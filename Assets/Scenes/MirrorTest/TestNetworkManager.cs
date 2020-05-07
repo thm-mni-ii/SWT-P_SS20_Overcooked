@@ -13,7 +13,6 @@ public class TestNetworkManager : NetworkManager
     public override void OnStartServer()
     {
         this.timer.ShowControls();
-        NetworkServer.RegisterHandler<AddPlayerMessage>(this.SpawnClient);
     }
     public override void OnStopServer()
     {
@@ -26,7 +25,7 @@ public class TestNetworkManager : NetworkManager
     }
 
 
-    private void SpawnClient(NetworkConnection conn, AddPlayerMessage message)
+    public override void OnServerAddPlayer(NetworkConnection conn)
     {
         GameObject playerGO = GameObject.Instantiate(this.playerPrefab, this.spawnPoint.position, this.spawnPoint.rotation);
         NetworkServer.AddPlayerForConnection(conn, playerGO);
