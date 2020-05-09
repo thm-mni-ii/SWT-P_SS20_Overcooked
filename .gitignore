@@ -17,6 +17,7 @@
 # /[Aa]ssets/AssetStoreTools*
 
 ## Asset store assets
+/[Aa]ssets/Editor*
 # ASE
 /[Aa]ssets/AmplifyShaderEditor*
 # Peek

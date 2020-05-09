@@ -27,6 +27,10 @@ public class PlayerControls : NetworkBehaviour
     {
         //this.rigidBody.isKinematic = !this.hasAuthority;
     }
+    public override void OnStartLocalPlayer()
+    {
+        PlayerExposeShader.Instance.Player = this;
+    }
 
 
     private void Update()
@@ -46,6 +50,11 @@ public class PlayerControls : NetworkBehaviour
             this.rigidBody.MoveRotation(this.rigidBody.rotation * Quaternion.Euler(0.0F, this.rotationInput * this.rotationSpeed, 0.0F));
             this.rotationInput *= this.rotationFalloff;
         }
+    }
+    private void OnDestroy()
+    {
+        if (PlayerExposeShader.Instance.Player == this)
+            PlayerExposeShader.Instance.Player = null;
     }
 
     private void UpdatePlayerColor(Color oldColor, Color newColor)
