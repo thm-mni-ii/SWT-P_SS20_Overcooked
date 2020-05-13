@@ -3,50 +3,6 @@ skinparam LegendBackgroundColor Strategy
 skinparam LegendBorderThickness 0
 skinparam LegendFontSize 16
 skinparam Padding 5
-skinparam defaultFontSize 14
-skinparam ArrowThickness 2
-skinparam shadowing false
-skinparam monochrome true
-
-
-:Main Admin: as Admin
-(Use the application) as (Use)
-
-User -> (Start)
-User --> (Use)
-
-Admin ---> (Use)
-
-note right of Admin : This is an example.
-
-note right of (Use)
-A note can also
-be on several lines
-end note
-
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
-@enduml
-
-@startuml
-left to right direction
-skinparam packageStyle rectangle
-actor customer
-actor clerk
-rectangle checkout {
-  customer -- (checkout)
-  (checkout) .> (payment) : include
-  (help) .> (checkout) : extends
-  (checkout) -- clerk
-}
-@enduml
-
-@startuml
-skinparam LegendBackgroundColor Strategy
-skinparam LegendBorderThickness 0
-skinparam LegendFontSize 16
-skinparam Padding 5
 skinparam defaultFontSize 16
 skinparam ArrowThickness 2
 skinparam shadowing false
