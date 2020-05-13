@@ -1,0 +1,121 @@
+@startuml
+skinparam LegendBackgroundColor Strategy
+skinparam LegendBorderThickness 0
+skinparam LegendFontSize 16
+skinparam Padding 5
+skinparam defaultFontSize 14
+skinparam ArrowThickness 2
+skinparam shadowing false
+skinparam monochrome true
+
+
+:Main Admin: as Admin
+(Use the application) as (Use)
+
+User -> (Start)
+User --> (Use)
+
+Admin ---> (Use)
+
+note right of Admin : This is an example.
+
+note right of (Use)
+A note can also
+be on several lines
+end note
+
+note "This note is connected\nto several objects." as N2
+(Start) .. N2
+N2 .. (Use)
+@enduml
+
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+actor clerk
+rectangle checkout {
+  customer -- (checkout)
+  (checkout) .> (payment) : include
+  (help) .> (checkout) : extends
+  (checkout) -- clerk
+}
+@enduml
+
+@startuml
+skinparam LegendBackgroundColor Strategy
+skinparam LegendBorderThickness 0
+skinparam LegendFontSize 16
+skinparam Padding 5
+skinparam defaultFontSize 16
+skinparam ArrowThickness 2
+skinparam shadowing false
+
+actor Player
+
+rectangle Underconnected {
+    (Start game) as (Start)
+    (Go to Settings) as (Settings)
+    (Show Credits) as (Credits)
+    (Exit Game) as (Exit)
+    (Change Volume) as (Vol)
+    (Singleplayer Modus) as (SP)
+    (Multiplayer Modus) as (MP)
+    (Choose Level) as (Level)
+    (Host Game) as (Host)
+    (Join Game) as (Join)
+    (Play Game) as (Play)
+    (Pause Game) as (Pause)
+    (Ingame Settings) as (ISettings)
+    (Back to Main Menu) as (Menu)
+
+    Player -right- (Start)
+
+    (Start) <.up. (Settings) : <<extend>>
+    (Settings) <.up. (Vol) : <<extends>>
+    note right of Settings
+    Other options
+    can be included
+    end note
+
+    (Start) <.down. (Credits) : <<extends>>
+    (Start) <.down. (Exit) : <<extends>>
+    (Start) <.up. (SP) : <<extends>>
+    (Start) <.right. (MP) : <<extends>>
+    (MP) <.right. (Host) : <<extends>>
+    note "Probably managed by framework" as N2
+    (MP) <.. (Join) : <<extends>>
+
+    (Host) .. N2
+    N2 .. (Join)
+
+    (SP) .right.> (Level) : <<include>>
+    (Host) .right.> (Level) : <<include>>
+
+    (Level) ..> (Play) : <<include>>
+    (Join) ..> (Play) : <<include>>
+
+    (Play) <.. (Pause) : <<extends>>
+    (Pause) <.. (ISettings) : <<extends>>
+    (Pause) <.. (Menu) : <<extends>>
+
+}
+
+
+legend right
+  |= \n           |= \n Underconnected \n\n Technische Hochschule Mittelhessen – THM \n University of Applied Sciences |
+  | Project title | Underconnected |
+  | Repository | [[https://github.com/thm-mni-ii/SWT-P_SS20_Overcooked]] |
+  | UML diagram type   | Use Case Diagram |
+  | UML tool | PlantUML v1.2019.5|
+  | Model version | 1.0 |
+  | Date created | 13.05.2020 |
+  | Creater | Johannes Greising |
+  | Mail| johannes.greising@mni.thm.de |
+  | Last edit | 13.05.2020 |
+  | Last editor | Johannes Greising |
+  | Mail| johannes.greising@mni.thm.de |
+end legend
+
+
+@enduml
