@@ -10,13 +10,14 @@ skinparam shadowing false
 actor Player
 
 rectangle Underconnected {
+' Nodes
     (Start game) as (Start)
     (Go to Settings) as (Settings)
     (Show Credits) as (Credits)
     (Exit Game) as (Exit)
     (Change Volume) as (Vol)
-    (Singleplayer Modus) as (SP)
-    (Multiplayer Modus) as (MP)
+    (Singleplayer Mode) as (SP)
+    (Multiplayer Mode) as (MP)
     (Choose Level) as (Level)
     (Host Game) as (Host)
     (Join Game) as (Join)
@@ -25,6 +26,7 @@ rectangle Underconnected {
     (Ingame Settings) as (ISettings)
     (Back to Main Menu) as (Menu)
 
+' Relations
     Player -right- (Start)
 
     (Start) <.up. (Settings) : <<extend>>
@@ -63,12 +65,12 @@ legend right
   | Project title | Underconnected |
   | Repository | [[https://github.com/thm-mni-ii/SWT-P_SS20_Overcooked]] |
   | UML diagram type   | Use Case Diagram |
-  | UML tool | PlantUML v1.2019.5|
+  | UML tool | PlantUML V1.2020.9|
   | Model version | 1.0 |
   | Date created | 13.05.2020 |
   | Creater | Johannes Greising |
   | Mail| johannes.greising@mni.thm.de |
-  | Last edit | 13.05.2020 |
+  | Last edit | 14.05.2020 |
   | Last editor | Johannes Greising |
   | Mail| johannes.greising@mni.thm.de |
 end legend
