@@ -41,7 +41,7 @@ public class Timer : NetworkBehaviour
     }
 
 
-    [Server]
+    [ServerCallback]
     private void FixedUpdate()
     {
         if (this.isTimerRunning && this.timerValue > 0.0F)

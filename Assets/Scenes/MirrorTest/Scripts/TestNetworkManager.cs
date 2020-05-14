@@ -8,11 +8,15 @@ public class TestNetworkManager : NetworkManager
 {
     [SerializeField] Transform spawnPoint;
     [SerializeField] Timer timer;
+    [SerializeField] TeamBase[] allBases;
 
 
     public override void OnStartServer()
     {
         this.timer.ShowControls();
+
+        foreach (TeamBase tb in this.allBases)
+            tb.SpawnFlag();
     }
     public override void OnStopServer()
     {

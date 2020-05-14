@@ -1,0 +1,416 @@
+{
+	"ToolsVersion": "2020.1.1.0",
+	"ChangeNumber": 7,
+	"Collections": {
+		"Entity": [
+			{
+				"Id": "18d4bf318f3c49688087dbed",
+				"Name": "Entity",
+				"DisplayName": "Entity",
+				"Group": "Design",
+				"Description": null,
+				"IdGenerator": 1,
+				"Specifications": "classgen=skip&icon=blueprint",
+				"Attributes": [
+					{
+						"Id": "53bd34a376a21229219cb156",
+						"Name": "Id",
+						"DisplayName": "Id",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 1,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 12,
+						"Specifications": null
+					},
+					{
+						"Id": "3ad672c130f6192149605540",
+						"Name": "Name",
+						"DisplayName": "Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 2,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "16e2300bf6a23c488629e69d",
+						"Name": "DisplayName",
+						"DisplayName": "Display Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "59088257983a362690093cf2",
+						"Name": "Group",
+						"DisplayName": "Group",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 128,
+						"Specifications": "editor=combobox"
+					},
+					{
+						"Id": "59088257983a362690093cf4",
+						"Name": "Description",
+						"DisplayName": "Description",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": "editor=textareafield&editor.grow=true"
+					},
+					{
+						"Id": "41a0a2dd9519fbb5e32c5932",
+						"Name": "IdGenerator",
+						"DisplayName": "Id Generator",
+						"Description": null,
+						"DataType": 18,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": "pick.None=0&pick.ObjectId=1&pick.Guid=2&pick.Sequence=3&pick.GlobalSequence=4"
+					},
+					{
+						"Id": "356560097834457153bb7b64",
+						"Name": "Specifications",
+						"DisplayName": "Specifications",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "cec3d153d20fdb588c1161c9",
+						"Name": "Attributes",
+						"DisplayName": "Attributes",
+						"Description": null,
+						"DataType": 23,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": {
+							"Id": "d40d8eb1a23248b69b252eea",
+							"DisplayName": "Attribute"
+						},
+						"Size": 0,
+						"Specifications": null
+					}
+				]
+			},
+			{
+				"Id": "2cd5b55e05a991db0600005c",
+				"Name": "Entities",
+				"DisplayName": "Entities",
+				"Group": "GameData",
+				"Description": null,
+				"IdGenerator": 3,
+				"Specifications": null,
+				"Attributes": [
+					{
+						"Id": "2cd5b55e05a991db0700005c",
+						"Name": "Id",
+						"DisplayName": "Id",
+						"Description": null,
+						"DataType": 13,
+						"DefaultValue": null,
+						"Uniqueness": 1,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": null
+					},
+					{
+						"Id": "2cd5b55e05a991db0800005c",
+						"Name": "Name",
+						"DisplayName": "Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": "Translate Me!",
+						"Uniqueness": 1,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "2cd5b55e05a991db0900005c",
+						"Name": "walkSpeed",
+						"DisplayName": "Walk Speed",
+						"Description": null,
+						"DataType": 12,
+						"DefaultValue": "1.00",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": "displayPrecision=2"
+					}
+				]
+			},
+			{
+				"Id": "55a4f32faca22e191098f3d9",
+				"Name": "ProjectSettings",
+				"DisplayName": "Project Settings",
+				"Group": "Settings",
+				"Description": null,
+				"IdGenerator": 1,
+				"Specifications": "classgen=skip&icon=gear&type=settings",
+				"Attributes": [
+					{
+						"Id": "59088258983a362690093d00",
+						"Name": "Id",
+						"DisplayName": "Id",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 1,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 24,
+						"Specifications": null
+					},
+					{
+						"Id": "59088258983a362690093d01",
+						"Name": "Name",
+						"DisplayName": "Project Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": "Untitled Project",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 128,
+						"Specifications": null
+					},
+					{
+						"Id": "59088259983a362690093d0f",
+						"Name": "PrimaryLanguage",
+						"DisplayName": "Primary Language",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 32,
+						"Specifications": "editor=languagefield"
+					},
+					{
+						"Id": "59088259983a362690093d0d",
+						"Name": "Languages",
+						"DisplayName": "Languages",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": "editor=languagelistfield"
+					},
+					{
+						"Id": "59088259983a362690093d0b",
+						"Name": "Copyright",
+						"DisplayName": "Copyright",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 512,
+						"Specifications": null
+					}
+				]
+			},
+			{
+				"Id": "d40d8eb1a23248b69b252eea",
+				"Name": "Attribute",
+				"DisplayName": "Attribute",
+				"Group": "Design",
+				"Description": null,
+				"IdGenerator": 1,
+				"Specifications": "classgen=skip&type=component",
+				"Attributes": [
+					{
+						"Id": "dfd84fc9957e94f02f9f60cc",
+						"Name": "Id",
+						"DisplayName": "Id",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 1,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 12,
+						"Specifications": null
+					},
+					{
+						"Id": "bd453e1e7f1543a7133d7fb1",
+						"Name": "Name",
+						"DisplayName": "Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 2,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "993520ecbe361cf06d060f2a",
+						"Name": "DisplayName",
+						"DisplayName": "Display Name",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "59088257983a362690093cf6",
+						"Name": "Description",
+						"DisplayName": "Description",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": "editor=textareafield&editor.grow=true"
+					},
+					{
+						"Id": "7286478a63f200a094a1cdc8",
+						"Name": "DataType",
+						"DisplayName": "Data Type",
+						"Description": null,
+						"DataType": 18,
+						"DefaultValue": "0",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": "pick.Text=0&pick.LocalizedText=1&pick.Logical=5&pick.Time=8&pick.Date=9&pick.Number=12&pick.Document=22&pick.DocumentList=23&pick.Integer=13&pick.PickList=18&pick.Formula=35&pick.Flags=19&pick.Reference=28&pick.ReferenceList=29"
+					},
+					{
+						"Id": "a15529ef753f70deed4af17e",
+						"Name": "DefaultValue",
+						"DisplayName": "Default Value",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					},
+					{
+						"Id": "caaa34c8708b5550c95004d9",
+						"Name": "Uniqueness",
+						"DisplayName": "Uniqueness",
+						"Description": null,
+						"DataType": 18,
+						"DefaultValue": "0",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": "pick.None=0&pick.Unique=1&pick.UniqueInContainer=2"
+					},
+					{
+						"Id": "d3e46e75b8a33b2b202f1a45",
+						"Name": "Requirement",
+						"DisplayName": "Requirement",
+						"Description": null,
+						"DataType": 18,
+						"DefaultValue": "0",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": "pick.None=0&pick.NotDefault=1&pick.NotEmpty=2"
+					},
+					{
+						"Id": "e3664a130c8c9f45220f08a7",
+						"Name": "ReferenceType",
+						"DisplayName": "Reference Type",
+						"Description": null,
+						"DataType": 28,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": {
+							"Id": "18d4bf318f3c49688087dbed",
+							"DisplayName": "Entity"
+						},
+						"Size": 0,
+						"Specifications": null
+					},
+					{
+						"Id": "8ddc9671536310356d553f7b",
+						"Name": "Size",
+						"DisplayName": "Size",
+						"Description": null,
+						"DataType": 13,
+						"DefaultValue": "8000",
+						"Uniqueness": 0,
+						"Requirement": 2,
+						"ReferenceType": null,
+						"Size": 4,
+						"Specifications": null
+					},
+					{
+						"Id": "f1c2a71b2da0b365a852ae7a",
+						"Name": "Specifications",
+						"DisplayName": "Specifications",
+						"Description": null,
+						"DataType": 0,
+						"DefaultValue": null,
+						"Uniqueness": 0,
+						"Requirement": 0,
+						"ReferenceType": null,
+						"Size": 8000,
+						"Specifications": null
+					}
+				]
+			}
+		],
+		"Entities": [
+			{
+				"Id": 1,
+				"Name": "player",
+				"walkSpeed": 10
+			}
+		]
+	}
+}

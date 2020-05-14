@@ -12,16 +12,24 @@ public class PlayerControls : NetworkBehaviour
     [SerializeField] float rotationFalloff = 0.6F;
 
 
+    public Team Team { get; private set; }
+
+
     private float forwardInput;
     private float rotationInput;
 
+    [SyncVar(hook = nameof(UpdatePlayerTeam))]
+    private int teamID;
     [SyncVar(hook = nameof(UpdatePlayerColor))]
     private Color playerColor;
 
 
     public override void OnStartServer()
     {
-        this.playerColor = Random.ColorHSV();
+        this.Team = Team.GetNextTeamToJoin();
+
+        this.teamID = this.Team.TeamID;
+        this.playerColor = this.Team.TeamColor;//Random.ColorHSV();
     }
     public override void OnStartClient()
     {
@@ -60,5 +68,9 @@ public class PlayerControls : NetworkBehaviour
     private void UpdatePlayerColor(Color oldColor, Color newColor)
     {
         this.playerModelRenderer.material.color = newColor;
+    }
+    private void UpdatePlayerTeam(int oldTeamID, int newTeamID)
+    {
+        this.Team = Team.GetByID(newTeamID);
     }
 }
