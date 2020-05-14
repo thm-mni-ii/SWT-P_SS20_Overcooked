@@ -60,20 +60,5 @@ rectangle Underconnected {
 }
 
 
-legend right
-  |= \n           |= \n Underconnected \n\n Technische Hochschule Mittelhessen – THM \n University of Applied Sciences |
-  | Project title | Underconnected |
-  | Repository | [[https://github.com/thm-mni-ii/SWT-P_SS20_Overcooked]] |
-  | UML diagram type   | Use Case Diagram |
-  | UML tool | PlantUML V1.2020.9|
-  | Model version | 1.0 |
-  | Date created | 13.05.2020 |
-  | Creater | Johannes Greising |
-  | Mail| johannes.greising@mni.thm.de |
-  | Last edit | 14.05.2020 |
-  | Last editor | Johannes Greising |
-  | Mail| johannes.greising@mni.thm.de |
-end legend
-
 
 @enduml
