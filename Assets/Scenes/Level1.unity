@@ -324,6 +324,7 @@ MonoBehaviour:
   sceneId: 2510067186
   serverOnly: 0
   m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &409239506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,7 +1186,9 @@ MonoBehaviour:
   port: 25565
   NoDelay: 1
   serverMaxMessageSize: 16384
+  serverMaxReceivesPerTick: 10000
   clientMaxMessageSize: 16384
+  clientMaxReceivesPerTick: 1000
 --- !u!114 &1162647111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1208,6 +1211,8 @@ MonoBehaviour:
   transport: {fileID: 1162647110}
   networkAddress: localhost
   maxConnections: 4
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 6801381813141395685, guid: 14c523ffd8720af42b085703c72b7bc4,
     type: 3}
@@ -2193,7 +2198,7 @@ GameObject:
   - component: {fileID: 1566309879}
   - component: {fileID: 1566309881}
   - component: {fileID: 1566309880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pickup1
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -2337,6 +2342,7 @@ MonoBehaviour:
   sceneId: 3485623799
   serverOnly: 0
   m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1588365175
 GameObject:
   m_ObjectHideFlags: 0
