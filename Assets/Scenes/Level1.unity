@@ -2193,11 +2193,11 @@ GameObject:
   - component: {fileID: 1566309874}
   - component: {fileID: 1566309877}
   - component: {fileID: 1566309876}
-  - component: {fileID: 1566309875}
   - component: {fileID: 1566309878}
   - component: {fileID: 1566309879}
   - component: {fileID: 1566309881}
   - component: {fileID: 1566309880}
+  - component: {fileID: 1566309882}
   m_Layer: 8
   m_Name: Pickup1
   m_TagString: Pickup
@@ -2219,20 +2219,6 @@ Transform:
   m_Father: {fileID: 1108544693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1566309875
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566309873}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.7178288
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.8589144}
 --- !u!23 &1566309876
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2292,7 +2278,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2343,6 +2329,22 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &1566309882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566309873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa53dd2695a89a8408ca05a311fba1c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultParent: {fileID: 1108544693}
+  canBeDropped: 1
+  nonKinematicRBs:
+  - {fileID: 1566309878}
 --- !u!1 &1588365175
 GameObject:
   m_ObjectHideFlags: 0

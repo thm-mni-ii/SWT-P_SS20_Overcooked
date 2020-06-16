@@ -325,11 +325,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  pickupReach: 2
-  pickupLayers:
+  interactReach: 1.5
+  interactLayers:
     serializedVersion: 2
     m_Bits: 256
-  reachOrigin: {fileID: 1690051582181024395}
+  interactOrigin: {fileID: 1690051582181024395}
 --- !u!1 &7357248181649520441
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1690051582181024395}
   m_Layer: 0
-  m_Name: ReachOrigin
+  m_Name: InteractOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
