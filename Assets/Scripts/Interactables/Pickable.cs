@@ -43,10 +43,13 @@ public class Pickable : NetworkBehaviour, IInteractable
     }
     protected virtual void OnDrop(Interactor interactor)
     {
-        this.currentHolder = null;
-        this.transform.SetParent(this.defaultParent);
+        if (interactor == this.currentHolder)
+        {
+            this.currentHolder = null;
+            this.transform.SetParent(this.defaultParent);
 
-        foreach (Rigidbody rb in this.nonKinematicRBs)
-            rb.isKinematic = false;
+            foreach (Rigidbody rb in this.nonKinematicRBs)
+                rb.isKinematic = false;
+        }
     }
 }
