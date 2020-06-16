@@ -10,33 +10,58 @@ public class Interactor : NetworkBehaviour
     [SerializeField] Transform interactOrigin;
 
 
+    #region Unity Callbacks
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (this.isLocalPlayer)
             {
-                RaycastHit hitInfo;
-                IInteractable interactedObj;
-                if (Physics.Raycast(interactOrigin.position, interactOrigin.forward, out hitInfo, interactReach, interactLayers))
-                {
-                    interactedObj = hitInfo.collider.GetComponent<IInteractable>();
-                    if (interactedObj != null)
-                        this.CmdRequestInteract(hitInfo.collider.GetComponent<NetworkIdentity>());
-                }
+                GameObject interactedObj = this.GetObjectToInteract();
+                if (interactedObj != null)
+                    this.CmdRequestInteract(interactedObj.GetComponent<NetworkIdentity>());
             }
         }
     }
 
+    #endregion
+
+
+    #region Logic
+
+    private GameObject GetObjectToInteract()
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(this.interactOrigin.position, this.interactOrigin.forward, out hitInfo, this.interactReach, this.interactLayers))
+            if (hitInfo.collider.GetComponent<IInteractable>() != null)
+                return hitInfo.collider.gameObject;
+
+        return null;
+    }
+
+    #endregion
+
+
+    #region Network Code
 
     [Command]
     private void CmdRequestInteract(NetworkIdentity interactable)
     {
-        this.RpcConfirmInteract(this.GetComponent<NetworkIdentity>(), interactable);
+        if (interactable != null && this.GetObjectToInteract().Equals(interactable.gameObject))
+            this.RpcConfirmInteract(interactable);
     }
     [ClientRpc]
-    private void RpcConfirmInteract(NetworkIdentity interactor, NetworkIdentity interactable)
+    private void RpcConfirmInteract(NetworkIdentity interactable)
     {
-        interactable.GetComponent<IInteractable>().Interact(interactor.GetComponent<Interactor>());
+        IInteractable i = interactable.GetComponent<IInteractable>();
+
+        if (i != null)
+            i.Interact(this);
+        else
+            Debug.LogError("Interactor: Server pointed to a non interactable object.");
     }
+
+    #endregion
 }
