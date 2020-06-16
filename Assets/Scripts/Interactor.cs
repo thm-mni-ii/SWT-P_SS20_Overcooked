@@ -10,7 +10,7 @@ public class Interactor : NetworkBehaviour
     [SerializeField] Transform interactOrigin;
 
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -22,9 +22,21 @@ public class Interactor : NetworkBehaviour
                 {
                     interactedObj = hitInfo.collider.GetComponent<IInteractable>();
                     if (interactedObj != null)
-                        interactedObj.Interact(this);
+                        this.CmdRequestInteract(hitInfo.collider.GetComponent<NetworkIdentity>());
                 }
             }
         }
+    }
+
+
+    [Command]
+    private void CmdRequestInteract(NetworkIdentity interactable)
+    {
+        this.RpcConfirmInteract(this.GetComponent<NetworkIdentity>(), interactable);
+    }
+    [ClientRpc]
+    private void RpcConfirmInteract(NetworkIdentity interactor, NetworkIdentity interactable)
+    {
+        interactable.GetComponent<IInteractable>().Interact(interactor.GetComponent<Interactor>());
     }
 }
