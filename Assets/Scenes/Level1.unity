@@ -2193,7 +2193,6 @@ GameObject:
   - component: {fileID: 1566309874}
   - component: {fileID: 1566309877}
   - component: {fileID: 1566309876}
-  - component: {fileID: 1566309875}
   - component: {fileID: 1566309878}
   - component: {fileID: 1566309879}
   - component: {fileID: 1566309881}
@@ -2220,20 +2219,6 @@ Transform:
   m_Father: {fileID: 1108544693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1566309875
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566309873}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.7178288
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.8589144}
 --- !u!23 &1566309876
 MeshRenderer:
   m_ObjectHideFlags: 0
