@@ -8,7 +8,7 @@ public class Interactor : NetworkBehaviour
     [SerializeField] float interactReach = 0.5F;
     [SerializeField] LayerMask interactLayers;
     [SerializeField] Transform interactOrigin;
-    
+
 
     void Update()
     {
@@ -17,12 +17,12 @@ public class Interactor : NetworkBehaviour
             if (this.isLocalPlayer)
             {
                 RaycastHit hitInfo;
-                Interactable interacted;
+                IInteractable interactedObj;
                 if (Physics.Raycast(interactOrigin.position, interactOrigin.forward, out hitInfo, interactReach, interactLayers))
                 {
-                    interacted = hitInfo.collider.GetComponent<Interactable>();
-                    if (interacted)
-                        interacted.Interact(this);
+                    interactedObj = hitInfo.collider.GetComponent<IInteractable>();
+                    if (interactedObj != null)
+                        interactedObj.Interact(this);
                 }
             }
         }

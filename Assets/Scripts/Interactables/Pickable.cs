@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickable : Interactable
+public class Pickable : MonoBehaviour, IInteractable
 {
     [Tooltip("The default parent to apply when this pickable is dropped.")]
     [SerializeField] Transform defaultParent = null;
@@ -18,7 +18,7 @@ public class Pickable : Interactable
     private Interactor currentHolder;
 
 
-    public override void Interact(Interactor interactor)
+    public void Interact(Interactor interactor)
     {
         if (!this.IsPickedUp)
             this.OnPickup(interactor);
