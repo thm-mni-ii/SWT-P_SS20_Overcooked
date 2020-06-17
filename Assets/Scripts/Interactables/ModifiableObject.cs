@@ -9,6 +9,7 @@ public class ModifiableObject : NetworkBehaviour, IInteractable
     [Header("Settings")]
     [SerializeField] float secondsToFinish = 5.0F;
     [SerializeField] GameObject resultObject = null;
+    [SerializeField] Vector3 resultSpawnOffset = Vector3.zero;
     [Header("References")]
     [SerializeField] Canvas objectInfoCanvas = null;
     [SerializeField] Slider progressBar = null;
@@ -78,7 +79,10 @@ public class ModifiableObject : NetworkBehaviour, IInteractable
         if (this.IsActivated && !this.IsFinished)
         {
             this.IsFinished = true;
+
             GameObject.Destroy(this.gameObject);
+            if (this.resultObject != null && this.isServer)
+                NetworkServer.Spawn(GameObject.Instantiate(this.resultObject, this.transform.position + this.resultSpawnOffset, Quaternion.identity, this.transform.parent));
         }
     }
 }
