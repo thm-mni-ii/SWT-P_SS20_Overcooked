@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Pickable : NetworkBehaviour, IInteractable
+public class PickableObject : NetworkBehaviour, IInteractable
 {
     [Tooltip("The default parent to apply when this pickable is dropped.")]
     [SerializeField] Transform defaultParent = null;
