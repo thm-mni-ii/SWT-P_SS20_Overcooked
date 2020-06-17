@@ -17,72 +17,70 @@ public class ModifiableObject : NetworkBehaviour, IInteractable
 
     public bool IsActivated { get; private set; }
     public bool IsFinished { get; private set; }
-
-    private Interactor currentInteractor;
-    private float secondsPassed;
+    public Interactor CurrentInteractor { get; private set; }
+    public float SecondsPassed { get; private set; }
+    public float TotalDuration => this.secondsToFinish;
 
 
     private void Awake()
     {
         this.IsActivated = false;
         this.IsFinished = false;
-        this.currentInteractor = null;
-        this.secondsPassed = 0.0F;
+        this.CurrentInteractor = null;
+        this.SecondsPassed = 0.0F;
 
         this.objectInfoCanvas.gameObject.SetActive(false);
     }
 
+
     private void Update()
     {
-        this.UpdateTimer();
+        if (this.IsActivated && !this.IsFinished)
+        {
+            if (this.SecondsPassed >= this.secondsToFinish)
+                this.OnTimerFinish();
+            else
+                this.SecondsPassed = Mathf.Clamp(this.SecondsPassed + Time.deltaTime, 0.0F, this.secondsToFinish);
+
+            this.progressBar.value = this.SecondsPassed / this.TotalDuration;
+        }
     }
 
 
     public void Interact(Interactor interactor)
     {
         if (!this.IsActivated && !this.IsFinished)
-        {
-            this.currentInteractor = interactor;
-            this.StartTimer();
-        }
+            this.OnTimerStart(interactor);
     }
 
 
-    private void StartTimer()
+    protected void OnTimerStart(Interactor interactor)
     {
         if (!this.IsActivated && !this.IsFinished)
         {
-            this.secondsPassed = 0.0F;
+            this.CurrentInteractor = interactor;
+            this.SecondsPassed = 0.0F;
             this.progressBar.value = 0.0F;
 
             this.objectInfoCanvas.gameObject.SetActive(true);
             this.IsActivated = true;
 
             if (this.secondsToFinish <= Mathf.Epsilon)
-                this.Finish();
+                this.OnTimerFinish();
         }
     }
-    private void UpdateTimer()
-    {
-        if (this.IsActivated && !this.IsFinished)
-        {
-            if (this.secondsPassed >= this.secondsToFinish)
-                this.Finish();
-            else
-                this.secondsPassed = Mathf.Clamp(this.secondsPassed + Time.deltaTime, 0.0F, this.secondsToFinish);
-
-            this.progressBar.value = this.secondsPassed / this.secondsToFinish;
-        }
-    }
-    private void Finish()
+    protected void OnTimerFinish()
     {
         if (this.IsActivated && !this.IsFinished)
         {
             this.IsFinished = true;
 
-            GameObject.Destroy(this.gameObject);
-            if (this.resultObject != null && this.isServer)
-                NetworkServer.Spawn(GameObject.Instantiate(this.resultObject, this.transform.position + this.resultSpawnOffset, Quaternion.identity, this.transform.parent));
+            if (this.isServer)
+            {
+                NetworkServer.Destroy(this.gameObject);
+                if (this.resultObject != null)
+                    NetworkServer.Spawn(GameObject.Instantiate(this.resultObject, this.transform.position + this.resultSpawnOffset, Quaternion.identity, this.transform.parent));
+            }
         }
     }
 }
