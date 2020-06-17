@@ -49,8 +49,11 @@ public class Interactor : NetworkBehaviour
     [Command]
     private void CmdRequestInteract(NetworkIdentity interactable)
     {
-        if (interactable != null && this.GetObjectToInteract().Equals(interactable.gameObject))
+        GameObject actualInteractable = this.GetObjectToInteract();
+        if (interactable != null && actualInteractable.Equals(interactable.gameObject))
             this.RpcConfirmInteract(interactable);
+        else
+            Debug.LogWarning($"Client pickup check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{actualInteractable}\"");
     }
     [ClientRpc]
     private void RpcConfirmInteract(NetworkIdentity interactable)
