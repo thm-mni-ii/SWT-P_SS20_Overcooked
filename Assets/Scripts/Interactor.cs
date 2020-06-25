@@ -10,25 +10,24 @@ public class Interactor : NetworkBehaviour
     [SerializeField] Transform interactOrigin;
 
 
-    #region Unity Callbacks
+    public PickableObject HeldObject { get; private set; }
+    public bool IsHoldingObject => this.HeldObject != null;
 
-    private void Update()
+
+    public void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (this.isLocalPlayer)
-            {
-                GameObject interactedObj = this.GetObjectToInteract();
-                if (interactedObj != null)
-                    this.CmdRequestInteract(interactedObj.GetComponent<NetworkIdentity>());
-            }
-        }
+        GameObject interactedObject = this.IsHoldingObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
+
+        if (interactedObject != null)
+            this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
     }
 
-    #endregion
 
+    public void SetHeldObject(PickableObject heldObject)
+    {
+        this.HeldObject = heldObject;
+    }
 
-    #region Logic
 
     private GameObject GetObjectToInteract()
     {
@@ -41,15 +40,14 @@ public class Interactor : NetworkBehaviour
         return null;
     }
 
-    #endregion
-
 
     #region Network Code
 
     [Command]
     private void CmdRequestInteract(NetworkIdentity interactable)
     {
-        GameObject actualInteractable = this.GetObjectToInteract();
+        GameObject actualInteractable = this.IsHoldingObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
+
         if (interactable != null && actualInteractable != null && actualInteractable.Equals(interactable.gameObject))
             this.RpcConfirmInteract(interactable);
         else

@@ -36,6 +36,7 @@ public class PickableObject : NetworkBehaviour, IInteractable
     protected virtual void OnPickup(Interactor interactor)
     {
         this.currentHolder = interactor;
+        interactor.SetHeldObject(this);
         this.transform.SetParent(interactor.transform, true);
 
         foreach (Rigidbody rb in this.nonKinematicRBs)
@@ -46,6 +47,7 @@ public class PickableObject : NetworkBehaviour, IInteractable
         if (interactor == this.currentHolder)
         {
             this.currentHolder = null;
+            interactor.SetHeldObject(null);
             this.transform.SetParent(this.defaultParent);
 
             foreach (Rigidbody rb in this.nonKinematicRBs)
