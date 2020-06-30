@@ -16,17 +16,16 @@ public class TestNetworkManager : NetworkManager
 
     public override void OnStartServer()
     {
-        this.timer.ShowControls();
+        this.timer?.ShowControls();
     }
     public override void OnStopServer()
     {
-        this.timer.HideControls();
+        this.timer?.HideControls();
     }
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
         conn.Send(new AddPlayerMessage());
-
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn)
@@ -47,7 +46,7 @@ public class TestNetworkManager : NetworkManager
                 break;
 
         }
-        GameObject playerGO = GameObject.Instantiate(this.playerPrefab, this.spawn.position, this.spawn.rotation);
+        GameObject playerGO = GameObject.Instantiate(this.playerPrefab/*, this.spawn.position, this.spawn.rotation*/);
         NetworkServer.AddPlayerForConnection(conn, playerGO);
     }
 }

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
 
-
     public Level CurrentLevel { get; private set; }
 
 
@@ -18,6 +17,7 @@ public class GameManager : MonoBehaviour
         {
             GameManager.Instance = this;
             this.CurrentLevel = null;
+            GameObject.DontDestroyOnLoad(this.gameObject);
 
             // TODO: Load player data
             // TODO: Check startup parameters & connect to given server
