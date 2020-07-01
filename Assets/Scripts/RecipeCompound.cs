@@ -34,4 +34,5 @@ public class RecipeCompound : Recipe
         return sb.ToString();
     }
     public override bool IsCompound() => true;
+    public RecipeComponent[] GetRequiredComponents() => this.requiredComponents;
 }

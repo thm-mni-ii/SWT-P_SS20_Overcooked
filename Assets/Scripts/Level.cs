@@ -60,5 +60,6 @@ public class Level : NetworkBehaviour
     private void AddDemand(Recipe demandedRecipe)
     {
         this.currentDemands.Add(demandedRecipe);
+        GameManager.Instance.GameDemandQueue.AddDemand(demandedRecipe);
     }
 }

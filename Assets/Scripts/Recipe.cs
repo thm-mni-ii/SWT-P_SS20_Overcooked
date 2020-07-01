@@ -10,7 +10,7 @@ public abstract class Recipe : ScriptableObject
     [SerializeField] string description;
 
 
-
+    public virtual Sprite GetIcon() => icon;
     public virtual string GetFullName() => $"{this.GetName()} ({this.GetElementSymbol()})";
     public virtual string GetName() => this.name;
     public abstract string GetElementSymbol();

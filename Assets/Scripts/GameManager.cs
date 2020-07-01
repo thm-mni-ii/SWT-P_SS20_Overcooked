@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] int levelBuildIndexStart = 1;
     [SerializeField] Timer gameTimer = null;
+    [SerializeField] DemandQueue gameDemandQueue = null;
 
 
     public Level CurrentLevel { get; set; }
     public Timer GameTimer => this.gameTimer;
+    public DemandQueue GameDemandQueue => this.gameDemandQueue;
 
 
 
