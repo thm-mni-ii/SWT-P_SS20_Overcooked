@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6534014385669024821}
   - component: {fileID: 2882960774695588800}
   - component: {fileID: 1381116415579331819}
+  - component: {fileID: 809165226}
+  - component: {fileID: 809165227}
   m_Layer: 0
   m_Name: NaCl_Experiment_Equipment
   m_TagString: Untagged
@@ -85,3 +87,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &809165226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846866026949719891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.89284956, y: 2.544413, z: 1.1647894}
+  m_Center: {x: -0.110747114, y: 0.08884925, z: -0.2919279}
+--- !u!114 &809165227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846866026949719891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3af646697c6058b4fb505ed6998394bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  acceptedElements:
+  - {fileID: 8632365603161309296, guid: 91516e444426320479ba6381f66d5a4e, type: 3}
+  - {fileID: 2480635677062756100, guid: bc930e4f9805900479b2e45f55c97d0f, type: 3}

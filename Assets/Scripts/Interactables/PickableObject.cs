@@ -32,7 +32,6 @@ public class PickableObject : NetworkBehaviour, IInteractable
         this.canBeDropped = canBeDropped;
     }
 
-
     protected virtual void OnPickup(Interactor interactor)
     {
         this.currentHolder = interactor;
@@ -54,4 +53,10 @@ public class PickableObject : NetworkBehaviour, IInteractable
                 rb.isKinematic = false;
         }
     }
+
+    public bool getIsPickedUp()
+    {
+        return IsPickedUp;
+    }
+
 }

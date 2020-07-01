@@ -10,6 +10,7 @@ public class Player : NetworkBehaviour
 
 
     public PickableObject HeldObject => this.interactor.HeldObject;
+    //public ModifiableObject HeldModifiedObject => this.interactor.HeldModifiedObject;
     public bool IsHoldingObject => this.interactor.IsHoldingObject;
 
 
@@ -21,6 +22,8 @@ public class Player : NetworkBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 this.interactor.Interact();
+            if (Input.GetKeyDown(KeyCode.E))
+                this.interactor.InteractWithDevice();
         }
     }
 
