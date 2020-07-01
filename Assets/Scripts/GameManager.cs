@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Timer gameTimer = null;
 
 
-    public Level CurrentLevel { get; private set; }
+    public Level CurrentLevel { get; set; }
     public Timer GameTimer => this.gameTimer;
 
 

@@ -7,7 +7,16 @@ public class Level : NetworkBehaviour
 {
     [Header("Settings")]
     [SerializeField] int levelDurationSeconds = 180;
+    [SerializeField] Transform[] spawnPoints;
 
+
+    public Transform[] SpawnPoints => this.spawnPoints;
+
+
+    private void Awake()
+    {
+        GameManager.Instance.CurrentLevel = this;
+    }
 
     public override void OnStartServer()
     {
@@ -18,4 +27,7 @@ public class Level : NetworkBehaviour
     {
         GameManager.Instance.GameTimer.StopTimer();
     }
+
+
+    public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
 }

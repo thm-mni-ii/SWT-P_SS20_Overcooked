@@ -1020,6 +1020,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   levelDurationSeconds: 180
+  spawnPoints:
+  - {fileID: 904617143}
+  - {fileID: 589103136}
+  - {fileID: 942341331}
+  - {fileID: 1991346539}
 --- !u!114 &1341400689
 MonoBehaviour:
   m_ObjectHideFlags: 0
