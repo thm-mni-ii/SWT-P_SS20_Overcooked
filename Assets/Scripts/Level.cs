@@ -13,16 +13,12 @@ public class Level : NetworkBehaviour
 
     public Transform[] SpawnPoints => this.spawnPoints;
 
-
-    private List<Recipe> currentDemands;
     private Coroutine demandCoroutine;
 
 
     private void Awake()
     {
         GameManager.Instance.CurrentLevel = this;
-
-        this.currentDemands = new List<Recipe>();
     }
 
     public override void OnStartServer()
@@ -46,20 +42,9 @@ public class Level : NetworkBehaviour
     {
         while (true)
         {
-            this.AddRandomDemand();
+            // add random demand from demand pool
             yield return new WaitForSeconds(5.0F);
+            GameManager.Instance.GameDemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
         }
-    }
-
-
-    private void AddRandomDemand()
-    {
-        if (this.demandsPool.Length > 0)
-            this.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
-    }
-    private void AddDemand(Recipe demandedRecipe)
-    {
-        this.currentDemands.Add(demandedRecipe);
-        GameManager.Instance.GameDemandQueue.AddDemand(demandedRecipe);
     }
 }
