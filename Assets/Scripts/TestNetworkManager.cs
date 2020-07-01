@@ -10,18 +10,9 @@ public class TestNetworkManager : NetworkManager
     [SerializeField] Transform spawnPoint2;
     [SerializeField] Transform spawnPoint3;
     [SerializeField] Transform spawnPoint4;
-    [SerializeField] Timer timer;
     Transform spawn;
 
 
-    public override void OnStartServer()
-    {
-        this.timer?.ShowControls();
-    }
-    public override void OnStopServer()
-    {
-        this.timer?.HideControls();
-    }
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);

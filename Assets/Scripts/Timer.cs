@@ -17,7 +17,7 @@ public class Timer : NetworkBehaviour
 
     private void Awake()
     {
-        this.Reset();
+        this.StopTimer();
     }
 
 
@@ -38,10 +38,14 @@ public class Timer : NetworkBehaviour
     {
         this.isTimerRunning = true;
     }
-    public void Reset()
+    public void StopTimer()
     {
         this.isTimerRunning = false;
-        this.timerValue = 60.0F;
+    }
+
+    public void SetTimeLeft(float secondsLeft)
+    {
+        this.timerValue = secondsLeft;
     }
 
 

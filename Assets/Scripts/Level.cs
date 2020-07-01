@@ -11,6 +11,11 @@ public class Level : NetworkBehaviour
 
     public override void OnStartServer()
     {
+        GameManager.Instance.GameTimer.SetTimeLeft(levelDurationSeconds);
         GameManager.Instance.GameTimer.StartTimer();
+    }
+    public override void OnStopServer()
+    {
+        GameManager.Instance.GameTimer.StopTimer();
     }
 }
