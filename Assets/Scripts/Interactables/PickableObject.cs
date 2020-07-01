@@ -53,4 +53,10 @@ public class PickableObject : NetworkBehaviour, IInteractable
                 rb.isKinematic = false;
         }
     }
+
+    public bool getIsPickedUp()
+    {
+        return IsPickedUp;
+    }
+
 }
