@@ -7,7 +7,6 @@ using TMPro;
 public class Timer : NetworkBehaviour
 {
     [SerializeField] TMP_Text timerText;
-    [SerializeField] GameObject timerControls;
 
 
     [SyncVar(hook = nameof(TimerValueChanged))]
@@ -15,29 +14,28 @@ public class Timer : NetworkBehaviour
     private bool isTimerRunning;
 
 
-    private void Start()
+    private void Awake()
     {
-        this.Reset();
+        this.StopTimer();
     }
 
-
-    public void ShowControls()
-    {
-        this.timerControls.SetActive(true);
-    }
-    public void HideControls()
-    {
-        this.timerControls.SetActive(false);
-    }
 
     public void Toggle()
     {
         this.isTimerRunning = !this.isTimerRunning;
     }
-    public void Reset()
+    public void StartTimer()
+    {
+        this.isTimerRunning = true;
+    }
+    public void StopTimer()
     {
         this.isTimerRunning = false;
-        this.timerValue = 60.0F;
+    }
+
+    public void SetTimeLeft(float secondsLeft)
+    {
+        this.timerValue = secondsLeft;
     }
 
 
