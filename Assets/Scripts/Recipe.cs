@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipe : MonoBehaviour
+public abstract class Recipe : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Sprite icon;
+    [SerializeField] new string name;
+    [TextArea]
+    [SerializeField] string description;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
+    public virtual string GetFullName() => $"{this.GetName()} ({this.GetElementSymbol()})";
+    public virtual string GetName() => this.name;
+    public abstract string GetElementSymbol();
+    public virtual string GetDescription() => this.description;
+    public abstract bool IsCompound();
 }
