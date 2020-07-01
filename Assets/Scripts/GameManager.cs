@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] int levelBuildIndexStart = 1;
+    [SerializeField] Timer gameTimer = null;
 
 
     public Level CurrentLevel { get; private set; }
+    public Timer GameTimer => this.gameTimer;
 
 
 
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
             this.CurrentLevel = null;
 
             // TODO: Load player data
-            // TODO: Check startup parameters & connect to given server
+            // TODO: Check startup parameters & connect to given server or show main menu
 
             this.LoadLevel(1);
         }

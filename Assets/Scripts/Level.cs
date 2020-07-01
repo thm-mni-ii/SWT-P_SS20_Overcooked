@@ -9,13 +9,8 @@ public class Level : NetworkBehaviour
     [SerializeField] int levelDurationSeconds = 180;
 
 
-    private void Start()
+    public override void OnStartServer()
     {
-
-    }
-
-    private void Update()
-    {
-
+        GameManager.Instance.GameTimer.StartTimer();
     }
 }

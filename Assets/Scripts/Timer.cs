@@ -15,7 +15,7 @@ public class Timer : NetworkBehaviour
     private bool isTimerRunning;
 
 
-    private void Start()
+    private void Awake()
     {
         this.Reset();
     }
@@ -33,6 +33,10 @@ public class Timer : NetworkBehaviour
     public void Toggle()
     {
         this.isTimerRunning = !this.isTimerRunning;
+    }
+    public void StartTimer()
+    {
+        this.isTimerRunning = true;
     }
     public void Reset()
     {
