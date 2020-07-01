@@ -11,7 +11,9 @@ public class Interactor : NetworkBehaviour
 
 
     public PickableObject HeldObject { get; private set; }
+    public ModifiableObject HeldModifiedObject { get; private set; }
     public bool IsHoldingObject => this.HeldObject != null;
+    public bool IsHoldingModifiedObject => this.HeldModifiedObject != null;
 
 
     public void Interact()
@@ -21,11 +23,22 @@ public class Interactor : NetworkBehaviour
         if (interactedObject != null)
             this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
     }
+    
+    public void InteractWithDevice() {
+        GameObject interactedObject = this.IsHoldingModifiedObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
+
+        if (interactedObject != null)
+            this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
+    }
 
 
     public void SetHeldObject(PickableObject heldObject)
     {
         this.HeldObject = heldObject;
+    }
+
+    public void SetHeldModifiedObject(ModifiableObject heldModifiedObject) {
+        this.HeldModifiedObject = heldModifiedObject;
     }
 
 
