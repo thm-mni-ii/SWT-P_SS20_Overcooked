@@ -3,39 +3,124 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : NetworkBehaviour
+public class Equipment : ModifiableObject
 {
+    [Header("References")]
+    [SerializeField] GameObject inputContainer;
+    [SerializeField] GameObject outputContainer;
 
-    [SerializeField] PickableObject[] acceptedElements;
-    List<GameObject> availableObjects;
+    [Header("Settings")]
+    [SerializeField] Recipe[] acceptedElements;
+    [SerializeField] Recipe resultElement;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private List<ElementObject> insertedObjects;
+    private ElementObject outputObject;
+
+
+    private void Awake()
     {
-        
+        this.insertedObjects = new List<ElementObject>();
+        this.outputObject = null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-     
-    }
 
-    private void OnTriggerEnter(Collider collider)
+    public override void Interact(Interactor interactor)
     {
-        if (collider.gameObject.tag == "Pickup")
+        if (this.IsActivated)
+            return;
+
+        PickableObject heldObject = interactor.HeldObject;
+
+        if (heldObject != null)
         {
-            for (int i = 0; i < acceptedElements.Length; i++)
+            if (this.outputObject == null)
             {
-                if (acceptedElements[i].gameObject.name == collider.gameObject.name)
-                {                   
-                    collider.gameObject.SetActive(false);
-                    availableObjects.Add(collider.gameObject);
+                ElementObject elementObject = heldObject.GetComponent<ElementObject>();
+
+                if (elementObject != null && this.AcceptsElement(elementObject.Element))
+                {
+                    interactor.SetHeldObject(null);
+
+                    elementObject.DisablePhysics();
+                    heldObject.transform.SetParent(this.inputContainer.transform, false);
+                    heldObject.transform.localPosition = Vector3.zero;
+                    heldObject.transform.localRotation = Quaternion.identity;
+                    this.insertedObjects.Add(elementObject);
+
+                    // TODO: Check actual recipes
+                    if (this.insertedObjects.Count >= 3)
+                    {
+                        this.IsActivated = false;
+                        this.IsFinished = false;
+                        this.OnTimerStart(interactor);
+                    }
                 }
             }
-                
+        }
+        else if (this.outputObject != null)
+        {
+            if (interactor.HeldObject == null)
+            {
+                this.outputObject.EnablePhysics();
+                this.outputObject.transform.SetParent(this.transform, false);
+                interactor.SetHeldObject(this.outputObject.GetComponent<PickableObject>());
+
+                this.outputObject = null;
+            }
         }
     }
 
-    
+    public bool AcceptsElement(Recipe element)
+    {
+        if (element != null)
+        {
+            foreach (Recipe acceptedElement in this.acceptedElements)
+                if (acceptedElement.Equals(element))
+                    return true;
+        }
+
+        return false;
+    }
+
+
+    protected override void OnTimerFinish()
+    {
+        if (!this.IsFinished)
+        {
+            this.IsActivated = false;
+            this.IsFinished = true;
+            this.ObjectInfoCanvas.gameObject.SetActive(false);
+
+            this.ClearInput();
+            this.AddToOutput(this.resultElement);
+        }
+    }
+
+
+    private void AddToOutput(Recipe element)
+    {
+        if (this.isServer && element != null)
+        {
+            GameObject resultElement = GameObject.Instantiate(element.GetPrefab());
+
+            this.outputObject = resultElement.GetComponent<ElementObject>();
+            this.outputObject.DisablePhysics();
+
+            resultElement.transform.SetParent(this.outputContainer.transform, false);
+            resultElement.transform.localPosition = Vector3.zero;
+            resultElement.transform.localRotation = Quaternion.identity;
+
+            NetworkServer.Spawn(resultElement);
+        }
+    }
+    private void ClearInput()
+    {
+        if (this.isServer)
+        {
+            foreach (ElementObject element in this.insertedObjects)
+                NetworkServer.Destroy(element.gameObject);
+            this.insertedObjects.Clear();
+        }
+    }
 }

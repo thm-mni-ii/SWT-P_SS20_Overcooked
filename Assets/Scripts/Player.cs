@@ -20,10 +20,8 @@ public class Player : NetworkBehaviour
     {
         if (this.isLocalPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                this.interactor.Interact();
             if (Input.GetKeyDown(KeyCode.E))
-                this.interactor.InteractWithDevice();
+                this.interactor.Interact();
         }
     }
 

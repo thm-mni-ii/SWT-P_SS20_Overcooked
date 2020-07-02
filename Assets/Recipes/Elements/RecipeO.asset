@@ -15,4 +15,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c45931ccaa9f9ca41a9600d6f6ef0662, type: 3}
   name: Oxygen
   description: Breath it mf
+  prefab: {fileID: 122257757236250085, guid: 91516e444426320479ba6381f66d5a4e, type: 3}
   elementSymbol: O

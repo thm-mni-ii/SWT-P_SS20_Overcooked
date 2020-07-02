@@ -22,9 +22,9 @@ public class PickableObject : NetworkBehaviour, IInteractable
     public void Interact(Interactor interactor)
     {
         if (!this.IsPickedUp)
-            this.OnPickup(interactor);
+            this.Pickup(interactor);
         else if (this.canBeDropped)
-            this.OnDrop(interactor);
+            this.Drop(interactor);
     }
 
     public void SetDroppable(bool canBeDropped)
@@ -32,16 +32,19 @@ public class PickableObject : NetworkBehaviour, IInteractable
         this.canBeDropped = canBeDropped;
     }
 
-    protected virtual void OnPickup(Interactor interactor)
+    public virtual void Pickup(Interactor interactor)
     {
-        this.currentHolder = interactor;
-        interactor.SetHeldObject(this);
-        this.transform.SetParent(interactor.transform, true);
+        if (interactor != this.currentHolder)
+        {
+            this.currentHolder = interactor;
+            interactor.SetHeldObject(this);
+            this.transform.SetParent(interactor.transform, true);
 
-        foreach (Rigidbody rb in this.nonKinematicRBs)
-            rb.isKinematic = true;
+            foreach (Rigidbody rb in this.nonKinematicRBs)
+                rb.isKinematic = true;
+        }
     }
-    protected virtual void OnDrop(Interactor interactor)
+    public virtual void Drop(Interactor interactor)
     {
         if (interactor == this.currentHolder)
         {
@@ -53,10 +56,4 @@ public class PickableObject : NetworkBehaviour, IInteractable
                 rb.isKinematic = false;
         }
     }
-
-    public bool getIsPickedUp()
-    {
-        return IsPickedUp;
-    }
-
 }

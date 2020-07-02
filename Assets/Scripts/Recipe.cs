@@ -30,6 +30,7 @@ public abstract class Recipe : ScriptableObject
     [SerializeField] new string name;
     [TextArea]
     [SerializeField] string description;
+    [SerializeField] ElementObject prefab;
 
 
     private void OnEnable()
@@ -44,5 +45,6 @@ public abstract class Recipe : ScriptableObject
     public virtual string GetName() => this.name;
     public abstract string GetElementSymbol();
     public virtual string GetDescription() => this.description;
+    public virtual GameObject GetPrefab() => this.prefab.gameObject;
     public abstract bool IsCompound();
 }
