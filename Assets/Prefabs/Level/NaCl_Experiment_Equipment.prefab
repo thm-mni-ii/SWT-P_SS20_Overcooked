@@ -202,6 +202,8 @@ MonoBehaviour:
   progressBar: {fileID: 4333722287232405784}
   inputContainer: {fileID: 1362320579}
   outputContainer: {fileID: 916252706}
+  fireLight: {fileID: 2217655088953142197}
+  fireParticles: {fileID: 2217655088953140298}
   acceptedElements:
   - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
@@ -371,6 +373,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2217655088505808218, guid: 8273e072ccac6d3409a3319201b143c2,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2217655088505808219, guid: 8273e072ccac6d3409a3319201b143c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -452,6 +459,18 @@ PrefabInstance:
 --- !u!4 &2217655088953140299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2217655088505808219, guid: 8273e072ccac6d3409a3319201b143c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1809465616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2217655088953140298 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2217655088505808218, guid: 8273e072ccac6d3409a3319201b143c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1809465616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &2217655088953142197 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 2217655088505809573, guid: 8273e072ccac6d3409a3319201b143c2,
     type: 3}
   m_PrefabInstance: {fileID: 1809465616}
   m_PrefabAsset: {fileID: 0}

@@ -8,6 +8,8 @@ public class Equipment : ModifiableObject
     [Header("References")]
     [SerializeField] GameObject inputContainer;
     [SerializeField] GameObject outputContainer;
+    [SerializeField] Light fireLight;
+    [SerializeField] ParticleSystem fireParticles;
 
     [Header("Settings")]
     [SerializeField] Recipe[] acceptedElements;
@@ -51,6 +53,9 @@ public class Equipment : ModifiableObject
                     // TODO: Check actual recipes
                     if (this.insertedObjects.Count >= 3)
                     {
+                        this.fireLight.enabled = true;
+                        this.fireParticles.Play();
+
                         this.IsActivated = false;
                         this.IsFinished = false;
                         this.OnTimerStart(interactor);
@@ -88,6 +93,9 @@ public class Equipment : ModifiableObject
     {
         if (!this.IsFinished)
         {
+            this.fireLight.enabled = false;
+            this.fireParticles.Stop();
+
             this.IsActivated = false;
             this.IsFinished = true;
             this.ObjectInfoCanvas.gameObject.SetActive(false);
