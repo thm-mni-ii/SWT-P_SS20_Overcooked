@@ -10,6 +10,7 @@ public class OutputArea : MonoBehaviour
         ElementObject elementObject = other.gameObject.GetComponent<ElementObject>();
 
         if (elementObject != null && this.CanAccept(elementObject.Element))
+            // TODO: Remove recipe from demands list
             NetworkServer.Destroy(other.gameObject);
     }
 
