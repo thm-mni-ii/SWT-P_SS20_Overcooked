@@ -19,6 +19,13 @@ public class PickableObject : NetworkBehaviour, IInteractable
     private Interactor currentHolder;
 
 
+    private void OnDisable()
+    {
+        if (this.IsPickedUp)
+            this.Drop(this.CurrentHolder);
+    }
+
+
     public void Interact(Interactor interactor)
     {
         if (!this.IsPickedUp)

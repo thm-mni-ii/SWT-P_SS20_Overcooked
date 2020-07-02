@@ -63,14 +63,9 @@ MonoBehaviour:
   autoCreatePlayer: 0
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 6801381813141395685, guid: 14c523ffd8720af42b085703c72b7bc4, type: 3}
-  - {fileID: 3616598582831666234, guid: b8f5ed8e90417c64698b1d020d8decba, type: 3}
-  - {fileID: 7232195095005542978, guid: 1dc721cd626942c4eb684c4f2206761d, type: 3}
-  spawnPoint1: {fileID: 0}
-  spawnPoint2: {fileID: 0}
-  spawnPoint3: {fileID: 0}
-  spawnPoint4: {fileID: 0}
-  timer: {fileID: 0}
+  - {fileID: 2480635677062756111, guid: bc930e4f9805900479b2e45f55c97d0f, type: 3}
+  - {fileID: 8632365603161309307, guid: 91516e444426320479ba6381f66d5a4e, type: 3}
+  - {fileID: 8632365603161309307, guid: afda75ea220321b4d97c7e7b1e6ec8cd, type: 3}
 --- !u!114 &4268389510805711341
 MonoBehaviour:
   m_ObjectHideFlags: 0
