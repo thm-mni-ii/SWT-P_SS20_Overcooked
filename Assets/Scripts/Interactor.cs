@@ -11,44 +11,63 @@ public class Interactor : NetworkBehaviour
 
 
     public PickableObject HeldObject { get; private set; }
-    public ModifiableObject HeldModifiedObject { get; private set; }
     public bool IsHoldingObject => this.HeldObject != null;
-    public bool IsHoldingModifiedObject => this.HeldModifiedObject != null;
+
+
+    private RaycastHit[] hitResultsPool;
+
+
+    private void Awake()
+    {
+        this.hitResultsPool = new RaycastHit[2];
+    }
 
 
     public void Interact()
     {
-        GameObject interactedObject = this.IsHoldingObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
+        GameObject interactedObject = this.GetObjectToInteract();
 
         if (interactedObject != null)
             this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
     }
-    
-    public void InteractWithDevice() {
-        GameObject interactedObject = this.IsHoldingModifiedObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
-
-        if (interactedObject != null)
-            this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
-    }
-
 
     public void SetHeldObject(PickableObject heldObject)
     {
-        this.HeldObject = heldObject;
-    }
+        if (this.HeldObject != heldObject)
+        {
+            if (this.HeldObject != null)
+                this.HeldObject.Drop(this);
 
-    public void SetHeldModifiedObject(ModifiableObject heldModifiedObject) {
-        this.HeldModifiedObject = heldModifiedObject;
+            this.HeldObject = heldObject;
+
+            if (this.HeldObject != null)
+                this.HeldObject.Pickup(this);
+        }
     }
 
 
     private GameObject GetObjectToInteract()
     {
-        RaycastHit hitInfo;
+        int resultsAmount = Physics.RaycastNonAlloc(this.interactOrigin.position, this.interactOrigin.forward, this.hitResultsPool, this.interactReach, this.interactLayers);
 
-        if (Physics.Raycast(this.interactOrigin.position, this.interactOrigin.forward, out hitInfo, this.interactReach, this.interactLayers))
-            if (hitInfo.collider.GetComponent<IInteractable>() != null)
-                return hitInfo.collider.gameObject;
+        if (resultsAmount > 0)
+        {
+            if (resultsAmount > 1 && this.IsHoldingObject)
+            {
+                for (int i = 0; i < resultsAmount; i++)
+                {
+                    if (this.hitResultsPool[i].collider.gameObject.Equals(this.HeldObject.gameObject))
+                        continue;
+                    if (this.hitResultsPool[i].collider.GetComponent<IInteractable>() != null)
+                        return this.hitResultsPool[i].collider.gameObject;
+                }
+            }
+
+            if (this.hitResultsPool[0].collider.GetComponent<IInteractable>() != null)
+                return this.hitResultsPool[0].collider.gameObject;
+        }
+        else if (this.HeldObject != null)
+            return this.HeldObject.gameObject;
 
         return null;
     }
@@ -59,7 +78,7 @@ public class Interactor : NetworkBehaviour
     [Command]
     private void CmdRequestInteract(NetworkIdentity interactable)
     {
-        GameObject actualInteractable = this.IsHoldingObject ? this.HeldObject.gameObject : this.GetObjectToInteract();
+        GameObject actualInteractable = this.GetObjectToInteract();
 
         if (interactable != null && actualInteractable != null && actualInteractable.Equals(interactable.gameObject))
             this.RpcConfirmInteract(interactable);

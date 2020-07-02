@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8632365603161309299}
   - component: {fileID: 8632365603161309298}
   - component: {fileID: 8632365603161309296}
-  - component: {fileID: -831875810089493253}
+  - component: {fileID: 122257757236250085}
   m_Layer: 8
   m_Name: Oxygen
   m_TagString: Pickup
@@ -166,16 +166,18 @@ MonoBehaviour:
   canBeDropped: 1
   nonKinematicRBs:
   - {fileID: 8632365603161309308}
---- !u!135 &-831875810089493253
-SphereCollider:
+--- !u!114 &122257757236250085
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8632365603161309307}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8a36676739f104eb0783ddcf51c408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbodies:
+  - {fileID: 8632365603161309308}
+  element: {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
