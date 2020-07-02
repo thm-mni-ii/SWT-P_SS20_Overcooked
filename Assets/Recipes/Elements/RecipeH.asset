@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cba5b0011767704c98fc8dc02b27881, type: 3}
   m_Name: RecipeH
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300446, guid: c862ec58257e74625b59a5f2bb18ace7, type: 3}
+  icon: {fileID: 21300000, guid: e135dbed5611f2b4eb03663649c0f59d, type: 3}
   name: Hydrogen
   description: Hydrogen undso
   elementSymbol: H
