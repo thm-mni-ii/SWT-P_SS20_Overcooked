@@ -120,6 +120,7 @@ public class Equipment : ModifiableObject
             resultElement.transform.localRotation = Quaternion.identity;
 
             NetworkServer.Spawn(resultElement);
+            this.RpcAddOutput(this.outputObject.GetComponent<NetworkIdentity>());
         }
     }
     private void ClearInput()
@@ -129,6 +130,23 @@ public class Equipment : ModifiableObject
             foreach (ElementObject element in this.insertedObjects)
                 NetworkServer.Destroy(element.gameObject);
             this.insertedObjects.Clear();
+        }
+    }
+
+
+    [ClientRpc]
+    private void RpcAddOutput(NetworkIdentity outputObject)
+    {
+        if (outputObject != null)
+        {
+            ElementObject elementObject = outputObject.GetComponent<ElementObject>();
+            elementObject.DisablePhysics();
+
+            outputObject.transform.SetParent(this.outputContainer.transform, false);
+            outputObject.transform.localPosition = Vector3.zero;
+            outputObject.transform.localRotation = Quaternion.identity;
+
+            this.outputObject = elementObject;
         }
     }
 }
