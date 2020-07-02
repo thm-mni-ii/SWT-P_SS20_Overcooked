@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396d7918f4dc77341afe59d88763a9f0, type: 3}
   m_Name: RecipeCO
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300044, guid: c862ec58257e74625b59a5f2bb18ace7, type: 3}
+  icon: {fileID: 21300000, guid: 100b40a92cfd73f48a6f6ac7fb6e28c1, type: 3}
   name: Carbon Monoxide
   description: Genau
   requiredComponents:

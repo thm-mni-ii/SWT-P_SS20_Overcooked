@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396d7918f4dc77341afe59d88763a9f0, type: 3}
   m_Name: RecipeH2O
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300280, guid: c862ec58257e74625b59a5f2bb18ace7, type: 3}
+  icon: {fileID: 21300000, guid: a4ac2d11f9f145b4ba8912f92558e8da, type: 3}
   name: Water
   description: It's just water
   requiredComponents:
