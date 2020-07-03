@@ -8,17 +8,25 @@ public class PlayerControls : NetworkBehaviour
     [SerializeField] Rigidbody rigidBody;
     [SerializeField] MeshRenderer playerModelRenderer;
     [SerializeField] float moveSpeed = 100.0F;
-    [SerializeField] float rotationSpeed = 5.0F;
-    [SerializeField] float rotationFalloff = 0.6F;
+    [SerializeField] float rotationSpeed = 500.0F;
 
 
-    private float forwardInput;
-    private float rotationInput;
+    private Vector3 movementInput;
+    private float targetYaw;
 
     [SyncVar(hook = nameof(UpdatePlayerColor))]
     private Color playerColor;
 
 
+    private void Awake()
+    {
+        this.movementInput = Vector3.zero;
+    }
+
+    private void Start()
+    {
+        this.targetYaw = this.transform.rotation.eulerAngles.y;
+    }
     public override void OnStartServer()
     {
         this.playerColor = Random.ColorHSV();
@@ -28,23 +36,29 @@ public class PlayerControls : NetworkBehaviour
         //this.rigidBody.isKinematic = !this.hasAuthority;
     }
 
-
     private void Update()
     {
         if (this.isLocalPlayer)
         {
-            this.forwardInput = Input.GetAxisRaw("Vertical");
-            if (Input.GetAxisRaw("Horizontal") != 0.0F)
-                this.rotationInput = Input.GetAxisRaw("Horizontal");
+            this.movementInput.x = Input.GetAxisRaw("Horizontal");
+            this.movementInput.y = 0;
+            this.movementInput.z = Input.GetAxisRaw("Vertical");
+
+            if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
+                this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
         }
     }
     private void FixedUpdate()
     {
         if (this.isLocalPlayer)
         {
-            this.rigidBody.AddForce(this.transform.rotation * Vector3.forward * this.forwardInput * this.moveSpeed);
-            this.rigidBody.MoveRotation(this.rigidBody.rotation * Quaternion.Euler(0.0F, this.rotationInput * this.rotationSpeed, 0.0F));
-            this.rotationInput *= this.rotationFalloff;
+            Vector3 currentRotation = this.rigidBody.rotation.eulerAngles;
+            float yawDelta = this.targetYaw - currentRotation.y;
+
+            if (Mathf.Abs(yawDelta) > Mathf.Epsilon)
+                this.rigidBody.MoveRotation(Quaternion.Euler(0.0F, Mathf.MoveTowardsAngle(currentRotation.y, this.targetYaw, this.rotationSpeed * Time.fixedDeltaTime), 0.0F));
+
+            this.rigidBody.AddForce(this.movementInput.normalized * this.moveSpeed);
         }
     }
 
