@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  interactReach: 1.5
+  interactReach: 0.65
   interactLayers:
     serializedVersion: 2
     m_Bits: 256
