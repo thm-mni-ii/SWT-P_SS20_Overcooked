@@ -130,10 +130,17 @@ public class Equipment : ModifiableObject
             foreach (ElementObject element in this.insertedObjects)
                 NetworkServer.Destroy(element.gameObject);
             this.insertedObjects.Clear();
+
+            this.RpcClearInput();
         }
     }
 
 
+    [ClientRpc]
+    private void RpcClearInput()
+    {
+        this.insertedObjects.Clear();
+    }
     [ClientRpc]
     private void RpcAddOutput(NetworkIdentity outputObject)
     {
