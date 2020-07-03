@@ -295,9 +295,8 @@ MonoBehaviour:
   syncInterval: 0.1
   rigidBody: {fileID: 2127368311968531779}
   playerModelRenderer: {fileID: 482893924135192172}
-  moveSpeed: 30
-  rotationSpeed: 5
-  rotationFalloff: 0.6
+  moveSpeed: 70
+  rotationSpeed: 1000
 --- !u!114 &8694444420510392368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,8 +325,8 @@ Rigidbody:
   m_GameObject: {fileID: 6801381813141395685}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 0.05
+  m_Drag: 10
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -340,7 +339,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6801381813141395685}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dc5735d5b37770c4da6988cfa6665600, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
