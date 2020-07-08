@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Timer gameTimer = null;
     [SerializeField] DemandQueue gameDemandQueue = null;
 
+    [Header("Prefabs")]
+    [SerializeField] GameObject finishedLevelPrefab;
 
     public Level CurrentLevel { get; set; }
     public Timer GameTimer => this.gameTimer;
     public DemandQueue GameDemandQueue => this.gameDemandQueue;
 
-
+    private GameObject levelFinished;
 
     private void Awake()
     {
@@ -36,6 +38,17 @@ public class GameManager : MonoBehaviour
             GameObject.Destroy(this.gameObject);
     }
 
+    private void Update() {
+        if (!GameTimer.isTimerRunning) { //TODO: isTimerRunning auf public/protected setzen?
+            if (this.levelFinished.activeSelf) this.ShowLevelFinished();
+        }
+    }
+
+    public void ShowLevelFinished() {
+        //Time.timeScale = 0.0F;
+        //this.UnloadUIScenes();
+        this.levelFinished.SetActive(true);
+    }
 
     public void LoadLevel(int levelNum)
     {
