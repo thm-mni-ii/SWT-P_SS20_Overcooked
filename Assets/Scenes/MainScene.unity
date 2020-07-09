@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -259.78998, y: 0}
+  m_AnchoredPosition: {x: -259.78906, y: 0}
   m_SizeDelta: {x: 520, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &388032731
@@ -759,7 +759,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   queueElementsContainer: {fileID: 614349157}
-  demandedRecipeUIPrefab: {fileID: 3559500836891273518, guid: 620c994536e21ed42b13284dd12aeb77,
+  demandedMatterUIPrefab: {fileID: 3559500836891273518, guid: 620c994536e21ed42b13284dd12aeb77,
     type: 3}
 --- !u!114 &1593102873
 MonoBehaviour:

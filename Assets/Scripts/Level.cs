@@ -7,7 +7,7 @@ public class Level : NetworkBehaviour
 {
     [Header("Settings")]
     [SerializeField] int levelDurationSeconds = 180;
-    [SerializeField] Recipe[] demandsPool;
+    [SerializeField] Matter[] demandsPool;
     [SerializeField] Transform[] spawnPoints;
 
 

@@ -10,16 +10,19 @@ public class OutputArea : MonoBehaviour
         ElementObject elementObject = other.gameObject.GetComponent<ElementObject>();
 
         if (elementObject != null && this.CanAccept(elementObject.Element))
-            // TODO: Remove recipe from demands list
+            // TODO: Remove matter from demands list
             NetworkServer.Destroy(other.gameObject);
     }
 
 
-    private bool CanAccept(Recipe recipe)
+    private bool CanAccept(Matter matter)
     {
-        foreach (Recipe r in GameManager.Instance.GameDemandQueue.CurrentDemands)
-            if (recipe.Equals(r))
-                return true;
+        if (matter != null)
+        {
+            foreach (Matter r in GameManager.Instance.GameDemandQueue.CurrentDemands)
+                if (matter.Equals(r))
+                    return true;
+        }
 
         return false;
     }

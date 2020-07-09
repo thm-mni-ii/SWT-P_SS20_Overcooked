@@ -133,13 +133,13 @@ MonoBehaviour:
   m_margin: {x: 4, y: 2, z: 4, w: 2}
   m_textInfo:
     textComponent: {fileID: 1729209565}
-    characterCount: 1
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 3559500836891273516}
   - component: {fileID: 3559500836891273514}
   m_Layer: 0
-  m_Name: DemandedRecipeUI
+  m_Name: DemandedMatterUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,10 +341,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3559500836891273518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82794425c9dec7d49a4ef0999e04b2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e3afc891be3ee24ea127ab2a20bffea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconUI: {fileID: 3559500836891273516}
   quantityText: {fileID: 1729209565}
-  requiredRecipesContainer: {fileID: 1793402820}
-  demandedRecipeUIPrefab: {fileID: 3559500836891273518}
+  requiredMatterContainer: {fileID: 1793402820}
+  demandedMatterUIPrefab: {fileID: 3559500836891273518}

@@ -12,8 +12,8 @@ public class Equipment : ModifiableObject
     [SerializeField] ParticleSystem fireParticles;
 
     [Header("Settings")]
-    [SerializeField] Recipe[] acceptedElements;
-    [SerializeField] Recipe resultElement;
+    [SerializeField] Matter[] acceptedElements;
+    [SerializeField] Matter resultElement;
 
 
     private List<ElementObject> insertedObjects;
@@ -76,11 +76,11 @@ public class Equipment : ModifiableObject
         }
     }
 
-    public bool AcceptsElement(Recipe element)
+    public bool AcceptsElement(Matter element)
     {
         if (element != null)
         {
-            foreach (Recipe acceptedElement in this.acceptedElements)
+            foreach (Matter acceptedElement in this.acceptedElements)
                 if (acceptedElement.Equals(element))
                     return true;
         }
@@ -106,7 +106,7 @@ public class Equipment : ModifiableObject
     }
 
 
-    private void AddToOutput(Recipe element)
+    private void AddToOutput(Matter element)
     {
         if (this.isServer && element != null)
         {
