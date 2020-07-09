@@ -63,9 +63,14 @@ MonoBehaviour:
   autoCreatePlayer: 0
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 2480635677062756111, guid: bc930e4f9805900479b2e45f55c97d0f, type: 3}
-  - {fileID: 8632365603161309307, guid: 91516e444426320479ba6381f66d5a4e, type: 3}
-  - {fileID: 8632365603161309307, guid: afda75ea220321b4d97c7e7b1e6ec8cd, type: 3}
+  - {fileID: 3545771996798813408, guid: 2bb6133ce327b4d44884e242463b6387, type: 3}
+  - {fileID: 3545771996798813408, guid: f8b5037c3f73cf44d87993cd959352d3, type: 3}
+  - {fileID: 3545771996798813408, guid: afda75ea220321b4d97c7e7b1e6ec8cd, type: 3}
+  - {fileID: 3545771996798813408, guid: 34f617cfe71ec7b4889c4f527461a8d0, type: 3}
+  - {fileID: 258118952715378590, guid: 58006da545cb5c84390fbd5a85b11697, type: 3}
+  - {fileID: 4331614810068572952, guid: bfa11505d1946dd4d829950ff511db2e, type: 3}
+  - {fileID: 5881419839391294201, guid: b507003908a09104e8e534fffc8441f9, type: 3}
+  - {fileID: 5881419839391294201, guid: effc34d17bea1b748bdda20084471d26, type: 3}
 --- !u!114 &4268389510805711341
 MonoBehaviour:
   m_ObjectHideFlags: 0

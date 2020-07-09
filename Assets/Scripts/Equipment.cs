@@ -12,17 +12,20 @@ public class Equipment : ModifiableObject
     [SerializeField] ParticleSystem fireParticles;
 
     [Header("Settings")]
-    [SerializeField] Matter[] acceptedElements;
-    [SerializeField] Matter resultElement;
+    [SerializeField] Recipe[] allRecipes;
 
 
     private List<ElementObject> insertedObjects;
+    private List<Matter> insertedMatter;
+    private Recipe recipeInProgress;
     private ElementObject outputObject;
 
 
     private void Awake()
     {
         this.insertedObjects = new List<ElementObject>();
+        this.insertedMatter = new List<Matter>();
+        this.recipeInProgress = null;
         this.outputObject = null;
     }
 
@@ -49,9 +52,17 @@ public class Equipment : ModifiableObject
                     heldObject.transform.localPosition = Vector3.zero;
                     heldObject.transform.localRotation = Quaternion.identity;
                     this.insertedObjects.Add(elementObject);
+                    this.insertedMatter.Add(elementObject.Element);
 
-                    // TODO: Check actual recipes
-                    if (this.insertedObjects.Count >= 3)
+                    foreach (Recipe recipe in this.allRecipes)
+                    {
+                        if (recipe.MatchInputs(this.insertedMatter) == RecipeMatchState.FullMatch)
+                        {
+                            this.recipeInProgress = recipe;
+                            break;
+                        }
+                    }
+                    if (this.recipeInProgress != null)
                     {
                         this.fireLight.enabled = true;
                         this.fireParticles.Play();
@@ -80,9 +91,7 @@ public class Equipment : ModifiableObject
     {
         if (element != null)
         {
-            foreach (Matter acceptedElement in this.acceptedElements)
-                if (acceptedElement.Equals(element))
-                    return true;
+            return true;
         }
 
         return false;
@@ -100,8 +109,8 @@ public class Equipment : ModifiableObject
             this.IsFinished = true;
             this.ObjectInfoCanvas.gameObject.SetActive(false);
 
+            this.AddToOutput(this.recipeInProgress.Output);
             this.ClearInput();
-            this.AddToOutput(this.resultElement);
         }
     }
 
@@ -130,6 +139,8 @@ public class Equipment : ModifiableObject
             foreach (ElementObject element in this.insertedObjects)
                 NetworkServer.Destroy(element.gameObject);
             this.insertedObjects.Clear();
+            this.insertedMatter.Clear();
+            this.recipeInProgress = null;
 
             this.RpcClearInput();
         }
@@ -140,6 +151,8 @@ public class Equipment : ModifiableObject
     private void RpcClearInput()
     {
         this.insertedObjects.Clear();
+        this.insertedMatter.Clear();
+        this.recipeInProgress = null;
     }
     [ClientRpc]
     private void RpcAddOutput(NetworkIdentity outputObject)

@@ -204,10 +204,9 @@ MonoBehaviour:
   outputContainer: {fileID: 916252706}
   fireLight: {fileID: 2217655088953142197}
   fireParticles: {fileID: 2217655088953140298}
-  acceptedElements:
-  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
-  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
-  resultElement: {fileID: 11400000, guid: a7143530cfade0545ae9994ea7034726, type: 2}
+  allRecipes:
+  - {fileID: 11400000, guid: c87420d64cc6695499b35d2f7ae03100, type: 2}
+  - {fileID: 11400000, guid: 0c01c8d1bbb9e6048bb07f5edab3890a, type: 2}
 --- !u!1001 &630977195
 PrefabInstance:
   m_ObjectHideFlags: 0
