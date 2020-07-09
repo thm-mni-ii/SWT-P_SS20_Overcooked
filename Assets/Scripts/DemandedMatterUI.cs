@@ -22,8 +22,9 @@ public class DemandedMatterUI : MonoBehaviour
     }
 
 
-    public void SetMatter(Matter matter, int quantity = 1, bool showRequiredComponents = true)
+    public void SetMatter(Matter matter, bool showRequiredComponents = true)
     {
+        int quantity = matter is MatterMolecule ? ((MatterMolecule)matter).ElementalAmount : 1;
         this.matter = matter;
 
         if (matter != null)
@@ -46,12 +47,12 @@ public class DemandedMatterUI : MonoBehaviour
             {
                 this.requiredMatterContainer.SetActive(true);
 
-                foreach (MatterCompound.MatterComponent component in ((MatterCompound)matter).GetRequiredComponents())
+                foreach (Matter component in ((MatterCompound)matter).Components)
                 {
                     GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.requiredMatterContainer.transform);
                     DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
 
-                    demandedMatterUI?.SetMatter(component.Matter, component.Amount, false);
+                    demandedMatterUI?.SetMatter(component, false);
                 }
             }
             else

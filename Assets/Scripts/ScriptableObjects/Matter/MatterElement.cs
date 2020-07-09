@@ -9,5 +9,6 @@ public class MatterElement : Matter
 
 
     public override string GetFormula() => this.elementSymbol;
+    public override bool IsMolecule() => false;
     public override bool IsCompound() => false;
 }

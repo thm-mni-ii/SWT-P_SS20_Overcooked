@@ -1910,9 +1910,9 @@ MonoBehaviour:
   syncInterval: 0.1
   levelDurationSeconds: 180
   demandsPool:
-  - {fileID: 11400000, guid: 78318cdcf3322834fa6d2dd12597af47, type: 2}
-  - {fileID: 11400000, guid: 7a3fa4e7f7bcd624fabf17fe41764122, type: 2}
-  - {fileID: 11400000, guid: ef964853cba3cf64da2fc68aa5f9f019, type: 2}
+  - {fileID: 11400000, guid: 59170507f3537da4e816653ff91d1b35, type: 2}
+  - {fileID: 11400000, guid: 258fcd638c7c7794789588ed0b481a6a, type: 2}
+  - {fileID: 11400000, guid: a7143530cfade0545ae9994ea7034726, type: 2}
   spawnPoints:
   - {fileID: 904617143}
   - {fileID: 589103136}

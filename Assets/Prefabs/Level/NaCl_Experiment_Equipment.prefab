@@ -207,7 +207,7 @@ MonoBehaviour:
   acceptedElements:
   - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
-  resultElement: {fileID: 11400000, guid: ef964853cba3cf64da2fc68aa5f9f019, type: 2}
+  resultElement: {fileID: 11400000, guid: a7143530cfade0545ae9994ea7034726, type: 2}
 --- !u!1001 &630977195
 PrefabInstance:
   m_ObjectHideFlags: 0

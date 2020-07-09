@@ -33,7 +33,7 @@ public abstract class Matter : ScriptableObject
     [SerializeField] ElementObject prefab;
 
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         Matter.RegisterMatter(this);
     }
@@ -46,5 +46,6 @@ public abstract class Matter : ScriptableObject
     public abstract string GetFormula();
     public virtual string GetDescription() => this.description;
     public virtual GameObject GetPrefab() => this.prefab.gameObject;
+    public abstract bool IsMolecule();
     public abstract bool IsCompound();
 }
