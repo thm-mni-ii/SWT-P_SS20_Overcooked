@@ -15,7 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 100b40a92cfd73f48a6f6ac7fb6e28c1, type: 3}
   name: Carbon Monoxide
   description: Genau
-  prefab: {fileID: 0}
+  prefab: {fileID: 5137224915557663102, guid: f8b5037c3f73cf44d87993cd959352d3, type: 3}
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
