@@ -8,10 +8,10 @@ public class ElementObject : MonoBehaviour
     [SerializeField] Rigidbody[] rigidbodies;
 
     [Header("Settings")]
-    [SerializeField] Recipe element;
+    [SerializeField] Matter element;
 
 
-    public Recipe Element => this.element;
+    public Matter Element => this.element;
 
 
     public void EnablePhysics()

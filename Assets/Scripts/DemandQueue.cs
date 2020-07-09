@@ -6,47 +6,47 @@ using Mirror;
 public class DemandQueue : NetworkBehaviour
 {
     [SerializeField] GameObject queueElementsContainer;
-    [SerializeField] GameObject demandedRecipeUIPrefab;
+    [SerializeField] GameObject demandedMatterUIPrefab;
 
 
-    public List<Recipe> CurrentDemands => this.currentDemands;
+    public List<Matter> CurrentDemands => this.currentDemands;
 
 
-    private List<Recipe> currentDemands;
+    private List<Matter> currentDemands;
 
 
     private void Awake()
     {
-        this.currentDemands = new List<Recipe>();
+        this.currentDemands = new List<Matter>();
     }
 
 
-    public void AddDemand(Recipe recipe)
+    public void AddDemand(Matter matter)
     {
         if (this.isServer)
-            this.RpcAcceptDemand(recipe.GetID());
+            this.RpcAcceptDemand(matter.GetID());
         else
-            this.AcceptDemand(recipe);
+            this.AcceptDemand(matter);
     }
 
 
-    private void AcceptDemand(Recipe recipe)
+    private void AcceptDemand(Matter matter)
     {
-        GameObject uiElement = GameObject.Instantiate(this.demandedRecipeUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
-        DemandedRecipeUI demandedRecipeUI = uiElement.GetComponent<DemandedRecipeUI>();
+        GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
+        DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
 
-        demandedRecipeUI?.SetRecipe(recipe);
-        this.currentDemands.Add(recipe);
+        demandedMatterUI?.SetMatter(matter);
+        this.currentDemands.Add(matter);
     }
 
 
     [ClientRpc]
-    private void RpcAcceptDemand(string recipeID)
+    private void RpcAcceptDemand(string matterID)
     {
-        Recipe targetRecipe = Recipe.GetByID(recipeID);
-        if (targetRecipe != null)
-            this.AcceptDemand(targetRecipe);
+        Matter targetMatter = Matter.GetByID(matterID);
+        if (targetMatter != null)
+            this.AcceptDemand(targetMatter);
         else
-            Debug.LogError($"Cannot accept nonexisting recipe with id '{recipeID}'.");
+            Debug.LogError($"Cannot accept nonexisting matter with id '{matterID}'.");
     }
 }
