@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7401228250153738755}
   - component: {fileID: 1725498552199988462}
   m_Layer: 5
-  m_Name: UI
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80a0f2c91a43a548862a59667bdd1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 0}
+  uiCanvas: {fileID: 7401228250153738765}
   levelUI: {fileID: 7401228249103709960}
 --- !u!1001 &5815877353575684269
 PrefabInstance:
