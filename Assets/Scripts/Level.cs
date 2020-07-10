@@ -14,24 +14,25 @@ public class Level : NetworkBehaviour
     public Transform[] SpawnPoints => this.spawnPoints;
 
     private Coroutine demandCoroutine;
+    private WaitForSeconds demandCoroutineWait;
 
 
     private void Awake()
     {
-        GameManager.Instance.CurrentLevel = this;
+        this.demandCoroutineWait = new WaitForSeconds(5.0F);
     }
 
     public override void OnStartServer()
     {
-        GameManager.Instance.GameTimer.SetTimeLeft(levelDurationSeconds);
-        GameManager.Instance.GameTimer.StartTimer();
+        GameManager.UI.LevelUI.GameTimer.SetTimeLeft(levelDurationSeconds);
+        GameManager.UI.LevelUI.GameTimer.StartTimer();
 
         this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
     }
     public override void OnStopServer()
     {
         this.StopCoroutine(this.demandCoroutine);
-        GameManager.Instance.GameTimer.StopTimer();
+        GameManager.UI.LevelUI.GameTimer.StopTimer();
     }
 
 
@@ -43,8 +44,8 @@ public class Level : NetworkBehaviour
         while (true)
         {
             // add random demand from demand pool
-            yield return new WaitForSeconds(5.0F);
-            GameManager.Instance.GameDemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
+            yield return this.demandCoroutineWait;
+            GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
         }
     }
 }

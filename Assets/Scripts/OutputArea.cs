@@ -19,7 +19,7 @@ public class OutputArea : MonoBehaviour
     {
         if (matter != null)
         {
-            foreach (Matter r in GameManager.Instance.GameDemandQueue.CurrentDemands)
+            foreach (Matter r in GameManager.UI.LevelUI.DemandQueue.CurrentDemands)
                 if (matter.Equals(r))
                     return true;
         }
