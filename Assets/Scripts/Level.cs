@@ -15,7 +15,7 @@ public class Level : NetworkBehaviour
     public int PlayerScore => this.PlayerScore;
     public Transform[] SpawnPoints => this.spawnPoints;
 
-    [SyncVar] int playerScore;
+    [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
     private Coroutine demandCoroutine;
     private WaitForSeconds demandCoroutineWait;
 
@@ -74,5 +74,10 @@ public class Level : NetworkBehaviour
             yield return this.demandCoroutineWait;
             GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
         }
+    }
+
+    private void PlayerScore_OnChange(int oldValue, int newValue)
+    {
+        GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
     }
 }
