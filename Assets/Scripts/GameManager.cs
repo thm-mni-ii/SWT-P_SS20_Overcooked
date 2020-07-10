@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
                 this.currentLevel = rootGO.GetComponent<Level>();
                 if (this.currentLevel != null)
                 {
+                    SceneManager.SetActiveScene(scene);
                     Debug.Log($"Level loaded: {this.currentLevel.gameObject.name}");
                     break;
                 }
