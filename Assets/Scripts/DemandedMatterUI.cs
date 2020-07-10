@@ -61,4 +61,9 @@ public class DemandedMatterUI : MonoBehaviour
         else
             this.iconUI.enabled = false;
     }
+
+    public void Remove()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }

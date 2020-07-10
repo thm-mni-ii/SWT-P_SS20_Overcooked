@@ -38,6 +38,20 @@ public class Level : NetworkBehaviour
 
     public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
 
+    public void DeliverElement(ElementObject elementObject)
+    {
+        Matter matter = elementObject != null ? elementObject.Element : null;
+
+        if (this.isServer && matter != null)
+        {
+            if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
+            {
+                GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
+                NetworkServer.Destroy(elementObject.gameObject);
+            }
+        }
+    }
+
 
     private IEnumerator Do_DemandCoroutine()
     {
