@@ -24,7 +24,7 @@ public class Level : NetworkBehaviour
     {
         this.playerScore = 0;
         this.demandCoroutine = null;
-        this.demandCoroutineWait = new WaitForSeconds(5.0F);
+        this.demandCoroutineWait = new WaitForSeconds(20.0F);
     }
 
     public override void OnStartServer()
