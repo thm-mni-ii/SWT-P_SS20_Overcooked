@@ -56,7 +56,7 @@ public class Equipment : ModifiableObject
 
                     foreach (Recipe recipe in this.allRecipes)
                     {
-                        if (recipe.MatchInputs(this.insertedMatter) == RecipeMatchState.FullMatch)
+                        if (recipe.MatchInputs(this.insertedMatter, true) == RecipeMatchState.FullMatch)
                         {
                             this.recipeInProgress = recipe;
                             break;
@@ -100,14 +100,22 @@ public class Equipment : ModifiableObject
             this.ObjectInfoCanvas.gameObject.SetActive(false);
 
             if (this.isServer)
-            {
-                this.AddToOutput(this.recipeInProgress.Output);
-                this.ClearInput();
-            }
+                this.CompleteRecipe(this.recipeInProgress);
         }
     }
 
 
+    private void CompleteRecipe(Recipe recipe)
+    {
+        if (this.isServer)
+        {
+            this.RemoveFromInput(recipe.Inputs);
+            this.AddToOutput(recipe.Output);
+
+            this.recipeInProgress = null;
+            this.RpcCompleteRecipe();
+        }
+    }
     private void AddToOutput(Matter element)
     {
         if (this.isServer && element != null)
@@ -122,35 +130,75 @@ public class Equipment : ModifiableObject
             resultElement.transform.localRotation = Quaternion.identity;
 
             NetworkServer.Spawn(resultElement);
-            this.RpcAddOutput(this.outputObject.GetComponent<NetworkIdentity>());
+            this.RpcAddOutput(resultElement.GetComponent<NetworkIdentity>());
         }
     }
-    private void ClearInput()
+    private void RemoveFromInput(Matter[] elements)
     {
         if (this.isServer)
         {
-            foreach (ElementObject element in this.insertedObjects)
-                NetworkServer.Destroy(element.gameObject);
-            this.insertedObjects.Clear();
-            this.insertedMatter.Clear();
-            this.recipeInProgress = null;
+            List<int> removeIndices = new List<int>(elements.Length);
+            foreach (Matter toRemove in elements)
+            {
+                int insertedSlotIndex = this.insertedMatter.IndexOf(toRemove);
+                while (insertedSlotIndex >= 0 && removeIndices.Contains(insertedSlotIndex) && insertedSlotIndex + 1 < this.insertedMatter.Count)
+                    insertedSlotIndex = this.insertedMatter.IndexOf(toRemove, insertedSlotIndex + 1);
 
-            this.RpcClearInput();
+                if (insertedSlotIndex >= 0 && insertedSlotIndex < this.insertedMatter.Count)
+                {
+                    NetworkServer.Destroy(this.insertedObjects[insertedSlotIndex].gameObject);
+
+                    this.insertedMatter.RemoveAt(insertedSlotIndex);
+                    this.insertedObjects.RemoveAt(insertedSlotIndex);
+                    removeIndices.Add(insertedSlotIndex);
+                }
+            }
+            this.RpcRemoveFromInput(removeIndices.ToArray());
         }
     }
 
 
     [ClientRpc]
+    private void RpcCompleteRecipe()
+    {
+        this.recipeInProgress = null;
+    }
+    [ClientRpc]
+    private void RpcRemoveFromInput(int[] indices)
+    {
+        if (this.isClientOnly)
+        {
+            try
+            {
+                foreach (int index in indices)
+                {
+                    this.insertedMatter.RemoveAt(index);
+                    this.insertedObjects.RemoveAt(index);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Cannot remove given indices from input list. Clearing entire list instead.", this);
+                Debug.LogException(ex, this);
+
+                this.insertedObjects.Clear();
+                this.insertedMatter.Clear();
+            }
+        }
+    }
+    [ClientRpc]
     private void RpcClearInput()
     {
-        this.insertedObjects.Clear();
-        this.insertedMatter.Clear();
-        this.recipeInProgress = null;
+        if (this.isClientOnly)
+        {
+            this.insertedObjects.Clear();
+            this.insertedMatter.Clear();
+        }
     }
     [ClientRpc]
     private void RpcAddOutput(NetworkIdentity outputObject)
     {
-        if (outputObject != null)
+        if (this.isClientOnly && outputObject != null)
         {
             ElementObject elementObject = outputObject.GetComponent<ElementObject>();
             elementObject.DisablePhysics();
