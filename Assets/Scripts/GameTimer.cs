@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
-public class Timer : NetworkBehaviour
+public class GameTimer : NetworkBehaviour
 {
     [SerializeField] TMP_Text timerText;
 

@@ -14,7 +14,7 @@ public class TestNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-        Transform spawnPos = GameManager.Instance.CurrentLevel.GetSpawnForPlayer(numPlayers);
+        Transform spawnPos = GameManager.CurrentLevel.GetSpawnForPlayer(numPlayers);
         GameObject playerGO;
 
         if (spawnPos != null)

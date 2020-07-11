@@ -43,7 +43,7 @@ public class Equipment : ModifiableObject
             {
                 ElementObject elementObject = heldObject.GetComponent<ElementObject>();
 
-                if (elementObject != null && this.AcceptsElement(elementObject.Element))
+                if (elementObject != null)
                 {
                     interactor.SetHeldObject(null);
 
@@ -87,16 +87,6 @@ public class Equipment : ModifiableObject
         }
     }
 
-    public bool AcceptsElement(Matter element)
-    {
-        if (element != null)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
 
     protected override void OnTimerFinish()
     {
@@ -109,8 +99,11 @@ public class Equipment : ModifiableObject
             this.IsFinished = true;
             this.ObjectInfoCanvas.gameObject.SetActive(false);
 
-            this.AddToOutput(this.recipeInProgress.Output);
-            this.ClearInput();
+            if (this.isServer)
+            {
+                this.AddToOutput(this.recipeInProgress.Output);
+                this.ClearInput();
+            }
         }
     }
 
