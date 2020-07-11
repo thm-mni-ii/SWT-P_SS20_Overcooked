@@ -12,6 +12,7 @@ public class Equipment : ModifiableObject
     [SerializeField] ParticleSystem fireParticles;
 
     [Header("Settings")]
+    [SerializeField] bool allowForeignElementsInRecipes;
     [SerializeField] Recipe[] allRecipes;
 
 
@@ -56,7 +57,7 @@ public class Equipment : ModifiableObject
 
                     foreach (Recipe recipe in this.allRecipes)
                     {
-                        if (recipe.MatchInputs(this.insertedMatter, true) == RecipeMatchState.FullMatch)
+                        if (recipe.MatchInputs(this.insertedMatter, this.allowForeignElementsInRecipes) == RecipeMatchState.FullMatch)
                         {
                             this.recipeInProgress = recipe;
                             break;

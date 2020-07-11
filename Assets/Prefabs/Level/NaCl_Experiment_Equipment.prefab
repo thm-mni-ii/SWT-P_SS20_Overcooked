@@ -204,6 +204,7 @@ MonoBehaviour:
   outputContainer: {fileID: 916252706}
   fireLight: {fileID: 2217655088953142197}
   fireParticles: {fileID: 2217655088953140298}
+  allowForeignElementsInRecipes: 1
   allRecipes:
   - {fileID: 11400000, guid: c87420d64cc6695499b35d2f7ae03100, type: 2}
   - {fileID: 11400000, guid: 0c01c8d1bbb9e6048bb07f5edab3890a, type: 2}
