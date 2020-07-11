@@ -47,44 +47,16 @@ public class Equipment : ModifiableObject
                 if (elementObject != null)
                 {
                     interactor.SetHeldObject(null);
-
-                    elementObject.DisablePhysics();
-                    heldObject.transform.SetParent(this.inputContainer.transform, false);
-                    heldObject.transform.localPosition = Vector3.zero;
-                    heldObject.transform.localRotation = Quaternion.identity;
-                    this.insertedObjects.Add(elementObject);
-                    this.insertedMatter.Add(elementObject.Element);
-
-                    foreach (Recipe recipe in this.allRecipes)
-                    {
-                        if (recipe.MatchInputs(this.insertedMatter, this.allowForeignElementsInRecipes) == RecipeMatchState.FullMatch)
-                        {
-                            this.recipeInProgress = recipe;
-                            break;
-                        }
-                    }
-                    if (this.recipeInProgress != null)
-                    {
-                        this.fireLight.enabled = true;
-                        this.fireParticles.Play();
-
-                        this.IsActivated = false;
-                        this.IsFinished = false;
-                        this.OnTimerStart(interactor);
-                    }
+                    this.InsertElement(elementObject);
                 }
             }
         }
-        else if (this.outputObject != null)
+        else if (interactor.HeldObject == null)
         {
-            if (interactor.HeldObject == null)
-            {
-                this.outputObject.EnablePhysics();
-                this.outputObject.transform.SetParent(this.transform, false);
-                interactor.SetHeldObject(this.outputObject.GetComponent<PickableObject>());
+            ElementObject toTake = this.outputObject != null ? this.TakeOutputElement() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedElement() : null;
 
-                this.outputObject = null;
-            }
+            if (toTake != null)
+                interactor.SetHeldObject(toTake.GetComponent<PickableObject>());
         }
     }
 
@@ -105,6 +77,68 @@ public class Equipment : ModifiableObject
         }
     }
 
+
+    private void InsertElement(ElementObject elementObject)
+    {
+        if (elementObject != null)
+        {
+            elementObject.DisablePhysics();
+            elementObject.transform.SetParent(this.inputContainer.transform, false);
+            elementObject.transform.localPosition = Vector3.zero;
+            elementObject.transform.localRotation = Quaternion.identity;
+            this.insertedObjects.Add(elementObject);
+            this.insertedMatter.Add(elementObject.Element);
+
+            foreach (Recipe recipe in this.allRecipes)
+            {
+                if (recipe.MatchInputs(this.insertedMatter, this.allowForeignElementsInRecipes) == RecipeMatchState.FullMatch)
+                {
+                    this.recipeInProgress = recipe;
+                    break;
+                }
+            }
+            if (this.recipeInProgress != null)
+            {
+                this.fireLight.enabled = true;
+                this.fireParticles.Play();
+
+                this.IsActivated = false;
+                this.IsFinished = false;
+                this.OnTimerStart(null);
+            }
+        }
+    }
+    private ElementObject TakeOutputElement()
+    {
+        if (this.outputObject != null)
+        {
+            ElementObject toTake = this.outputObject;
+            toTake.EnablePhysics();
+            toTake.transform.SetParent(this.transform, false);
+
+            this.outputObject = null;
+            return toTake;
+        }
+
+        return null;
+    }
+    private ElementObject TakeLastInsertedElement()
+    {
+        if (this.insertedObjects.Count > 0)
+        {
+            int index = this.insertedObjects.Count - 1;
+            ElementObject toTake = this.insertedObjects[index];
+            toTake.EnablePhysics();
+            toTake.transform.SetParent(this.transform, false);
+
+            this.insertedMatter.RemoveAt(index);
+            this.insertedObjects.RemoveAt(index);
+
+            return toTake;
+        }
+
+        return null;
+    }
 
     private void CompleteRecipe(Recipe recipe)
     {
