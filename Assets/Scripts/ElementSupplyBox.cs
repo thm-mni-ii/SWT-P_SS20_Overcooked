@@ -10,6 +10,7 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
 
     [Header("Settings")]
     [SerializeField] Matter containedMatter;
+    [SerializeField] bool canTakeBackItems = true;
     [SerializeField] string elementDisplayTextureField = "_Back";
 
 
@@ -35,6 +36,17 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
 
                 this.RpcGiveElementToInteractor(instantiatedElement.GetComponent<NetworkIdentity>(), interactor.GetComponent<NetworkIdentity>());
             }
+            else if (this.canTakeBackItems)
+            {
+                ElementObject elementObject = interactor.HeldObject.GetComponent<ElementObject>();
+
+                if (elementObject != null && (this.containedMatter == null || this.containedMatter.Equals(elementObject.Element)))
+                {
+                    interactor.SetHeldObject(null);
+                    this.RpcGiveElementToInteractor(null, interactor.GetComponent<NetworkIdentity>());
+                    NetworkServer.Destroy(elementObject.gameObject);
+                }
+            }
         }
     }
 
@@ -49,9 +61,12 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
     [ClientRpc]
     private void RpcGiveElementToInteractor(NetworkIdentity element, NetworkIdentity interactor)
     {
-        Interactor i = interactor.GetComponent<Interactor>();
+        if (interactor != null)
+        {
+            Interactor i = interactor.GetComponent<Interactor>();
 
-        if (i != null)
-            i.SetHeldObject(element.GetComponent<PickableObject>());
+            if (i != null)
+                i.SetHeldObject(element != null ? element.GetComponent<PickableObject>() : null);
+        }
     }
 }
