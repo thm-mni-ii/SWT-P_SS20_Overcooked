@@ -27,15 +27,18 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
 
     public void Interact(Interactor interactor)
     {
-        if (this.isServer && this.containedMatter != null)
+        if (this.isServer)
         {
             if (!interactor.IsHoldingObject)
             {
-                GameObject instantiatedElement = GameObject.Instantiate(this.containedMatter.GetPrefab(), this.transform.position, Quaternion.identity);
-                NetworkServer.Spawn(instantiatedElement);
-                interactor.SetHeldObject(instantiatedElement.GetComponent<PickableObject>());
+                if (this.containedMatter != null)
+                {
+                    GameObject instantiatedElement = GameObject.Instantiate(this.containedMatter.GetPrefab(), this.transform.position, Quaternion.identity);
+                    NetworkServer.Spawn(instantiatedElement);
+                    interactor.SetHeldObject(instantiatedElement.GetComponent<PickableObject>());
 
-                this.RpcGiveElementToInteractor(instantiatedElement.GetComponent<NetworkIdentity>(), interactor.GetComponent<NetworkIdentity>());
+                    this.RpcGiveElementToInteractor(instantiatedElement.GetComponent<NetworkIdentity>(), interactor.GetComponent<NetworkIdentity>());
+                }
             }
             else if (this.canTakeBackItems)
             {
