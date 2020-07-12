@@ -19,14 +19,15 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
 
     private void Awake()
     {
-        this.elementDisplayMaterial = this.elementDisplayRenderer.material;
+        if (this.elementDisplayRenderer != null)
+            this.elementDisplayMaterial = this.elementDisplayRenderer.material;
         this.SetContainedMatter(this.containedMatter);
     }
 
 
     public void Interact(Interactor interactor)
     {
-        if (this.isServer)
+        if (this.isServer && this.containedMatter != null)
         {
             if (!interactor.IsHoldingObject)
             {
@@ -54,7 +55,8 @@ public class ElementSupplyBox : NetworkBehaviour, IInteractable
     public void SetContainedMatter(Matter matter)
     {
         this.containedMatter = matter;
-        this.elementDisplayMaterial.SetTexture(this.elementDisplayTextureField, matter != null ? matter.GetIcon().texture : null);
+        if (this.elementDisplayMaterial != null)
+            this.elementDisplayMaterial.SetTexture(this.elementDisplayTextureField, matter != null ? matter.GetIcon().texture : null);
     }
 
 
