@@ -49,6 +49,6 @@ public class GameTimer : NetworkBehaviour
 
     private void TimerValueChanged(float oldValue, float newValue)
     {
-        this.timerText.text = $"<b>{Mathf.Ceil(newValue * 10.0F) * 0.1F}</b> s";
+        this.timerText.text = $"<b>{(int)Mathf.Ceil(newValue)}</b> s";
     }
 }
