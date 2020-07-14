@@ -29,7 +29,7 @@ public class Level : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        GameManager.UI.LevelUI.GameTimer.SetTimeLeft(levelDurationSeconds);
+        GameManager.UI.LevelUI.GameTimer.SetTime(levelDurationSeconds);
         GameManager.UI.LevelUI.GameTimer.StartTimer();
 
         this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
