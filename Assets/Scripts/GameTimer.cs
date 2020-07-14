@@ -81,12 +81,16 @@ public class GameTimer : NetworkBehaviour
     #region Serialize/Deserialize
     public override bool OnSerialize(NetworkWriter writer, bool initialState)
     {
-        int roundedSeconds = (int)Mathf.Ceil(newValue);
+        bool dataWritten = base.OnSerialize(writer, initialState);
 
-        if (roundedSeconds >= 60)
-            this.timerText.text = $"<b>{(roundedSeconds / 60):#0}:{(roundedSeconds % 60):00}</b>";
-        else
-            this.timerText.text = $"<b>{roundedSeconds}</b>";
+        if (initialState)
+        {
+            writer.WriteDouble(this.timerValue);
+            writer.WriteBoolean(this.isTimerRunning);
+            dataWritten = true;
+        }
+
+        return dataWritten;
     }
     public override void OnDeserialize(NetworkReader reader, bool initialState)
     {
