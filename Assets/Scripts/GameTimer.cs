@@ -49,6 +49,11 @@ public class GameTimer : NetworkBehaviour
 
     private void TimerValueChanged(float oldValue, float newValue)
     {
-        this.timerText.text = $"<b>{(int)Mathf.Ceil(newValue)}</b> s";
+        int roundedSeconds = (int)Mathf.Ceil(newValue);
+
+        if (roundedSeconds >= 60)
+            this.timerText.text = $"<b>{(roundedSeconds / 60):#0}:{(roundedSeconds % 60):00}</b>";
+        else
+            this.timerText.text = $"<b>{roundedSeconds}</b>";
     }
 }
