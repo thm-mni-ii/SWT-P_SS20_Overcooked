@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Recipe", menuName = "UniOvercooked/Recipe", order = 0)]
+[CreateAssetMenu(fileName = "Recipe", menuName = "Underconnected/Recipe", order = 0)]
 public class Recipe : ScriptableObject
 {
     [SerializeField] Matter[] inputs;

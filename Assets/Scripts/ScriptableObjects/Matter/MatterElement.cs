@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Element", menuName = "UniOvercooked/Matter/Element", order = 0)]
+[CreateAssetMenu(fileName = "Element", menuName = "Underconnected/Matter/Element", order = 0)]
 public class MatterElement : Matter
 {
     [SerializeField] string elementSymbol;

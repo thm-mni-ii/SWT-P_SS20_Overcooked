@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Molecule", menuName = "UniOvercooked/Matter/Molecule", order = 0)]
+[CreateAssetMenu(fileName = "Molecule", menuName = "Underconnected/Matter/Molecule", order = 0)]
 public class MatterMolecule : Matter
 {
     [SerializeField] MatterElement element;
