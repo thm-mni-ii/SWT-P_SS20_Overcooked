@@ -32,7 +32,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 7401228249103709967}
-  - {fileID: 6087277843057770292}
+  - {fileID: 7618118090892631179}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,38 +115,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 7401228250153738765}
   levelUI: {fileID: 7401228249103709960}
---- !u!1001 &3357171871690445014
+--- !u!1001 &1393220868124668777
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 7401228250153738754}
     m_Modifications:
-    - target: {fileID: 954774696868314306, guid: 919454fd31ac4d84bad8a6688cb85128,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 954774696868314306, guid: 919454fd31ac4d84bad8a6688cb85128,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 954774696868314306, guid: 919454fd31ac4d84bad8a6688cb85128,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 954774696868314306, guid: 919454fd31ac4d84bad8a6688cb85128,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 954774696868314306, guid: 919454fd31ac4d84bad8a6688cb85128,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1156579048398295481, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_Name
@@ -171,6 +146,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488840984275467460, guid: 919454fd31ac4d84bad8a6688cb85128,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 35.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488840984275467460, guid: 919454fd31ac4d84bad8a6688cb85128,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1793487565885103140, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
@@ -260,27 +245,37 @@ PrefabInstance:
     - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 15
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 65.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7554229769365875709, guid: 919454fd31ac4d84bad8a6688cb85128,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7766786267531693389, guid: 919454fd31ac4d84bad8a6688cb85128,
         type: 3}
@@ -474,11 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 919454fd31ac4d84bad8a6688cb85128, type: 3}
---- !u!224 &6087277843057770292 stripped
+--- !u!224 &7618118090892631179 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8857816263282044898, guid: 919454fd31ac4d84bad8a6688cb85128,
     type: 3}
-  m_PrefabInstance: {fileID: 3357171871690445014}
+  m_PrefabInstance: {fileID: 1393220868124668777}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5815877353575684269
 PrefabInstance:
