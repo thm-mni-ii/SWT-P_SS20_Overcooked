@@ -38,12 +38,6 @@ public class GameManager : MonoBehaviour
             GameObject.Destroy(this.gameObject);
     }
 
-    private void Update() {
-        if (!GameTimer.isTimerRunning) { //TODO: isTimerRunning auf public/protected setzen?
-            if (this.levelFinished.activeSelf) this.ShowLevelFinished();
-        }
-    }
-
     public void ShowLevelFinished() {
         //Time.timeScale = 0.0F;
         //this.UnloadUIScenes();
