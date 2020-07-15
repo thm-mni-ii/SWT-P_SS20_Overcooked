@@ -16,7 +16,7 @@ public class LevelFinishedUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI highscoreText;
 
     public void SetPoints(int numOfLevel, int deliveredPoints, int deliveredFailedPoints, int score, int highscore) {
-        levelText.SetText("Level " + numOfLevel.ToString());
+        levelText.SetText("Level " + numOfLevel.ToString() + System.Environment.NewLine + "Chempleted");
         recipesDeliveredText.SetText(deliveredPoints.ToString());
         recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
         pointsText.SetText(score.ToString());

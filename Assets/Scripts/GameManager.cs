@@ -17,12 +17,8 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] int levelBuildIndexStart = 1;
 
-    [Header("Prefabs")]
-    [SerializeField] GameObject finishedLevelPrefab;
-
     private Level currentLevel;
 
-    private GameObject levelFinished;
 
     private void Awake()
     {
@@ -40,12 +36,6 @@ public class GameManager : MonoBehaviour
         }
         else
             GameObject.Destroy(this.gameObject);
-    }
-
-    public void ShowLevelFinished() {
-        //Time.timeScale = 0.0F;
-        //this.UnloadUIScenes();
-        this.levelFinished.SetActive(true);
     }
 
     public void LoadLevel(int levelNum)
