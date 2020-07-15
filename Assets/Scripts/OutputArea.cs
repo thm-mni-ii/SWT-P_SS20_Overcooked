@@ -5,22 +5,5 @@ using Mirror;
 
 public class OutputArea : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        ElementObject elementObject = other.gameObject.GetComponent<ElementObject>();
-
-        if (elementObject != null && this.CanAccept(elementObject.Element))
-            // TODO: Remove recipe from demands list
-            NetworkServer.Destroy(other.gameObject);
-    }
-
-
-    private bool CanAccept(Recipe recipe)
-    {
-        foreach (Recipe r in GameManager.Instance.GameDemandQueue.CurrentDemands)
-            if (recipe.Equals(r))
-                return true;
-
-        return false;
-    }
+    private void OnTriggerEnter(Collider other) => GameManager.CurrentLevel.DeliverElement(other.GetComponent<ElementObject>());
 }

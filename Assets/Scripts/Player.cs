@@ -10,7 +10,6 @@ public class Player : NetworkBehaviour
 
 
     public PickableObject HeldObject => this.interactor.HeldObject;
-    //public ModifiableObject HeldModifiedObject => this.interactor.HeldModifiedObject;
     public bool IsHoldingObject => this.interactor.IsHoldingObject;
 
 
