@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class LevelFinishedUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] Image[] stars;
+    [SerializeField] Sprite emptyStar;
+    [SerializeField] Sprite filledStar;
+    [SerializeField] TextMeshProUGUI recipesDeliveredText;
+    [SerializeField] TextMeshProUGUI recipesFailedDeliveredText;
+    [SerializeField] TextMeshProUGUI pointsText;
+    [SerializeField] TextMeshProUGUI highscoreText;
+
+    public void SetPoints(int numOfLevel, int deliveredPoints, int deliveredFailedPoints, int score, int highscore) {
+        levelText.SetText("Level " + numOfLevel.ToString());
+        recipesDeliveredText.SetText(deliveredPoints.ToString());
+        recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
+        pointsText.SetText(score.ToString());
+        highscoreText.SetText(highscore.ToString());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetStars(int amountOfStars) {
+        for (int i=0; i < stars.Length; i++) {
+            stars[i].sprite = i < amountOfStars ? filledStar : emptyStar;
+        }
+    }
+
+    public void Close() {
+        this.gameObject.SetActive(false);
     }
 }
