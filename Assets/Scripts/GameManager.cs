@@ -17,9 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] int levelBuildIndexStart = 1;
 
-
     private Level currentLevel;
-
 
 
     private void Awake()
@@ -39,7 +37,6 @@ public class GameManager : MonoBehaviour
         else
             GameObject.Destroy(this.gameObject);
     }
-
 
     public void LoadLevel(int levelNum)
     {
