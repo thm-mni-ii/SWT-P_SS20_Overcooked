@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4fccc8ac1bcc042a074074f83bf8cc, type: 3}
-  m_Name: CompoundH2O
+  m_Name: CompoundCH4O
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a4ac2d11f9f145b4ba8912f92558e8da, type: 3}
-  name: Water
-  description: It's just water
-  prefab: {fileID: 5137224915557663102, guid: afda75ea220321b4d97c7e7b1e6ec8cd, type: 3}
+  icon: {fileID: 21300000, guid: a0c43d3af08d7894fbacee5588c461f3, type: 3}
+  name: Methanol
+  description: The Tide Pod challenge among alcohols.
+  prefab: {fileID: 5137224915557663102, guid: 53224d5f9181e184697a62237b2a9888, type: 3}
   components:
-  - {fileID: 11400000, guid: 2e099c643537f1c419dc79cbb9981590, type: 2}
-  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
-  formula: H2O
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  formula: CH4O
