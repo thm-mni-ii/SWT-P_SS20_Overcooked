@@ -616,6 +616,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 2217655088505808217, guid: 8273e072ccac6d3409a3319201b143c2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fffc4820a5122fa48ac68afc733f68ac, type: 2}
+    - target: {fileID: 2217655088505808217, guid: 8273e072ccac6d3409a3319201b143c2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fffc4820a5122fa48ac68afc733f68ac, type: 2}
     - target: {fileID: 2217655088505808218, guid: 8273e072ccac6d3409a3319201b143c2,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
