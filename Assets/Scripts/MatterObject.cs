@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PickableObject))]
-public class ElementObject : MonoBehaviour
+public class MatterObject : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Rigidbody[] rigidbodies;
@@ -11,15 +11,15 @@ public class ElementObject : MonoBehaviour
     [SerializeField] PickableObject pickableObject;
 
     [Header("Settings")]
-    [SerializeField] Matter element;
+    [SerializeField] Matter matter;
 
 
-    public Matter Element => this.element;
+    public Matter Matter => this.matter;
 
 
     private void Awake()
     {
-        // Setup events for reacting to picking up and dropping this element
+        // Setup events for reacting to picking up and dropping this matter object
         this.pickableObject.OnPickedUp += this.OnPickedUp;
         this.pickableObject.OnDropped += this.OnDropped;
     }

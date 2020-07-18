@@ -30,7 +30,7 @@ public abstract class Matter : ScriptableObject
     [SerializeField] new string name;
     [TextArea]
     [SerializeField] string description;
-    [SerializeField] ElementObject prefab;
+    [SerializeField] MatterObject prefab;
 
 
     protected virtual void OnEnable()

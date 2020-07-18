@@ -12,19 +12,19 @@ public class Equipment : ModifiableObject
     [SerializeField] ParticleSystem fireParticles;
 
     [Header("Settings")]
-    [SerializeField] bool allowForeignElementsInRecipes;
+    [SerializeField] bool allowForeignMattersInRecipes;
     [SerializeField] Recipe[] allRecipes;
 
 
-    private List<ElementObject> insertedObjects;
+    private List<MatterObject> insertedObjects;
     private List<Matter> insertedMatter;
     private Recipe recipeInProgress;
-    private ElementObject outputObject;
+    private MatterObject outputObject;
 
 
     private void Awake()
     {
-        this.insertedObjects = new List<ElementObject>();
+        this.insertedObjects = new List<MatterObject>();
         this.insertedMatter = new List<Matter>();
         this.recipeInProgress = null;
         this.outputObject = null;
@@ -42,18 +42,18 @@ public class Equipment : ModifiableObject
         {
             if (this.outputObject == null)
             {
-                ElementObject elementObject = heldObject.GetComponent<ElementObject>();
+                MatterObject matterObject = heldObject.GetComponent<MatterObject>();
 
-                if (elementObject != null)
+                if (matterObject != null)
                 {
                     interactor.SetHeldObject(null);
-                    this.InsertElement(elementObject);
+                    this.InsertMatterObject(matterObject);
                 }
             }
         }
         else if (interactor.HeldObject == null)
         {
-            ElementObject toTake = this.outputObject != null ? this.TakeOutputElement() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedElement() : null;
+            MatterObject toTake = this.outputObject != null ? this.TakeOutputObject() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedObject() : null;
 
             if (toTake != null)
                 interactor.SetHeldObject(toTake.GetComponent<PickableObject>());
@@ -78,20 +78,20 @@ public class Equipment : ModifiableObject
     }
 
 
-    private void InsertElement(ElementObject elementObject)
+    private void InsertMatterObject(MatterObject matterObject)
     {
-        if (elementObject != null)
+        if (matterObject != null)
         {
-            elementObject.DisablePhysics();
-            elementObject.transform.SetParent(this.inputContainer.transform, false);
-            elementObject.transform.localPosition = Vector3.zero;
-            elementObject.transform.localRotation = Quaternion.identity;
-            this.insertedObjects.Add(elementObject);
-            this.insertedMatter.Add(elementObject.Element);
+            matterObject.DisablePhysics();
+            matterObject.transform.SetParent(this.inputContainer.transform, false);
+            matterObject.transform.localPosition = Vector3.zero;
+            matterObject.transform.localRotation = Quaternion.identity;
+            this.insertedObjects.Add(matterObject);
+            this.insertedMatter.Add(matterObject.Matter);
 
             foreach (Recipe recipe in this.allRecipes)
             {
-                if (recipe.MatchInputs(this.insertedMatter, this.allowForeignElementsInRecipes) == RecipeMatchState.FullMatch)
+                if (recipe.MatchInputs(this.insertedMatter, this.allowForeignMattersInRecipes) == RecipeMatchState.FullMatch)
                 {
                     this.recipeInProgress = recipe;
                     break;
@@ -108,11 +108,11 @@ public class Equipment : ModifiableObject
             }
         }
     }
-    private ElementObject TakeOutputElement()
+    private MatterObject TakeOutputObject()
     {
         if (this.outputObject != null)
         {
-            ElementObject toTake = this.outputObject;
+            MatterObject toTake = this.outputObject;
             toTake.EnablePhysics();
             toTake.transform.SetParent(this.transform, false);
 
@@ -122,12 +122,12 @@ public class Equipment : ModifiableObject
 
         return null;
     }
-    private ElementObject TakeLastInsertedElement()
+    private MatterObject TakeLastInsertedObject()
     {
         if (this.insertedObjects.Count > 0)
         {
             int index = this.insertedObjects.Count - 1;
-            ElementObject toTake = this.insertedObjects[index];
+            MatterObject toTake = this.insertedObjects[index];
             toTake.EnablePhysics();
             toTake.transform.SetParent(this.transform, false);
 
@@ -151,29 +151,29 @@ public class Equipment : ModifiableObject
             this.RpcCompleteRecipe();
         }
     }
-    private void AddToOutput(Matter element)
+    private void AddToOutput(Matter matter)
     {
-        if (this.isServer && element != null)
+        if (this.isServer && matter != null)
         {
-            GameObject resultElement = GameObject.Instantiate(element.GetPrefab());
+            GameObject resultMatter = GameObject.Instantiate(matter.GetPrefab());
 
-            this.outputObject = resultElement.GetComponent<ElementObject>();
+            this.outputObject = resultMatter.GetComponent<MatterObject>();
             this.outputObject.DisablePhysics();
 
-            resultElement.transform.SetParent(this.outputContainer.transform, false);
-            resultElement.transform.localPosition = Vector3.zero;
-            resultElement.transform.localRotation = Quaternion.identity;
+            resultMatter.transform.SetParent(this.outputContainer.transform, false);
+            resultMatter.transform.localPosition = Vector3.zero;
+            resultMatter.transform.localRotation = Quaternion.identity;
 
-            NetworkServer.Spawn(resultElement);
-            this.RpcAddOutput(resultElement.GetComponent<NetworkIdentity>());
+            NetworkServer.Spawn(resultMatter);
+            this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
         }
     }
-    private void RemoveFromInput(Matter[] elements)
+    private void RemoveFromInput(Matter[] matters)
     {
         if (this.isServer)
         {
-            List<int> removeIndices = new List<int>(elements.Length);
-            foreach (Matter toRemove in elements)
+            List<int> removeIndices = new List<int>(matters.Length);
+            foreach (Matter toRemove in matters)
             {
                 int insertedSlotIndex = this.insertedMatter.IndexOf(toRemove);
                 while (insertedSlotIndex >= 0 && removeIndices.Contains(insertedSlotIndex) && insertedSlotIndex + 1 < this.insertedMatter.Count)
@@ -235,14 +235,14 @@ public class Equipment : ModifiableObject
     {
         if (this.isClientOnly && outputObject != null)
         {
-            ElementObject elementObject = outputObject.GetComponent<ElementObject>();
-            elementObject.DisablePhysics();
+            MatterObject matterObject = outputObject.GetComponent<MatterObject>();
+            matterObject.DisablePhysics();
 
             outputObject.transform.SetParent(this.outputContainer.transform, false);
             outputObject.transform.localPosition = Vector3.zero;
             outputObject.transform.localRotation = Quaternion.identity;
 
-            this.outputObject = elementObject;
+            this.outputObject = matterObject;
         }
     }
 }

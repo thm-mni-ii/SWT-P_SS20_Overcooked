@@ -13,6 +13,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 12240e22e1549ea41b2e5d1a1db607df,
         type: 2}
+    - target: {fileID: 122257757236250085, guid: a8abf1f7b1efeec4695111084d2eb8d9,
+        type: 3}
+      propertyPath: matter
+      value: 
+      objectReference: {fileID: 11400000, guid: 12240e22e1549ea41b2e5d1a1db607df,
+        type: 2}
     - target: {fileID: 8632365603161309299, guid: a8abf1f7b1efeec4695111084d2eb8d9,
         type: 3}
       propertyPath: m_AssetId

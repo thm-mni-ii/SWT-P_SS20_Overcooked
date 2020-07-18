@@ -5,5 +5,5 @@ using Mirror;
 
 public class OutputArea : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other) => GameManager.CurrentLevel.DeliverElement(other.GetComponent<ElementObject>());
+    private void OnTriggerEnter(Collider other) => GameManager.CurrentLevel.DeliverObject(other.GetComponent<MatterObject>());
 }

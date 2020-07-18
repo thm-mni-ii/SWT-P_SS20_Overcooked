@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ElementSupplyBoxDisplay
+  m_Name: MatterSupplyBoxDisplay
   m_Shader: {fileID: 4800000, guid: 6c259fc66ab17fa4b9ca6fc6201cad08, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
