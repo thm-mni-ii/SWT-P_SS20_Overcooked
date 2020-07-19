@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5804353388838069585}
   - component: {fileID: 5804353388838069590}
   m_Layer: 0
-  m_Name: ElementDisplay
+  m_Name: MatterDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 5804353390669505396}
   - component: {fileID: 5539673847107387527}
   m_Layer: 8
-  m_Name: ElementSupplyBox
+  m_Name: MatterSupplyBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -602,9 +602,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  elementDisplayRenderer: {fileID: 5804353388838069590}
+  matterDisplayRenderer: {fileID: 5804353388838069590}
   containedMatter: {fileID: 0}
-  elementDisplayTextureField: _Back
+  canTakeBackItems: 1
+  matterDisplayTextureField: _Back
 --- !u!114 &5539673847107387527
 MonoBehaviour:
   m_ObjectHideFlags: 0

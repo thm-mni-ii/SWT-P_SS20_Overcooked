@@ -43,9 +43,9 @@ public class Level : NetworkBehaviour
 
     public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
 
-    public void DeliverElement(ElementObject elementObject)
+    public void DeliverObject(MatterObject matterObject)
     {
-        Matter matter = elementObject != null ? elementObject.Element : null;
+        Matter matter = matterObject != null ? matterObject.Matter : null;
 
         if (this.isServer && matter != null)
         {
@@ -53,7 +53,7 @@ public class Level : NetworkBehaviour
             {
                 this.IncrementPlayerScore(this.scorePerDelivery);
                 GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
-                NetworkServer.Destroy(elementObject.gameObject);
+                NetworkServer.Destroy(matterObject.gameObject);
             }
         }
     }

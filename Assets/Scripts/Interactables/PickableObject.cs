@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
 
 public class PickableObject : NetworkBehaviour, IInteractable
@@ -14,6 +15,10 @@ public class PickableObject : NetworkBehaviour, IInteractable
     public bool IsPickedUp => this.currentHolder != null;
     public bool CanBeDropped => this.canBeDropped;
     public Interactor CurrentHolder => this.currentHolder;
+
+
+    public event UnityAction<PickableObject, Interactor> OnPickedUp;
+    public event UnityAction<PickableObject, Interactor> OnDropped;
 
 
     private Interactor currentHolder;
@@ -49,6 +54,8 @@ public class PickableObject : NetworkBehaviour, IInteractable
 
             foreach (Rigidbody rb in this.nonKinematicRBs)
                 rb.isKinematic = true;
+
+            this.OnPickedUp?.Invoke(this, interactor);
         }
     }
     public virtual void Drop(Interactor interactor)
@@ -61,6 +68,8 @@ public class PickableObject : NetworkBehaviour, IInteractable
 
             foreach (Rigidbody rb in this.nonKinematicRBs)
                 rb.isKinematic = false;
+
+            this.OnDropped?.Invoke(this, interactor);
         }
     }
 }
