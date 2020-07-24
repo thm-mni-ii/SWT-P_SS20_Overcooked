@@ -13,6 +13,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &1876727067652553633
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763135374031713301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a14f3a1018e90df47a456704f94920e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1200652503135162976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78,7 +97,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: bf08ab06824fb594caea61838429136c,
         type: 3}
       propertyPath: m_Name
-      value: Drawers1x1
+      value: Drawers1x1Table
       objectReference: {fileID: 0}
     - target: {fileID: 3959002639352981109, guid: bf08ab06824fb594caea61838429136c,
         type: 3}
@@ -90,6 +109,12 @@ PrefabInstance:
 --- !u!1 &7172120951260269417 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: bf08ab06824fb594caea61838429136c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1200652503135162976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2763135374031713301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3959002639352981109, guid: bf08ab06824fb594caea61838429136c,
     type: 3}
   m_PrefabInstance: {fileID: 1200652503135162976}
   m_PrefabAsset: {fileID: 0}
