@@ -4,6 +4,9 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
+/// <summary>
+/// GameTimer class manages all functions concerning the timer and interaction between server and client timer
+/// </summary>
 public class GameTimer : NetworkBehaviour
 {
     [Header("References")]
@@ -26,7 +29,9 @@ public class GameTimer : NetworkBehaviour
         this.TickTimer(Time.deltaTime);
     }
 
-
+    /// <summary>
+    /// Toggle starts a new timer if no timer is currently running or stops the running timer when there is one.
+    /// </summary>
     public void Toggle()
     {
         if (this.isTimerRunning)
@@ -34,6 +39,10 @@ public class GameTimer : NetworkBehaviour
         else
             this.StartTimer();
     }
+
+    /// <summary>
+    /// Starts a timer with current values and signals clients to toggle timer as well.
+    /// </summary>
     public void StartTimer()
     {
         this.isTimerRunning = true;
@@ -41,6 +50,10 @@ public class GameTimer : NetworkBehaviour
         if (this.isServer)
             this.RpcToggleTimer(this.isTimerRunning, this.timerValue);
     }
+
+    /// <summary>
+    /// Stops timer for client or server and all its clients
+    /// </summary>
     public void StopTimer()
     {
         this.isTimerRunning = false;
@@ -49,6 +62,10 @@ public class GameTimer : NetworkBehaviour
             this.RpcToggleTimer(this.isTimerRunning, this.timerValue);
     }
 
+    /// <summary>
+    /// Sets timer for client or server and all its clients in seconds. Updates the timerText as well so it can be started.
+    /// </summary>
+    /// <param name="seconds">value of timer in seconds</param>
     public void SetTime(float seconds)
     {
         this.timerValue = seconds;
@@ -58,7 +75,11 @@ public class GameTimer : NetworkBehaviour
             this.RpcSetTime(this.timerValue);
     }
 
-
+    /// <summary>
+    /// Sets the current timeValue and uses <see cref="UpdateTimerText"/> to update timertext.
+    /// Server sends current time to its client every few seconds to synchronize timers.
+    /// </summary>
+    /// <param name="deltaTime">time differnce between update calls</param>
     private void TickTimer(float deltaTime)
     {
         if (this.isTimerRunning && this.timerValue > 0.0F)
@@ -70,6 +91,9 @@ public class GameTimer : NetworkBehaviour
                 this.RpcTickCheckpoint(this.timerValue);
         }
     }
+    /// <summary>
+    /// Rounds timerValue and converts it to 00:00 format.
+    /// </summary>
     private void UpdateTimerText()
     {
         int roundedSeconds = (int)Mathf.Ceil(this.timerValue);
@@ -115,6 +139,11 @@ public class GameTimer : NetworkBehaviour
 
     #region RPC/Commands
     [ClientRpc]
+    /// <summary>
+    /// Used by server to notify clients to toggle their respective timers
+    /// </summary>
+    /// <param name="isTimerEnabled">checks if timer is enabled</param>
+    /// <param name="currentTime">current timerValue on server</param>
     private void RpcToggleTimer(bool isTimerEnabled, float currentTime)
     {
         if (this.isClientOnly)
@@ -128,12 +157,20 @@ public class GameTimer : NetworkBehaviour
         }
     }
     [ClientRpc]
+    /// <summary>
+    /// Used by server to change timerValue for all clients.
+    /// </summary>
+    /// <param name="currentTime">current timerValue on server</param>
     private void RpcSetTime(float currentTime)
     {
         if (this.isClientOnly)
             this.SetTime(currentTime);
     }
     [ClientRpc]
+    /// <summary>
+    /// Used by server to synchronize client timers every few seconds
+    /// </summary>
+    /// <param name="timeOnServer">current timerValue on server</param>
     private void RpcTickCheckpoint(float timeOnServer)
     {
         if (this.isClientOnly && timeOnServer < this.timerValue)
