@@ -55,14 +55,17 @@ div.center img {
 #nav-tree {
     background: #212429;
     border-left: 3px solid #32363d;
-    border-bottom: 3px solid #32363d;
 }
 #doc-content {
     background: #212429;
     border-right: 3px solid #32363d;
-    border-bottom: 3px solid #32363d;
 }
 
 #nav-path {
     background-color: #32363d;
+}
+
+.qindex {
+    border: none !important;
+    background-color: inherit !important;
 }
