@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Represents a compound matter.
+/// </summary>
 [CreateAssetMenu(fileName = "Compound", menuName = "UniOvercooked/Matter/Compound", order = 0)]
 public class MatterCompound : Matter
 {
+    [Tooltip("The matters this compound consists of.")]
     [SerializeField] Matter[] components;
 
+    /// <summary>
+    /// The matters this compound consists of.
+    /// </summary>
     public Matter[] Components => this.components;
 
 
