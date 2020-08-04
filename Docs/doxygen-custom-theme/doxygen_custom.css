@@ -1,3 +1,7 @@
+/**
+ *  Doxygen theme addon for the Doxygen Dark Theme by MaJerle (https://github.com/MaJerle/doxygen-dark-theme).
+ */
+
 * {
     box-sizing: border-box;
 }
@@ -26,4 +30,17 @@
 }
 #projectalign {
     padding: 0px !important;
+}
+
+.sm-dox a {
+    transition: background-color 0.2s linear;
+	background: transparent !important;
+}
+.sm-dox a:hover {
+    transition: background-color 0.2s linear;
+	background: #282923 !important;
+}
+
+#top {
+    background-color: #32363d;
 }
