@@ -45,6 +45,13 @@
     background-color: #32363d;
 }
 
+#projecthomelink {
+    color: inherit !important;
+}
+#projecthomelink:hover {
+    text-decoration: none;
+}
+
 div.center img {
     background-color: #fafcff;
     padding: 8px;
