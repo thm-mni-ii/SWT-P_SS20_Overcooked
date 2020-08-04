@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.arrow {
+    box-sizing: content-box;
+}
+
+#titlearea {
+    padding: 10px;
+}
+#projectalign {
+    padding: 0px !important;
+}
+* {
+    box-sizing: border-box;
+}
+
+.arrow {
+    box-sizing: content-box;
+}
+
+#titlearea {
+    padding: 10px;
+    padding-left: 22px;
+}
+#projectalign {
+    padding: 0px !important;
+}
