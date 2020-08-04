@@ -6,18 +6,8 @@
     box-sizing: border-box;
 }
 
-.arrow {
-    box-sizing: content-box;
-}
-
-#titlearea {
-    padding: 10px;
-}
-#projectalign {
-    padding: 0px !important;
-}
-* {
-    box-sizing: border-box;
+body {
+    background-color: #212429 !important;
 }
 
 .arrow {
@@ -57,4 +47,22 @@ div.center img {
     padding: 8px;
     border: 3px solid #879ECB !important;
     border-radius: 2px;
+}
+
+#side-nav {
+    padding: 0px;
+}
+#nav-tree {
+    background: #212429;
+    border-left: 3px solid #32363d;
+    border-bottom: 3px solid #32363d;
+}
+#doc-content {
+    background: #212429;
+    border-right: 3px solid #32363d;
+    border-bottom: 3px solid #32363d;
+}
+
+#nav-path {
+    background-color: #32363d;
 }
