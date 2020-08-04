@@ -4,6 +4,9 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
+/// <summary>
+/// A temporary network manager that spawns players as soon as they connect to the server.
+/// </summary>
 public class TestNetworkManager : NetworkManager
 {
     public override void OnClientConnect(NetworkConnection conn)
