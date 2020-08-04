@@ -909,7 +909,8 @@ HTML_FOOTER            = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\D
 # stylesheet in the HTML output directory as well, or it will be erased!
 
 HTML_EXTRA_STYLESHEET        = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\custom.css" \
-								"C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\custom_dark_theme.css"
+								"C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\custom_dark_theme.css" \
+								"C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-custom-theme\doxygen_custom.css"
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or 
 # other source files which should be copied to the HTML output directory. Note 
