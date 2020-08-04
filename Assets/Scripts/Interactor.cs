@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-
+/// <summary>
+/// 
+/// </summary>
 public class Interactor : NetworkBehaviour
 {
     [SerializeField] float interactReach = 0.5F;
     [SerializeField] LayerMask interactLayers;
     [SerializeField] Transform interactOrigin;
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <value></value>
     public PickableObject HeldObject { get; private set; }
+    /// <summary>
+    /// Checks if holding an object
+    /// </summary>
     public bool IsHoldingObject => this.HeldObject != null;
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     private RaycastHit[] hitResultsPool;
 
 
@@ -30,7 +40,10 @@ public class Interactor : NetworkBehaviour
         if (interactedObject != null)
             this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="heldObject"></param>
     public void SetHeldObject(PickableObject heldObject)
     {
         if (this.HeldObject != heldObject)
@@ -45,7 +58,10 @@ public class Interactor : NetworkBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private GameObject GetObjectToInteract()
     {
         int resultsAmount = Physics.RaycastNonAlloc(this.interactOrigin.position, this.interactOrigin.forward, this.hitResultsPool, this.interactReach, this.interactLayers);
@@ -76,6 +92,10 @@ public class Interactor : NetworkBehaviour
     #region Network Code
 
     [Command]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="interactable"></param>
     private void CmdRequestInteract(NetworkIdentity interactable)
     {
         GameObject actualInteractable = this.GetObjectToInteract();
@@ -86,6 +106,10 @@ public class Interactor : NetworkBehaviour
             Debug.LogWarning($"Client pickup check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{actualInteractable}\"");
     }
     [ClientRpc]
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="interactable"></param>
     private void RpcConfirmInteract(NetworkIdentity interactable)
     {
         IInteractable i = interactable.GetComponent<IInteractable>();

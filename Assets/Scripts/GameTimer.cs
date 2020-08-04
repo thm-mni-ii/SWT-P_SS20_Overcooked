@@ -5,7 +5,7 @@ using Mirror;
 using TMPro;
 
 /// <summary>
-/// GameTimer class manages all functions concerning the timer and interaction between server and client timer
+/// Manages all functions concerning timer and interaction between server and client timer
 /// </summary>
 public class GameTimer : NetworkBehaviour
 {
