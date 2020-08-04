@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class ResetZone : MonoBehaviour
+namespace Underconnected
 {
-    [SerializeField] Transform resetPoint;
-
-
-    private void OnTriggerEnter(Collider other)
+    public class ResetZone : MonoBehaviour
     {
-        NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+        [SerializeField] Transform resetPoint;
 
-        if (netId.isServer || netId.isLocalPlayer)
+
+        private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.transform.position = resetPoint.position;
-            other.attachedRigidbody.velocity = Vector3.zero;
+            NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+
+            if (netId.isServer || netId.isLocalPlayer)
+            {
+                other.gameObject.transform.position = resetPoint.position;
+                other.attachedRigidbody.velocity = Vector3.zero;
+            }
         }
     }
 }

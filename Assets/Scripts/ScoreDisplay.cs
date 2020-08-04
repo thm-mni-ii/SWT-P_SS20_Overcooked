@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ScoreDisplay : MonoBehaviour
+namespace Underconnected
 {
-    [SerializeField] TextMeshProUGUI label;
-
-
-    public void SetScore(int score)
+    public class ScoreDisplay : MonoBehaviour
     {
-        this.label.text = score.ToString();
+        [SerializeField] TextMeshProUGUI label;
+
+
+        public void SetScore(int score)
+        {
+            this.label.text = score.ToString();
+        }
     }
 }
