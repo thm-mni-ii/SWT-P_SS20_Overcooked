@@ -15,8 +15,13 @@ public class GameTimer : NetworkBehaviour
     [Header("Settings")]
     [SerializeField] int syncAfterSeconds = 30;
 
-
+    /// <summary>
+    /// Represents the current timer value.
+    /// </summary>
     private float timerValue;
+    /// <summary>
+    /// Depends on status of timer.
+    /// </summary>
     private bool isTimerRunning;
 
 
