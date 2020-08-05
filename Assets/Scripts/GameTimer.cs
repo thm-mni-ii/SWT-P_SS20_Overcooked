@@ -37,7 +37,7 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Toggle starts a new timer if no timer is currently running or stops the running timer when there is one.
+        /// Starts a new timer if no timer is currently running or stops the running timer when there is one.
         /// </summary>
         public void Toggle()
         {
@@ -147,7 +147,7 @@ namespace Underconnected
         #region RPC/Commands
         [ClientRpc]
         /// <summary>
-        /// Used by server to notify clients to toggle their respective timers
+        /// Can only be called by server to notify clients to toggle their respective timers
         /// </summary>
         /// <param name="isTimerEnabled">checks if timer is enabled</param>
         /// <param name="currentTime">current timerValue on server</param>
@@ -165,7 +165,7 @@ namespace Underconnected
         }
         [ClientRpc]
         /// <summary>
-        /// Used by server to change timerValue for all clients.
+        /// Can only be called by server to change timerValue for all clients.
         /// </summary>
         /// <param name="currentTime">current timerValue on server</param>
         private void RpcSetTime(float currentTime)
@@ -175,7 +175,7 @@ namespace Underconnected
         }
         [ClientRpc]
         /// <summary>
-        /// Used by server to synchronize client timers every few seconds
+        /// Can only be called by server to synchronize client timers every 30 seconds
         /// </summary>
         /// <param name="timeOnServer">current timerValue on server</param>
         private void RpcTickCheckpoint(float timeOnServer)
