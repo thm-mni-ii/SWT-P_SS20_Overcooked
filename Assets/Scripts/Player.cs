@@ -26,7 +26,7 @@ namespace Underconnected
         #region Unity Callbacks
 
         /// <summary>
-        /// Will check if local player presses the 'E' key and if so calls Interact.
+        /// Will check if local player presses the 'E' key and if so calls <see cref="Interactor.Interact"/>.
         /// </summary>
         private void Update()
         {
