@@ -70,9 +70,9 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// 
+        /// Creates an UI element for demanded matter and adds the same matter to the current demand queue object.
         /// </summary>
-        /// <param name="matter"></param>
+        /// <param name="matter">matter to be added to the demand queue UI element and object</param>
         private void AcceptDemand(Matter matter)
         {
             GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
