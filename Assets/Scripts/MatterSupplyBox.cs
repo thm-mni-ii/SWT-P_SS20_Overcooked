@@ -5,6 +5,9 @@ using Mirror;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Contains all functions concerning the matter supplybox.
+    /// </summary>
     public class MatterSupplyBox : NetworkBehaviour, IInteractable
     {
         [Header("References")]
@@ -15,10 +18,14 @@ namespace Underconnected
         [SerializeField] bool canTakeBackItems = true;
         [SerializeField] string matterDisplayTextureField = "_Back";
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private Material matterDisplayMaterial;
 
-
+        /// <summary>
+        /// matterDisplayMaterial is initialized and <see cref="SetContainedMatter(Matter)"/> is called.
+        /// </summary>
         private void Awake()
         {
             if (this.matterDisplayRenderer != null)
@@ -26,7 +33,16 @@ namespace Underconnected
             this.SetContainedMatter(this.containedMatter);
         }
 
-
+        /// <summary>
+        /// Checks if interactor is server
+        /// Checks if interactor is already holding an object -
+        /// if it is not holding an object the respective matter object is created, <see cref="Interactor.HeldObject"/> is called
+        /// and then <see cref="RpcGiveMatterObjectToInteractor(NetworkIdentity, NetworkIdentity)"/> is called
+        /// with the given interactor and the created matter as parameters.
+        /// If it is holding an object and the container can take this object back the matter object will be destroyed
+        /// and the interactor will not hold an object anymore.
+        /// </summary>
+        /// <param name="interactor"></param>
         public void Interact(Interactor interactor)
         {
             if (this.isServer)
@@ -56,7 +72,10 @@ namespace Underconnected
             }
         }
 
-
+        /// <summary>
+        /// Sets the given matter as the contained matter of supplybox.
+        /// </summary>
+        /// <param name="matter">matter to be contained in supplybox</param>
         public void SetContainedMatter(Matter matter)
         {
             this.containedMatter = matter;
@@ -66,6 +85,13 @@ namespace Underconnected
 
 
         [ClientRpc]
+        /// <summary>
+        /// Is only called by server.
+        /// Checks if given iterator and matter is not null and calls <see cref="Interactor.SetHeldObject(PickableObject)"/> 
+        /// with given matterObject as parameter
+        /// </summary>
+        /// <param name="matterObject">matter object to be interacted with</param>
+        /// <param name="interactor">object which is able to interact</param>
         private void RpcGiveMatterObjectToInteractor(NetworkIdentity matterObject, NetworkIdentity interactor)
         {
             if (interactor != null)
