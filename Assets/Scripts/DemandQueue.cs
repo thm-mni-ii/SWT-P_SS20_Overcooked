@@ -136,7 +136,13 @@ namespace Underconnected
         /// </summary>
         public struct Demand
         {
+            /// <summary>
+            /// The demanded matter.
+            /// </summary>
             public Matter demandedMatter;
+            /// <summary>
+            /// The corresponding UI element inside of the demand queue.
+            /// </summary>
             public DemandedMatterUI uiElement;
 
 
