@@ -5,10 +5,23 @@ using UnityEngine.SceneManagement;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Manages the current game state and the game UI.
+    /// Holds references to various singletons such as the UI manager or the current level.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
+        /// <summary>
+        /// The OG game manager.
+        /// </summary>
         public static GameManager Instance { get; private set; }
+        /// <summary>
+        /// The game's UI.
+        /// </summary>
         public static UIManager UI => Instance.uiManager;
+        /// <summary>
+        /// The currently played level. `null` if there is none.
+        /// </summary>
         public static Level CurrentLevel => Instance.currentLevel;
 
 
@@ -19,6 +32,9 @@ namespace Underconnected
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
 
+        /// <summary>
+        /// Holds the currently played level.
+        /// </summary>
         private Level currentLevel;
 
 
@@ -40,12 +56,21 @@ namespace Underconnected
                 GameObject.Destroy(this.gameObject);
         }
 
+        /// <summary>
+        /// Loads the level with the given level number.
+        /// </summary>
+        /// <param name="levelNum">The level number to load.</param>
         public void LoadLevel(int levelNum)
         {
             SceneManager.LoadScene(this.levelBuildIndexStart + levelNum - 1, LoadSceneMode.Additive);
         }
 
 
+        /// <summary>
+        /// Called when a scene is loaded by the SceneManager.
+        /// </summary>
+        /// <param name="scene">The loaded scene.</param>
+        /// <param name="mode">The mode the given <paramref name="scene"/> has been loaded with.</param>
         private void SceneManager_SceneLoaded(Scene scene, LoadSceneMode mode)
         {
             this.currentLevel = null;
