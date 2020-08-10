@@ -6,6 +6,9 @@ using TMPro;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Represents a UI element that displays a matter icon on the <see cref="DemandQueue"/> with a quantity text.
+    /// </summary>
     public class DemandedMatterUI : MonoBehaviour
     {
         [Header("References")]
@@ -15,6 +18,9 @@ namespace Underconnected
         [SerializeField] GameObject demandedMatterUIPrefab;
 
 
+        /// <summary>
+        /// The matter to display.
+        /// </summary>
         private Matter matter;
 
 
@@ -24,6 +30,11 @@ namespace Underconnected
         }
 
 
+        /// <summary>
+        /// Sets the matter to display on this UI element.
+        /// </summary>
+        /// <param name="matter">The matter to display. `null` will hide the icon.</param>
+        /// <param name="showRequiredComponents">Whether to display the required components for the given <paramref name="matter"/>.</param>
         public void SetMatter(Matter matter, bool showRequiredComponents = true)
         {
             int quantity = matter is MatterMolecule ? ((MatterMolecule)matter).ElementalAmount : 1;
@@ -64,6 +75,9 @@ namespace Underconnected
                 this.iconUI.enabled = false;
         }
 
+        /// <summary>
+        /// Destroys this UI element.
+        /// </summary>
         public void Remove()
         {
             GameObject.Destroy(this.gameObject);
