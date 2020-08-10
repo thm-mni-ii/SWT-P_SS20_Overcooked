@@ -5,6 +5,9 @@ using Mirror;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Represents a game level.
+    /// </summary>
     public class Level : NetworkBehaviour
     {
         [Header("Settings")]
@@ -14,11 +17,26 @@ namespace Underconnected
         [SerializeField] Transform[] spawnPoints;
 
 
+        /// <summary>
+        /// Holds the score the players currently have.
+        /// </summary>
         public int PlayerScore => this.PlayerScore;
+        /// <summary>
+        /// Holds all the possible spawn locations for this level.
+        /// </summary>
         public Transform[] SpawnPoints => this.spawnPoints;
 
+        /// <summary>
+        /// The score the players currentlyy have.
+        /// </summary>
         [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
+        /// <summary>
+        /// The coroutine that adds demands to the demands list.
+        /// </summary>
         private Coroutine demandCoroutine;
+        /// <summary>
+        /// A timeout object used by <see cref="demandCoroutine"/> to wait for a certain amount of time.
+        /// </summary>
         private WaitForSeconds demandCoroutineWait;
 
 
@@ -42,9 +60,20 @@ namespace Underconnected
             GameManager.UI.LevelUI.GameTimer.StopTimer();
         }
 
-
+        /// <summary>
+        /// Returns the spawn location for the given player number.
+        /// </summary>
+        /// <param name="playerNum">The player number.</param>
+        /// <returns>The spawn location for the given <paramref name="playerNum"/>.</returns>
         public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
 
+        /// <summary>
+        /// Attempts to deliver the given matter object.
+        /// Checks the demand queue whether the given matter is demanded, destroys it and increments the player score.
+        /// Does nothing if the given matter is not inside the demand queue.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="matterObject">The matter object to deliver.</param>
         public void DeliverObject(MatterObject matterObject)
         {
             Matter matter = matterObject != null ? matterObject.Matter : null;
@@ -60,7 +89,17 @@ namespace Underconnected
             }
         }
 
+        /// <summary>
+        /// Increments the player score by the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="scoreDelta">The amount by which to increase the player score.</param>
         public void IncrementPlayerScore(int scoreDelta) => this.SetPlayerScore(this.playerScore + scoreDelta);
+        /// <summary>
+        /// Sets the player score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player score.</param>
         public void SetPlayerScore(int newScore)
         {
             if (this.isServer)
@@ -68,6 +107,9 @@ namespace Underconnected
         }
 
 
+        /// <summary>
+        /// The coroutine used to add demands to the demand queue.
+        /// </summary>
         private IEnumerator Do_DemandCoroutine()
         {
             while (true)
@@ -78,6 +120,12 @@ namespace Underconnected
             }
         }
 
+        /// <summary>
+        /// Called when the value of <see cref="PlayerScore"/> has changed on the server side.
+        /// Updates the score on a client to synchronize it with the server.
+        /// </summary>
+        /// <param name="oldValue">The previous player score.</param>
+        /// <param name="newValue">The new player score.</param>
         private void PlayerScore_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
