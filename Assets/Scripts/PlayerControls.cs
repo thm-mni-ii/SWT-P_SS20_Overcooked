@@ -5,6 +5,9 @@ using Mirror;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Allows the player to move the game object this component is on.
+    /// </summary>
     public class PlayerControls : NetworkBehaviour
     {
         [SerializeField] Rigidbody rigidBody;
@@ -13,9 +16,19 @@ namespace Underconnected
         [SerializeField] float rotationSpeed = 500.0F;
 
 
+        /// <summary>
+        /// Stores the input from <see cref="Update"/> here to move the player inside of <see cref="FixedUpdate"/>.
+        /// </summary>
         private Vector3 movementInput;
+        /// <summary>
+        /// The target yaw rotation to interpolate the current rotation.
+        /// Used to animate the player's rotation.
+        /// </summary>
         private float targetYaw;
 
+        /// <summary>
+        /// This player's color.
+        /// </summary>
         [SyncVar(hook = nameof(UpdatePlayerColor))]
         private Color playerColor;
 
@@ -38,6 +51,10 @@ namespace Underconnected
             //this.rigidBody.isKinematic = !this.hasAuthority;
         }
 
+        /// <summary>
+        /// Listens for player input and stores it to move the player inside of <see cref="FixedUpdate"/>.
+        /// Called every frame.
+        /// </summary>
         private void Update()
         {
             if (this.isLocalPlayer)
@@ -50,6 +67,10 @@ namespace Underconnected
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
             }
         }
+        /// <summary>
+        /// Moves the player with the input values previously recorded inside of <see cref="Update"/>.
+        /// The player needs to be moved here because Unity's physics system expects rigidbodies to move inside of FixedUpdate instead of regular Update.
+        /// </summary>
         private void FixedUpdate()
         {
             if (this.isLocalPlayer)
@@ -64,6 +85,12 @@ namespace Underconnected
             }
         }
 
+        /// <summary>
+        /// Called when the value of <see cref="playerColor"/> changes on the server.
+        /// Updates the player color on clients to synchronize it with the server.
+        /// </summary>
+        /// <param name="oldColor">The previous player color.</param>
+        /// <param name="newColor">The new player color.</param>
         private void UpdatePlayerColor(Color oldColor, Color newColor)
         {
             this.playerModelRenderer.material.color = newColor;
