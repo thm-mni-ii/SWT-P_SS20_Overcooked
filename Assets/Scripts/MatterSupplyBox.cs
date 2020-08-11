@@ -76,9 +76,10 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Sets the given matter as the contained matter of supplybox.
+        /// Sets the given matter as the contained matter of this supplybox.
+        /// Updates the displayed matter texture to show the new matter icon.
         /// </summary>
-        /// <param name="matter">matter to be contained in supplybox</param>
+        /// <param name="matter">Matter to be contained in this supplybox or `null`.</param>
         public void SetContainedMatter(Matter matter)
         {
             this.containedMatter = matter;
