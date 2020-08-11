@@ -52,7 +52,7 @@ PROJECT_LOGO           =
 # If a relative path is entered, it will be relative to the location 
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = "C:/Users/Alex/Documents/Unity Projects/UniOvercooked/Docs" 
+OUTPUT_DIRECTORY       = "./" 
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 
 # 4096 sub-directories (in 2 levels) under the output directory of each output 
@@ -638,7 +638,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = "C:/Users/Alex/Documents/Unity Projects/UniOvercooked/Assets/Scripts" "C:/Users/Alex/Documents/Unity Projects/UniOvercooked/Assets/Mirror/Runtime" 
+INPUT                  = "../Assets/Scripts" "../Assets/Mirror/Runtime" 
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -893,13 +893,13 @@ HTML_FILE_EXTENSION    = .html
 # have to redo this when upgrading to a newer version of doxygen or when 
 # changing the value of configuration settings such as GENERATE_TREEVIEW!
 
-HTML_HEADER            = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-custom-theme\html_header.html"
+HTML_HEADER            = "./doxygen-custom-theme/html_header.html"
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for 
 # each generated HTML page. If it is left blank doxygen will generate a 
 # standard footer.
 
-HTML_FOOTER            = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\html_footer.html"
+HTML_FOOTER            = "./doxygen-dark-theme/html_footer.html"
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading 
 # style sheet that is used by each HTML page. It can be used to 
@@ -908,9 +908,9 @@ HTML_FOOTER            = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\D
 # the style sheet file to the HTML output directory, so don't put your own 
 # stylesheet in the HTML output directory as well, or it will be erased!
 
-HTML_EXTRA_STYLESHEET        = "C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\custom.css" \
-								"C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-dark-theme\custom_dark_theme.css" \
-								"C:\Users\Alex\Documents\Unity Projects\UniOvercooked\Docs\doxygen-custom-theme\doxygen_custom.css"
+HTML_EXTRA_STYLESHEET        = "./doxygen-dark-theme/custom.css" \
+								"./doxygen-dark-theme/custom_dark_theme.css" \
+								"./doxygen-custom-theme/doxygen_custom.css"
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or 
 # other source files which should be copied to the HTML output directory. Note 
