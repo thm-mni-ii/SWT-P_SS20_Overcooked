@@ -3,19 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class ResetZone : MonoBehaviour
+namespace Underconnected
 {
-    [SerializeField] Transform resetPoint;
-
-
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// Will teleport objects entering the zone back to their respective reset positions.
+    /// </summary>
+    public class ResetZone : MonoBehaviour
     {
-        NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+        [SerializeField] Transform resetPoint;
 
-        if (netId.isServer || netId.isLocalPlayer)
+        /// <summary>
+        /// When an object with a collider enters the resetzone it will be teleported back to its reset position.
+        /// </summary>
+        /// <param name="other">collider of object entering resetzone</param>
+        private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.transform.position = resetPoint.position;
-            other.attachedRigidbody.velocity = Vector3.zero;
+            NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+
+            if (netId.isServer || netId.isLocalPlayer)
+            {
+                other.gameObject.transform.position = resetPoint.position;
+                other.attachedRigidbody.velocity = Vector3.zero;
+            }
         }
     }
 }

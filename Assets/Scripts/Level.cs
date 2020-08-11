@@ -3,81 +3,132 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Level : NetworkBehaviour
+namespace Underconnected
 {
-    [Header("Settings")]
-    [SerializeField] int scorePerDelivery = 50;
-    [SerializeField] int levelDurationSeconds = 180;
-    [SerializeField] Matter[] demandsPool;
-    [SerializeField] Transform[] spawnPoints;
-
-
-    public int PlayerScore => this.PlayerScore;
-    public Transform[] SpawnPoints => this.spawnPoints;
-
-    [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
-    private Coroutine demandCoroutine;
-    private WaitForSeconds demandCoroutineWait;
-
-
-    private void Awake()
+    /// <summary>
+    /// Represents a game level.
+    /// </summary>
+    public class Level : NetworkBehaviour
     {
-        this.playerScore = 0;
-        this.demandCoroutine = null;
-        this.demandCoroutineWait = new WaitForSeconds(20.0F);
-    }
-
-    public override void OnStartServer()
-    {
-        GameManager.UI.LevelUI.GameTimer.SetTime(levelDurationSeconds);
-        GameManager.UI.LevelUI.GameTimer.StartTimer();
-
-        this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
-    }
-    public override void OnStopServer()
-    {
-        this.StopCoroutine(this.demandCoroutine);
-        GameManager.UI.LevelUI.GameTimer.StopTimer();
-    }
+        [Header("Settings")]
+        [SerializeField] int scorePerDelivery = 50;
+        [SerializeField] int levelDurationSeconds = 180;
+        [SerializeField] Matter[] demandsPool;
+        [SerializeField] Transform[] spawnPoints;
 
 
-    public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
+        /// <summary>
+        /// Holds the score the players currently have.
+        /// </summary>
+        public int PlayerScore => this.PlayerScore;
+        /// <summary>
+        /// Holds all the possible spawn locations for this level.
+        /// </summary>
+        public Transform[] SpawnPoints => this.spawnPoints;
 
-    public void DeliverObject(MatterObject matterObject)
-    {
-        Matter matter = matterObject != null ? matterObject.Matter : null;
+        /// <summary>
+        /// The score the players currentlyy have.
+        /// </summary>
+        [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
+        /// <summary>
+        /// The coroutine that adds demands to the demands list.
+        /// </summary>
+        private Coroutine demandCoroutine;
+        /// <summary>
+        /// A timeout object used by <see cref="demandCoroutine"/> to wait for a certain amount of time.
+        /// </summary>
+        private WaitForSeconds demandCoroutineWait;
 
-        if (this.isServer && matter != null)
+
+        private void Awake()
         {
-            if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
+            this.playerScore = 0;
+            this.demandCoroutine = null;
+            this.demandCoroutineWait = new WaitForSeconds(20.0F);
+        }
+
+        public override void OnStartServer()
+        {
+            GameManager.UI.LevelUI.GameTimer.SetTime(levelDurationSeconds);
+            GameManager.UI.LevelUI.GameTimer.StartTimer();
+
+            this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
+        }
+        public override void OnStopServer()
+        {
+            this.StopCoroutine(this.demandCoroutine);
+            GameManager.UI.LevelUI.GameTimer.StopTimer();
+        }
+
+        /// <summary>
+        /// Returns the spawn location for the given player number.
+        /// </summary>
+        /// <param name="playerNum">The player number.</param>
+        /// <returns>The spawn location for the given <paramref name="playerNum"/>.</returns>
+        public Transform GetSpawnForPlayer(int playerNum) => this.spawnPoints.Length > 0 ? this.spawnPoints[playerNum % this.spawnPoints.Length] : null;
+
+        /// <summary>
+        /// Attempts to deliver the given matter object.
+        /// Checks the demand queue whether the given matter is demanded, destroys it and increments the player score.
+        /// Does nothing if the given matter is not inside the demand queue.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="matterObject">The matter object to deliver.</param>
+        public void DeliverObject(MatterObject matterObject)
+        {
+            Matter matter = matterObject != null ? matterObject.Matter : null;
+
+            if (this.isServer && matter != null)
             {
-                this.IncrementPlayerScore(this.scorePerDelivery);
-                GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
-                NetworkServer.Destroy(matterObject.gameObject);
+                if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
+                {
+                    this.IncrementPlayerScore(this.scorePerDelivery);
+                    GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
+                    NetworkServer.Destroy(matterObject.gameObject);
+                }
             }
         }
-    }
 
-    public void IncrementPlayerScore(int scoreDelta) => this.SetPlayerScore(this.playerScore + scoreDelta);
-    public void SetPlayerScore(int newScore)
-    {
-        if (this.isServer)
-            this.playerScore = newScore;
-    }
-
-
-    private IEnumerator Do_DemandCoroutine()
-    {
-        while (true)
+        /// <summary>
+        /// Increments the player score by the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="scoreDelta">The amount by which to increase the player score.</param>
+        public void IncrementPlayerScore(int scoreDelta) => this.SetPlayerScore(this.playerScore + scoreDelta);
+        /// <summary>
+        /// Sets the player score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player score.</param>
+        public void SetPlayerScore(int newScore)
         {
-            // add random demand from demand pool
-            yield return this.demandCoroutineWait;
-            GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
+            if (this.isServer)
+                this.playerScore = newScore;
         }
-    }
 
-    private void PlayerScore_OnChange(int oldValue, int newValue)
-    {
-        GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
+
+        /// <summary>
+        /// The coroutine used to add demands to the demand queue.
+        /// </summary>
+        private IEnumerator Do_DemandCoroutine()
+        {
+            while (true)
+            {
+                // add random demand from demand pool
+                yield return this.demandCoroutineWait;
+                GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
+            }
+        }
+
+        /// <summary>
+        /// Called when the value of <see cref="PlayerScore"/> has changed on the server side.
+        /// Updates the score on a client to synchronize it with the server.
+        /// </summary>
+        /// <param name="oldValue">The previous player score.</param>
+        /// <param name="newValue">The new player score.</param>
+        private void PlayerScore_OnChange(int oldValue, int newValue)
+        {
+            GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
+        }
     }
 }

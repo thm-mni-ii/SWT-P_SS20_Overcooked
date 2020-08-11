@@ -4,24 +4,30 @@ using UnityEngine;
 using Mirror;
 using TMPro;
 
-public class TestNetworkManager : NetworkManager
+namespace Underconnected
 {
-    public override void OnClientConnect(NetworkConnection conn)
+    /// <summary>
+    /// A temporary network manager that spawns players as soon as they connect to the server.
+    /// </summary>
+    public class TestNetworkManager : NetworkManager
     {
-        base.OnClientConnect(conn);
-        conn.Send(new AddPlayerMessage());
-    }
+        public override void OnClientConnect(NetworkConnection conn)
+        {
+            base.OnClientConnect(conn);
+            conn.Send(new AddPlayerMessage());
+        }
 
-    public override void OnServerAddPlayer(NetworkConnection conn)
-    {
-        Transform spawnPos = GameManager.CurrentLevel.GetSpawnForPlayer(numPlayers);
-        GameObject playerGO;
+        public override void OnServerAddPlayer(NetworkConnection conn)
+        {
+            Transform spawnPos = GameManager.CurrentLevel.GetSpawnForPlayer(numPlayers);
+            GameObject playerGO;
 
-        if (spawnPos != null)
-            playerGO = GameObject.Instantiate(this.playerPrefab, spawnPos.position, spawnPos.rotation);
-        else
-            playerGO = GameObject.Instantiate(this.playerPrefab);
+            if (spawnPos != null)
+                playerGO = GameObject.Instantiate(this.playerPrefab, spawnPos.position, spawnPos.rotation);
+            else
+                playerGO = GameObject.Instantiate(this.playerPrefab);
 
-        NetworkServer.AddPlayerForConnection(conn, playerGO);
+            NetworkServer.AddPlayerForConnection(conn, playerGO);
+        }
     }
 }
