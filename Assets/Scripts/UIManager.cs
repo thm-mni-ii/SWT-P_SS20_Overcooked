@@ -27,8 +27,9 @@ namespace Underconnected
         /// A reference to the level UI.
         /// </summary>
         public LevelUI LevelUI => this.levelUI;
-
- 
+        /// <summary>
+        /// A reference to the level finished UI.
+        /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
 
         /// <summary>
@@ -37,6 +38,8 @@ namespace Underconnected
         public void ShowLevelFinishedScreen() 
         {
             LevelFinishedUI.gameObject.SetActive(true);
+            LevelUI.gameObject.SetActive(false);
+            GameManager.Instance.UnloadCurrentLevel();
         }
     }
 }

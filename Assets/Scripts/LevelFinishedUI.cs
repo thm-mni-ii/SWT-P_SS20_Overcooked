@@ -20,13 +20,16 @@ namespace Underconnected
         [SerializeField] TextMeshProUGUI pointsText;
         [SerializeField] TextMeshProUGUI highscoreText;
 
+        private int numOfNextLevel;
 
         /// <summary>
         /// Sets the number of the level to display on this screen.
+        /// Saves the number of the next level for the next level button.
         /// </summary>
         /// <param name="numOfLevel">The number of the finished level.</param>
         public void SetNumOfLevel(int numOfLevel) {
             levelText.SetText("Level " + numOfLevel.ToString() + System.Environment.NewLine + "Chempleted");
+            numOfNextLevel = numOfLevel + 1;
         }
 
         /// <summary>
@@ -79,9 +82,18 @@ namespace Underconnected
         /// <summary>
         /// Hides this screen.
         /// </summary>
-        public void Close()
+        public void Exit()
         {
             this.gameObject.SetActive(false);
+        }
+
+
+        /// <summary>
+        /// Hides this screen and load the next level.
+        /// </summary>
+        public void NextLevel() {
+            this.gameObject.SetActive(false);
+            GameManager.Instance.LoadLevel(numOfNextLevel);
         }
     }
 }

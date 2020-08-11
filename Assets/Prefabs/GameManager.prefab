@@ -43,8 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21698d9a3fc5c514bac2392ae74603cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
   levelBuildIndexStart: 1
-  gameTimer: {fileID: 0}
-  gameDemandQueue: {fileID: 0}
-  finishedLevelPrefab: {fileID: 1561939206993637890, guid: c6e75bb73682f014a831e9f4aa84f6f0,
-    type: 3}
+  levelFinishedUI: {fileID: 0}
