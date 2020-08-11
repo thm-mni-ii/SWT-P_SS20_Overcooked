@@ -18,10 +18,13 @@ namespace Underconnected
         [SerializeField] bool canTakeBackItems = true;
         [SerializeField] string matterDisplayTextureField = "_Back";
 
+
         /// <summary>
-        /// 
+        /// The material used to display the matter icon.
+        /// This reference is needed to be able to change the displayed texture.
         /// </summary>
         private Material matterDisplayMaterial;
+
 
         /// <summary>
         /// matterDisplayMaterial is initialized and <see cref="SetContainedMatter(Matter)"/> is called.
