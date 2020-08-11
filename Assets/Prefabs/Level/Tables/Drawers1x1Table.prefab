@@ -13,6 +13,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &4756770694839871335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172120951260269417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &8549564144817891318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172120951260269417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc4f3d9d9e9edd40ad8d8e1eacef511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawerAnimator: {fileID: 1876727067652553633}
+  isDrawerOpened: 0
+  canBeInteractedWith: 1
+  isOpenedAnimParameter: IsOpen
+  drawerClosedState: close_idle
+  drawerOpenedState: open_idle
+--- !u!65 &3666622711157940187
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763135374031713301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9712523, y: 0.80937684, z: 0.86819166}
+  m_Center: {x: 0, y: 0.3616206, z: 0.042519957}
 --- !u!95 &1876727067652553633
 Animator:
   serializedVersion: 3
@@ -98,6 +145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1Table
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: bf08ab06824fb594caea61838429136c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3959002639352981109, guid: bf08ab06824fb594caea61838429136c,
         type: 3}
