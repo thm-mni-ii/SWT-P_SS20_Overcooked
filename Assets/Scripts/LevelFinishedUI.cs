@@ -22,21 +22,47 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Sets the values to display on this screen.
+        /// Sets the number of the level to display on this screen.
         /// </summary>
         /// <param name="numOfLevel">The number of the finished level.</param>
-        /// <param name="deliveredPoints">The amount of delivered recipes.</param>
-        /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
-        /// <param name="score">The player score.</param>
-        /// <param name="highscore">The highscore for the finished level.</param>
-        public void SetPoints(int numOfLevel, int deliveredPoints, int deliveredFailedPoints, int score, int highscore)
-        {
+        public void SetNumOfLevel(int numOfLevel) {
             levelText.SetText("Level " + numOfLevel.ToString() + System.Environment.NewLine + "Chempleted");
-            recipesDeliveredText.SetText(deliveredPoints.ToString());
-            recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
-            pointsText.SetText(score.ToString());
-            highscoreText.SetText(highscore.ToString());
         }
+
+        /// <summary>
+        /// Sets the points of right delivered recipes and display them on this screen.
+        /// </summary>
+        /// <param name="deliveredPoints">The amount of delivered recipes.</param>
+        public void SetDeliveredPoints(int deliveredPoints) {
+            recipesDeliveredText.SetText(deliveredPoints.ToString());
+        }
+
+        /// <summary>
+        /// Sets the points of wrong delivered recipes and display them on this screen.
+        /// </summary>
+        /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
+        public void SetDeliveredFailedPoints(int deliveredFailedPoints) {
+            //recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
+            recipesFailedDeliveredText.SetText("0");
+        }
+
+        /// <summary>
+        /// Sets total score to display on this screen.
+        /// </summary>
+        /// <param name="score">The player score.</param>
+        public void SetScore(int score) {
+            this.pointsText.text = score.ToString();
+        }
+
+        /// <summary>
+        /// Sets current highscore to display on this screen.
+        /// </summary>
+        /// <param name="highscore">The highscore for the finished level.</param>
+        public void SetHighscore(int highscore) {
+            //highscoreText.SetText(highscore.ToString());
+            highscoreText.SetText("10000");
+        }
+        
 
         /// <summary>
         /// Sets the amount of reached stars to display.

@@ -59,6 +59,11 @@ namespace Underconnected
             this.StopCoroutine(this.demandCoroutine);
             GameManager.UI.LevelUI.GameTimer.StopTimer();
         }
+    
+        //comment
+        public override void OnStartClient() {
+            GameManager.UI.LevelUI.GameTimer.OnTimerFinished += this.GameTimer_OnTimerFinished;
+        }
 
         /// <summary>
         /// Returns the spawn location for the given player number.
@@ -105,7 +110,7 @@ namespace Underconnected
             if (this.isServer)
                 this.playerScore = newScore;
         }
-
+        
 
         /// <summary>
         /// The coroutine used to add demands to the demand queue.
@@ -122,13 +127,22 @@ namespace Underconnected
 
         /// <summary>
         /// Called when the value of <see cref="PlayerScore"/> has changed on the server side.
-        /// Updates the score on a client to synchronize it with the server.
+        /// Updates the score on a client to synchronize it with the server. 
+        /// Updates the score for the level finished screen.
         /// </summary>
         /// <param name="oldValue">The previous player score.</param>
         /// <param name="newValue">The new player score.</param>
         private void PlayerScore_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
+            GameManager.UI.LevelFinishedUI.SetScore(newValue);
+        }
+
+        /// <summary>
+        /// Starts the ShowLevelFinishedScreen method of the UIManager script.
+        /// </summary>
+        private void GameTimer_OnTimerFinished() {
+            GameManager.UI.ShowLevelFinishedScreen();
         }
     }
 }
