@@ -57,7 +57,7 @@ namespace Underconnected
         /// </summary>
         private void Update()
         {
-            if (this.isLocalPlayer)
+            /*if (this.isLocalPlayer)
             {
                 this.movementInput.x = Input.GetAxisRaw("Horizontal");
                 this.movementInput.y = 0;
@@ -65,7 +65,23 @@ namespace Underconnected
 
                 if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
+            }*/
+            if(Input.GetKey(GameManager.Instance.forward))
+                transform.position += Vector3.forward/2;
+            
+            if(Input.GetKey(GameManager.Instance.left))
+                transform.position += Vector3.left/2;
+
+            if(Input.GetKey(GameManager.Instance.right))
+                transform.position += Vector3.right/2;
+
+            if(Input.GetKey(GameManager.Instance.backward))
+                transform.position += -Vector3.forward/2;
+
+            if(Input.GetKey(GameManager.Instance.action)){
+                
             }
+
         }
         /// <summary>
         /// Moves the player with the input values previously recorded inside of <see cref="Update"/>.
