@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4fccc8ac1bcc042a074074f83bf8cc, type: 3}
+  m_Name: CompoundC5H4N4O3
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  name: Uric Acid
+  description: Uric acid is a heterocyclic compound of carbon, nitrogen, oxygen,
+    and hydrogen with the formula C5H4N4O3. It forms ions and salts known as urates
+    and acid urates, such as ammonium acid urate. Uric acid is a product of the metabolic
+    breakdown of purine nucleotides, and it is a normal component of urine. High
+    blood concentrations of uric acid can lead to gout and are associated with other
+    medical conditions, including diabetes and the formation of ammonium acid urate
+    kidney stones.
+  prefab: {fileID: 5137224915557663102, guid: d17440ae36638b94d8d89d656445136c, type: 3}
+  components: []
+  formula: C5H4N4O3
