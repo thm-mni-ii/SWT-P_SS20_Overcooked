@@ -45,8 +45,7 @@ namespace Underconnected
         /// </summary>
         /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
         public void SetDeliveredFailedPoints(int deliveredFailedPoints) {
-            //recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
-            recipesFailedDeliveredText.SetText("0");
+            recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
         }
 
         /// <summary>
@@ -62,21 +61,30 @@ namespace Underconnected
         /// </summary>
         /// <param name="highscore">The highscore for the finished level.</param>
         public void SetHighscore(int highscore) {
-            //highscoreText.SetText(highscore.ToString());
-            highscoreText.SetText("10000");
+            highscoreText.SetText(highscore.ToString());
         }
-        
+
 
         /// <summary>
         /// Sets the amount of reached stars to display.
         /// </summary>
-        /// <param name="amountOfStars">The amount of stars.</param>
-        public void SetStars(int amountOfStars)
+        /// <param name="score">The amount of stars.</param>
+        public void SetStars(int score)
         {
-            for (int i = 0; i < stars.Length; i++)
-            {
-                stars[i].sprite = i < amountOfStars ? filledStar : emptyStar;
+            int numOfStars = 0;
+            if (score >= 100) { //placeholder points
+                stars[0].sprite = filledStar;
+                if (score >= 200) {
+                    stars[1].sprite = filledStar;
+                    if (score >= 300) {
+                        stars[2].sprite = filledStar;
+                    }
+                }
             }
+            /*for (int i = 0; i < stars.Length; i++)
+            {
+                stars[i].sprite = i < numOfStars ? filledStar : emptyStar;
+            }*/
         }
 
         /// <summary>

@@ -434,6 +434,12 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1813726027158661377, guid: 2a304940b56ad0e4e9bbdedc38523115,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bcfda418f76d3e0449497932e389b4ab,
+        type: 3}
     - target: {fileID: 1850454457328324787, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -639,6 +645,12 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: 2a304940b56ad0e4e9bbdedc38523115
       objectReference: {fileID: 0}
+    - target: {fileID: 8300923385407891216, guid: 2a304940b56ad0e4e9bbdedc38523115,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bcfda418f76d3e0449497932e389b4ab,
+        type: 3}
     - target: {fileID: 8523812934846550667, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}
       propertyPath: m_Name
