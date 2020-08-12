@@ -23,6 +23,7 @@ namespace Underconnected
         /// The currently played level. `null` if there is none.
         /// </summary>
         public static Level CurrentLevel => Instance.currentLevel;
+        public static int CurrentLevelNum => Instance.currentLevelScene.buildIndex - Instance.levelBuildIndexStart + 1;
 
 
 
@@ -32,9 +33,6 @@ namespace Underconnected
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
 
-        //[Tooltip("A reference to the level finished UI.")]
-        [Header("Settings")]
-        [SerializeField] LevelFinishedUI levelFinishedUI;
 
         /// <summary>
         /// Holds the currently played level.
@@ -44,10 +42,6 @@ namespace Underconnected
         /// Holds the currently scene.
         /// </summary>
         private Scene currentLevelScene;
-        /// <summary>
-        /// A reference to the level finished UI.
-        /// </summary>
-        public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
 
 
         private void Awake()
@@ -74,17 +68,29 @@ namespace Underconnected
         /// <param name="levelNum">The level number to load.</param>
         public void LoadLevel(int levelNum)
         {
+            if (this.currentLevel != null)
+                this.UnloadCurrentLevel();
+
             SceneManager.LoadScene(this.levelBuildIndexStart + levelNum - 1, LoadSceneMode.Additive);
-            levelFinishedUI.SetNumOfLevel(this.levelBuildIndexStart + levelNum - 1);
         }
-
-
+        /// <summary>
+        /// Loads the successor to the current level.
+        /// </summary>
+        public void LoadNextLevel()
+        {
+            this.LoadLevel(this.currentLevelScene.buildIndex + 1);
+        }
         /// <summary>
         /// Unloads the level with the given level number.
         /// </summary>
         /// <param name="levelNum">The level number to load.</param>
-        public void UnloadCurrentLevel() {
-            SceneManager.UnloadSceneAsync(currentLevelScene);
+        public void UnloadCurrentLevel()
+        {
+            if (this.currentLevel != null)
+            {
+                this.currentLevel = null;
+                SceneManager.UnloadSceneAsync(this.currentLevelScene);
+            }
         }
 
 
@@ -103,7 +109,8 @@ namespace Underconnected
                 foreach (GameObject rootGO in rootGOs)
                 {
                     this.currentLevel = rootGO.GetComponent<Level>();
-                    currentLevelScene = scene;
+                    this.currentLevelScene = scene;
+
                     if (this.currentLevel != null)
                     {
                         SceneManager.SetActiveScene(scene);

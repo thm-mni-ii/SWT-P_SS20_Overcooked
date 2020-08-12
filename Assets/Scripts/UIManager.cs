@@ -32,11 +32,13 @@ namespace Underconnected
         /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
 
+
         /// <summary>
         /// Shows up the level finished screen, when the timer is finished.
         /// </summary>
-        public void ShowLevelFinishedScreen() 
+        public void ShowLevelFinishedScreen()
         {
+            LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
             LevelFinishedUI.gameObject.SetActive(true);
             LevelUI.gameObject.SetActive(false);
         }
