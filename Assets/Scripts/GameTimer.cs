@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using UnityEngine.Events;
 
 namespace Underconnected
 {
@@ -16,6 +17,9 @@ namespace Underconnected
 
         [Header("Settings")]
         [SerializeField] int syncAfterSeconds = 30;
+        
+
+        public event UnityAction OnTimerFinished;
 
         /// <summary>
         /// Represents the current timer value.
@@ -86,7 +90,7 @@ namespace Underconnected
         /// Sets the current timeValue and uses <see cref="UpdateTimerText"/> to update timertext.
         /// Server sends current time to its client every few seconds to synchronize timers.
         /// </summary>
-        /// <param name="deltaTime">time differnce between update calls</param>
+        /// <param name="deltaTime">time difference between update calls</param>
         private void TickTimer(float deltaTime)
         {
             if (this.isTimerRunning && this.timerValue > 0.0F)
@@ -96,6 +100,8 @@ namespace Underconnected
 
                 if (this.isServer && ((int)this.timerValue) % this.syncAfterSeconds == 0 && ((int)this.timerValue != (int)(this.timerValue + Time.deltaTime)))
                     this.RpcTickCheckpoint(this.timerValue);
+
+                if (this.timerValue == 0) this.OnTimerFinished?.Invoke();
             }
         }
         /// <summary>
@@ -110,8 +116,7 @@ namespace Underconnected
             else
                 this.timerText.text = $"<b>{roundedSeconds}</b>";
         }
-
-
+        
         #region Network Code
 
         #region Serialize/Deserialize

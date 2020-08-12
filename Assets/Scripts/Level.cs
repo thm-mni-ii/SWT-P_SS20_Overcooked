@@ -27,9 +27,13 @@ namespace Underconnected
         public Transform[] SpawnPoints => this.spawnPoints;
 
         /// <summary>
-        /// The score the players currentlyy have.
+        /// The score the players currently have.
         /// </summary>
         [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
+        /// <summary>
+        /// The currently score that the players make with right delivered recipes.
+        /// </summary>
+        [SyncVar(hook = nameof(DeliveredScore_OnChange))] int deliveredScore;
         /// <summary>
         /// The coroutine that adds demands to the demands list.
         /// </summary>
@@ -43,6 +47,7 @@ namespace Underconnected
         private void Awake()
         {
             this.playerScore = 0;
+            this.deliveredScore = 0;
             this.demandCoroutine = null;
             this.demandCoroutineWait = new WaitForSeconds(20.0F);
         }
@@ -58,6 +63,11 @@ namespace Underconnected
         {
             this.StopCoroutine(this.demandCoroutine);
             GameManager.UI.LevelUI.GameTimer.StopTimer();
+        }
+    
+        //comment
+        public override void OnStartClient() {
+            GameManager.UI.LevelUI.GameTimer.OnTimerFinished += this.GameTimer_OnTimerFinished;
         }
 
         /// <summary>
@@ -83,6 +93,7 @@ namespace Underconnected
                 if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
                 {
                     this.IncrementPlayerScore(this.scorePerDelivery);
+                    this.IncrementDeliveredScore(this.scorePerDelivery);
                     GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
                     NetworkServer.Destroy(matterObject.gameObject);
                 }
@@ -106,6 +117,21 @@ namespace Underconnected
                 this.playerScore = newScore;
         }
 
+        /// <summary>
+        /// Increments the recipes delievered score by the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="scoreDelta">The amount by which to increase the player score.</param>
+        public void IncrementDeliveredScore(int scoreDelta) => this.SetDeliveredScore(this.deliveredScore + scoreDelta);
+        /// <summary>
+        /// Sets the recipes delievered score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player score.</param>
+        public void SetDeliveredScore(int newScore) {
+            if (this.isServer)
+                this.deliveredScore = newScore;
+        }
 
         /// <summary>
         /// The coroutine used to add demands to the demand queue.
@@ -122,13 +148,34 @@ namespace Underconnected
 
         /// <summary>
         /// Called when the value of <see cref="PlayerScore"/> has changed on the server side.
-        /// Updates the score on a client to synchronize it with the server.
+        /// Updates the score on a client to synchronize it with the server. 
+        /// Updates the score for the level finished screen.
         /// </summary>
         /// <param name="oldValue">The previous player score.</param>
         /// <param name="newValue">The new player score.</param>
         private void PlayerScore_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelUI.ScoreDisplay.SetScore(newValue);
+            GameManager.UI.LevelFinishedUI.SetScore(newValue);
+            GameManager.UI.LevelFinishedUI.SetStars(newValue); //doesnt work with FailedDeliveredPoints
+        }
+
+        /// <summary>
+        /// Called when the value of <see cref="DeliveredScore"/> has changed on the server side.
+        /// Updates the score on a client to synchronize it with the server. 
+        /// Updates the score for the level finished screen.
+        /// </summary>
+        /// <param name="oldValue">The previous recipes delivered score.</param>
+        /// <param name="newValue">The new recipes delivered  score.</param>
+        private void DeliveredScore_OnChange(int oldValue, int newValue) {
+            GameManager.UI.LevelFinishedUI.SetDeliveredPoints(newValue);
+        }
+
+        /// <summary>
+        /// Starts the ShowLevelFinishedScreen method of the UIManager script.
+        /// </summary>
+        private void GameTimer_OnTimerFinished() {
+            GameManager.UI.ShowLevelFinishedScreen();
         }
     }
 }

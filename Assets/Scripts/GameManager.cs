@@ -32,10 +32,22 @@ namespace Underconnected
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
 
+        //[Tooltip("A reference to the level finished UI.")]
+        [Header("Settings")]
+        [SerializeField] LevelFinishedUI levelFinishedUI;
+
         /// <summary>
         /// Holds the currently played level.
         /// </summary>
         private Level currentLevel;
+        /// <summary>
+        /// Holds the currently scene.
+        /// </summary>
+        private Scene currentLevelScene;
+        /// <summary>
+        /// A reference to the level finished UI.
+        /// </summary>
+        public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
 
 
         private void Awake()
@@ -63,6 +75,16 @@ namespace Underconnected
         public void LoadLevel(int levelNum)
         {
             SceneManager.LoadScene(this.levelBuildIndexStart + levelNum - 1, LoadSceneMode.Additive);
+            levelFinishedUI.SetNumOfLevel(this.levelBuildIndexStart + levelNum - 1);
+        }
+
+
+        /// <summary>
+        /// Unloads the level with the given level number.
+        /// </summary>
+        /// <param name="levelNum">The level number to load.</param>
+        public void UnloadCurrentLevel() {
+            SceneManager.UnloadSceneAsync(currentLevelScene);
         }
 
 
@@ -81,6 +103,7 @@ namespace Underconnected
                 foreach (GameObject rootGO in rootGOs)
                 {
                     this.currentLevel = rootGO.GetComponent<Level>();
+                    currentLevelScene = scene;
                     if (this.currentLevel != null)
                     {
                         SceneManager.SetActiveScene(scene);
