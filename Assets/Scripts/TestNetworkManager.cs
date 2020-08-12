@@ -11,6 +11,8 @@ namespace Underconnected
     /// </summary>
     public class TestNetworkManager : NetworkManager
     {
+        public override void OnStartServer() => GameManager.Instance.LoadLevel(1);
+
         public override void OnClientConnect(NetworkConnection conn)
         {
             base.OnClientConnect(conn);

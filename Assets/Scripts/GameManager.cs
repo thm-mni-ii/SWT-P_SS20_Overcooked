@@ -39,7 +39,7 @@ namespace Underconnected
         /// </summary>
         private Level currentLevel;
         /// <summary>
-        /// Holds the currently scene.
+        /// Holds the currently loaded level scene.
         /// </summary>
         private Scene currentLevelScene;
 
@@ -55,8 +55,6 @@ namespace Underconnected
 
                 // TODO: Load player data
                 // TODO: Check startup parameters & connect to given server or show main menu
-
-                this.LoadLevel(1);
             }
             else
                 GameObject.Destroy(this.gameObject);
