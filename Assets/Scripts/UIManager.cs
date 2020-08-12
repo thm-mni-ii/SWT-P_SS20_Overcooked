@@ -39,7 +39,6 @@ namespace Underconnected
         {
             LevelFinishedUI.gameObject.SetActive(true);
             LevelUI.gameObject.SetActive(false);
-            GameManager.Instance.UnloadCurrentLevel();
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Underconnected
         /// Saves the number of the next level for the next level button.
         /// </summary>
         /// <param name="numOfLevel">The number of the finished level.</param>
-        public void SetNumOfLevel(int numOfLevel) {
+        public void SetNumOfLevel(int numOfLevel) 
+        {
             levelText.SetText("Level " + numOfLevel.ToString() + System.Environment.NewLine + "Chempleted");
             numOfNextLevel = numOfLevel + 1;
         }
@@ -36,7 +37,8 @@ namespace Underconnected
         /// Sets the points of right delivered recipes and display them on this screen.
         /// </summary>
         /// <param name="deliveredPoints">The amount of delivered recipes.</param>
-        public void SetDeliveredPoints(int deliveredPoints) {
+        public void SetDeliveredPoints(int deliveredPoints) 
+        {
             recipesDeliveredText.SetText(deliveredPoints.ToString());
         }
 
@@ -44,7 +46,8 @@ namespace Underconnected
         /// Sets the points of wrong delivered recipes and display them on this screen.
         /// </summary>
         /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
-        public void SetDeliveredFailedPoints(int deliveredFailedPoints) {
+        public void SetDeliveredFailedPoints(int deliveredFailedPoints)
+        {
             recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
         }
 
@@ -52,7 +55,8 @@ namespace Underconnected
         /// Sets total score to display on this screen.
         /// </summary>
         /// <param name="score">The player score.</param>
-        public void SetScore(int score) {
+        public void SetScore(int score) 
+        {
             this.pointsText.text = score.ToString();
         }
 
@@ -60,7 +64,8 @@ namespace Underconnected
         /// Sets current highscore to display on this screen.
         /// </summary>
         /// <param name="highscore">The highscore for the finished level.</param>
-        public void SetHighscore(int highscore) {
+        public void SetHighscore(int highscore) 
+        {
             highscoreText.SetText(highscore.ToString());
         }
 
@@ -81,10 +86,6 @@ namespace Underconnected
                     }
                 }
             }
-            /*for (int i = 0; i < stars.Length; i++)
-            {
-                stars[i].sprite = i < numOfStars ? filledStar : emptyStar;
-            }*/
         }
 
         /// <summary>
@@ -99,9 +100,9 @@ namespace Underconnected
         /// <summary>
         /// Hides this screen and load the next level.
         /// </summary>
-        public void NextLevel() {
+        public void NextLevel() 
+        {
             this.gameObject.SetActive(false);
-            GameManager.Instance.LoadLevel(numOfNextLevel);
         }
     }
 }
