@@ -264,6 +264,11 @@ PrefabInstance:
       propertyPath: levelFinishedUI
       value: 
       objectReference: {fileID: 1954850953}
+    - target: {fileID: 4513865422924228712, guid: 32ba70a6f188275449ed4d08381f483c,
+        type: 3}
+      propertyPath: networkManager
+      value: 
+      objectReference: {fileID: 4268389511968292780}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32ba70a6f188275449ed4d08381f483c, type: 3}
 --- !u!114 &1954850953 stripped
@@ -407,6 +412,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b830785cbfa234b89203faa013b155, type: 3}
+--- !u!114 &4268389511968292780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4268389510805711340, guid: d3b830785cbfa234b89203faa013b155,
+    type: 3}
+  m_PrefabInstance: {fileID: 4268389511968292779}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b088ea6de8ce34ab7d9882a18ec974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7401228249681254660
 PrefabInstance:
   m_ObjectHideFlags: 0

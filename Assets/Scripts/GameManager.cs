@@ -23,12 +23,21 @@ namespace Underconnected
         /// The currently played level. `null` if there is none.
         /// </summary>
         public static Level CurrentLevel => Instance.currentLevel;
-        public static int CurrentLevelNum => Instance.currentLevelScene.buildIndex - Instance.levelBuildIndexStart + 1;
+        /// <summary>
+        /// The level number of the currently played level. `0` if there is none.
+        /// </summary>
+        public static int CurrentLevelNum => (CurrentLevel != null) ? Instance.currentLevelScene.buildIndex - Instance.levelBuildIndexStart + 1 : 0;
+        /// <summary>
+        /// The global network manager.
+        /// </summary>
+        public static TestNetworkManager NetworkManager => Instance.networkManager;
+
 
 
 
         [Header("References")]
         [SerializeField] UIManager uiManager;
+        [SerializeField] TestNetworkManager networkManager;
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;

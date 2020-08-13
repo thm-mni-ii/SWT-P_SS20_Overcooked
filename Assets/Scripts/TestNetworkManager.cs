@@ -11,6 +11,10 @@ namespace Underconnected
     /// </summary>
     public class TestNetworkManager : NetworkManager
     {
+        [Header("References")]
+        [SerializeField] Transform clientsContainer;
+
+
         public override void OnStartServer() => GameManager.Instance.LoadLevel(1);
 
         public override void OnClientConnect(NetworkConnection conn)
@@ -18,7 +22,6 @@ namespace Underconnected
             base.OnClientConnect(conn);
             conn.Send(new AddPlayerMessage());
         }
-
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             Transform spawnPos = GameManager.CurrentLevel.GetSpawnForPlayer(numPlayers);
