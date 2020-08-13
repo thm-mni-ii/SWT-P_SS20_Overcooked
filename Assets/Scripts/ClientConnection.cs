@@ -5,6 +5,9 @@ using Mirror;
 
 namespace Underconnected
 {
+    /// <summary>
+    /// Represents a connection between a server and a single client.
+    /// </summary>
     public class ClientConnection : NetworkBehaviour
     {
         /// <summary>
