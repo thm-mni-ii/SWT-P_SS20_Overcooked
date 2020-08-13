@@ -8,7 +8,7 @@ namespace Underconnected
     /// Represents a recipe that contains input elements and assigns them an output(/result) element.
     /// Can be created from the Create Asset menu.
     /// </summary>
-    [CreateAssetMenu(fileName = "Recipe", menuName = "UniOvercooked/Recipe", order = 0)]
+    [CreateAssetMenu(fileName = "Recipe", menuName = "Underconnected/Recipe", order = 0)]
     public class Recipe : ScriptableObject
     {
         [Tooltip("The input elements for this recipe.")]

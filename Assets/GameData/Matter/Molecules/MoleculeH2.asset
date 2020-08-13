@@ -18,3 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 2873589174651004775, guid: b507003908a09104e8e534fffc8441f9, type: 3}
   element: {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   elementalAmount: 2
+  formula: H2

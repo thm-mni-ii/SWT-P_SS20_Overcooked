@@ -19,3 +19,4 @@ MonoBehaviour:
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
   - {fileID: 11400000, guid: 12240e22e1549ea41b2e5d1a1db607df, type: 2}
+  formula: CO2
