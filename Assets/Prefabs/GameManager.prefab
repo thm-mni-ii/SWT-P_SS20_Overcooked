@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21698d9a3fc5c514bac2392ae74603cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 0}
+  levelBuildIndexStart: 1
+  levelFinishedUI: {fileID: 0}

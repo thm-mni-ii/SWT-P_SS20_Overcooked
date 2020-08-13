@@ -1,0 +1,3 @@
+[submodule "Docs/doxygen-dark-theme"]
+	path = Docs/doxygen-dark-theme
+	url = https://github.com/MaJerle/doxygen-dark-theme

@@ -180,4 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbodies:
   - {fileID: 8632365603161309308}
+  colliders:
+  - {fileID: 8632365603161309309}
+  pickableObject: {fileID: 8632365603161309296}
   element: {fileID: 0}
