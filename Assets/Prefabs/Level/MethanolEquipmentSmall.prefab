@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3619489996941544733}
-  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
-  m_LocalPosition: {x: -1.65, y: -4.58, z: 14.753792}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: -5.03, y: -4.58, z: 14.03}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children: []
   m_Father: {fileID: 6871177964808822027}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 270, z: 0}
 --- !u!33 &5843830213994463870
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3786439188465059198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.361, y: -0.65634817, z: -0.18210363}
+  m_LocalPosition: {x: -0.64, y: -0.65634817, z: -0.86}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 5165012458662491005}
@@ -265,9 +265,9 @@ GameObject:
   - component: {fileID: 5165012458662491005}
   - component: {fileID: 5165012458662490993}
   - component: {fileID: 5165012458662490994}
-  - component: {fileID: 5165012458662490995}
+  - component: {fileID: 1227454557651923460}
   m_Layer: 8
-  m_Name: MethanolEquipment
+  m_Name: MethanolEquipmentSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5165012458662491004}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.606, y: -0.16000009, z: -2.7909703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -325,7 +325,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   secondsToFinish: 6
-  resultObject: {fileID: 0}
+  resultObject: {fileID: 6115621929301609654}
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 7564768418353272879}
   progressBar: {fileID: 7564768417757933245}
@@ -336,8 +336,8 @@ MonoBehaviour:
   allowForeignElementsInRecipes: 0
   allRecipes:
   - {fileID: 11400000, guid: e0a06f48469f02a44a877d6b76a52d1e, type: 2}
---- !u!136 &5165012458662490995
-CapsuleCollider:
+--- !u!65 &1227454557651923460
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -346,10 +346,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.77010536
-  m_Height: 1.2357289
-  m_Direction: 0
-  m_Center: {x: 0.25276738, y: 0.12592483, z: -0.20998979}
+  serializedVersion: 2
+  m_Size: {x: 2.154152, y: 1.8770156, z: 1.5194385}
+  m_Center: {x: -0.22354412, y: 0.2245493, z: -0.25971925}
 --- !u!1 &5165012458787120014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5285,7 +5284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6115621929301609654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.378, y: -0.604, z: -0.165}
+  m_LocalPosition: {x: -0.653, y: -0.604, z: -0.854}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 5165012458662491005}
