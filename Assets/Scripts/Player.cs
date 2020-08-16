@@ -13,12 +13,13 @@ namespace Underconnected
         [SerializeField] Interactor interactor;
         [SerializeField] PlayerControls controls;
 
+
         /// <summary>
-        /// the held object of local player
+        /// The object held by this player.
         /// </summary>
         public PickableObject HeldObject => this.interactor.HeldObject;
         /// <summary>
-        /// checks if player is holding an object
+        /// Tells if this player is holding an object.
         /// </summary>
         public bool IsHoldingObject => this.interactor.IsHoldingObject;
 
