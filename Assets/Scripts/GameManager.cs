@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 namespace Underconnected
 {
@@ -31,6 +33,13 @@ namespace Underconnected
         /// The global network manager.
         /// </summary>
         public static TestNetworkManager NetworkManager => Instance.networkManager;
+
+
+        /// <summary>
+        /// An event that is called when the game manager has finished loading a level.
+        /// Parameters: the level number and the actual level object that has been loaded
+        /// </summary>
+        public static UnityAction<int, Level> OnLevelLoaded;
 
 
 
@@ -75,6 +84,8 @@ namespace Underconnected
         /// <param name="levelNum">The level number to load.</param>
         public void LoadLevel(int levelNum)
         {
+            Debug.Log($"Loading level: {levelNum}");
+
             if (this.currentLevel != null)
                 this.UnloadCurrentLevel();
 
@@ -122,6 +133,8 @@ namespace Underconnected
                     {
                         SceneManager.SetActiveScene(scene);
                         Debug.Log($"Level loaded: {this.currentLevel.gameObject.name}");
+
+                        GameManager.OnLevelLoaded?.Invoke(GameManager.CurrentLevelNum, GameManager.CurrentLevel);
                         break;
                     }
                 }
