@@ -65,6 +65,7 @@ namespace Underconnected
         {
             // Unregister server events
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Server;
+            GameManager.Instance.UnloadCurrentLevel();
         }
 
         public override void OnStartClient()
@@ -76,11 +77,14 @@ namespace Underconnected
         {
             // Unregister client events
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Client;
+            GameManager.Instance.UnloadCurrentLevel();
         }
 
         public override void OnClientConnect(NetworkConnection conn)
         {
             base.OnClientConnect(conn);
+
+            // TODO: Load the current server level here first, THEN send the add player message
             conn.Send(new AddPlayerMessage());
         }
         public override void OnServerAddPlayer(NetworkConnection conn)
