@@ -114,26 +114,31 @@ namespace Underconnected
 
         /// <summary>
         /// Called when a scene is loaded by the SceneManager.
+        /// Tries to find a <see cref="Level"/> component on a root game object and sets it as the current level.
+        /// Also fires the <see cref="OnLevelLoaded"/> event.
+        /// Has no effect if the loaded scene is not a level.
         /// </summary>
         /// <param name="scene">The loaded scene.</param>
         /// <param name="mode">The mode the given <paramref name="scene"/> has been loaded with.</param>
         private void SceneManager_SceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            this.currentLevel = null;
-
             if (scene.isLoaded)
             {
                 GameObject[] rootGOs = scene.GetRootGameObjects();
+                Level levelComponent;
+
                 foreach (GameObject rootGO in rootGOs)
                 {
-                    this.currentLevel = rootGO.GetComponent<Level>();
-                    this.currentLevelScene = scene;
+                    levelComponent = rootGO.GetComponent<Level>();
 
-                    if (this.currentLevel != null)
+                    if (levelComponent != null)
                     {
-                        SceneManager.SetActiveScene(scene);
-                        Debug.Log($"Level loaded: {this.currentLevel.gameObject.name}");
+                        this.currentLevel = levelComponent;
+                        this.currentLevelScene = scene;
 
+                        SceneManager.SetActiveScene(scene);
+
+                        Debug.Log($"Level loaded: {this.currentLevel.gameObject.name}");
                         GameManager.OnLevelLoaded?.Invoke(GameManager.CurrentLevelNum, GameManager.CurrentLevel);
                         break;
                     }
