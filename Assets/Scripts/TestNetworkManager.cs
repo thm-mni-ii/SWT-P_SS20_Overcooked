@@ -58,8 +58,10 @@ namespace Underconnected
         {
             // Register server events
             GameManager.OnLevelLoaded += GameManager_OnLevelLoaded_Server;
-            // Load the first level
-            GameManager.Instance.LoadLevel(1);
+
+            // Load the first level if no level is currently loaded (e.g. when launching from the Unity Editor while having a level scene open)
+            if (GameManager.CurrentLevel == null)
+                GameManager.Instance.LoadLevel(1);
         }
         public override void OnStopServer()
         {
@@ -72,6 +74,12 @@ namespace Underconnected
         {
             // Register client events
             GameManager.OnLevelLoaded += GameManager_OnLevelLoaded_Client;
+
+            // Unload the currently loaded level if there is one (e.g. when launching from the Unity Editor while having a level scene open)
+            // and we are not running a server.
+            // The client should always load the level that is currently running on the server
+            if (!NetworkServer.active)
+                GameManager.Instance.UnloadCurrentLevel();
         }
         public override void OnStopClient()
         {
