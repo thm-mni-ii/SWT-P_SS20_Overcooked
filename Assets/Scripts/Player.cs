@@ -32,11 +32,8 @@ namespace Underconnected
         {
             if (this.isLocalPlayer)
             {
-                if (this.isLocalPlayer)
-                {
-                    if (Input.GetKeyDown(KeyCode.E))
-                        this.interactor.Interact();
-                }
+                if (Input.GetKeyDown(KeyCode.E))
+                    this.interactor.Interact();
             }
         }
         #endregion
