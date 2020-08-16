@@ -72,6 +72,9 @@ namespace Underconnected
 
         public override void OnStartClient()
         {
+            // Register message handlers
+            NetworkClient.RegisterHandler<ServerStateMessage>(this.OnServerStateMessage, false);
+
             // Register client events
             GameManager.OnLevelLoaded += GameManager_OnLevelLoaded_Client;
 
@@ -88,13 +91,7 @@ namespace Underconnected
             GameManager.Instance.UnloadCurrentLevel();
         }
 
-        public override void OnClientConnect(NetworkConnection conn)
-        {
-            base.OnClientConnect(conn);
-
-            // TODO: Load the current server level here first, THEN send the add player message
-            conn.Send(new AddPlayerMessage());
-        }
+        public override void OnServerConnect(NetworkConnection conn) => conn.Send(new ServerStateMessage(GameManager.CurrentLevelNum));
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             GameObject connectionGO = GameObject.Instantiate(this.playerPrefab, this.clientsContainer);
@@ -124,15 +121,7 @@ namespace Underconnected
                 this.ConnectionToServer = connection;
 
             if (!this.AllClients.Contains(connection))
-            {
                 this.AllClients.Add(connection);
-
-                if (NetworkServer.active && !connection.IsOwnConnection)
-                {
-                    // Notifies the client of the level that is currently running on the client
-                    connection.RequestLoadLevel(GameManager.CurrentLevelNum);
-                }
-            }
         }
         /// <summary>
         /// Unregisters a client connection.
@@ -212,11 +201,18 @@ namespace Underconnected
         private void GameManager_OnLevelLoaded_Server(int levelNum, Level level) { }
         /// <summary>
         /// Called when a level has been loaded on the client.
-        /// Used to notify the server that a client has finished loading and is ready to play.
+        /// If the client is already connected to the server, it just notifies the server that the level has been loaded.
+        /// If not, it requests to add its player object by calling <see cref="ClientScene.AddPlayer(NetworkConnection)"/> to finish connecting.
         /// </summary>
         /// <param name="levelNum">The level number that has been loaded.</param>
         /// <param name="level">The level object that has been loaded.</param>
-        private void GameManager_OnLevelLoaded_Client(int levelNum, Level level) => this.ConnectionToServer.ConfirmLevelLoaded(levelNum);
+        private void GameManager_OnLevelLoaded_Client(int levelNum, Level level)
+        {
+            if (this.ConnectionToServer != null)
+                this.ConnectionToServer.ConfirmLevelLoaded(levelNum);
+            else
+                ClientScene.AddPlayer(NetworkClient.connection);
+        }
 
         /// <summary>
         /// Called when a client has finished loading a level.
@@ -224,5 +220,24 @@ namespace Underconnected
         /// </summary>
         /// <param name="connection">The client that has finished loading a requested level.</param>
         private void ClientConnection_OnLevelLoaded(ClientConnection connection) => this.CheckIfClientsReady();
+
+        /// <summary>
+        /// Called when the client receives a <see cref="ServerStateMessage"/>.
+        /// Usually called when the client attempts to connect to the server and it responds with
+        /// its current state so the client can load the correct level before fully connecting.
+        /// </summary>
+        /// <param name="connection">The connection that has sent this message.</param>
+        /// <param name="message">The message that was sent by <paramref name="connection"/>.</param>
+        private void OnServerStateMessage(NetworkConnection connection, ServerStateMessage message)
+        {
+            // Load the level that is currently running on the server but only if we are not the local client
+            // to prevent double-loading the same level.
+            // If we are the local client, just finish connecting by requesting to add a player object for
+            // our connection.
+            if (!NetworkServer.active)
+                GameManager.Instance.LoadLevel(message.LevelNum);
+            else
+                ClientScene.AddPlayer(connection);
+        }
     }
 }
