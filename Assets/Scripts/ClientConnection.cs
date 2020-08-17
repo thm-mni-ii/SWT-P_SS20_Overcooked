@@ -12,11 +12,6 @@ namespace Underconnected
     public class ClientConnection : NetworkBehaviour
     {
         /// <summary>
-        /// The player that belongs to this client connection.
-        /// `null` if none exists.
-        /// </summary>
-        public Player Player { get; private set; }
-        /// <summary>
         /// Tells whether this is our own client's connection to the server.
         /// </summary>
         public bool IsOwnConnection => this.hasAuthority;
@@ -42,18 +37,10 @@ namespace Underconnected
 
         private void Awake()
         {
-            this.Player = null;
             this.HasFinishedLoading = true;
         }
         private void Start() => GameManager.NetworkManager.RegisterClient(this);
         private void OnDestroy() => GameManager.NetworkManager.UnregisterClient(this);
-
-
-        /// <summary>
-        /// Sets the player object for this client.
-        /// </summary>
-        /// <param name="player">The player object to assign to this client.</param>
-        public void SetPlayer(Player player) => this.Player = player;
 
 
         #region Server Side & Commands

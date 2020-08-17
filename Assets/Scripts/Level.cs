@@ -132,6 +132,35 @@ namespace Underconnected
         }
 
         /// <summary>
+        /// Registers the given player on this level.
+        /// Usually called when a new <see cref="Player"/> object is spawned on the server or the client.
+        /// It will add the given object to <see cref="AllPlayers"/>.
+        /// </summary>
+        /// <param name="player">The player object to register.</param>
+        public void RegisterPlayer(Player player)
+        {
+            if (!this.allPlayers.Contains(player))
+            {
+                Debug.Log($"Registered player {player}", this);
+                this.allPlayers.Add(player);
+            }
+        }
+        /// <summary>
+        /// Unregisters the given player from this level.
+        /// Usually called when a <see cref="Player"/> object is despawned on the server or the client.
+        /// It won't destroy this object, just remove it from <see cref="AllPlayers"/>.
+        /// </summary>
+        /// <param name="player">The player object to unregister.</param>
+        public void UnregisterPlayer(Player player)
+        {
+            if (this.allPlayers.Contains(player))
+            {
+                Debug.Log($"Unregistered player {player}", this);
+                this.allPlayers.Remove(player);
+            }
+        }
+
+        /// <summary>
         /// Increments the player score by the given amount.
         /// Only has effect when called on the server.
         /// </summary>
@@ -184,20 +213,21 @@ namespace Underconnected
         /// Adds a player for the given client connection.
         /// Can only be called on the server.
         /// </summary>
-        /// <param name="connection">The client connection to spawn a new player for.</param>
+        /// <param name="client">The client connection to spawn a new player for.</param>
         [Server]
-        private void AddPlayer(ClientConnection connection)
+        private void AddPlayer(ClientConnection client)
         {
-            if (connection.Player == null)
-            {
-                Transform spawnPos = this.GetSpawnForPlayer(this.allPlayers.Count);
-                GameObject playerGO = GameObject.Instantiate(this.playerPrefab.gameObject, spawnPos.position, spawnPos.rotation, this.transform);
-                Player player = playerGO.GetComponent<Player>();
+            foreach (Player p in this.allPlayers)
+                if (p.Client == client)
+                    return;
 
-                this.allPlayers.Add(player);
-                NetworkServer.Spawn(playerGO, connection.connectionToClient);
-                connection.SetPlayer(player);
-            }
+            Transform spawnPos = this.GetSpawnForPlayer(this.allPlayers.Count);
+            GameObject playerGO = GameObject.Instantiate(this.playerPrefab.gameObject, spawnPos.position, spawnPos.rotation, this.transform);
+            Player player = playerGO.GetComponent<Player>();
+
+            NetworkServer.Spawn(playerGO, client.connectionToClient);
+            this.RegisterPlayer(player);
+            player.SetClient(client);
         }
         /// <summary>
         /// Adds a player for each connected client found in <see cref="GameManager.NetworkManager"/>.
@@ -214,15 +244,25 @@ namespace Underconnected
         /// Removes and destroys the player assigned to the given connection.
         /// Can only be called on the server.
         /// </summary>
-        /// <param name="connection">The client whose player to remove.</param>
+        /// <param name="client">The client whose player to remove.</param>
         [Server]
-        private void RemovePlayer(ClientConnection connection)
+        private void RemovePlayer(ClientConnection client)
         {
-            if (connection.Player != null)
+            Player targetPlayer = null;
+
+            foreach (Player p in this.allPlayers)
             {
-                this.allPlayers.Remove(connection.Player);
-                NetworkServer.Destroy(connection.Player.gameObject);
-                connection.SetPlayer(null);
+                if (p.Client == client)
+                {
+                    targetPlayer = p;
+                    break;
+                }
+            }
+
+            if (targetPlayer != null)
+            {
+                this.UnregisterPlayer(targetPlayer);
+                NetworkServer.Destroy(targetPlayer.gameObject);
             }
         }
         /// <summary>
@@ -232,20 +272,12 @@ namespace Underconnected
         [Server]
         private void RemoveAllPlayers()
         {
-            foreach (ClientConnection client in GameManager.NetworkManager.AllClients)
-                this.RemovePlayer(client);
-
-            if (this.allPlayers.Count > 0)
+            Player player;
+            while (this.allPlayers.Count > 0)
             {
-                Debug.LogWarning($"Expected to remove all players, but there was/were still {this.allPlayers.Count} player(s) in the list. Removing them manually...");
-
-                Player p;
-                while (this.allPlayers.Count > 0)
-                {
-                    p = this.allPlayers[0];
-                    this.allPlayers.RemoveAt(0);
-                    NetworkServer.Destroy(p.gameObject);
-                }
+                player = this.allPlayers[0];
+                this.UnregisterPlayer(player);
+                NetworkServer.Destroy(player.gameObject);
             }
         }
 
