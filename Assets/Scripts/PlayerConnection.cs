@@ -7,30 +7,30 @@ using Mirror;
 namespace Underconnected
 {
     /// <summary>
-    /// Represents a connection between the server and a single client.
+    /// Represents a connection between the server and a single player client.
     /// </summary>
-    public class ClientConnection : NetworkBehaviour
+    public class PlayerConnection : NetworkBehaviour
     {
         /// <summary>
-        /// Tells whether this is our own client's connection to the server.
+        /// Tells whether this is our own connection to the server.
         /// </summary>
-        public bool IsOwnConnection => this.hasAuthority;
+        public bool IsOwn => this.hasAuthority;
         /// <summary>
-        /// Tells whether the requested level for this client has finished loading.
+        /// Tells whether the requested level for this player client has finished loading.
         /// </summary>
         public bool HasFinishedLoading { get; private set; }
 
 
         /// <summary>
-        /// Called when the client has loaded a level.
-        /// Parameter: the <see cref="ClientConnection"/> that has triggered this event.
+        /// Called when this player client has loaded a level.
+        /// Parameter: the <see cref="PlayerConnection"/> that has triggered this event.
         /// This event will only be triggered on the server.
         /// </summary>
-        public event UnityAction<ClientConnection> OnLevelLoaded;
+        public event UnityAction<PlayerConnection> OnLevelLoaded;
 
 
         /// <summary>
-        /// Holds the level number to load for this client.
+        /// Holds the level number to load for this player client.
         /// </summary>
         private int levelToLoad;
 
@@ -46,7 +46,7 @@ namespace Underconnected
         #region Server Side & Commands
 
         /// <summary>
-        /// Tells this client to load the given level.
+        /// Tells this player client to load the given level.
         /// Can only be called on the server.
         /// </summary>
         /// <param name="levelNum">The level number to load.</param>
@@ -96,7 +96,7 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Tells a client to load the level with the given number.
+        /// Tells a player client to load the level with the given number.
         /// Sent by the server to this client.
         /// </summary>
         /// <param name="target">This connection's <see cref="NetworkConnection"/>.</param>

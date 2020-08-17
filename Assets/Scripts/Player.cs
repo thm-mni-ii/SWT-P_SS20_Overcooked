@@ -23,9 +23,9 @@ namespace Underconnected
         /// </summary>
         public bool IsHoldingObject => this.interactor.IsHoldingObject;
         /// <summary>
-        /// The client this player belongs to.
+        /// The player connection this player belongs to.
         /// </summary>
-        public ClientConnection Client { get; private set; }
+        public PlayerConnection Client { get; private set; }
 
 
         #region Unity Callbacks
@@ -88,17 +88,17 @@ namespace Underconnected
             if (initialState)
             {
                 NetworkIdentity clientIdentity = reader.ReadNetworkIdentity();
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<ClientConnection>() : null;
+                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
             }
         }
 
 
         /// <summary>
-        /// Sets the client this player belongs to.
+        /// Sets the player client this player belongs to.
         /// Synchronizes the value with the clients.
         /// </summary>
         /// <param name="client">The owner client.</param>
-        public void SetClient(ClientConnection client)
+        public void SetClient(PlayerConnection client)
         {
             this.Client = client;
 
@@ -108,7 +108,7 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Tells the clients to set the given client as this player's owner.
+        /// Tells the clients to set the given player client as this player's owner.
         /// Sent by the server to all clients.
         /// </summary>
         /// <param name="clientIdentity">The <see cref="NetworkIdentity"/> of the client that owns this player.</param>
@@ -116,7 +116,7 @@ namespace Underconnected
         private void RpcSetClient(NetworkIdentity clientIdentity)
         {
             if (this.isClientOnly)
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<ClientConnection>() : null;
+                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
         }
     }
 }

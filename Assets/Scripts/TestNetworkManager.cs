@@ -18,26 +18,26 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Contains all clients connected to the same server.
+        /// Contains all player clients connected to the same server.
         /// </summary>
-        public List<ClientConnection> AllClients { get; private set; }
+        public List<PlayerConnection> AllClients { get; private set; }
         /// <summary>
-        /// Own client's connection to the server.
+        /// Our own client's connection to the server.
         /// </summary>
-        public ClientConnection ConnectionToServer { get; private set; }
+        public PlayerConnection ConnectionToServer { get; private set; }
 
 
         /// <summary>
-        /// Called when a new client is registered via <see cref="RegisterClient(ClientConnection)"/> and joins the game.
+        /// Called when a new client is registered via <see cref="RegisterClient(PlayerConnection)"/> and joins the game.
         /// The client already has the correct level loaded and is ready to spawn its level player.
         /// Parameters: The client that has joined the game.
         /// </summary>
-        public event UnityAction<ClientConnection> OnClientJoin;
+        public event UnityAction<PlayerConnection> OnClientJoin;
         /// <summary>
-        /// Called when a client is unregistered via <see cref="UnregisterClient(ClientConnection)"/> and leaves the game.
+        /// Called when a player client is unregistered via <see cref="UnregisterClient(PlayerConnection)"/> and leaves the game.
         /// Parameters: The client that has left the game.
         /// </summary>
-        public event UnityAction<ClientConnection> OnClientLeave;
+        public event UnityAction<PlayerConnection> OnClientLeave;
         /// <summary>
         /// Called when all clients have loaded the requested level.
         /// Will only be fired on the server.
@@ -59,7 +59,7 @@ namespace Underconnected
         {
             base.Awake();
 
-            this.AllClients = new List<ClientConnection>();
+            this.AllClients = new List<PlayerConnection>();
             this.isWaitingForClientsToLoad = false;
             this.levelOnClients = 0;
             this.OnClientsLevelReady += this.TestNetworkManager_OnClientsLevelReady;
@@ -116,28 +116,28 @@ namespace Underconnected
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
             GameObject connectionGO = GameObject.Instantiate(this.playerPrefab, this.clientsContainer);
-            ClientConnection clientConnection = connectionGO.GetComponent<ClientConnection>();
+            PlayerConnection clientConnection = connectionGO.GetComponent<PlayerConnection>();
 
             // Register server-side events for the connected client
             if (clientConnection != null)
-                clientConnection.OnLevelLoaded += this.ClientConnection_OnLevelLoaded;
+                clientConnection.OnLevelLoaded += this.PlayerConnection_OnLevelLoaded;
 
             NetworkServer.AddPlayerForConnection(conn, connectionGO);
         }
 
 
         /// <summary>
-        /// Registers a new client connection for this network manager.
-        /// Called when a new <see cref="ClientConnection"/> object is spawned.
-        /// Usually happens when a new client connects to the server.
+        /// Registers a new playerr connection for this network manager.
+        /// Called when a new <see cref="PlayerConnection"/> object is spawned.
+        /// Usually happens when a new player client connects to the server.
         /// Fires <see cref="OnClientJoin"/>.
         /// </summary>
         /// <param name="connection">The new connection to register.</param>
-        public void RegisterClient(ClientConnection connection)
+        public void RegisterClient(PlayerConnection connection)
         {
             connection.transform.SetParent(this.clientsContainer);
 
-            if (connection.IsOwnConnection)
+            if (connection.IsOwn)
                 this.ConnectionToServer = connection;
 
             if (!this.AllClients.Contains(connection))
@@ -147,13 +147,13 @@ namespace Underconnected
             }
         }
         /// <summary>
-        /// Unregisters a client connection.
-        /// Called when a <see cref="ClientConnection"/> object is destroyed.
-        /// Usually happens when a client disconnects from the server.
+        /// Unregisters a player connection.
+        /// Called when a <see cref="PlayerConnection"/> object is destroyed.
+        /// Usually happens when a player client disconnects from the server.
         /// Fires <see cref="OnClientLeave"/>.
         /// </summary>
         /// <param name="connection">The connection to unregister.</param>
-        public void UnregisterClient(ClientConnection connection)
+        public void UnregisterClient(PlayerConnection connection)
         {
             if (this.AllClients.Contains(connection))
             {
@@ -183,11 +183,11 @@ namespace Underconnected
                 this.isWaitingForClientsToLoad = true;
 
                 // Instructs all connected clients to load the new level
-                foreach (ClientConnection client in this.AllClients)
+                foreach (PlayerConnection client in this.AllClients)
                 {
                     // Skip our own local client to prevent double-loading the level
                     // The level will be loaded on the server and the local client after all remote clients have finished loading their level
-                    if (client.IsOwnConnection)
+                    if (client.IsOwn)
                         continue;
 
                     client.RequestLoadLevel(levelNum);
@@ -201,15 +201,15 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Checks if all the clients have finished loading and are ready to start the level.
+        /// Checks if all the player clients have finished loading and are ready to start the level.
         /// Fires <see cref="OnClientsLevelReady"/> when all clients are ready.
         /// </summary>
         private void CheckIfClientsReady()
         {
             if (NetworkServer.active && this.isWaitingForClientsToLoad)
             {
-                foreach (ClientConnection client in this.AllClients)
-                    if (!client.IsOwnConnection && !client.HasFinishedLoading)
+                foreach (PlayerConnection client in this.AllClients)
+                    if (!client.IsOwn && !client.HasFinishedLoading)
                         return;
 
                 this.isWaitingForClientsToLoad = false;
@@ -247,11 +247,11 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Called when a client has finished loading a level.
+        /// Called when a player client has finished loading a level.
         /// Calls <see cref="CheckIfClientsReady"/> to check if all clients are ready and the server can start the level.
         /// </summary>
         /// <param name="connection">The client that has finished loading a requested level.</param>
-        private void ClientConnection_OnLevelLoaded(ClientConnection connection) => this.CheckIfClientsReady();
+        private void PlayerConnection_OnLevelLoaded(PlayerConnection connection) => this.CheckIfClientsReady();
 
         /// <summary>
         /// Called when the client receives a <see cref="ServerStateMessage"/>.

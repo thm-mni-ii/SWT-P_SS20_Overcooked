@@ -210,12 +210,12 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Adds a player for the given client connection.
+        /// Adds a player for the given player connection.
         /// Can only be called on the server.
         /// </summary>
-        /// <param name="client">The client connection to spawn a new player for.</param>
+        /// <param name="client">The player connection to spawn a new player for.</param>
         [Server]
-        private void AddPlayer(ClientConnection client)
+        private void AddPlayer(PlayerConnection client)
         {
             foreach (Player p in this.allPlayers)
                 if (p.Client == client)
@@ -237,16 +237,16 @@ namespace Underconnected
         private void AddAllPlayers()
         {
             // Spawn players for all clients that are already connected
-            foreach (ClientConnection client in GameManager.NetworkManager.AllClients)
+            foreach (PlayerConnection client in GameManager.NetworkManager.AllClients)
                 this.AddPlayer(client);
         }
         /// <summary>
-        /// Removes and destroys the player assigned to the given connection.
+        /// Removes and destroys the player assigned to the given player connection.
         /// Can only be called on the server.
         /// </summary>
-        /// <param name="client">The client whose player to remove.</param>
+        /// <param name="client">The player client whose player to remove.</param>
         [Server]
-        private void RemovePlayer(ClientConnection client)
+        private void RemovePlayer(PlayerConnection client)
         {
             Player targetPlayer = null;
 
