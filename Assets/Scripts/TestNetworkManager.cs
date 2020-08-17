@@ -192,6 +192,10 @@ namespace Underconnected
 
                     client.RequestLoadLevel(levelNum);
                 }
+
+                // See if all the clients are already ready
+                // This is the case when we only have the local player connected, since the local player's level loading is handled by the server itself
+                this.CheckIfClientsReady();
             }
         }
 
@@ -205,7 +209,7 @@ namespace Underconnected
             if (NetworkServer.active && this.isWaitingForClientsToLoad)
             {
                 foreach (ClientConnection client in this.AllClients)
-                    if (!client.HasFinishedLoading)
+                    if (!client.IsOwnConnection && !client.HasFinishedLoading)
                         return;
 
                 this.isWaitingForClientsToLoad = false;
