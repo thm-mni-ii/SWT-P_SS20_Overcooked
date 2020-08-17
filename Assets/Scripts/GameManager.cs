@@ -95,7 +95,7 @@ namespace Underconnected
         /// <param name="levelNum">The level number to load.</param>
         public void LoadLevel(int levelNum)
         {
-            Debug.Log($"Loading level: {levelNum}");
+            Debug.Log($"Loading level #{levelNum}");
 
             if (this.currentLevel != null)
                 this.UnloadCurrentLevel();
@@ -117,6 +117,7 @@ namespace Underconnected
         {
             if (this.currentLevel != null)
             {
+                Debug.Log($"Unloading level: {this.currentLevel.gameObject.scene.name}");
                 this.currentLevel = null;
                 SceneManager.UnloadSceneAsync(this.currentLevelScene);
             }

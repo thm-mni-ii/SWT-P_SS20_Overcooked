@@ -28,6 +28,17 @@ namespace Underconnected
 
 
         /// <summary>
+        /// Called when a new client is registered via <see cref="RegisterClient(ClientConnection)"/> and joins the game.
+        /// The client already has the correct level loaded and is ready to spawn its level player.
+        /// Parameters: The client that has joined the game.
+        /// </summary>
+        public event UnityAction<ClientConnection> OnClientJoin;
+        /// <summary>
+        /// Called when a client is unregistered via <see cref="UnregisterClient(ClientConnection)"/> and leaves the game.
+        /// Parameters: The client that has left the game.
+        /// </summary>
+        public event UnityAction<ClientConnection> OnClientLeave;
+        /// <summary>
         /// Called when all clients have loaded the requested level.
         /// Will only be fired on the server.
         /// </summary>
@@ -67,7 +78,13 @@ namespace Underconnected
         {
             // Unregister server events
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Server;
-            GameManager.Instance.UnloadCurrentLevel();
+
+            if (GameManager.CurrentLevel != null)
+            {
+                // TODO: avoid calling predefined methods/messages ourself
+                GameManager.CurrentLevel.OnStopServer(); // call OnStopServer manually because the level is unloaded in the next frame and Mirror won't call OnStopServer because the server is shutdown in the current frame
+                GameManager.Instance.UnloadCurrentLevel();
+            }
         }
 
         public override void OnStartClient()
@@ -88,7 +105,11 @@ namespace Underconnected
         {
             // Unregister client events
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Client;
-            GameManager.Instance.UnloadCurrentLevel();
+
+            // Unload the level if we are not running a server.
+            // Otherwise let the server handle unloading the level (see OnStopServer).
+            if (!NetworkServer.active)
+                GameManager.Instance.UnloadCurrentLevel();
         }
 
         public override void OnServerConnect(NetworkConnection conn) => conn.Send(new ServerStateMessage(GameManager.CurrentLevelNum));
@@ -99,9 +120,7 @@ namespace Underconnected
 
             // Register server-side events for the connected client
             if (clientConnection != null)
-            {
                 clientConnection.OnLevelLoaded += this.ClientConnection_OnLevelLoaded;
-            }
 
             NetworkServer.AddPlayerForConnection(conn, connectionGO);
         }
@@ -111,6 +130,7 @@ namespace Underconnected
         /// Registers a new client connection for this network manager.
         /// Called when a new <see cref="ClientConnection"/> object is spawned.
         /// Usually happens when a new client connects to the server.
+        /// Fires <see cref="OnClientJoin"/>.
         /// </summary>
         /// <param name="connection">The new connection to register.</param>
         public void RegisterClient(ClientConnection connection)
@@ -121,17 +141,25 @@ namespace Underconnected
                 this.ConnectionToServer = connection;
 
             if (!this.AllClients.Contains(connection))
+            {
                 this.AllClients.Add(connection);
+                this.OnClientJoin?.Invoke(connection);
+            }
         }
         /// <summary>
         /// Unregisters a client connection.
         /// Called when a <see cref="ClientConnection"/> object is destroyed.
         /// Usually happens when a client disconnects from the server.
+        /// Fires <see cref="OnClientLeave"/>.
         /// </summary>
         /// <param name="connection">The connection to unregister.</param>
         public void UnregisterClient(ClientConnection connection)
         {
-            this.AllClients.Remove(connection);
+            if (this.AllClients.Contains(connection))
+            {
+                this.AllClients.Remove(connection);
+                this.OnClientLeave?.Invoke(connection);
+            }
 
             if (this.isWaitingForClientsToLoad)
                 this.CheckIfClientsReady();

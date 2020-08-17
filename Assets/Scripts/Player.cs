@@ -31,7 +31,7 @@ namespace Underconnected
         /// </summary>
         private void Update()
         {
-            if (this.isLocalPlayer)
+            if (this.hasAuthority)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                     this.interactor.Interact();

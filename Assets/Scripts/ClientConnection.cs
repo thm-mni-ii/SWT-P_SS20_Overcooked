@@ -49,6 +49,13 @@ namespace Underconnected
         private void OnDestroy() => GameManager.NetworkManager.UnregisterClient(this);
 
 
+        /// <summary>
+        /// Sets the player object for this client.
+        /// </summary>
+        /// <param name="player">The player object to assign to this client.</param>
+        public void SetPlayer(Player player) => this.Player = player;
+
+
         #region Server Side & Commands
 
         /// <summary>
