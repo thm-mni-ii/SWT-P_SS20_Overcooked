@@ -33,6 +33,10 @@ namespace Underconnected
         /// The global network manager.
         /// </summary>
         public static TestNetworkManager NetworkManager => Instance.networkManager;
+        /// <summary>
+        /// Holds the player character prefab to spawn on levels.
+        /// </summary>
+        public static GameObject PlayerPrefab => Instance.playerPrefab.gameObject;
 
 
         /// <summary>
@@ -50,6 +54,7 @@ namespace Underconnected
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
+        [SerializeField] Player playerPrefab = null; // TODO: move elsewhere (e.g. a constants/globals class?)
 
 
         /// <summary>

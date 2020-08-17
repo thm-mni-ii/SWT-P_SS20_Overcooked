@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  networkManager: {fileID: 0}
   levelBuildIndexStart: 1
-  levelFinishedUI: {fileID: 0}
+  playerPrefab: {fileID: 5674135250990863131, guid: 14c523ffd8720af42b085703c72b7bc4,
+    type: 3}

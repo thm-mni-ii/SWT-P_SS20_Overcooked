@@ -15,7 +15,6 @@ namespace Underconnected
         [SerializeField] int scorePerDelivery = 50;
         [SerializeField] int levelDurationSeconds = 180;
         [SerializeField] Matter[] demandsPool;
-        [SerializeField] Player playerPrefab;
         [SerializeField] Transform[] spawnPoints;
 
 
@@ -222,7 +221,7 @@ namespace Underconnected
                     return;
 
             Transform spawnPos = this.GetSpawnForPlayer(this.allPlayers.Count);
-            GameObject playerGO = GameObject.Instantiate(this.playerPrefab.gameObject, spawnPos.position, spawnPos.rotation, this.transform);
+            GameObject playerGO = GameObject.Instantiate(GameManager.PlayerPrefab, spawnPos.position, spawnPos.rotation, this.transform);
             Player player = playerGO.GetComponent<Player>();
 
             NetworkServer.Spawn(playerGO, client.connectionToClient);
