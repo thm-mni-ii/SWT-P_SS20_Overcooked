@@ -66,6 +66,22 @@ namespace Underconnected
 
             return false;
         }
+        /// <summary>
+        /// Returns the oldest demand for the given matter.
+        /// </summary>
+        /// <param name="matter">The matter to find a demand for.</param>
+        /// <returns>The oldest demand for <paramref name="matter"/> or `null` if none found.</returns>
+        public Demand? GetDemand(Matter matter)
+        {
+            if (matter != null)
+            {
+                foreach (Demand demand in this.currentDemands)
+                    if (demand.demandedMatter.Equals(matter))
+                        return demand;
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// Creates a UI element for demanded matter and adds the same matter to the current demand queue object.

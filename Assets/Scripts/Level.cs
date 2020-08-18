@@ -13,6 +13,9 @@ namespace Underconnected
         [Header("Settings")]
         [SerializeField] int levelDurationSeconds = 180;
         [SerializeField] float timePerDemand = 20.0F;
+        [SerializeField] int bonusScore = 10;
+        [Range(0.0F, 1.0F)]
+        [SerializeField] float bonusScoreThreshold = 0.15F;
         [SerializeField] Vector2 demandSpawnTimeMinMax = new Vector2(10.0F, 30.0F);
         [SerializeField] Matter[] demandsPool;
         [SerializeField] Transform[] spawnPoints;
@@ -87,10 +90,23 @@ namespace Underconnected
 
             if (this.isServer && matter != null)
             {
-                if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
+                DemandQueue.Demand? demand = GameManager.UI.LevelUI.DemandQueue.GetDemand(matter);
+                if (demand.HasValue)
                 {
-                    this.IncrementPlayerScore(matter.GetScoreReward());
-                    this.IncrementDeliveredScore(matter.GetScoreReward());
+                    int bonusPoints = 0;
+                    float timeLeftPercent = 0.0F;
+
+                    // Calculate bonus points if the demand has a time limit and it was delivered before the threshold
+                    if (demand.Value.uiElement.TimeLimit > 0.0F)
+                    {
+                        timeLeftPercent = Mathf.Clamp01(demand.Value.uiElement.TimeLeft / demand.Value.uiElement.TimeLimit);
+
+                        if (timeLeftPercent > this.bonusScoreThreshold)
+                            bonusPoints = Mathf.CeilToInt(timeLeftPercent * this.bonusScore);
+                    }
+
+                    this.IncrementPlayerScore(matter.GetScoreReward() + bonusPoints);
+                    this.IncrementDeliveredScore(matter.GetScoreReward() + bonusPoints);
                     GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
                     NetworkServer.Destroy(matterObject.gameObject);
                 }
