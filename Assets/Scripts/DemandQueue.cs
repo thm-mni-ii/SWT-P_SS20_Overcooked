@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
 
 namespace Underconnected
@@ -12,6 +13,14 @@ namespace Underconnected
     {
         [SerializeField] GameObject queueElementsContainer;
         [SerializeField] GameObject demandedMatterUIPrefab;
+
+
+        /// <summary>
+        /// Fired when a demand's time limit is reached and it is removed.
+        /// Parameters: The expired demand's matter.
+        /// </summary>
+        public event UnityAction<Matter> OnDemandExpired;
+
 
         /// <summary>
         /// List of matter demands
@@ -174,10 +183,15 @@ namespace Underconnected
 
         /// <summary>
         /// Called when a demand expires.
+        /// Applies a score penalty and removes the demand.
         /// Only called on the server since this event is only registered on the server side.
         /// </summary>
         /// <param name="demandedMatterUI">The element that has triggered this event.</param>
-        private void DemandedMatterUI_OnExpired_Server(DemandedMatterUI demandedMatterUI) => this.RemoveDemand(demandedMatterUI.Matter);
+        private void DemandedMatterUI_OnExpired_Server(DemandedMatterUI demandedMatterUI)
+        {
+            this.RemoveDemand(demandedMatterUI.Matter);
+            this.OnDemandExpired?.Invoke(demandedMatterUI.Matter);
+        }
 
 
         /// <summary>

@@ -73,6 +73,7 @@ namespace Underconnected
             // Setup events to create/destroy a player for each joining/leaving client automatically
             GameManager.NetworkManager.OnClientJoin += this.AddPlayer;
             GameManager.NetworkManager.OnClientLeave += this.RemovePlayer;
+            GameManager.UI.LevelUI.DemandQueue.OnDemandExpired += this.DemandQueue_OnDemandExpired_Server;
 
             // Add a player for each client to this level
             this.AddAllPlayers();
@@ -87,6 +88,7 @@ namespace Underconnected
             // Unsubscribe from events
             GameManager.NetworkManager.OnClientJoin -= this.AddPlayer;
             GameManager.NetworkManager.OnClientLeave -= this.RemovePlayer;
+            GameManager.UI.LevelUI.DemandQueue.OnDemandExpired -= this.DemandQueue_OnDemandExpired_Server;
 
             // Remove all players from this level
             this.RemoveAllPlayers();
@@ -185,7 +187,7 @@ namespace Underconnected
         public void SetPlayerScore(int newScore)
         {
             if (this.isServer)
-                this.playerScore = newScore;
+                this.playerScore = Mathf.Max(0, newScore);
         }
 
         /// <summary>
@@ -325,6 +327,17 @@ namespace Underconnected
         private void GameTimer_OnTimerFinished()
         {
             GameManager.UI.ShowLevelFinishedScreen();
+        }
+
+        /// <summary>
+        /// Called when a demand's time limit is reached.
+        /// Applies a score penalty.
+        /// </summary>
+        /// <param name="matter">The expired demand's matter.</param>
+        private void DemandQueue_OnDemandExpired_Server(Matter matter)
+        {
+            this.IncrementPlayerScore(-matter.GetScoreFailPenalty());
+            this.IncrementDeliveredScore(-matter.GetScoreFailPenalty());
         }
     }
 }
