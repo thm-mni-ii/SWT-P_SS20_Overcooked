@@ -13,7 +13,7 @@ namespace Underconnected
     {
         [Header("Settings")]
         [SerializeField] int levelDurationSeconds = 180;
-        [SerializeField] float timePerDemand = 20.0F;
+        [SerializeField] float timePerDemand = 30.0F;
         [SerializeField] int bonusScore = 10;
         [Range(0.0F, 1.0F)]
         [SerializeField] float bonusScoreThreshold = 0.15F;
