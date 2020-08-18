@@ -55,6 +55,10 @@ namespace Underconnected
         [Tooltip("The description for this matter.")]
         [TextArea]
         [SerializeField] string description;
+        [Tooltip("The score players receive when they turn in this matter.")]
+        [SerializeField] int scoreReward = 50;
+        [Tooltip("The penalty that is subtracted from the player score when the players fail to deliver this matter.")]
+        [SerializeField] int scoreFailPenalty = 25;
         [Tooltip("The prefab that belongs to this matter.")]
         [SerializeField] MatterObject prefab;
 
@@ -95,6 +99,16 @@ namespace Underconnected
         /// </summary>
         /// <returns>The description.</returns>
         public virtual string GetDescription() => this.description;
+        /// <summary>
+        /// Returns the score players receive when they turn in this matter.
+        /// </summary>
+        /// <returns>The score value.</returns>
+        public virtual int GetScoreReward() => this.scoreReward;
+        /// <summary>
+        /// Returns the penalty that is subtracted from the player score when the players fail to deliver this matter.
+        /// </summary>
+        /// <returns>The penalty value.</returns>
+        public virtual int GetScoreFailPenalty() => this.scoreFailPenalty;
         /// <summary>
         /// Returns the <see cref="MatterObject"/> prefab that should be spawned when this matter is materialized inside the game world.
         /// </summary>

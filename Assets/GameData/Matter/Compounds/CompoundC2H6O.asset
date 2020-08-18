@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 100b40a92cfd73f48a6f6ac7fb6e28c1, type: 3}
   name: Ethanol
   description: Good ol' ethanol.
+  scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: ef0661911121d074b8ea146a07d54357, type: 3}
   components:
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}

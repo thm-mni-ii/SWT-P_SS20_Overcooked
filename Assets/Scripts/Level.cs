@@ -12,8 +12,12 @@ namespace Underconnected
     public class Level : NetworkBehaviour
     {
         [Header("Settings")]
-        [SerializeField] int scorePerDelivery = 50;
         [SerializeField] int levelDurationSeconds = 180;
+        [SerializeField] float timePerDemand = 30.0F;
+        [SerializeField] int bonusScore = 10;
+        [Range(0.0F, 1.0F)]
+        [SerializeField] float bonusScoreThreshold = 0.15F;
+        [SerializeField] Vector2 demandSpawnTimeMinMax = new Vector2(10.0F, 30.0F);
         [SerializeField] Matter[] demandsPool;
         [SerializeField] Transform[] spawnPoints;
 
@@ -41,10 +45,6 @@ namespace Underconnected
         /// The coroutine that adds demands to the demands list.
         /// </summary>
         private Coroutine demandCoroutine;
-        /// <summary>
-        /// A timeout object used by <see cref="demandCoroutine"/> to wait for a certain amount of time.
-        /// </summary>
-        private WaitForSeconds demandCoroutineWait;
 
         /// <summary>
         /// Holds a list of all players inside of this level.
@@ -58,7 +58,6 @@ namespace Underconnected
             this.deliveredScore = 0;
 
             this.demandCoroutine = null;
-            this.demandCoroutineWait = new WaitForSeconds(20.0F);
 
             this.allPlayers = new List<Player>();
         }
@@ -74,6 +73,7 @@ namespace Underconnected
             // Setup events to create/destroy a player for each joining/leaving client automatically
             GameManager.NetworkManager.OnClientJoin += this.AddPlayer;
             GameManager.NetworkManager.OnClientLeave += this.RemovePlayer;
+            GameManager.UI.LevelUI.DemandQueue.OnDemandExpired += this.DemandQueue_OnDemandExpired_Server;
 
             // Add a player for each client to this level
             this.AddAllPlayers();
@@ -88,6 +88,7 @@ namespace Underconnected
             // Unsubscribe from events
             GameManager.NetworkManager.OnClientJoin -= this.AddPlayer;
             GameManager.NetworkManager.OnClientLeave -= this.RemovePlayer;
+            GameManager.UI.LevelUI.DemandQueue.OnDemandExpired -= this.DemandQueue_OnDemandExpired_Server;
 
             // Remove all players from this level
             this.RemoveAllPlayers();
@@ -120,10 +121,23 @@ namespace Underconnected
 
             if (this.isServer && matter != null)
             {
-                if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
+                DemandQueue.Demand? demand = GameManager.UI.LevelUI.DemandQueue.GetDemand(matter);
+                if (demand.HasValue)
                 {
-                    this.IncrementPlayerScore(this.scorePerDelivery);
-                    this.IncrementDeliveredScore(this.scorePerDelivery);
+                    int bonusPoints = 0;
+                    float timeLeftPercent = 0.0F;
+
+                    // Calculate bonus points if the demand has a time limit and it was delivered before the threshold
+                    if (demand.Value.uiElement.TimeLimit > 0.0F)
+                    {
+                        timeLeftPercent = Mathf.Clamp01(demand.Value.uiElement.TimeLeft / demand.Value.uiElement.TimeLimit);
+
+                        if (timeLeftPercent >= this.bonusScoreThreshold)
+                            bonusPoints = Mathf.CeilToInt(((timeLeftPercent - this.bonusScoreThreshold) / (1.0F - this.bonusScoreThreshold)) * this.bonusScore);
+                    }
+
+                    this.IncrementPlayerScore(matter.GetScoreReward() + bonusPoints);
+                    this.IncrementDeliveredScore(matter.GetScoreReward() + bonusPoints);
                     GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
                     NetworkServer.Destroy(matterObject.gameObject);
                 }
@@ -173,7 +187,7 @@ namespace Underconnected
         public void SetPlayerScore(int newScore)
         {
             if (this.isServer)
-                this.playerScore = newScore;
+                this.playerScore = Mathf.Max(0, newScore);
         }
 
         /// <summary>
@@ -202,8 +216,8 @@ namespace Underconnected
             while (true)
             {
                 // add random demand from demand pool
-                yield return this.demandCoroutineWait;
-                GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
+                yield return new WaitForSeconds(Random.Range(this.demandSpawnTimeMinMax.x, this.demandSpawnTimeMinMax.y));
+                GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)], this.timePerDemand);
             }
         }
 
@@ -313,6 +327,17 @@ namespace Underconnected
         private void GameTimer_OnTimerFinished()
         {
             GameManager.UI.ShowLevelFinishedScreen();
+        }
+
+        /// <summary>
+        /// Called when a demand's time limit is reached.
+        /// Applies a score penalty.
+        /// </summary>
+        /// <param name="matter">The expired demand's matter.</param>
+        private void DemandQueue_OnDemandExpired_Server(Matter matter)
+        {
+            this.IncrementPlayerScore(-matter.GetScoreFailPenalty());
+            this.IncrementDeliveredScore(-matter.GetScoreFailPenalty());
         }
     }
 }
