@@ -12,6 +12,8 @@ namespace Underconnected
     {
         [Header("Settings")]
         [SerializeField] int levelDurationSeconds = 180;
+        [SerializeField] float timePerDemand = 20.0F;
+        [SerializeField] Vector2 demandSpawnTimeMinMax = new Vector2(10.0F, 30.0F);
         [SerializeField] Matter[] demandsPool;
         [SerializeField] Transform[] spawnPoints;
 
@@ -37,10 +39,6 @@ namespace Underconnected
         /// The coroutine that adds demands to the demands list.
         /// </summary>
         private Coroutine demandCoroutine;
-        /// <summary>
-        /// A timeout object used by <see cref="demandCoroutine"/> to wait for a certain amount of time.
-        /// </summary>
-        private WaitForSeconds demandCoroutineWait;
 
 
         private void Awake()
@@ -48,7 +46,6 @@ namespace Underconnected
             this.playerScore = 0;
             this.deliveredScore = 0;
             this.demandCoroutine = null;
-            this.demandCoroutineWait = new WaitForSeconds(20.0F);
         }
 
         public override void OnStartServer()
@@ -142,8 +139,8 @@ namespace Underconnected
             while (true)
             {
                 // add random demand from demand pool
-                yield return this.demandCoroutineWait;
-                GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)]);
+                yield return new WaitForSeconds(Random.Range(this.demandSpawnTimeMinMax.x, this.demandSpawnTimeMinMax.y));
+                GameManager.UI.LevelUI.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)], this.timePerDemand);
             }
         }
 

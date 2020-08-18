@@ -28,13 +28,14 @@ namespace Underconnected
         /// Adds a matter to demand queue with <see cref="RpcAcceptDemand(string)"/> for server
         /// or <see cref="AcceptDemand(Matter)"/> for clients.
         /// </summary>
-        /// <param name="matter">matter to be added to demand queue</param>
-        public void AddDemand(Matter matter)
+        /// <param name="matter">The matter to be added to demand queue.</param>
+        /// <param name="timeLimit">The time limit for the demand.</param>
+        public void AddDemand(Matter matter, float timeLimit)
         {
             if (this.isServer)
-                this.RpcAcceptDemand(matter.GetID());
+                this.RpcAcceptDemand(matter.GetID(), timeLimit);
             else
-                this.AcceptDemand(matter);
+                this.AcceptDemand(matter, timeLimit);
         }
         /// <summary>
         /// Checks if given matter is currently demanded and 
@@ -72,13 +73,15 @@ namespace Underconnected
         /// <summary>
         /// Creates an UI element for demanded matter and adds the same matter to the current demand queue object.
         /// </summary>
-        /// <param name="matter">matter to be added to the demand queue UI element and object</param>
-        private void AcceptDemand(Matter matter)
+        /// <param name="matter">The matter to be added to the demand queue UI element and object.</param>
+        /// <param name="timeLimit">The time limit for the new demand.</param>
+        private void AcceptDemand(Matter matter, float timeLimit)
         {
             GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
             DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
 
             demandedMatterUI?.SetMatter(matter);
+            demandedMatterUI?.SetTimeLimit(timeLimit);
             this.currentDemands.Add(new Demand(matter, demandedMatterUI));
         }
         /// <summary>
@@ -106,12 +109,13 @@ namespace Underconnected
         /// Is only called by server.
         /// Checks if a matter with given ID exists and then calls <see cref="AcceptDemand(Matter)"/>.
         /// </summary>
-        /// <param name="matterID">id of matter to be accepted to queue</param>
-        private void RpcAcceptDemand(string matterID)
+        /// <param name="matterID">The ID of the matter to add to queue.</param>
+        /// <param name="timeLimit">The time limit for the demand.</param>
+        private void RpcAcceptDemand(string matterID, float timeLimit)
         {
             Matter targetMatter = Matter.GetByID(matterID);
             if (targetMatter != null)
-                this.AcceptDemand(targetMatter);
+                this.AcceptDemand(targetMatter, timeLimit);
             else
                 Debug.LogError($"Cannot accept nonexisting matter with id '{matterID}'.");
         }
