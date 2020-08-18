@@ -11,7 +11,6 @@ namespace Underconnected
     public class Level : NetworkBehaviour
     {
         [Header("Settings")]
-        [SerializeField] int scorePerDelivery = 50;
         [SerializeField] int levelDurationSeconds = 180;
         [SerializeField] Matter[] demandsPool;
         [SerializeField] Transform[] spawnPoints;
@@ -64,9 +63,10 @@ namespace Underconnected
             this.StopCoroutine(this.demandCoroutine);
             GameManager.UI.LevelUI.GameTimer.StopTimer();
         }
-    
+
         //comment
-        public override void OnStartClient() {
+        public override void OnStartClient()
+        {
             GameManager.UI.LevelUI.GameTimer.OnTimerFinished += this.GameTimer_OnTimerFinished;
         }
 
@@ -92,8 +92,8 @@ namespace Underconnected
             {
                 if (GameManager.UI.LevelUI.DemandQueue.HasDemand(matter))
                 {
-                    this.IncrementPlayerScore(this.scorePerDelivery);
-                    this.IncrementDeliveredScore(this.scorePerDelivery);
+                    this.IncrementPlayerScore(matter.GetScoreReward());
+                    this.IncrementDeliveredScore(matter.GetScoreReward());
                     GameManager.UI.LevelUI.DemandQueue.DeliverDemand(matter);
                     NetworkServer.Destroy(matterObject.gameObject);
                 }
@@ -128,7 +128,8 @@ namespace Underconnected
         /// Only has effect when called on the server.
         /// </summary>
         /// <param name="newScore">The new player score.</param>
-        public void SetDeliveredScore(int newScore) {
+        public void SetDeliveredScore(int newScore)
+        {
             if (this.isServer)
                 this.deliveredScore = newScore;
         }
@@ -167,14 +168,16 @@ namespace Underconnected
         /// </summary>
         /// <param name="oldValue">The previous recipes delivered score.</param>
         /// <param name="newValue">The new recipes delivered  score.</param>
-        private void DeliveredScore_OnChange(int oldValue, int newValue) {
+        private void DeliveredScore_OnChange(int oldValue, int newValue)
+        {
             GameManager.UI.LevelFinishedUI.SetDeliveredPoints(newValue);
         }
 
         /// <summary>
         /// Starts the ShowLevelFinishedScreen method of the UIManager script.
         /// </summary>
-        private void GameTimer_OnTimerFinished() {
+        private void GameTimer_OnTimerFinished()
+        {
             GameManager.UI.ShowLevelFinishedScreen();
         }
     }

@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 46c7f90acac60904bb6e4e93ab39e91f, type: 3}
   name: Ethane
   description: Ethane.
+  scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: 605f581628302de4386dcd087b7f827e, type: 3}
   components: []
   formula: C2H6

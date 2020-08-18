@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a4ac2d11f9f145b4ba8912f92558e8da, type: 3}
   name: Water
   description: It's just water
+  scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: afda75ea220321b4d97c7e7b1e6ec8cd, type: 3}
   components:
   - {fileID: 11400000, guid: 2e099c643537f1c419dc79cbb9981590, type: 2}
