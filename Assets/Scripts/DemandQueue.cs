@@ -24,40 +24,37 @@ namespace Underconnected
             this.currentDemands = new List<Demand>();
         }
 
+
         /// <summary>
-        /// Adds a matter to demand queue with <see cref="RpcAcceptDemand(string)"/> for server
-        /// or <see cref="AcceptDemand(Matter)"/> for clients.
+        /// Adds a matter to the demand queue with the given time limit and synchronizes it with the clients.
+        /// Can only be called on the server (since demand spawn is exclusively server side).
         /// </summary>
-        /// <param name="matter">The matter to be added to demand queue.</param>
+        /// <param name="matter">The matter to add to the demand queue.</param>
         /// <param name="timeLimit">The time limit for the demand.</param>
-        public void AddDemand(Matter matter, float timeLimit)
-        {
-            if (this.isServer)
-                this.RpcAcceptDemand(matter.GetID(), timeLimit);
-            else
-                this.AcceptDemand(matter, timeLimit);
-        }
+        [Server]
+        public void AddDemand(Matter matter, float timeLimit) => this.AcceptDemand(matter, timeLimit);
         /// <summary>
-        /// Checks if given matter is currently demanded and 
-        /// if so removes matter from queue with <see cref="RpcRemoveDemand(string)"/> for server
-        /// and <see cref="RemoveDemand(Matter)"/> for clients.
+        /// Removes a matter from the demand queue and synchronizes it with the clients.
+        /// Can only be called on the server.
         /// </summary>
-        /// <param name="matter"></param>
-        public void DeliverDemand(Matter matter)
+        /// <param name="matter">The matter to remove from the demand queue.</param>
+        /// <returns>Whether the demand queue contained the delivered matter and removed it.</returns>
+        [Server]
+        public bool DeliverDemand(Matter matter)
         {
             if (this.HasDemand(matter))
             {
-                if (this.isServer)
-                    this.RpcRemoveDemand(matter.GetID());
-                else
-                    this.RemoveDemand(matter);
+                this.RemoveDemand(matter);
+                return true;
             }
+
+            return false;
         }
         /// <summary>
         /// Checks if given matter is currently demanded.
         /// </summary>
-        /// <param name="matter">given matter to be checked</param>
-        /// <returns>true if given matter is demanded or false if not</returns>
+        /// <param name="matter">The matter to be checked</param>
+        /// <returns>True if given matter is demanded or false if not</returns>
         public bool HasDemand(Matter matter)
         {
             if (matter != null)
@@ -71,7 +68,8 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Creates an UI element for demanded matter and adds the same matter to the current demand queue object.
+        /// Creates a UI element for demanded matter and adds the same matter to the current demand queue object.
+        /// Synchronizes it with the clients if this is called on the server.
         /// </summary>
         /// <param name="matter">The matter to be added to the demand queue UI element and object.</param>
         /// <param name="timeLimit">The time limit for the new demand.</param>
@@ -80,64 +78,96 @@ namespace Underconnected
             GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
             DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
 
-            demandedMatterUI?.SetMatter(matter);
-            demandedMatterUI?.SetTimeLimit(timeLimit);
-            this.currentDemands.Add(new Demand(matter, demandedMatterUI));
+            if (demandedMatterUI != null)
+            {
+                demandedMatterUI.SetMatter(matter);
+                demandedMatterUI.SetTimeLimit(timeLimit);
+                this.currentDemands.Add(new Demand(matter, demandedMatterUI));
+
+                if (this.isServer)
+                {
+                    demandedMatterUI.OnExpired += this.DemandedMatterUI_OnExpired_Server;
+                    this.RpcAcceptDemand(matter.GetID(), timeLimit);
+                }
+            }
+            else
+                Debug.LogWarning("Demanded Matter UI prefab is missing!", this);
         }
         /// <summary>
-        /// Is only called after checking if given matter is currently demanded.
         /// Iterates through queue and removes first instance of given matter
-        /// from queue and UI element.
+        /// from queue and UI element. Synchronizes it with the clients if this is called on the server.
         /// </summary>
-        /// <param name="matter">matter to be removed from demand queue</param>
+        /// <param name="matter">The matter to be removed from demand queue.</param>
         private void RemoveDemand(Matter matter)
         {
             for (int i = 0; i < this.currentDemands.Count; i++)
             {
                 if (this.currentDemands[i].demandedMatter.Equals(matter))
                 {
+                    if (this.isServer)
+                    {
+                        this.currentDemands[i].uiElement.OnExpired -= this.DemandedMatterUI_OnExpired_Server;
+                        this.RpcRemoveDemand(matter.GetID());
+                    }
+
                     this.currentDemands[i].uiElement.Remove();
                     this.currentDemands.RemoveAt(i);
+
                     break;
                 }
             }
         }
 
 
-        [ClientRpc]
         /// <summary>
         /// Is only called by server.
         /// Checks if a matter with given ID exists and then calls <see cref="AcceptDemand(Matter)"/>.
         /// </summary>
         /// <param name="matterID">The ID of the matter to add to queue.</param>
         /// <param name="timeLimit">The time limit for the demand.</param>
+        [ClientRpc]
         private void RpcAcceptDemand(string matterID, float timeLimit)
         {
-            Matter targetMatter = Matter.GetByID(matterID);
-            if (targetMatter != null)
-                this.AcceptDemand(targetMatter, timeLimit);
-            else
-                Debug.LogError($"Cannot accept nonexisting matter with id '{matterID}'.");
+            if (this.isClientOnly)
+            {
+                Matter targetMatter = Matter.GetByID(matterID);
+                if (targetMatter != null)
+                    this.AcceptDemand(targetMatter, timeLimit);
+                else
+                    Debug.LogError($"Cannot accept nonexisting matter with id '{matterID}'.");
+            }
         }
-        [ClientRpc]
         /// <summary>
         /// Is only called by server and after checking if given matter is currently demanded.
         /// Checks if a matter with given ID exists and then calls <see cref="RemoveDemand(Matter)"/>.
         /// </summary>
         /// <param name="matterID">id of matter to be removed from queue</param>
+        [ClientRpc]
         private void RpcRemoveDemand(string matterID)
         {
-            Matter targetMatter = Matter.GetByID(matterID);
-            if (targetMatter != null)
-                this.RemoveDemand(targetMatter);
-            else
-                Debug.LogError($"Cannot remove nonexisting matter with id '{matterID}'.");
+            if (this.isClientOnly)
+            {
+                Matter targetMatter = Matter.GetByID(matterID);
+                if (targetMatter != null)
+                    this.RemoveDemand(targetMatter);
+                else
+                    Debug.LogError($"Cannot remove nonexisting matter with id '{matterID}'.");
+            }
         }
+
+
+        /// <summary>
+        /// Called when a demand expires.
+        /// Only called on the server since this event is only registered on the server side.
+        /// </summary>
+        /// <param name="demandedMatterUI">The element that has triggered this event.</param>
+        private void DemandedMatterUI_OnExpired_Server(DemandedMatterUI demandedMatterUI) => this.RemoveDemand(demandedMatterUI.Matter);
 
 
         /// <summary>
         /// A Demand struct which contains the demanded matter and its uiElement.
         /// </summary>
+        [System.Serializable]
         public struct Demand
         {
             /// <summary>
