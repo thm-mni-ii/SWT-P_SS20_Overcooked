@@ -57,7 +57,7 @@ namespace Underconnected
         /// </summary>
         private void Update()
         {
-            if (this.isLocalPlayer)
+            if (this.hasAuthority)
             {
                 this.movementInput.x = Input.GetAxisRaw("Horizontal");
                 this.movementInput.y = 0;
@@ -73,7 +73,7 @@ namespace Underconnected
         /// </summary>
         private void FixedUpdate()
         {
-            if (this.isLocalPlayer)
+            if (this.hasAuthority)
             {
                 Vector3 currentRotation = this.rigidBody.rotation.eulerAngles;
                 float yawDelta = this.targetYaw - currentRotation.y;
