@@ -101,8 +101,8 @@ namespace Underconnected
                     {
                         timeLeftPercent = Mathf.Clamp01(demand.Value.uiElement.TimeLeft / demand.Value.uiElement.TimeLimit);
 
-                        if (timeLeftPercent > this.bonusScoreThreshold)
-                            bonusPoints = Mathf.CeilToInt(timeLeftPercent * this.bonusScore);
+                        if (timeLeftPercent >= this.bonusScoreThreshold)
+                            bonusPoints = Mathf.CeilToInt(((timeLeftPercent - this.bonusScoreThreshold) / (1.0F - this.bonusScoreThreshold)) * this.bonusScore);
                     }
 
                     this.IncrementPlayerScore(matter.GetScoreReward() + bonusPoints);
