@@ -58,7 +58,7 @@ namespace Underconnected
             {
                 this.TimeLeft = Mathf.Max(this.TimeLeft - Time.deltaTime, 0.0F);
                 if (this.TimeLeft <= 0.0F)
-                    this.OnExpired.Invoke(this);
+                    this.OnExpired?.Invoke(this);
             }
 
             if (this.TimeLimit > 0.0F)
