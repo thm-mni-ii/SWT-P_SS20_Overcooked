@@ -17,6 +17,8 @@ namespace Underconnected
         [SerializeField] LevelUI levelUI;
         [Tooltip("A reference to the level finished UI.")]
         [SerializeField] LevelFinishedUI levelFinishedUI;
+        [Tooltip("A reference to the player controls UI.")]
+        [SerializeField] PlayerControlsUI playerControlsUI;
 
         /// <summary>
         /// A reference to the UI canvas.
@@ -30,6 +32,10 @@ namespace Underconnected
         /// A reference to the level finished UI.
         /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
+        /// <summary>
+        /// A reference to the player controls UI.
+        /// </summary>
+        public PlayerControlsUI PlayerControlsUI => this.playerControlsUI;
 
         /// <summary>
         /// Shows up the level finished screen, when the timer is finished.

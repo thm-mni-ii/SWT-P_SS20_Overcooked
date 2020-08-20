@@ -76,7 +76,6 @@ namespace Underconnected
         /// <param name="score">The amount of stars.</param>
         public void SetStars(int score)
         {
-            int numOfStars = 0;
             if (score >= 100) { //placeholder points
                 stars[0].sprite = filledStar;
                 if (score >= 200) {
@@ -95,7 +94,6 @@ namespace Underconnected
         {
             this.gameObject.SetActive(false);
         }
-
 
         /// <summary>
         /// Hides this screen and load the next level.
