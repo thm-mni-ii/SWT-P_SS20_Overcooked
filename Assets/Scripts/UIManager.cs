@@ -39,13 +39,22 @@ namespace Underconnected
         /// </summary>
         public void HideAllUI()
         {
-            this.LevelUI.gameObject.SetActive(false);
+            this.HideLevelUI();
             this.LevelFinishedUI.gameObject.SetActive(false);
         }
 
 
         /// <summary>
-        /// Shows up the level finished screen, when the timer is finished.
+        /// Shows the level UI.
+        /// </summary>
+        public void ShowLevelUI() => this.levelUI.gameObject.SetActive(true);
+        /// <summary>
+        /// Hides the level UI.
+        /// </summary>
+        public void HideLevelUI() => this.levelUI.gameObject.SetActive(false);
+
+        /// <summary>
+        /// Shows the level finished screen.
         /// </summary>
         public void ShowLevelFinishedScreen()
         {

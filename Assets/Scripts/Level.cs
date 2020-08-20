@@ -12,7 +12,6 @@ namespace Underconnected
     public class Level : NetworkBehaviour
     {
         [Header("Settings")]
-        [SerializeField] int levelDurationSeconds = 180;
         [SerializeField] float timePerDemand = 30.0F;
         [SerializeField] int bonusScore = 10;
         [Range(0.0F, 1.0F)]
@@ -20,6 +19,9 @@ namespace Underconnected
         [SerializeField] Vector2 demandSpawnTimeMinMax = new Vector2(10.0F, 30.0F);
         [SerializeField] Matter[] demandsPool;
         [SerializeField] Transform[] spawnPoints;
+
+        [Header("References")]
+        [SerializeField] GameTimer timer;
 
 
         /// <summary>
@@ -31,13 +33,25 @@ namespace Underconnected
         /// </summary>
         public ReadOnlyCollection<Player> AllPlayers => this.allPlayers.AsReadOnly();
 
+        /// <summary>
+        /// Holds the timer for this level.
+        /// Can be `null` if this level does not have a timer.
+        /// </summary>
+        public GameTimer Timer => this.timer;
+        /// <summary>
+        /// Tells whether this level has a <see cref="GameTimer"/> by checking if <see cref="Timer"/> is `null`.
+        /// </summary>
+        public bool HasTimer => this.Timer != null;
+
 
         /// <summary>
         /// The score the players currently have.
+        /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
         /// </summary>
         [SyncVar(hook = nameof(PlayerScore_OnChange))] int playerScore;
         /// <summary>
         /// The current score that the players make with correctly delivered recipes.
+        /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
         /// </summary>
         [SyncVar(hook = nameof(DeliveredScore_OnChange))] int deliveredScore;
 
@@ -65,8 +79,8 @@ namespace Underconnected
         public override void OnStartServer()
         {
             // Setup UI and coroutines
-            GameManager.UI.LevelUI.GameTimer.SetTime(levelDurationSeconds);
-            GameManager.UI.LevelUI.GameTimer.StartTimer();
+            if (this.HasTimer)
+                this.Timer.StartTimer();
 
             this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
 
@@ -81,7 +95,8 @@ namespace Underconnected
         public override void OnStopServer()
         {
             // Stop game timer and coroutines
-            GameManager.UI.LevelUI.GameTimer.StopTimer();
+            if (this.HasTimer)
+                this.Timer.StopTimer();
 
             this.StopCoroutine(this.demandCoroutine);
 
@@ -96,8 +111,13 @@ namespace Underconnected
 
         public override void OnStartClient()
         {
-            // TODO: unsubscribe eventually?
-            GameManager.UI.LevelUI.GameTimer.OnTimerFinished += this.GameTimer_OnTimerFinished;
+            if (this.HasTimer)
+                this.Timer.OnTimerFinished += this.GameTimer_OnTimerFinished;
+        }
+        public override void OnStopClient()
+        {
+            if (this.HasTimer)
+                this.Timer.OnTimerFinished -= this.GameTimer_OnTimerFinished;
         }
 
 

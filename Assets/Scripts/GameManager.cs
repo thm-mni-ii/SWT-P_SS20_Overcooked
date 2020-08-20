@@ -77,6 +77,7 @@ namespace Underconnected
                 SceneManager.sceneLoaded += this.SceneManager_SceneLoaded;
 
                 this.uiManager.HideAllUI();
+                this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary
 
                 // TODO: Load player data
                 // TODO: Check startup parameters & connect to given server or show main menu

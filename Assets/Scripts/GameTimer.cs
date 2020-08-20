@@ -12,40 +12,38 @@ namespace Underconnected
     /// </summary>
     public class GameTimer : NetworkBehaviour
     {
-        [Header("References")]
-        [SerializeField] TMP_Text timerText;
-
         [Header("Settings")]
+        [SerializeField] int levelDurationSeconds = 180;
         [SerializeField] int syncAfterSeconds = 30;
-        
+
 
         public event UnityAction OnTimerFinished;
+
 
         /// <summary>
         /// Represents the current timer value.
         /// </summary>
-        private float timerValue;
+        public float SecondsLeft { get; private set; }
         /// <summary>
         /// Depends on status of timer.
         /// </summary>
-        private bool isTimerRunning;
+        public bool IsTimerRunning { get; private set; }
 
 
         private void Awake()
         {
             this.StopTimer();
+            this.SetTime(this.levelDurationSeconds);
         }
-        private void Update()
-        {
-            this.TickTimer(Time.deltaTime);
-        }
+        private void Update() => this.TickTimer(Time.deltaTime);
+
 
         /// <summary>
         /// Starts a new timer if no timer is currently running or stops the running timer when there is one.
         /// </summary>
         public void Toggle()
         {
-            if (this.isTimerRunning)
+            if (this.IsTimerRunning)
                 this.StopTimer();
             else
                 this.StartTimer();
@@ -56,10 +54,10 @@ namespace Underconnected
         /// </summary>
         public void StartTimer()
         {
-            this.isTimerRunning = true;
+            this.IsTimerRunning = true;
 
             if (this.isServer)
-                this.RpcToggleTimer(this.isTimerRunning, this.timerValue);
+                this.RpcToggleTimer(this.IsTimerRunning, this.SecondsLeft);
         }
 
         /// <summary>
@@ -67,10 +65,10 @@ namespace Underconnected
         /// </summary>
         public void StopTimer()
         {
-            this.isTimerRunning = false;
+            this.IsTimerRunning = false;
 
             if (this.isServer)
-                this.RpcToggleTimer(this.isTimerRunning, this.timerValue);
+                this.RpcToggleTimer(this.IsTimerRunning, this.SecondsLeft);
         }
 
         /// <summary>
@@ -79,11 +77,10 @@ namespace Underconnected
         /// <param name="seconds">value of timer in seconds</param>
         public void SetTime(float seconds)
         {
-            this.timerValue = seconds;
-            this.UpdateTimerText();
+            this.SecondsLeft = seconds;
 
             if (this.isServer)
-                this.RpcSetTime(this.timerValue);
+                this.RpcSetTime(this.SecondsLeft);
         }
 
         /// <summary>
@@ -93,30 +90,17 @@ namespace Underconnected
         /// <param name="deltaTime">time difference between update calls</param>
         private void TickTimer(float deltaTime)
         {
-            if (this.isTimerRunning && this.timerValue > 0.0F)
+            if (this.IsTimerRunning && this.SecondsLeft > 0.0F)
             {
-                this.timerValue = Mathf.Max(0.0F, this.timerValue - Time.deltaTime);
-                this.UpdateTimerText();
+                this.SecondsLeft = Mathf.Max(0.0F, this.SecondsLeft - Time.deltaTime);
 
-                if (this.isServer && ((int)this.timerValue) % this.syncAfterSeconds == 0 && ((int)this.timerValue != (int)(this.timerValue + Time.deltaTime)))
-                    this.RpcTickCheckpoint(this.timerValue);
+                if (this.isServer && ((int)this.SecondsLeft) % this.syncAfterSeconds == 0 && ((int)this.SecondsLeft != (int)(this.SecondsLeft + Time.deltaTime)))
+                    this.RpcTickCheckpoint(this.SecondsLeft);
 
-                if (this.timerValue == 0) this.OnTimerFinished?.Invoke();
+                if (this.SecondsLeft == 0) this.OnTimerFinished?.Invoke();
             }
         }
-        /// <summary>
-        /// Rounds timerValue and converts it to 00:00 format.
-        /// </summary>
-        private void UpdateTimerText()
-        {
-            int roundedSeconds = (int)Mathf.Ceil(this.timerValue);
 
-            if (roundedSeconds >= 60)
-                this.timerText.text = $"<b>{(roundedSeconds / 60):#0}:{(roundedSeconds % 60):00}</b>";
-            else
-                this.timerText.text = $"<b>{roundedSeconds}</b>";
-        }
-        
         #region Network Code
 
         #region Serialize/Deserialize
@@ -126,8 +110,8 @@ namespace Underconnected
 
             if (initialState)
             {
-                writer.WriteDouble(this.timerValue);
-                writer.WriteBoolean(this.isTimerRunning);
+                writer.WriteDouble(this.SecondsLeft);
+                writer.WriteBoolean(this.IsTimerRunning);
                 dataWritten = true;
             }
 
@@ -185,7 +169,7 @@ namespace Underconnected
         /// <param name="timeOnServer">current timerValue on server</param>
         private void RpcTickCheckpoint(float timeOnServer)
         {
-            if (this.isClientOnly && timeOnServer < this.timerValue)
+            if (this.isClientOnly && timeOnServer < this.SecondsLeft)
                 this.SetTime(timeOnServer);
         }
         #endregion
