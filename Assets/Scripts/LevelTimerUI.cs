@@ -6,9 +6,9 @@ using TMPro;
 namespace Underconnected
 {
     /// <summary>
-    /// Represents the game timer UI element displaying the time left before the level is over.
+    /// Represents the level timer UI element displaying the time left before the level is over.
     /// </summary>
-    public class GameTimerUI : MonoBehaviour
+    public class LevelTimerUI : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] TMP_Text timerText;
@@ -38,10 +38,10 @@ namespace Underconnected
 
 
         /// <summary>
-        /// Converts the given seconds to 00:00 format and displays them on the game timer UI.
-        /// Checks whether the given seconds value is already displayed and updates the game timer UI's text if not.
+        /// Converts the given seconds to 00:00 format and displays them on the level timer UI.
+        /// Checks whether the given seconds value is already displayed and updates the level timer UI's text if not.
         /// </summary>
-        /// <param name="seconds">The seconds value to display on the game timer UI. Negative values will be treated as `0`.</param>
+        /// <param name="seconds">The seconds value to display on the level timer UI. Negative values will be treated as `0`.</param>
         private void UpdateTimerValue(int seconds)
         {
             seconds = Mathf.Max(0, seconds);

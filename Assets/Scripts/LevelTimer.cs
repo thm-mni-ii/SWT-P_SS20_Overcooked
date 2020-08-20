@@ -10,7 +10,7 @@ namespace Underconnected
     /// <summary>
     /// Manages all functions concerning timer and interaction between server and client timer
     /// </summary>
-    public class GameTimer : NetworkBehaviour
+    public class LevelTimer : NetworkBehaviour
     {
         [Header("Settings")]
         [SerializeField] int levelDurationSeconds = 180;

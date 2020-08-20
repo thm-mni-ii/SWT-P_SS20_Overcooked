@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ada50875ee2d744c963d4672de79242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTimer: {fileID: 4013463727838131975}
+  levelTimer: {fileID: 4013463727838131975}
   gameDemandQueue: {fileID: 3891202723852096433}
   scoreDisplay: {fileID: 6520070933232970076}
 --- !u!1001 &2094932934336989564
@@ -74,7 +74,7 @@ PrefabInstance:
     - target: {fileID: 3103796139842134028, guid: 03e0add560341584ebbff6ab526c1307,
         type: 3}
       propertyPath: m_Name
-      value: GameTimerUI
+      value: LevelTimerUI
       objectReference: {fileID: 0}
     - target: {fileID: 3103796139842134031, guid: 03e0add560341584ebbff6ab526c1307,
         type: 3}
@@ -221,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 1607165232844208622, guid: 441117d815c945e48a40404e0bce9d8c,
         type: 3}
       propertyPath: m_Name
-      value: DemandQueue
+      value: DemandQueueUI
       objectReference: {fileID: 0}
     - target: {fileID: 1607165232844208623, guid: 441117d815c945e48a40404e0bce9d8c,
         type: 3}

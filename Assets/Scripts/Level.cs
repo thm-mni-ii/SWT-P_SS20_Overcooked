@@ -21,7 +21,7 @@ namespace Underconnected
         [SerializeField] Transform[] spawnPoints;
 
         [Header("References")]
-        [SerializeField] GameTimer timer;
+        [SerializeField] LevelTimer timer;
 
 
         /// <summary>
@@ -37,9 +37,9 @@ namespace Underconnected
         /// Holds the timer for this level.
         /// Can be `null` if this level does not have a timer.
         /// </summary>
-        public GameTimer Timer => this.timer;
+        public LevelTimer Timer => this.timer;
         /// <summary>
-        /// Tells whether this level has a <see cref="GameTimer"/> by checking if <see cref="Timer"/> is `null`.
+        /// Tells whether this level has a <see cref="LevelTimer"/> by checking if <see cref="Timer"/> is `null`.
         /// </summary>
         public bool HasTimer => this.Timer != null;
 
@@ -94,7 +94,7 @@ namespace Underconnected
         }
         public override void OnStopServer()
         {
-            // Stop game timer and coroutines
+            // Stop level timer and coroutines
             if (this.HasTimer)
                 this.Timer.StopTimer();
 
@@ -112,12 +112,12 @@ namespace Underconnected
         public override void OnStartClient()
         {
             if (this.HasTimer)
-                this.Timer.OnTimerFinished += this.GameTimer_OnTimerFinished;
+                this.Timer.OnTimerFinished += this.Timer_OnTimerFinished;
         }
         public override void OnStopClient()
         {
             if (this.HasTimer)
-                this.Timer.OnTimerFinished -= this.GameTimer_OnTimerFinished;
+                this.Timer.OnTimerFinished -= this.Timer_OnTimerFinished;
         }
 
 
@@ -344,7 +344,7 @@ namespace Underconnected
         /// <summary>
         /// Starts the ShowLevelFinishedScreen method of the UIManager script.
         /// </summary>
-        private void GameTimer_OnTimerFinished()
+        private void Timer_OnTimerFinished()
         {
             GameManager.UI.ShowLevelFinishedScreen();
         }
