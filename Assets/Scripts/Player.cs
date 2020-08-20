@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.InputSystem;
 
 namespace Underconnected
+
 {
     /// <summary>
     /// Will check if local player presses the 'E' key and if so calls Interact.
@@ -11,7 +13,6 @@ namespace Underconnected
     public class Player : NetworkBehaviour
     {
         [SerializeField] Interactor interactor;
-        [SerializeField] PlayerControls controls;
 
         /// <summary>
         /// the held object of local player
@@ -28,7 +29,7 @@ namespace Underconnected
         /// <summary>
         /// Will check if local player presses the 'E' key and if so calls <see cref="Interactor.Interact"/>.
         /// </summary>
-        private void Update()
+        /*private void Update()
         {
             if (this.isLocalPlayer)
             {
@@ -38,7 +39,21 @@ namespace Underconnected
                         this.interactor.Interact();
                 }
             }
+        }*/
+        /// <summary>
+        /// 
+        /// </summary>
+         private void OnInteraction(){
+            Debug.Log("OnInteraction wird aufgerufen");
+            this.interactor.Interact();
         }
+
+        /*private void OnInteract(InputValue value){
+            Debug.Log("Wird ausgeführt");
+            //this.interactor.Interact();
+        }*/
+     
         #endregion
     }
+    
 }

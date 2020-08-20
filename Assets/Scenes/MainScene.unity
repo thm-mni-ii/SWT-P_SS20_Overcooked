@@ -1117,18 +1117,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7057956862444385130}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7057956862444385133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7057956862444385132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa2ec38715abd2a4293f06dc200b9b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7057956862444385134 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5791843578000371481, guid: 7189eaea369d4a741a0cc843f990dc37,
@@ -1175,7 +1163,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerControlsUI
       value: 
-      objectReference: {fileID: 7057956862444385133}
+      objectReference: {fileID: 0}
     - target: {fileID: 3122552230866220988, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}
       propertyPath: m_Material

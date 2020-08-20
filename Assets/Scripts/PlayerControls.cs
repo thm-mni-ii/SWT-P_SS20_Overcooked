@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.InputSystem;
 
 namespace Underconnected
 {
     /// <summary>
     /// Allows the player to move the game object this component is on.
     /// </summary>
+    
     public class PlayerControls : NetworkBehaviour
     {
+        
+        [SerializeField] Interactor interactor;
         [SerializeField] Rigidbody rigidBody;
         [SerializeField] MeshRenderer playerModelRenderer;
         [SerializeField] float moveSpeed = 100.0F;
         [SerializeField] float rotationSpeed = 500.0F;
-
-
+        private Vector3 inputDirection;
+        
         /// <summary>
         /// Stores the input from <see cref="Update"/> here to move the player inside of <see cref="FixedUpdate"/>.
         /// </summary>
@@ -31,21 +35,30 @@ namespace Underconnected
         /// </summary>
         [SyncVar(hook = nameof(UpdatePlayerColor))]
         private Color playerColor;
-
-
-        private void Awake()
+      
+        public void Awake()
         {
             this.movementInput = Vector3.zero;
-        }
+            this.targetYaw = this.transform.rotation.eulerAngles.y;            
 
-        private void Start()
-        {
-            this.targetYaw = this.transform.rotation.eulerAngles.y;
         }
         public override void OnStartServer()
         {
             this.playerColor = Random.ColorHSV();
         }
+
+        private void OnMovement(InputValue value){
+            
+            Debug.Log("OnMovement wird aufgerufen!");
+            Vector2 tmpInput = value.Get<Vector2>();
+            movementInput.x = tmpInput.x;
+            movementInput.z = tmpInput.y;
+
+            if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
+                    this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
+
+        }
+
         public override void OnStartClient()
         {
             //this.rigidBody.isKinematic = !this.hasAuthority;
@@ -55,9 +68,10 @@ namespace Underconnected
         /// Listens for player input and stores it to move the player inside of <see cref="FixedUpdate"/>.
         /// Called every frame.
         /// </summary>
+        /*
         private void Update()
         {
-            /*if (this.isLocalPlayer)
+            if (this.isLocalPlayer)
             {
                 this.movementInput.x = Input.GetAxisRaw("Horizontal");
                 this.movementInput.y = 0;
@@ -65,24 +79,11 @@ namespace Underconnected
 
                 if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
-            }*/
-            if(Input.GetKey(GameManager.Instance.forward))
-                transform.position += Vector3.forward/2;
-            
-            if(Input.GetKey(GameManager.Instance.left))
-                transform.position += Vector3.left/2;
-
-            if(Input.GetKey(GameManager.Instance.right))
-                transform.position += Vector3.right/2;
-
-            if(Input.GetKey(GameManager.Instance.backward))
-                transform.position += -Vector3.forward/2;
-
-            if(Input.GetKey(GameManager.Instance.action)){
-                
             }
+            
 
         }
+        */
         /// <summary>
         /// Moves the player with the input values previously recorded inside of <see cref="Update"/>.
         /// The player needs to be moved here because Unity's physics system expects rigidbodies to move inside of FixedUpdate instead of regular Update.
