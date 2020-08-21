@@ -45,5 +45,11 @@ namespace Underconnected
             LevelFinishedUI.gameObject.SetActive(true);
             LevelUI.gameObject.SetActive(false);
         }
+        /// <summary>
+        /// Shows up the control settings screen, when the ESC is pressed.
+        /// </summary>
+        /*public void ShowControlSettings() {
+                    if (Input.GetKeyDown(KeyCode.Escape)) PlayerControlsUI.gameObject.SetActive(true);
+        }*/
     }
 }
