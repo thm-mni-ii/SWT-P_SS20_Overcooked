@@ -91,6 +91,7 @@ namespace Underconnected
 
                 if (showRequiredComponents && matter is MatterCompound)
                 {
+                    this.ClearRequiredComponents();
                     this.requiredMatterContainer.SetActive(true);
 
                     foreach (Matter component in ((MatterCompound)matter).Components)
@@ -113,5 +114,15 @@ namespace Underconnected
         /// Destroys this UI element.
         /// </summary>
         public void Remove() => GameObject.Destroy(this.gameObject);
+
+
+        /// <summary>
+        /// Removes all UI elements for required components.
+        /// </summary>
+        private void ClearRequiredComponents()
+        {
+            for (int i = this.requiredMatterContainer.transform.childCount - 1; i >= 0; i--)
+                GameObject.Destroy(this.requiredMatterContainer.transform.GetChild(i).gameObject);
+        }
     }
 }
