@@ -198,16 +198,16 @@ namespace Underconnected
 
             if (this.isServer && matter != null)
             {
-                Demand demand = this.DemandQueue.GetDemand(matter);
-                if (this.DemandQueue.DeliverMatter(matter))
+                Demand deliveredDemand = this.DemandQueue.Deliver(matter);
+                if (deliveredDemand != null)
                 {
                     int bonusPoints = 0;
                     float timeLeftPercent = 0.0F;
 
                     // Calculate bonus points if the demand has a time limit and it was delivered before the threshold
-                    if (demand.HasTimeLimit)
+                    if (deliveredDemand.HasTimeLimit)
                     {
-                        timeLeftPercent = Mathf.Clamp01(demand.TimeLeft / demand.TimeLimit);
+                        timeLeftPercent = Mathf.Clamp01(deliveredDemand.TimeLeft / deliveredDemand.TimeLimit);
 
                         if (timeLeftPercent >= this.bonusScoreThreshold)
                             bonusPoints = Mathf.CeilToInt(((timeLeftPercent - this.bonusScoreThreshold) / (1.0F - this.bonusScoreThreshold)) * this.bonusScore);

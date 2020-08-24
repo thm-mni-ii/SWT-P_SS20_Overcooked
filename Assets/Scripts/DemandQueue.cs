@@ -38,7 +38,7 @@ namespace Underconnected
         /// A dictionary containing all the current demands.
         /// The key is the demand's ID, the value is the <see cref="Demand"/> object itself.
         /// </summary>
-        private Dictionary<int, Demand> currentDemands;
+        private SortedDictionary<int, Demand> currentDemands;
         /// <summary>
         /// Holds the demands that are flagged for removal.
         /// This is needed because demands can only detect whether they have expired when <see cref="Update"/> iterates through them and calls their <see cref="Demand.Update(float)"/> method.
@@ -51,7 +51,7 @@ namespace Underconnected
         private void Awake()
         {
             this.nextDemandID = 0;
-            this.currentDemands = new Dictionary<int, Demand>();
+            this.currentDemands = new SortedDictionary<int, Demand>();
             this.demandsToRemove = new List<Demand>();
         }
         private void Update()
@@ -65,7 +65,7 @@ namespace Underconnected
             }
 
             // Then iterate over the still existing demands and update them, potentially flagging more demands for removal (when their OnExpired event is fired)
-            Dictionary<int, Demand>.Enumerator enumerator = this.currentDemands.GetEnumerator();
+            var enumerator = this.currentDemands.GetEnumerator();
             while (enumerator.MoveNext())
                 enumerator.Current.Value.Update(Time.deltaTime);
         }
@@ -91,9 +91,9 @@ namespace Underconnected
         /// Can only be called on the server.
         /// </summary>
         /// <param name="matter">The matter to deliver.</param>
-        /// <returns>Whether the demand queue contained the delivered matter and removed it.</returns>
+        /// <returns>The demand that has been delivered or `null` if none matched.</returns>
         [Server]
-        public bool DeliverMatter(Matter matter)
+        public Demand Deliver(Matter matter)
         {
             Demand demand = this.GetDemand(matter);
 
@@ -101,10 +101,10 @@ namespace Underconnected
             {
                 demand.SetDelivered();
                 this.RemoveDemand(demand);
-                return true;
+                return demand;
             }
 
-            return false;
+            return null;
         }
         /// <summary>
         /// Returns the oldest demand for the given matter.
@@ -115,7 +115,7 @@ namespace Underconnected
         {
             if (matter != null)
             {
-                Dictionary<int, Demand>.Enumerator enumerator = this.currentDemands.GetEnumerator();
+                var enumerator = this.currentDemands.GetEnumerator();
 
                 while (enumerator.MoveNext())
                     if (enumerator.Current.Value.Matter.Equals(matter) && !this.demandsToRemove.Contains(enumerator.Current.Value))
