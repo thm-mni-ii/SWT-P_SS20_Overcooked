@@ -25,7 +25,6 @@ namespace Underconnected
         /// <param name="demand">The demand to add a UI element for.</param>
         public void AddDemand(Demand demand)
         {
-            Debug.Log($"Added demand: {demand.Matter.GetFullName()}");
             if (!this.demandUIElements.ContainsKey(demand.ID))
             {
                 GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
@@ -49,7 +48,6 @@ namespace Underconnected
         public void RemoveDemand(Demand demand)
         {
             DemandedMatterUI uiElement;
-            Debug.Log($"Removed demand: {demand.Matter.GetFullName()}");
 
             if (this.demandUIElements.TryGetValue(demand.ID, out uiElement))
             {
@@ -63,8 +61,6 @@ namespace Underconnected
         /// </summary>
         public void Clear()
         {
-            Debug.Log("Clear called");
-
             Dictionary<int, DemandedMatterUI>.Enumerator enumerator = this.demandUIElements.GetEnumerator();
             while (enumerator.MoveNext())
                 enumerator.Current.Value.Remove();
