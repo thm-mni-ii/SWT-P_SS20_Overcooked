@@ -9,17 +9,19 @@ namespace Underconnected
     /// </summary>
     public class LevelUI : MonoBehaviour
     {
-        [SerializeField] GameTimer gameTimer = null;
-        [SerializeField] DemandQueue gameDemandQueue = null;
+        [SerializeField] LevelTimerUI levelTimer = null;
+        [SerializeField] DemandQueueUI demandQueue = null;
         [SerializeField] ScoreDisplay scoreDisplay = null;
+
+
         /// <summary>
-        /// gametimer of level
+        /// The level timer UI element.
         /// </summary>
-        public GameTimer GameTimer => this.gameTimer;
+        public LevelTimerUI LevelTimer => this.levelTimer;
         /// <summary>
-        /// Queue of incoming matter demands
+        /// The demand queue UI element.
         /// </summary>
-        public DemandQueue DemandQueue => this.gameDemandQueue;
+        public DemandQueueUI DemandQueue => this.demandQueue;
         /// <summary>
         /// A display for score
         /// </summary>

@@ -11,26 +11,63 @@ namespace Underconnected
     /// </summary>
     public class DemandQueue : NetworkBehaviour
     {
-        [SerializeField] GameObject queueElementsContainer;
-        [SerializeField] GameObject demandedMatterUIPrefab;
+        /// <summary>
+        /// Fired when a demand is added to this queue.
+        /// Parameters: The demand that has been added.
+        /// </summary>
+        public event UnityAction<Demand> OnDemandAdded;
+        /// <summary>
+        /// Fired when a demand is removed from this queue.
+        /// Parameters: The demand that has been removed.
+        /// </summary>
+        public event UnityAction<Demand> OnDemandRemoved;
+        /// <summary>
+        /// Fired when a demand's time limit is reached and it will be removed.
+        /// <see cref="OnDemandRemoved"/> will be fired after this event.
+        /// Parameters: The expired demand.
+        /// </summary>
+        public event UnityAction<Demand> OnDemandExpired;
 
 
         /// <summary>
-        /// Fired when a demand's time limit is reached and it is removed.
-        /// Parameters: The expired demand's matter.
+        /// Holds the ID for the next demand that will spawn.
+        /// Is only used by the server to make sure that each demand that is spawned has a unique ID.
         /// </summary>
-        public event UnityAction<Matter> OnDemandExpired;
-
-
+        private int nextDemandID;
         /// <summary>
-        /// List of matter demands
+        /// A dictionary containing all the current demands.
+        /// The key is the demand's ID, the value is the <see cref="Demand"/> object itself.
         /// </summary>
-        private List<Demand> currentDemands;
+        private SortedDictionary<int, Demand> currentDemands;
+        /// <summary>
+        /// Holds the demands that are flagged for removal.
+        /// This is needed because demands can only detect whether they have expired when <see cref="Update"/> iterates through them and calls their <see cref="Demand.Update(float)"/> method.
+        /// Expired demands should be removed but we can't do that while iterating through them.
+        /// This is why we store them here first and then remove them in the next frame.
+        /// </summary>
+        private List<Demand> demandsToRemove;
 
 
         private void Awake()
         {
-            this.currentDemands = new List<Demand>();
+            this.nextDemandID = 0;
+            this.currentDemands = new SortedDictionary<int, Demand>();
+            this.demandsToRemove = new List<Demand>();
+        }
+        private void Update()
+        {
+            // Remove the demands that have been flagged for removal first
+            if (this.demandsToRemove.Count > 0)
+            {
+                foreach (Demand toRemove in this.demandsToRemove)
+                    this.currentDemands.Remove(toRemove.ID);
+                this.demandsToRemove.Clear();
+            }
+
+            // Then iterate over the still existing demands and update them, potentially flagging more demands for removal (when their OnExpired event is fired)
+            var enumerator = this.currentDemands.GetEnumerator();
+            while (enumerator.MoveNext())
+                enumerator.Current.Value.Update(Time.deltaTime);
         }
 
 
@@ -39,182 +76,130 @@ namespace Underconnected
         /// Can only be called on the server (since demand spawn is exclusively server side).
         /// </summary>
         /// <param name="matter">The matter to add to the demand queue.</param>
-        /// <param name="timeLimit">The time limit for the demand.</param>
+        /// <param name="timeLimit">The time limit for the demand. `0` if infinite.</param>
         [Server]
-        public void AddDemand(Matter matter, float timeLimit) => this.AcceptDemand(matter, timeLimit);
-        /// <summary>
-        /// Removes a matter from the demand queue and synchronizes it with the clients.
-        /// Can only be called on the server.
-        /// </summary>
-        /// <param name="matter">The matter to remove from the demand queue.</param>
-        /// <returns>Whether the demand queue contained the delivered matter and removed it.</returns>
-        [Server]
-        public bool DeliverDemand(Matter matter)
+        public void AddDemand(Matter matter, float timeLimit = 0)
         {
-            if (this.HasDemand(matter))
-            {
-                this.RemoveDemand(matter);
-                return true;
-            }
+            Demand demand = new Demand(this.nextDemandID++, matter, timeLimit);
+            demand.OnExpired += this.Demand_OnExpired_Server;
 
-            return false;
+            this.AcceptDemand(demand);
         }
         /// <summary>
-        /// Checks if given matter is currently demanded.
+        /// Tries to deliver a matter and remove its demand from this demand queue.
+        /// Synchronizes the removal process with the clients.
+        /// Can only be called on the server.
         /// </summary>
-        /// <param name="matter">The matter to be checked</param>
-        /// <returns>True if given matter is demanded or false if not</returns>
-        public bool HasDemand(Matter matter)
+        /// <param name="matter">The matter to deliver.</param>
+        /// <returns>The demand that has been delivered or `null` if none matched.</returns>
+        [Server]
+        public Demand Deliver(Matter matter)
         {
-            if (matter != null)
+            Demand demand = this.GetDemand(matter);
+
+            if (demand != null)
             {
-                foreach (Demand demand in this.currentDemands)
-                    if (demand.demandedMatter.Equals(matter))
-                        return true;
+                demand.SetDelivered();
+                this.RemoveDemand(demand);
+                return demand;
             }
 
-            return false;
+            return null;
         }
         /// <summary>
         /// Returns the oldest demand for the given matter.
         /// </summary>
         /// <param name="matter">The matter to find a demand for.</param>
         /// <returns>The oldest demand for <paramref name="matter"/> or `null` if none found.</returns>
-        public Demand? GetDemand(Matter matter)
+        public Demand GetDemand(Matter matter)
         {
             if (matter != null)
             {
-                foreach (Demand demand in this.currentDemands)
-                    if (demand.demandedMatter.Equals(matter))
-                        return demand;
+                var enumerator = this.currentDemands.GetEnumerator();
+
+                while (enumerator.MoveNext())
+                    if (enumerator.Current.Value.Matter.Equals(matter) && !this.demandsToRemove.Contains(enumerator.Current.Value))
+                        return enumerator.Current.Value;
             }
 
             return null;
         }
 
+
         /// <summary>
-        /// Creates a UI element for demanded matter and adds the same matter to the current demand queue object.
-        /// Synchronizes it with the clients if this is called on the server.
+        /// Adds the given demand to the queue and synchronizes it with the clients if called on the server.
         /// </summary>
-        /// <param name="matter">The matter to be added to the demand queue UI element and object.</param>
-        /// <param name="timeLimit">The time limit for the new demand.</param>
-        private void AcceptDemand(Matter matter, float timeLimit)
+        /// <param name="demand">The demand to add to the queue.</param>
+        private void AcceptDemand(Demand demand)
         {
-            GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.queueElementsContainer.transform);
-            DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
+            this.currentDemands.Add(demand.ID, demand);
+            this.OnDemandAdded?.Invoke(demand);
 
-            if (demandedMatterUI != null)
-            {
-                demandedMatterUI.SetMatter(matter);
-                demandedMatterUI.SetTimeLimit(timeLimit);
-                this.currentDemands.Add(new Demand(matter, demandedMatterUI));
-
-                if (this.isServer)
-                {
-                    demandedMatterUI.OnExpired += this.DemandedMatterUI_OnExpired_Server;
-                    this.RpcAcceptDemand(matter.GetID(), timeLimit);
-                }
-            }
-            else
-                Debug.LogWarning("Demanded Matter UI prefab is missing!", this);
+            if (this.isServer)
+                this.RpcAcceptDemand(demand.ID, demand.Matter.GetID(), demand.TimeLimit);
         }
         /// <summary>
-        /// Iterates through queue and removes first instance of given matter
-        /// from queue and UI element. Synchronizes it with the clients if this is called on the server.
+        /// Removes the given demand from the queue and synchronizes it with the clients if called on the server.
+        /// Adds the given demand to the removal queue (<see cref="demandsToRemove"/>).
         /// </summary>
-        /// <param name="matter">The matter to be removed from demand queue.</param>
-        private void RemoveDemand(Matter matter)
+        /// <param name="demand">The demand to remove.</param>
+        private void RemoveDemand(Demand demand)
         {
-            for (int i = 0; i < this.currentDemands.Count; i++)
-            {
-                if (this.currentDemands[i].demandedMatter.Equals(matter))
-                {
-                    if (this.isServer)
-                    {
-                        this.currentDemands[i].uiElement.OnExpired -= this.DemandedMatterUI_OnExpired_Server;
-                        this.RpcRemoveDemand(matter.GetID());
-                    }
+            this.demandsToRemove.Add(demand);
+            this.OnDemandRemoved?.Invoke(demand);
 
-                    this.currentDemands[i].uiElement.Remove();
-                    this.currentDemands.RemoveAt(i);
-
-                    break;
-                }
-            }
+            if (this.isServer)
+                this.RpcRemoveDemand(demand.ID);
         }
 
 
         /// <summary>
-        /// Is only called by server.
-        /// Checks if a matter with given ID exists and then calls <see cref="AcceptDemand(Matter)"/>.
+        /// Tells the clients to add a new demand with the given ID, matter ID and time limit.
+        /// Sent by the server to all clients.
         /// </summary>
-        /// <param name="matterID">The ID of the matter to add to queue.</param>
+        /// <param name="demandID">The ID to assign to the new demand.</param>
+        /// <param name="matterID">The ID of the matter for the new demand.</param>
         /// <param name="timeLimit">The time limit for the demand.</param>
         [ClientRpc]
-        private void RpcAcceptDemand(string matterID, float timeLimit)
+        private void RpcAcceptDemand(int demandID, string matterID, float timeLimit)
         {
             if (this.isClientOnly)
             {
                 Matter targetMatter = Matter.GetByID(matterID);
+
                 if (targetMatter != null)
-                    this.AcceptDemand(targetMatter, timeLimit);
+                    this.AcceptDemand(new Demand(demandID, targetMatter, timeLimit));
                 else
                     Debug.LogError($"Cannot accept nonexisting matter with id '{matterID}'.");
             }
         }
         /// <summary>
-        /// Is only called by server and after checking if given matter is currently demanded.
-        /// Checks if a matter with given ID exists and then calls <see cref="RemoveDemand(Matter)"/>.
+        /// Tells the clients to remove the demand with the given ID from the demand queue.
+        /// Sent by the server to all clients.
         /// </summary>
-        /// <param name="matterID">id of matter to be removed from queue</param>
+        /// <param name="demandID">The ID of the demand to remove from the queue.</param>
         [ClientRpc]
-        private void RpcRemoveDemand(string matterID)
+        private void RpcRemoveDemand(int demandID)
         {
             if (this.isClientOnly)
             {
-                Matter targetMatter = Matter.GetByID(matterID);
-                if (targetMatter != null)
-                    this.RemoveDemand(targetMatter);
-                else
-                    Debug.LogError($"Cannot remove nonexisting matter with id '{matterID}'.");
+                Demand toRemove;
+                if (this.currentDemands.TryGetValue(demandID, out toRemove))
+                    this.RemoveDemand(toRemove);
             }
         }
 
 
         /// <summary>
         /// Called when a demand expires.
-        /// Applies a score penalty and removes the demand.
+        /// Fires <see cref="OnDemandExpired"/> and removes the demand from the queue.
         /// Only called on the server since this event is only registered on the server side.
         /// </summary>
-        /// <param name="demandedMatterUI">The element that has triggered this event.</param>
-        private void DemandedMatterUI_OnExpired_Server(DemandedMatterUI demandedMatterUI)
+        /// <param name="demandedMatterUI">The demand that has expired.</param>
+        private void Demand_OnExpired_Server(Demand demand)
         {
-            this.RemoveDemand(demandedMatterUI.Matter);
-            this.OnDemandExpired?.Invoke(demandedMatterUI.Matter);
-        }
-
-
-        /// <summary>
-        /// A Demand struct which contains the demanded matter and its uiElement.
-        /// </summary>
-        [System.Serializable]
-        public struct Demand
-        {
-            /// <summary>
-            /// The demanded matter.
-            /// </summary>
-            public Matter demandedMatter;
-            /// <summary>
-            /// The corresponding UI element inside of the demand queue.
-            /// </summary>
-            public DemandedMatterUI uiElement;
-
-
-            public Demand(Matter demandedMatter, DemandedMatterUI uiElement)
-            {
-                this.demandedMatter = demandedMatter;
-                this.uiElement = uiElement;
-            }
+            this.OnDemandExpired?.Invoke(demand);
+            this.RemoveDemand(demand);
         }
     }
 }

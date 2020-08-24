@@ -76,6 +76,9 @@ namespace Underconnected
                 this.currentLevel = null;
                 SceneManager.sceneLoaded += this.SceneManager_SceneLoaded;
 
+                this.uiManager.HideAllUI();
+                this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary
+
                 // TODO: Load player data
                 // TODO: Check startup parameters & connect to given server or show main menu
             }
@@ -123,6 +126,7 @@ namespace Underconnected
             if (this.currentLevel != null)
             {
                 Debug.Log($"Unloading level: {this.currentLevel.gameObject.scene.name}");
+                this.currentLevel.Unload();
                 this.currentLevel = null;
                 SceneManager.UnloadSceneAsync(this.currentLevelScene);
             }

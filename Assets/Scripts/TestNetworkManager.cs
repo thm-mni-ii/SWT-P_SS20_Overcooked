@@ -80,11 +80,7 @@ namespace Underconnected
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Server;
 
             if (GameManager.CurrentLevel != null)
-            {
-                // TODO: avoid calling predefined methods/messages ourself
-                GameManager.CurrentLevel.OnStopServer(); // call OnStopServer manually because the level is unloaded in the next frame and Mirror won't call OnStopServer because the server is shutdown in the current frame
                 GameManager.Instance.UnloadCurrentLevel();
-            }
         }
 
         public override void OnStartClient()
@@ -106,10 +102,13 @@ namespace Underconnected
             // Unregister client events
             GameManager.OnLevelLoaded -= GameManager_OnLevelLoaded_Client;
 
-            // Unload the level if we are not running a server.
-            // Otherwise let the server handle unloading the level (see OnStopServer).
-            if (!NetworkServer.active)
-                GameManager.Instance.UnloadCurrentLevel();
+            if (GameManager.CurrentLevel != null)
+            {
+                // Unload the level if we are not running a server.
+                // Otherwise let the server handle unloading the level (see OnStopServer).
+                if (!NetworkServer.active)
+                    GameManager.Instance.UnloadCurrentLevel();
+            }
         }
 
         public override void OnServerConnect(NetworkConnection conn) => conn.Send(new ServerStateMessage(GameManager.CurrentLevelNum));
