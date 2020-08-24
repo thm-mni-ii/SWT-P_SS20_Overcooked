@@ -126,6 +126,7 @@ namespace Underconnected
             if (this.currentLevel != null)
             {
                 Debug.Log($"Unloading level: {this.currentLevel.gameObject.scene.name}");
+                this.currentLevel.Unload();
                 this.currentLevel = null;
                 SceneManager.UnloadSceneAsync(this.currentLevelScene);
             }

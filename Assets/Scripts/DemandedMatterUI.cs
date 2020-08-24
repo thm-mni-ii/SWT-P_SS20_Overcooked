@@ -25,50 +25,45 @@ namespace Underconnected
         [SerializeField] Color timeLeftHigh;
 
 
-        /// <summary>
-        /// Called when the time limit for this demand has been reached.
-        /// Parameters: The UI element that has triggered this event.
-        /// TODO: move to own Demand class?
-        /// </summary>
-        public event UnityAction<DemandedMatterUI> OnExpired;
-
 
         /// <summary>
-        /// The matter to display.
+        /// The demand to display.
         /// </summary>
-        public Matter Matter { get; private set; }
-        /// <summary>
-        /// The time left for this demand.
-        /// </summary>
-        public float TimeLeft { get; private set; }
-        /// <summary>
-        /// The time limit for this demand. 0 if infinite.
-        /// </summary>
-        public float TimeLimit { get; private set; }
+        public Demand Demand { get; private set; }
 
 
         private void Awake()
         {
-            this.SetMatter(null);
-            this.SetTimeLimit(0.0F);
+            this.SetDemand(this.Demand);
         }
         private void Update()
         {
-            if (this.TimeLeft > 0.0F)
+            if (this.Demand != null && this.Demand.HasTimeLimit)
             {
-                this.TimeLeft = Mathf.Max(this.TimeLeft - Time.deltaTime, 0.0F);
-                if (this.TimeLeft <= 0.0F)
-                    this.OnExpired?.Invoke(this);
-            }
-
-            if (this.TimeLimit > 0.0F)
-            {
-                this.timeLeftSlider.value = Mathf.Clamp01(this.TimeLeft / this.TimeLimit);
+                this.timeLeftSlider.value = Mathf.Clamp01(this.Demand.TimeLeft / this.Demand.TimeLimit);
                 this.timeLeftSliderFill.color = Color.Lerp(this.timeLeftLow, this.timeLeftHigh, this.timeLeftSlider.value);
             }
         }
 
 
+        /// <summary>
+        /// Sets the demand to display on this UI element.
+        /// </summary>
+        /// <param name="demand">The demand to display.</param>
+        public void SetDemand(Demand demand)
+        {
+            this.Demand = demand;
+            this.SetMatter(demand != null ? demand.Matter : null, true);
+
+            if (demand != null && demand.HasTimeLimit)
+            {
+                this.timeLeftSliderFill.color = this.timeLeftHigh;
+                this.timeLeftSlider.value = 1.0F;
+                this.timeLeftSlider.enabled = true;
+            }
+            else
+                this.timeLeftSlider.enabled = false;
+        }
         /// <summary>
         /// Sets the matter to display on this UI element.
         /// </summary>
@@ -77,7 +72,6 @@ namespace Underconnected
         public void SetMatter(Matter matter, bool showRequiredComponents = true)
         {
             int quantity = matter is MatterMolecule ? ((MatterMolecule)matter).ElementalAmount : 1;
-            this.Matter = matter;
 
             if (matter != null)
             {
@@ -113,31 +107,11 @@ namespace Underconnected
             else
                 this.iconUI.enabled = false;
         }
-        /// <summary>
-        /// Sets the time limit for this demand.
-        /// </summary>
-        /// <param name="timeLimit">The time limit. 0 for infinite.</param>
-        public void SetTimeLimit(float timeLimit)
-        {
-            this.TimeLimit = timeLimit;
-            this.TimeLeft = timeLimit;
 
-            if (timeLimit > 0.0F)
-            {
-                this.timeLeftSliderFill.color = this.timeLeftHigh;
-                this.timeLeftSlider.value = 1.0F;
-                this.timeLeftSlider.enabled = true;
-            }
-            else
-                this.timeLeftSlider.enabled = false;
-        }
 
         /// <summary>
         /// Destroys this UI element.
         /// </summary>
-        public void Remove()
-        {
-            GameObject.Destroy(this.gameObject);
-        }
+        public void Remove() => GameObject.Destroy(this.gameObject);
     }
 }
