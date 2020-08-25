@@ -14,6 +14,7 @@ namespace Underconnected
         [SerializeField] LayerMask interactLayers;
         [SerializeField] Transform interactOrigin;
 
+
         /// <summary>
         /// The <see cref="PickableObject"/> that is currently picked up by this interactor.
         /// </summary>
@@ -23,6 +24,10 @@ namespace Underconnected
         /// Checks if this interactor is holding a <see cref="PickableObject"/>.
         /// </summary>
         public bool IsHoldingObject => this.HeldObject != null;
+        /// <summary>
+        /// Holds the interactable game object this interactor is currently looking at.
+        /// </summary>
+        public IInteractable LookedAtObject { get; private set; }
 
 
         /// <summary>
@@ -34,7 +39,19 @@ namespace Underconnected
 
         private void Awake()
         {
+            this.LookedAtObject = null;
             this.hitResultsPool = new RaycastHit[2];
+        }
+        private void Update()
+        {
+            IInteractable toInteract = this.GetObjectToInteract();
+
+            if (this.LookedAtObject != toInteract && this.LookedAtObject != null)
+                this.LookedAtObject.SetWatcher(null);
+
+            this.LookedAtObject = toInteract;
+            if (toInteract != null)
+                toInteract.SetWatcher(this);
         }
 
 
@@ -45,10 +62,10 @@ namespace Underconnected
         /// </summary>
         public void Interact()
         {
-            GameObject interactedObject = this.GetObjectToInteract();
+            //IInteractable interactedObject = this.GetObjectToInteract();
 
-            if (interactedObject != null)
-                this.CmdRequestInteract(interactedObject.GetComponent<NetworkIdentity>());
+            if (this.LookedAtObject != null)
+                this.CmdRequestInteract(this.LookedAtObject.GetGameObject().GetComponent<NetworkIdentity>());
         }
         /// <summary>
         /// Sets the held object for this interactor.
@@ -75,7 +92,7 @@ namespace Underconnected
         /// If it cannot find any, it will return the current <see cref="HeldObject"/> so it can be dropped.
         /// </summary>
         /// <returns>The found <see cref="IInteractable"/> to interact with or the value of <see cref="HeldObject"/> if none found.</returns>
-        private GameObject GetObjectToInteract()
+        private IInteractable GetObjectToInteract()
         {
             int resultsAmount = Physics.RaycastNonAlloc(this.interactOrigin.position, this.interactOrigin.forward, this.hitResultsPool, this.interactReach, this.interactLayers);
 
@@ -87,18 +104,14 @@ namespace Underconnected
                     {
                         if (this.hitResultsPool[i].collider.gameObject.Equals(this.HeldObject.gameObject))
                             continue;
-                        if (this.hitResultsPool[i].collider.GetComponent<IInteractable>() != null)
-                            return this.hitResultsPool[i].collider.gameObject;
+                        return this.hitResultsPool[i].collider.GetComponent<IInteractable>();
                     }
                 }
 
-                if (this.hitResultsPool[0].collider.GetComponent<IInteractable>() != null)
-                    return this.hitResultsPool[0].collider.gameObject;
+                return this.hitResultsPool[0].collider.GetComponent<IInteractable>();
             }
-            else if (this.HeldObject != null)
-                return this.HeldObject.gameObject;
-
-            return null;
+            else
+                return this.HeldObject;
         }
 
 
@@ -113,12 +126,10 @@ namespace Underconnected
         [Command]
         private void CmdRequestInteract(NetworkIdentity interactable)
         {
-            GameObject actualInteractable = this.GetObjectToInteract();
-
-            if (interactable != null && actualInteractable != null && actualInteractable.Equals(interactable.gameObject))
+            if (interactable != null && this.LookedAtObject != null && this.LookedAtObject.GetGameObject().Equals(interactable.gameObject))
                 this.RpcConfirmInteract(interactable);
             else
-                Debug.LogWarning($"Client interaction check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{actualInteractable}\"");
+                Debug.LogWarning($"Client interaction check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{this.LookedAtObject.GetGameObject()}\"");
         }
         /// <summary>
         /// Tells a client that this interactor has interacted with the given <paramref name="interactable"/>.

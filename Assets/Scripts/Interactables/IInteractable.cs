@@ -14,5 +14,17 @@ namespace Underconnected
         /// </summary>
         /// <param name="interactor">The initiator of this interaction.</param>
         void Interact(Interactor interactor);
+
+        /// <summary>
+        /// Sets the interactor that is currently looking at this interactable.
+        /// </summary>
+        /// <param name="watcher">The interactor that is looking at this interactable. `null` to remove the current one.</param>
+        void SetWatcher(Interactor watcher);
+
+        /// <summary>
+        /// Returns the game object this interactable belongs to.
+        /// </summary>
+        /// <returns>The game object this interactable belongs to.</returns>
+        GameObject GetGameObject();
     }
 }

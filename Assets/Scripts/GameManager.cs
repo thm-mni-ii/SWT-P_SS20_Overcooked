@@ -37,6 +37,10 @@ namespace Underconnected
         /// Holds the player character prefab to spawn on levels.
         /// </summary>
         public static GameObject PlayerPrefab => Instance.playerPrefab.gameObject;
+        /// <summary>
+        /// Holds the game's main camera.
+        /// </summary>
+        public static Camera Camera => Instance.camera;
 
 
         /// <summary>
@@ -49,6 +53,7 @@ namespace Underconnected
 
 
         [Header("References")]
+        [SerializeField] new Camera camera;
         [SerializeField] UIManager uiManager;
         [SerializeField] TestNetworkManager networkManager;
 
