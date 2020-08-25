@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 5339775179543884102}
   - component: {fileID: 1014690263550474183}
   - component: {fileID: 5985571876464018144}
+  - component: {fileID: 5380007660669354746}
   m_Layer: 8
   m_Name: DistillationEquipment
   m_TagString: Untagged
@@ -353,13 +354,27 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 1783659567603671886}
   progressBar: {fileID: 1783659567142016476}
+  highlighting: {fileID: 5380007660669354746}
   inputContainer: {fileID: 2947305121510065519}
   outputContainer: {fileID: 7020952110156068313}
   fireLight: {fileID: 6010447848994638790}
   fireParticles: {fileID: 6010447848994636857}
-  allowForeignElementsInRecipes: 0
+  allowForeignMattersInRecipes: 0
   allRecipes:
   - {fileID: 11400000, guid: 93031774ea5c3054c842024a67b7d438, type: 2}
+--- !u!114 &5380007660669354746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667769143025853275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &3921035660464825746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,18 +1117,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a379a82c9328b14498ab58e23d92de5d, type: 3}
---- !u!223 &1783659567603671886 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 4333722287350076705, guid: a379a82c9328b14498ab58e23d92de5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2658440551548827247}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1783659567603671885 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4333722287350076706, guid: a379a82c9328b14498ab58e23d92de5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2658440551548827247}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1783659567142016476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4333722287677481907, guid: a379a82c9328b14498ab58e23d92de5d,
@@ -1126,6 +1129,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1783659567603671885 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4333722287350076706, guid: a379a82c9328b14498ab58e23d92de5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2658440551548827247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1783659567603671886 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4333722287350076705, guid: a379a82c9328b14498ab58e23d92de5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2658440551548827247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5597930309060387171
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -269,6 +269,11 @@ PrefabInstance:
       propertyPath: networkManager
       value: 
       objectReference: {fileID: 4268389511968292780}
+    - target: {fileID: 4513865422924228712, guid: 32ba70a6f188275449ed4d08381f483c,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 2006195450}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32ba70a6f188275449ed4d08381f483c, type: 3}
 --- !u!114 &1954850953 stripped

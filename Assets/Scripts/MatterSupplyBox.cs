@@ -12,6 +12,7 @@ namespace Underconnected
     {
         [Header("References")]
         [SerializeField] MeshRenderer matterDisplayRenderer;
+        [SerializeField] ObjectHighlighting highlighting;
 
         [Header("Settings")]
         [SerializeField] Matter containedMatter;
@@ -25,6 +26,11 @@ namespace Underconnected
         /// </summary>
         private Material matterDisplayMaterial;
 
+        /// <summary>
+        /// Holds the interactor that is currently looking at this interactable.
+        /// </summary>
+        private Interactor watchingInteractor;
+
 
         /// <summary>
         /// matterDisplayMaterial is initialized and <see cref="SetContainedMatter(Matter)"/> is called.
@@ -34,6 +40,8 @@ namespace Underconnected
             if (this.matterDisplayRenderer != null)
                 this.matterDisplayMaterial = this.matterDisplayRenderer.material;
             this.SetContainedMatter(this.containedMatter);
+
+            this.watchingInteractor = null;
         }
 
         /// <summary>
@@ -74,6 +82,15 @@ namespace Underconnected
                 }
             }
         }
+        public void SetWatcher(Interactor watcher)
+        {
+            this.watchingInteractor = watcher;
+            if (watcher != null)
+                this.highlighting.ShowHighlighting();
+            else
+                this.highlighting.HideHighlighting();
+        }
+        public GameObject GetGameObject() => this.gameObject;
 
         /// <summary>
         /// Sets the given matter as the contained matter of this supplybox.
