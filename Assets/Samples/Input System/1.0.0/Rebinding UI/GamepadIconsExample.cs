@@ -1,9 +1,12 @@
 using System;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine;
 
 ////TODO: have updateBindingUIEvent receive a control path string, too (in addition to the device layout name)
 
-namespace UnityEngine.InputSystem.Samples.RebindUI
+//namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace Underconnected
 {
     /// <summary>
     /// This is an example for how to override the default display behavior of bindings. The component

@@ -100,6 +100,7 @@ namespace Underconnected
         {
             if (interactor == this.currentHolder)
             {
+                this.transform.rotation = Quaternion.Euler(0, 90, 60);
                 this.currentHolder = null;
                 interactor.SetHeldObject(null);
                 this.transform.SetParent(this.defaultParent);

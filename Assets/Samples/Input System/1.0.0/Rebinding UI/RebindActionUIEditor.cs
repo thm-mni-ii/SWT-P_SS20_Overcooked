@@ -1,10 +1,13 @@
 #if UNITY_EDITOR
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 ////TODO: support multi-object editing
 
-namespace UnityEngine.InputSystem.Samples.RebindUI
+//namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace Underconnected
 {
     /// <summary>
     /// A custom inspector for <see cref="RebindActionUI"/> which provides a more convenient way for

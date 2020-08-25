@@ -4,12 +4,15 @@ using System.Linq;
 using UnityEngine.Events;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 ////TODO: localization support
 
 ////TODO: deal with composites that have parts bound in different control schemes
 
-namespace UnityEngine.InputSystem.Samples.RebindUI
+//namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace Underconnected
 {
     /// <summary>
     /// A reusable component with a self-contained UI for rebinding a single action.
