@@ -54,6 +54,15 @@ namespace Underconnected
                 toInteract.SetWatcher(this);
         }
 
+        private void OnDisable()
+        {
+            if (this.LookedAtObject != null)
+            {
+                this.LookedAtObject.SetWatcher(null);
+                this.LookedAtObject = null;
+            }
+        }
+
 
         /// <summary>
         /// Attempts to interact with interactable objects in reach.

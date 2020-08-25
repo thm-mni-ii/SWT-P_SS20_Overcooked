@@ -33,6 +33,9 @@ namespace Underconnected
             }
         }
 
+        private void OnDisable() => this.HideHighlighting();
+
+
         /// <summary>
         /// Enables the highlighting effect on this object.
         /// </summary>
