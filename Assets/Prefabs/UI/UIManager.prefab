@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7401228250153738764}
   - component: {fileID: 7401228250153738755}
   - component: {fileID: 1725498552199988462}
+  - component: {fileID: 6162885419970098383}
   m_Layer: 5
   m_Name: UIManager
   m_TagString: Untagged
@@ -117,8 +118,38 @@ MonoBehaviour:
   uiCanvas: {fileID: 7401228250153738765}
   levelUI: {fileID: 7401228249103709960}
   levelFinishedUI: {fileID: 652136946740222891}
-  playerControlsUI: {fileID: 7621115874981894658, guid: 7189eaea369d4a741a0cc843f990dc37,
+  playerControlsUI: {fileID: 6346374945003955477}
+--- !u!114 &6162885419970098383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401228250153738753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 8f4dcf2659071744abc2406a02d39857,
     type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1393220868124668777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -763,6 +794,21 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.2901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.36078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
 --- !u!224 &7008731463790294552 stripped
@@ -771,6 +817,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4170399485393983096}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6346374945003955477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7057956862444385133, guid: 7189eaea369d4a741a0cc843f990dc37,
+    type: 3}
+  m_PrefabInstance: {fileID: 4170399485393983096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3189b95980ac3224aa3460cdb24138db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5815877353575684269
 PrefabInstance:
   m_ObjectHideFlags: 0

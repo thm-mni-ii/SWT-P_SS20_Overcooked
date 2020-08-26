@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Underconnected
 {
@@ -51,5 +52,10 @@ namespace Underconnected
         /*public void ShowControlSettings() {
                     if (Input.GetKeyDown(KeyCode.Escape)) PlayerControlsUI.gameObject.SetActive(true);
         }*/
+
+        public void OnAbort(InputValue value) {
+            Debug.Log("OnAbort wird aufgerufen!");
+
+        }
     }
 }

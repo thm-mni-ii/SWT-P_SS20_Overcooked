@@ -56,7 +56,6 @@ namespace Underconnected
 
             if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
-
         }
 
         public override void OnStartClient()
