@@ -80,7 +80,7 @@ namespace Underconnected
                 if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (this.ControlsEnabled && Input.GetKeyDown(KeyCode.E))
                     this.interactor.Interact();
             }
         }
