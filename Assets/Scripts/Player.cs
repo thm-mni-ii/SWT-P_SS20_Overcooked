@@ -63,18 +63,6 @@ namespace Underconnected
                 GameManager.CurrentLevel.UnregisterPlayer(this);
         }
 
-        /// <summary>
-        /// Will check if local player presses the 'E' key and if so calls <see cref="Interactor.Interact"/>.
-        /// </summary>
-        private void Update()
-        {
-            if (this.IsOwnPlayer && this.Controls.ControlsEnabled)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                    this.interactor.Interact();
-            }
-        }
-
         #endregion
 
 

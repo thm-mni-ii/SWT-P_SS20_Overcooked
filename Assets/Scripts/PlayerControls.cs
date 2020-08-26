@@ -8,12 +8,13 @@ namespace Underconnected
     /// <summary>
     /// Allows the player to move the game object this component is on.
     /// </summary>
-    [RequireComponent(typeof(Player))]
+    [RequireComponent(typeof(Player), typeof(Interactor))]
     public class PlayerControls : NetworkBehaviour
     {
         [SerializeField] Rigidbody rigidBody;
         [SerializeField] MeshRenderer playerModelRenderer;
         [SerializeField] Player player;
+        [SerializeField] Interactor interactor;
         [SerializeField] float moveSpeed = 100.0F;
         [SerializeField] float rotationSpeed = 500.0F;
 
@@ -78,6 +79,9 @@ namespace Underconnected
 
                 if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                    this.interactor.Interact();
             }
         }
         /// <summary>
