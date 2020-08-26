@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: -1098063710644785047}
   - component: {fileID: 809165226}
   - component: {fileID: 809165227}
+  - component: {fileID: 411969945874217738}
   m_Layer: 8
   m_Name: NaCl_Experiment_Equipment
   m_TagString: Untagged
@@ -146,6 +147,7 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 4333722287827724170}
   progressBar: {fileID: 4333722287232405784}
+  highlighting: {fileID: 411969945874217738}
   inputContainer: {fileID: 1362320579}
   outputContainer: {fileID: 916252706}
   fireLight: {fileID: 2217655088953142197}
@@ -156,6 +158,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c01c8d1bbb9e6048bb07f5edab3890a, type: 2}
   - {fileID: 11400000, guid: ac98f9233a49f64489035fe3c92afd1b, type: 2}
   - {fileID: 11400000, guid: 78e9c98037f2fc846a900d1f6c935061, type: 2}
+--- !u!114 &411969945874217738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846866026949719891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allRenderers:
+  - {fileID: 5558534897672291351}
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &4783237803073758174
 GameObject:
   m_ObjectHideFlags: 0

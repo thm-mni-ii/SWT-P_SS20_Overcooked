@@ -15,6 +15,7 @@ namespace Underconnected
         [SerializeField] Transform defaultParent = null;
         [SerializeField] bool canBeDropped = true;
         [SerializeField] Rigidbody[] nonKinematicRBs;
+        [SerializeField] ObjectHighlighting highlighting;
 
 
         /// <summary>
@@ -48,11 +49,18 @@ namespace Underconnected
         /// </summary>
         private Interactor currentHolder;
 
+        /// <summary>
+        /// Holds the interactor that is currently looking at this interactable.
+        /// </summary>
+        private Interactor watchingInteractor;
+
 
         private void OnDisable()
         {
             if (this.IsPickedUp)
                 this.Drop(this.CurrentHolder);
+
+            this.watchingInteractor = null;
         }
 
 
@@ -63,6 +71,15 @@ namespace Underconnected
             else if (this.canBeDropped)
                 this.Drop(interactor);
         }
+        public void SetWatcher(Interactor watcher)
+        {
+            this.watchingInteractor = watcher;
+            if (watcher != null)
+                this.highlighting.ShowHighlighting();
+            else
+                this.highlighting.HideHighlighting();
+        }
+        public GameObject GetGameObject() => this.gameObject;
 
         /// <summary>
         /// Sets whether this object can be dropped after it is picked up.

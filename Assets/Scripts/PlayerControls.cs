@@ -8,12 +8,25 @@ namespace Underconnected
     /// <summary>
     /// Allows the player to move the game object this component is on.
     /// </summary>
+    [RequireComponent(typeof(Player), typeof(Interactor))]
     public class PlayerControls : NetworkBehaviour
     {
         [SerializeField] Rigidbody rigidBody;
         [SerializeField] MeshRenderer playerModelRenderer;
+        [SerializeField] Player player;
+        [SerializeField] Interactor interactor;
         [SerializeField] float moveSpeed = 100.0F;
         [SerializeField] float rotationSpeed = 500.0F;
+
+
+        /// <summary>
+        /// The player these controls belong to.
+        /// </summary>
+        public Player Player => this.player;
+        /// <summary>
+        /// Tells whether the controls are enabled for this player.
+        /// </summary>
+        public bool ControlsEnabled { get; private set; }
 
 
         /// <summary>
@@ -36,6 +49,7 @@ namespace Underconnected
         private void Awake()
         {
             this.movementInput = Vector3.zero;
+            this.EnableControls();
         }
 
         private void Start()
@@ -57,14 +71,17 @@ namespace Underconnected
         /// </summary>
         private void Update()
         {
-            if (this.isLocalPlayer)
+            if (this.player.IsOwnPlayer)
             {
-                this.movementInput.x = Input.GetAxisRaw("Horizontal");
+                this.movementInput.x = this.ControlsEnabled ? Input.GetAxisRaw("Horizontal") : 0;
                 this.movementInput.y = 0;
-                this.movementInput.z = Input.GetAxisRaw("Vertical");
+                this.movementInput.z = this.ControlsEnabled ? Input.GetAxisRaw("Vertical") : 0;
 
                 if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
                     this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
+
+                if (this.ControlsEnabled && Input.GetKeyDown(KeyCode.E))
+                    this.interactor.Interact();
             }
         }
         /// <summary>
@@ -73,7 +90,7 @@ namespace Underconnected
         /// </summary>
         private void FixedUpdate()
         {
-            if (this.isLocalPlayer)
+            if (this.player.IsOwnPlayer)
             {
                 Vector3 currentRotation = this.rigidBody.rotation.eulerAngles;
                 float yawDelta = this.targetYaw - currentRotation.y;
@@ -84,6 +101,17 @@ namespace Underconnected
                 this.rigidBody.AddForce(this.movementInput.normalized * this.moveSpeed);
             }
         }
+
+
+        /// <summary>
+        /// Enables the player controls.
+        /// </summary>
+        public void EnableControls() => this.ControlsEnabled = true;
+        /// <summary>
+        /// Disables the player controls.
+        /// </summary>
+        public void DisableControls() => this.ControlsEnabled = false;
+
 
         /// <summary>
         /// Called when the value of <see cref="playerColor"/> changes on the server.

@@ -167,9 +167,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2498412773474789677}
+  - component: {fileID: 2103659432041102941}
   - component: {fileID: 2103659432041102936}
   - component: {fileID: 2103659432041102940}
-  - component: {fileID: 2103659432041102941}
+  - component: {fileID: 442578239955439047}
   m_Layer: 8
   m_Name: ethanacidEquip
   m_TagString: Untagged
@@ -197,6 +198,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103659432041102941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510813599345777470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!136 &2103659432041102936
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -230,15 +247,16 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0.68, z: 0}
   objectInfoCanvas: {fileID: 2384034151830493077}
   progressBar: {fileID: 2384034152308924679}
+  highlighting: {fileID: 442578239955439047}
   inputContainer: {fileID: 8864635976296845720}
   outputContainer: {fileID: 8864635976296845720}
   fireLight: {fileID: 8864635976296848997}
   fireParticles: {fileID: 8864635976296845722}
-  allowForeignElementsInRecipes: 0
+  allowForeignMattersInRecipes: 0
   allRecipes:
   - {fileID: 11400000, guid: a5e81f0cbeda1f54e8611cf527a77432, type: 2}
   - {fileID: 11400000, guid: 1454fceeeec6ab4499cb9a5b67f8ea8f, type: 2}
---- !u!114 &2103659432041102941
+--- !u!114 &442578239955439047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,13 +265,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1510813599345777470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &9024698867764925439
 GameObject:
   m_ObjectHideFlags: 0

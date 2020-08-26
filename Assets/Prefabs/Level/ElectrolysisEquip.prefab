@@ -10764,10 +10764,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2269771124718232570}
+  - component: {fileID: 1649685191295413779}
   - component: {fileID: 7072021891733248460}
   - component: {fileID: 3537673283732251957}
-  - component: {fileID: 1649685191295413779}
   - component: {fileID: 7210062097995502770}
+  - component: {fileID: 4169084866588890487}
   m_Layer: 8
   m_Name: ElectrolysisEquip
   m_TagString: Untagged
@@ -10793,6 +10794,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: -90, z: 0}
+--- !u!114 &1649685191295413779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964636390598513129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!33 &7072021891733248460
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10841,22 +10858,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1649685191295413779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2964636390598513129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
 --- !u!114 &7210062097995502770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10876,12 +10877,26 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 5677887893511915511}
   progressBar: {fileID: 5677887893855580517}
+  highlighting: {fileID: 4169084866588890487}
   inputContainer: {fileID: 3877674630001896510}
   outputContainer: {fileID: 4579305305432774205}
   fireLight: {fileID: 0}
   fireParticles: {fileID: 0}
-  allowForeignElementsInRecipes: 0
+  allowForeignMattersInRecipes: 0
   allRecipes: []
+--- !u!114 &4169084866588890487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964636390598513129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &2991696071410002021
 GameObject:
   m_ObjectHideFlags: 0

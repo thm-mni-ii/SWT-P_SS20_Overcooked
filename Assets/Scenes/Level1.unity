@@ -1943,6 +1943,8 @@ GameObject:
   - component: {fileID: 1341400687}
   - component: {fileID: 1341400689}
   - component: {fileID: 1341400688}
+  - component: {fileID: 1341400690}
+  - component: {fileID: 1341400691}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1982,8 +1984,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  scorePerDelivery: 50
-  levelDurationSeconds: 180
+  timePerDemand: 30
+  bonusScore: 10
+  bonusScoreThreshold: 0.15
+  demandSpawnTimeMinMax: {x: 10, y: 30}
   demandsPool:
   - {fileID: 11400000, guid: 59170507f3537da4e816653ff91d1b35, type: 2}
   - {fileID: 11400000, guid: 258fcd638c7c7794789588ed0b481a6a, type: 2}
@@ -1993,6 +1997,8 @@ MonoBehaviour:
   - {fileID: 589103136}
   - {fileID: 942341331}
   - {fileID: 1991346539}
+  timer: {fileID: 1341400690}
+  demandQueue: {fileID: 1341400691}
 --- !u!114 &1341400689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2009,6 +2015,36 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &1341400690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341400686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2add9dd2f489a084f827c83cb016a4da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  levelDurationSeconds: 180
+  syncAfterSeconds: 30
+--- !u!114 &1341400691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341400686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afedfa0d282ea9e4398e6742184df653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &1359049102
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,5 +25,6 @@ MonoBehaviour:
     as it is an asphyxiant gas; this name is instead used in many languages, such
     as French, Italian, Russian, Romanian and Turkish, and appears in the English
     names of some nitrogen compounds such as hydrazine, azides and azo compounds."
+  scoreReward: 50
   prefab: {fileID: 5360117775137513094, guid: eb747cdaf5256df4d97e770257a5bb63, type: 3}
   elementSymbol: N

@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c300c5de9c8271c43addc90f14c4a9c6, type: 3}
   name: Ethane
   description: Ethane.
+  scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: 605f581628302de4386dcd087b7f827e, type: 3}
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
