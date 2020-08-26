@@ -92,6 +92,7 @@ namespace Underconnected
 
         /// <summary>
         /// Picks up this object and attaches it to the given <see cref="Interactor"/> object.
+        /// Resets the rotation of the object to make the orb text visible.
         /// </summary>
         /// <param name="interactor">The <see cref="Interactor"/> object that should pick up this object.</param>
         public virtual void Pickup(Interactor interactor)
@@ -106,10 +107,13 @@ namespace Underconnected
                     rb.isKinematic = true;
 
                 this.OnPickedUp?.Invoke(this, interactor);
+                this.transform.rotation = Quaternion.Euler(0, 90, 60);
             }
+
         }
         /// <summary>
         /// Drops this object.
+        /// Resets the rotation of the object to make the orb text visible.
         /// Will only drop it if the given interactor matches <see cref="CurrentHolder"/>.
         /// </summary>
         /// <param name="interactor">The <see cref="Interactor"/> object that should drop this object.</param>
@@ -125,6 +129,7 @@ namespace Underconnected
                     rb.isKinematic = false;
 
                 this.OnDropped?.Invoke(this, interactor);
+                this.transform.rotation = Quaternion.Euler(0, 90, 60);
             }
         }
     }
