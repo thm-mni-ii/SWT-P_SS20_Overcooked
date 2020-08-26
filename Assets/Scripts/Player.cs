@@ -26,6 +26,15 @@ namespace Underconnected
         /// The player connection this player belongs to.
         /// </summary>
         public PlayerConnection Client { get; private set; }
+        /// <summary>
+        /// The player controls instance that listens for inputs and moves this player.
+        /// </summary>
+        public PlayerControls Controls => this.controls;
+
+        /// <summary>
+        /// Tells whether this player is our own player that we can control.
+        /// </summary>
+        public bool IsOwnPlayer => this.hasAuthority;
 
 
         #region Unity Callbacks
@@ -52,18 +61,6 @@ namespace Underconnected
         {
             if (GameManager.CurrentLevel != null)
                 GameManager.CurrentLevel.UnregisterPlayer(this);
-        }
-
-        /// <summary>
-        /// Will check if local player presses the 'E' key and if so calls <see cref="Interactor.Interact"/>.
-        /// </summary>
-        private void Update()
-        {
-            if (this.hasAuthority)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                    this.interactor.Interact();
-            }
         }
 
         #endregion

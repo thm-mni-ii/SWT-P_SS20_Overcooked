@@ -33,6 +33,10 @@ namespace Underconnected
         /// Returns an immutable list of all <see cref="Player"/> objects inside of this level.
         /// </summary>
         public ReadOnlyCollection<Player> AllPlayers => this.allPlayers.AsReadOnly();
+        /// <summary>
+        /// Holds our own player.
+        /// </summary>
+        public Player OwnPlayer { get; private set; }
 
         /// <summary>
         /// Holds the timer for this level.
@@ -129,7 +133,7 @@ namespace Underconnected
             if (!this.isRunningOnClient)
             {
                 if (this.HasTimer)
-                    this.Timer.OnTimerFinished += this.Timer_OnTimerFinished;
+                    this.Timer.OnTimerFinished += this.Timer_OnTimerFinished_Client;
 
                 if (this.HasDemandQueue && !this.isServer /* only subscribe if we are not running a server as the server also subscribes to these events (see OnStartServer)*/)
                     this.SubscribeDemandQueueUI();
@@ -165,7 +169,7 @@ namespace Underconnected
             if (this.isRunningOnClient)
             {
                 if (this.HasTimer)
-                    this.Timer.OnTimerFinished -= this.Timer_OnTimerFinished;
+                    this.Timer.OnTimerFinished -= this.Timer_OnTimerFinished_Client;
 
                 this.isRunningOnClient = false;
             }
@@ -231,6 +235,10 @@ namespace Underconnected
             if (!this.allPlayers.Contains(player))
             {
                 Debug.Log($"Registered player {player}", this);
+
+                if (player.IsOwnPlayer)
+                    this.OwnPlayer = player;
+
                 this.allPlayers.Add(player);
             }
         }
@@ -245,6 +253,10 @@ namespace Underconnected
             if (this.allPlayers.Contains(player))
             {
                 Debug.Log($"Unregistered player {player}", this);
+
+                if (this.OwnPlayer == player)
+                    this.OwnPlayer = null;
+
                 this.allPlayers.Remove(player);
             }
         }
@@ -418,10 +430,13 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Starts the ShowLevelFinishedScreen method of the UIManager script.
+        /// Called when the level timer is finished.
+        /// Shows the level finished screen and blocks player controls for the own player.
+        /// Will only be called on the client as this event is only subscribed on the client side.
         /// </summary>
-        private void Timer_OnTimerFinished()
+        private void Timer_OnTimerFinished_Client()
         {
+            this.OwnPlayer?.Controls.DisableControls();
             GameManager.UI.ShowLevelFinishedScreen();
         }
 
