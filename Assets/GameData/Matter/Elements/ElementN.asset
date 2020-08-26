@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e546a8102559da418319c4836099e1d, type: 3}
   m_Name: ElementN
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ddf90a6887a49764f8195e066887adf7, type: 3}
   name: Nitrogen
   description: "itrogen is the chemical element with the symbol N and atomic number
     7. It was first discovered and isolated by Scottish physician Daniel Rutherford

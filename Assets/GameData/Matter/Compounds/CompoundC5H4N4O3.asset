@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fccc8ac1bcc042a074074f83bf8cc, type: 3}
   m_Name: CompoundC5H4N4O3
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c5232193192ddcf48b7cac18dc216e09, type: 3}
   name: Uric Acid
   description: Uric acid is a heterocyclic compound of carbon, nitrogen, oxygen,
     and hydrogen with the formula C5H4N4O3. It forms ions and salts known as urates
@@ -22,5 +22,21 @@ MonoBehaviour:
     medical conditions, including diabetes and the formation of ammonium acid urate
     kidney stones.
   prefab: {fileID: 5137224915557663102, guid: d17440ae36638b94d8d89d656445136c, type: 3}
-  components: []
+  components:
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 8c6fd4cc10c6a724b8a9f947a8516ead, type: 2}
+  - {fileID: 11400000, guid: 8c6fd4cc10c6a724b8a9f947a8516ead, type: 2}
+  - {fileID: 11400000, guid: 8c6fd4cc10c6a724b8a9f947a8516ead, type: 2}
+  - {fileID: 11400000, guid: 8c6fd4cc10c6a724b8a9f947a8516ead, type: 2}
+  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
+  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
+  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
   formula: C5H4N4O3
