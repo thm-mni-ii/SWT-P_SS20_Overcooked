@@ -265,9 +265,11 @@ namespace Underconnected
             {
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
+                action.Enable();
             }
 
             // Configure the rebind.
+            action.Disable();
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .OnCancel(
                     operation =>

@@ -298,14 +298,6 @@ MonoBehaviour:
   playerModelRenderer: {fileID: 482893924135192172}
   moveSpeed: 70
   rotationSpeed: 1000
-  interAction:
-    m_Name: Inter
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8fc7193a-2107-4605-b35f-d2d770f5b90c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
 --- !u!114 &8694444420510392368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4ff4c3c5c57abb0428b04e6f5bacb519,
+  m_Actions: {fileID: -944628639613478452, guid: 7dead05c54ca85b4681351aafd8bd03a,
     type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
@@ -413,7 +405,7 @@ MonoBehaviour:
     m_ActionName: Player/Movement[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &7357248181649520441

@@ -74,7 +74,7 @@ namespace Underconnected
                 {
                     ""name"": ""up"",
                     ""id"": ""e16e5d37-3720-4ece-9cb6-7f55255b4370"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
