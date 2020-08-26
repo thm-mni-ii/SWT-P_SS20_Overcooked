@@ -10,6 +10,7 @@ namespace Underconnected
     /// </summary>
     public class Player : NetworkBehaviour
     {
+        [SerializeField] MeshRenderer playerModelRenderer;
         [SerializeField] Interactor interactor;
         [SerializeField] PlayerControls controls;
 
@@ -86,6 +87,8 @@ namespace Underconnected
             {
                 NetworkIdentity clientIdentity = reader.ReadNetworkIdentity();
                 this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
+                if (this.Client != null)
+                    this.playerModelRenderer.material.color = this.Client.PlayerInfo.Color;
             }
         }
 
@@ -98,6 +101,9 @@ namespace Underconnected
         public void SetClient(PlayerConnection client)
         {
             this.Client = client;
+
+            if (client != null)
+                this.playerModelRenderer.material.color = client.PlayerInfo.Color;
 
             if (this.isServer)
                 this.RpcSetClient(client != null ? client.GetComponent<NetworkIdentity>() : null);
