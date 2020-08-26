@@ -26,6 +26,15 @@ namespace Underconnected
         /// The player connection this player belongs to.
         /// </summary>
         public PlayerConnection Client { get; private set; }
+        /// <summary>
+        /// The player controls instance that listens for inputs and moves this player.
+        /// </summary>
+        public PlayerControls Controls => this.controls;
+
+        /// <summary>
+        /// Tells whether this player is our own player that we can control.
+        /// </summary>
+        public bool IsOwnPlayer => this.hasAuthority;
 
 
         #region Unity Callbacks
@@ -59,7 +68,7 @@ namespace Underconnected
         /// </summary>
         private void Update()
         {
-            if (this.hasAuthority)
+            if (this.IsOwnPlayer && this.Controls.ControlsEnabled)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                     this.interactor.Interact();
