@@ -14,27 +14,37 @@ namespace Underconnected
         /// Contains random syllables to generate random strings from.
         /// </summary>
         private static readonly string[] RANDOM_SYLLABLES = {
+            /* Source: https://en.wikipedia.org/wiki/Hiragana */
+
+            /* Monographs */
             "a", "e", "i", "o", "u",
-            "ha", "ba", "pa",
-            "ho", "bo", "po",
-            "ka", "ga",
-            "ko", "go",
-            "ku", "gu",
-            "ki", "gi",
-            "ke", "ge",
-            "ma", "me", "mu", "mo",
-            "fu", "bu", "pu",
-            "na", "no", "nu",
-            "sa", "za",
-            "su", "zu",
-            "so", "zo",
-            "ya", "yo",
-            "tsu", "n",
-            "shi", "ji",
-            "to", "do",
-            "ta", "da",
-            "te", "de",
-            "ra", "ru", "ri", "ro"
+            "ka", "ke", "ki", "ko", "ku",
+            "ga", "ge", "gi", "go", "gu",
+            "sa", "se", "shi", "so", "su",
+            "za", "ze", "ji", "zo", "zu",
+            "ta", "te", "chi", "to", "tsu",
+            "da", "de", "do",
+            "na", "ne", "ni", "no", "nu",
+            "ha", "he", "hi", "ho", "fu",
+            "ba", "be", "bi", "bo", "bu",
+            "pa", "pe", "pi", "po", "pu",
+            "ma", "me", "mi", "mo", "mu",
+            "ya", "yo", "yu",
+            "ra", "re", "ri", "ro", "ru",
+            "wa", "n",
+
+            /* Digraphs */
+            "kya", "kyu", "kyo",
+            "gya", "gyu", "gyo",
+            "sha", "shu", "sho",
+            "ja", "ju", "jo",
+            "cha", "chu", "cho",
+            "nya", "nyu", "nyo",
+            "hya", "hyu", "hyo",
+            "bya", "byu", "byo",
+            "pya", "pyu", "pyo",
+            "mya", "myu", "myo",
+            "rya", "ryu", "ryo"
         };
 
 
@@ -46,9 +56,19 @@ namespace Underconnected
         public static string GetRandomPlayerName(int minLength)
         {
             StringBuilder playerName = new StringBuilder();
+            int lastSyllable = -1;
+            int currentSyllable = 0;
 
             while (playerName.Length < minLength)
-                playerName.Append(RANDOM_SYLLABLES[Random.Range(0, RANDOM_SYLLABLES.Length)]);
+            {
+                currentSyllable = Random.Range(0, RANDOM_SYLLABLES.Length);
+
+                if (currentSyllable != lastSyllable)
+                {
+                    playerName.Append(RANDOM_SYLLABLES[currentSyllable]);
+                    lastSyllable = currentSyllable;
+                }
+            }
 
             if (playerName.Length > 0)
                 playerName[0] = char.ToUpper(playerName[0]);
