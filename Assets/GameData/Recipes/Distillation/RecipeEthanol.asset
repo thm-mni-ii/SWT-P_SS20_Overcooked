@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b4630f9a04d4e44e8c153ce5d90bae0, type: 3}
-  m_Name: RecipeEthane
+  m_Name: RecipeEthanol
   m_EditorClassIdentifier: 
   inputs:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
@@ -22,4 +22,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
-  output: {fileID: 11400000, guid: fed34ef602a277042a47fc70adcdbefa, type: 2}
+  output: {fileID: 11400000, guid: a9945d53d24bdaa4fa8a8fd2befc8840, type: 2}
