@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 namespace Underconnected
 {
@@ -11,6 +12,7 @@ namespace Underconnected
     public class Player : NetworkBehaviour
     {
         [SerializeField] MeshRenderer playerModelRenderer;
+        [SerializeField] TextMeshProUGUI playerNameText;
         [SerializeField] Interactor interactor;
         [SerializeField] PlayerControls controls;
 
@@ -101,7 +103,10 @@ namespace Underconnected
             this.Client = client;
 
             if (client != null)
+            {
+                this.playerNameText.text = client.PlayerInfo.Name;
                 this.playerModelRenderer.material.color = client.PlayerInfo.Color;
+            }
 
             if (this.isServer)
                 this.RpcSetClient(client != null ? client.GetComponent<NetworkIdentity>() : null);
