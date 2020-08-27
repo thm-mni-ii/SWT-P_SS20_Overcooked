@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerModelRenderer: {fileID: 482893924135192172}
   interactor: {fileID: 8694444420510392368}
   controls: {fileID: 4366956658083762539}
 --- !u!114 &4366956658083762539
@@ -294,7 +295,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   rigidBody: {fileID: 2127368311968531779}
-  playerModelRenderer: {fileID: 482893924135192172}
   player: {fileID: 5674135250990863131}
   interactor: {fileID: 8694444420510392368}
   moveSpeed: 70

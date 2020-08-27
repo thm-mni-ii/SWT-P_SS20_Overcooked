@@ -86,9 +86,7 @@ namespace Underconnected
             if (initialState)
             {
                 NetworkIdentity clientIdentity = reader.ReadNetworkIdentity();
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
-                if (this.Client != null)
-                    this.playerModelRenderer.material.color = this.Client.PlayerInfo.Color;
+                this.SetClient(clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null);
             }
         }
 
@@ -119,7 +117,7 @@ namespace Underconnected
         private void RpcSetClient(NetworkIdentity clientIdentity)
         {
             if (this.isClientOnly)
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
+                this.SetClient(clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null);
         }
     }
 }

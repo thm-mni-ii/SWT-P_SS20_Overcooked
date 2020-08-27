@@ -54,6 +54,13 @@ namespace Underconnected
         /// </summary>
         private int levelOnClients;
 
+        /// <summary>
+        /// Holds the clients that have attempted to connect and are still loading.
+        /// Used to store their <see cref="PlayerInfo"/> to create their <see cref="PlayerConnection"/> later.
+        /// Key is the connection id (<see cref="NetworkConnection.connectionId"/>), Value is the associated player information.
+        /// </summary>
+        private Dictionary<int, PlayerInfo> pendingConnections;
+
 
         public override void Awake()
         {
@@ -62,11 +69,16 @@ namespace Underconnected
             this.AllClients = new List<PlayerConnection>();
             this.isWaitingForClientsToLoad = false;
             this.levelOnClients = 0;
+            this.pendingConnections = new Dictionary<int, PlayerInfo>();
+
             this.OnClientsLevelReady += this.TestNetworkManager_OnClientsLevelReady;
         }
 
         public override void OnStartServer()
         {
+            // Register message handlers
+            NetworkServer.RegisterHandler<ConnectionRequestMessage>(this.OnConnectionRequestMessage, false);
+
             // Register server events
             GameManager.OnLevelLoaded += GameManager_OnLevelLoaded_Server;
 
@@ -81,6 +93,8 @@ namespace Underconnected
 
             if (GameManager.CurrentLevel != null)
                 GameManager.Instance.UnloadCurrentLevel();
+
+            this.pendingConnections.Clear();
         }
 
         public override void OnStartClient()
@@ -110,18 +124,25 @@ namespace Underconnected
                     GameManager.Instance.UnloadCurrentLevel();
             }
         }
+        public override void OnClientConnect(NetworkConnection conn) => conn.Send(new ConnectionRequestMessage(GameManager.PlayerInfo));
 
-        public override void OnServerConnect(NetworkConnection conn) => conn.Send(new ServerStateMessage(GameManager.CurrentLevelNum));
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
-            GameObject connectionGO = GameObject.Instantiate(this.playerPrefab, this.clientsContainer);
-            PlayerConnection clientConnection = connectionGO.GetComponent<PlayerConnection>();
+            if (this.pendingConnections.ContainsKey(conn.connectionId))
+            {
+                GameObject connectionGO = GameObject.Instantiate(this.playerPrefab, this.clientsContainer);
+                PlayerConnection clientConnection = connectionGO.GetComponent<PlayerConnection>();
+                clientConnection.SetPlayerInfo(this.pendingConnections[conn.connectionId]);
 
-            // Register server-side events for the connected client
-            if (clientConnection != null)
-                clientConnection.OnLevelLoaded += this.PlayerConnection_OnLevelLoaded;
+                // Register server-side events for the connected client
+                if (clientConnection != null)
+                    clientConnection.OnLevelLoaded += this.PlayerConnection_OnLevelLoaded;
 
-            NetworkServer.AddPlayerForConnection(conn, connectionGO);
+                this.pendingConnections.Remove(conn.connectionId);
+                NetworkServer.AddPlayerForConnection(conn, connectionGO);
+            }
+            else
+                conn.Disconnect(); // No player info was sent before requesting to add a player -> disconnect and let the client retry
         }
 
 
@@ -251,6 +272,16 @@ namespace Underconnected
         /// </summary>
         /// <param name="connection">The client that has finished loading a requested level.</param>
         private void PlayerConnection_OnLevelLoaded(PlayerConnection connection) => this.CheckIfClientsReady();
+
+
+        private void OnConnectionRequestMessage(NetworkConnection connection, ConnectionRequestMessage message)
+        {
+            if (this.pendingConnections.ContainsKey(connection.connectionId))
+                this.pendingConnections.Remove(connection.connectionId);
+
+            this.pendingConnections.Add(connection.connectionId, message.PlayerInfo);
+            connection.Send(new ServerStateMessage(GameManager.CurrentLevelNum));
+        }
 
         /// <summary>
         /// Called when the client receives a <see cref="ServerStateMessage"/>.
