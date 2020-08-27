@@ -10,14 +10,15 @@ namespace Underconnected {
     /// Represents the "Control Settings Screen" screen that is shown after ...
     /// </summary>
     public class PlayerControlsUI : MonoBehaviour {
-        [SerializeField] InputMaster inputMaster;
+        [SerializeField] Button activeButton;
 
-        /// <summary>
-        /// Hides this screen.
-        /// </summary>
-        public void Close()
-        {
+        private void OnEnable() {
+            activeButton.Select();
+        }
+
+        public void Close(){
             this.gameObject.SetActive(false);
         }
+       
     }
 }

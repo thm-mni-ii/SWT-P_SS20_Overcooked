@@ -53,9 +53,14 @@ namespace Underconnected
                     if (Input.GetKeyDown(KeyCode.Escape)) PlayerControlsUI.gameObject.SetActive(true);
         }*/
 
-        public void OnAbort(InputValue value) {
-            Debug.Log("OnAbort wird aufgerufen!");
+        
 
+        public void OnAbort(InputValue value) {
+            if(PlayerControlsUI.gameObject.activeSelf){
+                PlayerControlsUI.gameObject.SetActive(false);
+            }else{
+                PlayerControlsUI.gameObject.SetActive(true);
+            }
         }
     }
 }
