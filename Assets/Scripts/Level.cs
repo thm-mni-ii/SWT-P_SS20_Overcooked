@@ -71,6 +71,24 @@ namespace Underconnected
         [SyncVar(hook = nameof(DeliveredScore_OnChange))] int deliveredScore;
 
         /// <summary>
+        /// The current amount of correctly delivered recipes.
+        /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
+        /// </summary>
+        [SyncVar(hook = nameof(DeliveredCounter_OnChange))] int deliveredCounter;
+
+        /// <summary>
+        /// The current score that the players lose by not delivering recipes.
+        /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
+        /// </summary>
+        [SyncVar(hook = nameof(DeliveredFailedScore_OnChange))] int deliveredFailedScore;
+
+        /// <summary>
+        /// The current amount of not delivered recipes.
+        /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
+        /// </summary>
+        [SyncVar(hook = nameof(DeliveredFailedCounter_OnChange))] int deliveredFailedCounter;
+
+        /// <summary>
         /// The coroutine that adds demands to the demands list.
         /// </summary>
         private Coroutine demandCoroutine;
@@ -93,7 +111,10 @@ namespace Underconnected
         private void Awake()
         {
             this.playerScore = 0;
+            this.deliveredCounter = 0;
             this.deliveredScore = 0;
+            this.deliveredFailedCounter = 0;
+            this.deliveredFailedScore = 0;
 
             this.demandCoroutine = null;
 
@@ -219,6 +240,7 @@ namespace Underconnected
 
                     this.IncrementPlayerScore(matter.GetScoreReward() + bonusPoints);
                     this.IncrementDeliveredScore(matter.GetScoreReward() + bonusPoints);
+                    this.IncrementDeliveredCounter();
                     NetworkServer.Destroy(matterObject.gameObject);
                 }
             }
@@ -284,6 +306,24 @@ namespace Underconnected
         /// </summary>
         /// <param name="scoreDelta">The amount by which to increase the player score.</param>
         public void IncrementDeliveredScore(int scoreDelta) => this.SetDeliveredScore(this.deliveredScore + scoreDelta);
+
+        /// <summary>
+        /// Increments the recipes delievered amount by one.
+        /// Only has effect when called on the server.
+        public void IncrementDeliveredCounter() => this.SetDeliveredCounter(this.deliveredCounter + 1);
+
+        /// <summary>
+        /// Reduces the recipes delievered score by the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="scoreDelta">The amount by which to decrease the player score.</param>
+        public void IncrementFailedDeliveredScore(int scoreDelta) => this.SetDeliveredFailedScore(this.deliveredFailedScore + scoreDelta);
+
+        /// <summary>
+        /// Increments the recipes failed amount by one.
+        /// Only has effect when called on the server.
+        public void IncrementFailedDeliveredCounter() => this.SetDeliveredFailedCounter(this.deliveredFailedCounter + 1);
+
         /// <summary>
         /// Sets the recipes delievered score to the given amount.
         /// Only has effect when called on the server.
@@ -293,6 +333,39 @@ namespace Underconnected
         {
             if (this.isServer)
                 this.deliveredScore = newScore;
+        }
+
+        /// <summary>
+        /// Sets the recipes delievered score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player amount.</param>
+        public void SetDeliveredCounter(int newAmount)
+        {
+            if (this.isServer)
+                this.deliveredCounter = newAmount;
+        }
+
+        /// <summary>
+        /// Sets the recipes delievered score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player score.</param>
+        public void SetDeliveredFailedScore(int newScore)
+        {
+            if (this.isServer)
+                this.deliveredFailedScore = newScore;
+        }
+
+        /// <summary>
+        /// Sets the recipes delievered score to the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="newScore">The new player amount.</param>
+        public void SetDeliveredFailedCounter(int newAmount)
+        {
+            if (this.isServer)
+                this.deliveredFailedCounter = newAmount;
         }
 
 
@@ -430,6 +503,44 @@ namespace Underconnected
         }
 
         /// <summary>
+        /// Called when the value of <see cref="DeliveredCounter"/> has changed on the server side.
+        /// Updates the amount on a client to synchronize it with the server. 
+        /// Updates the amount for the level finished screen.
+        /// </summary>
+        /// <param name="oldValue">The previous recipes delivered score.</param>
+        /// <param name="newValue">The new recipes delivered  score.</param>
+
+        private void DeliveredCounter_OnChange(int oldValue, int newValue)
+        {
+            GameManager.UI.LevelFinishedUI.SetDeliveredCounter(newValue);
+        }
+
+        /// <summary>
+        /// Called when the value of <see cref="DeliveredFailedScore"/> has changed on the server side.
+        /// Updates the score on a client to synchronize it with the server. 
+        /// Updates the score for the level finished screen.
+        /// </summary>
+        /// <param name="oldValue">The previous recipes delivered score.</param>
+        /// <param name="newValue">The new recipes delivered  score.</param>
+        private void DeliveredFailedScore_OnChange(int oldValue, int newValue)
+        {
+            GameManager.UI.LevelFinishedUI.SetDeliveredFailedPoints(newValue);
+        }
+
+        /// <summary>
+        /// Called when the value of <see cref="DeliveredFailedCounter"/> has changed on the server side.
+        /// Updates the amount on a client to synchronize it with the server. 
+        /// Updates the amount for the level finished screen.
+        /// </summary>
+        /// <param name="oldValue">The previous recipes delivered score.</param>
+        /// <param name="newValue">The new recipes delivered  score.</param>
+
+        private void DeliveredFailedCounter_OnChange(int oldValue, int newValue)
+        {
+            GameManager.UI.LevelFinishedUI.SetDeliveredFailedCounter(newValue);
+        }
+
+        /// <summary>
         /// Called when the level timer is finished.
         /// Shows the level finished screen and blocks player controls for the own player.
         /// Will only be called on the client as this event is only subscribed on the client side.
@@ -460,7 +571,9 @@ namespace Underconnected
         private void DemandQueue_OnDemandExpired_Server(Demand demand)
         {
             this.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
-            this.IncrementDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+            this.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+            this.IncrementFailedDeliveredCounter();
+
         }
     }
 }
