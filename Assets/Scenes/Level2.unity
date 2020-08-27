@@ -2468,7 +2468,9 @@ MonoBehaviour:
   syncInterval: 0.1
   scorePerDelivery: 50
   levelDurationSeconds: 180
-  demandsPool: []
+  demandsPool:
+  - {fileID: 11400000, guid: f5134015f746dd7418b1ff6b5acb6e78, type: 2}
+  - {fileID: 11400000, guid: fed34ef602a277042a47fc70adcdbefa, type: 2}
   spawnPoints:
   - {fileID: 904617143}
   - {fileID: 589103136}
