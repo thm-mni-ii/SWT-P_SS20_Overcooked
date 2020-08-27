@@ -100,5 +100,18 @@ namespace Underconnected
                 this.OnStateChanged?.Invoke(nextState);
             }
         }
+
+        /// <summary>
+        /// Shuts down this state machine by exiting the current state.
+        /// </summary>
+        public void Shutdown()
+        {
+            if (this.CurrentStateObject != null)
+            {
+                this.CurrentStateObject.OnStateLeave(null);
+                this.CurrentStateObject = null;
+                this.CurrentState = default(TEnum);
+            }
+        }
     }
 }
