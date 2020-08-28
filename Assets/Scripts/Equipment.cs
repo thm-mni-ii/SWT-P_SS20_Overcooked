@@ -192,7 +192,7 @@ namespace Underconnected
         private void CompleteRecipe(Recipe recipe)
         {
             this.RemoveFromInput(recipe.Inputs);
-            this.AddToOutput(recipe.Output);
+            this.AddToOutput(recipe.Outputs);
 
             this.recipeInProgress = null;
             this.RpcCompleteRecipe();
@@ -203,21 +203,25 @@ namespace Underconnected
         /// </summary>
         /// <param name="matter">The matter to add.</param>
         [Server]
-        private void AddToOutput(Matter matter)
+        private void AddToOutput(Matter[] matter)
         {
             if (matter != null)
             {
-                GameObject resultMatter = GameObject.Instantiate(matter.GetPrefab());
+                for(int i = 0; i < matter.Length; i++)
+                {
+                    GameObject resultMatter = GameObject.Instantiate(matter[i].GetPrefab());
 
-                this.outputObject = resultMatter.GetComponent<MatterObject>();
-                this.outputObject.DisablePhysics();
+                    this.outputObject = resultMatter.GetComponent<MatterObject>();
+                    this.outputObject.DisablePhysics();
 
-                resultMatter.transform.SetParent(this.outputContainer.transform, false);
-                resultMatter.transform.localPosition = Vector3.zero;
-                resultMatter.transform.localRotation = Quaternion.identity;
+                    resultMatter.transform.SetParent(this.outputContainer.transform, false);
+                    resultMatter.transform.localPosition = Vector3.zero;
+                    resultMatter.transform.localRotation = Quaternion.identity;
 
-                NetworkServer.Spawn(resultMatter);
-                this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
+                    NetworkServer.Spawn(resultMatter);
+                    this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
+                }
+                
             }
         }
         /// <summary>

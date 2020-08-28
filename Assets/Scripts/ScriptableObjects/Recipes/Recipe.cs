@@ -13,8 +13,8 @@ namespace Underconnected
     {
         [Tooltip("The input elements for this recipe.")]
         [SerializeField] Matter[] inputs;
-        [Tooltip("The output element that is produced by this recipe.")]
-        [SerializeField] Matter output;
+        [Tooltip("The output elements that are produced by this recipe.")]
+        [SerializeField] Matter[] outputs;
 
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Underconnected
         /// <summary>
         /// The output element that is produced by this recipe.
         /// </summary>
-        public Matter Output => this.output;
+        public Matter[] Outputs => this.outputs;
 
 
         /// <summary>

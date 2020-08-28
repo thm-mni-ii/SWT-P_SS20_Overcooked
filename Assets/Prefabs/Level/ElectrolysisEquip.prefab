@@ -10769,6 +10769,7 @@ GameObject:
   - component: {fileID: 3537673283732251957}
   - component: {fileID: 7210062097995502770}
   - component: {fileID: 4169084866588890487}
+  - component: {fileID: 860631472}
   m_Layer: 8
   m_Name: ElectrolysisEquip
   m_TagString: Untagged
@@ -10897,6 +10898,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
+--- !u!65 &860631472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2964636390598513129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0933399, y: 2.8558476, z: 1.2932262}
+  m_Center: {x: -1.0059941, y: 0.00000011920929, z: 0.4633869}
 --- !u!1 &2991696071410002021
 GameObject:
   m_ObjectHideFlags: 0
@@ -34730,8 +34744,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8524578093857017655}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.74, z: 0.78}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalPosition: {x: -0.3, y: -1.72, z: 0}
+  m_LocalScale: {x: 0.045, y: 0.045, z: 0.04}
   m_Children:
   - {fileID: 1113712005386671466}
   - {fileID: 4028256763619980847}
