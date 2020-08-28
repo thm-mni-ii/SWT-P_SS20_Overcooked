@@ -2039,6 +2039,10 @@ PrefabInstance:
       propertyPath: m_AssetId
       value: f28d248b5897f164f8e880003f6c6ce2
       objectReference: {fileID: 0}
+    - target: {fileID: 809165227, guid: f28d248b5897f164f8e880003f6c6ce2, type: 3}
+      propertyPath: allRecipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2846866026949719891, guid: f28d248b5897f164f8e880003f6c6ce2,
         type: 3}
       propertyPath: m_Name
