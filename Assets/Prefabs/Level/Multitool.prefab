@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 809165226}
   - component: {fileID: 809165227}
   m_Layer: 8
-  m_Name: NaCl_Experiment_Equipment
+  m_Name: Multitool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +312,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.313
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333722287350076706, guid: a379a82c9328b14498ab58e23d92de5d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333722287350076706, guid: a379a82c9328b14498ab58e23d92de5d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4333722287350076717, guid: a379a82c9328b14498ab58e23d92de5d,
         type: 3}
