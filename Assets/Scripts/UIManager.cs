@@ -49,18 +49,16 @@ namespace Underconnected
         /// <summary>
         /// Shows up the control settings screen, when the ESC is pressed.
         /// </summary>
-        /*public void ShowControlSettings() {
-                    if (Input.GetKeyDown(KeyCode.Escape)) PlayerControlsUI.gameObject.SetActive(true);
-        }*/
-public void OnAbort(InputValue value) {
-            Debug.Log("OnAbort wird aufgerufen");
-            if(PlayerControlsUI.gameObject.activeSelf){
+        public void OnAbort(InputValue value) 
+        {
+            if(PlayerControlsUI.gameObject.activeSelf)
+            {
                 PlayerControlsUI.gameObject.SetActive(false);
-            }else{
+            }
+            else
+            {
                 PlayerControlsUI.gameObject.SetActive(true);
             }
         }
-        
-
     }
 }

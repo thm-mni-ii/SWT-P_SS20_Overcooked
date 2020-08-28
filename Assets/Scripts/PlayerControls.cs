@@ -46,7 +46,9 @@ namespace Underconnected
         {
             this.playerColor = Random.ColorHSV();
         }
-
+        /// <summary>
+        /// Movement Method of Player with new Input System
+        /// </summary>
         private void OnMovement(InputValue value){
             
             Debug.Log("OnMovement wird aufgerufen!");

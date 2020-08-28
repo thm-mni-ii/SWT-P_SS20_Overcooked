@@ -11,7 +11,9 @@ namespace Underconnected {
     /// </summary>
     public class PlayerControlsUI : MonoBehaviour {
         [SerializeField] Button activeButton;
-        
+        /// <summary>
+        /// Represents the "Control Settings Screen" screen that is shown after ...
+        /// </summary>
         private void OnEnable() {
             activeButton.Select();
         }
@@ -19,15 +21,5 @@ namespace Underconnected {
         public void Close(){
             this.gameObject.SetActive(false);
         }
-
-        public void OnAbort(InputValue value) {
-            Debug.Log("OnAbort wird aufgerufen");
-            if(this.gameObject.activeSelf){
-                this.gameObject.SetActive(false);
-            }else{
-                this.gameObject.SetActive(true);
-            }
-        }
-       
     }
 }
