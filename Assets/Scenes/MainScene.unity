@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &830390989 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2504149403412627347, guid: 2a304940b56ad0e4e9bbdedc38523115,
-    type: 3}
-  m_PrefabInstance: {fileID: 7401228249681254660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1210915494
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,18 +187,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &1594933287 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6346374945003955477, guid: 2a304940b56ad0e4e9bbdedc38523115,
-    type: 3}
-  m_PrefabInstance: {fileID: 7401228249681254660}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3189b95980ac3224aa3460cdb24138db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1750786448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -443,67 +419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2504149403412627347, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_Colors.m_SelectedColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2504149403412627347, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_Colors.m_SelectedColor.g
-      value: 0.25337353
-      objectReference: {fileID: 0}
-    - target: {fileID: 2504149403412627347, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_Colors.m_SelectedColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4354900434970416234, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4865645597115601233, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4865645597115601233, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1594933287}
-    - target: {fileID: 4865645597115601233, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Close
-      objectReference: {fileID: 0}
-    - target: {fileID: 4865645597115601233, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4865645597115601233, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6162885419970098383, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 20f9b9a0a128edf4aa357af9800c6d37,
-        type: 3}
-    - target: {fileID: 6162885419970098383, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_DefaultActionMap
-      value: AbortUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6346374945003955477, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: activeButton
-      value: 
-      objectReference: {fileID: 830390989}
     - target: {fileID: 7401228249431716312, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}
       propertyPath: sceneId
@@ -518,11 +433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7401228250153738753, guid: 2a304940b56ad0e4e9bbdedc38523115,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7401228250153738754, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}

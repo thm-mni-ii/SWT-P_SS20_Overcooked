@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7401228250153738754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7dead05c54ca85b4681351aafd8bd03a,
+  m_Actions: {fileID: -944628639613478452, guid: 20f9b9a0a128edf4aa357af9800c6d37,
     type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: AbortUI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1001 &1393220868124668777
@@ -624,6 +624,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7401228250153738754}
     m_Modifications:
+    - target: {fileID: 97392756, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 97392756, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 97392756, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -440
+      objectReference: {fileID: 0}
+    - target: {fileID: 144580111138286545, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: GamepadMovementText
+      objectReference: {fileID: 0}
+    - target: {fileID: 178116611353217209, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 178116611353217209, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 178116611353217209, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.6901961
+      objectReference: {fileID: 0}
     - target: {fileID: 400691600108962322, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Name
@@ -632,7 +664,22 @@ PrefabInstance:
     - target: {fileID: 400691600108962322, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763948514963229211, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: KeyboardInteractionText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101952589298332389, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: GamepadInteractionText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1261144334306580730, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: ResetGamepadInteraction
       objectReference: {fileID: 0}
     - target: {fileID: 1267435455043174012, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
@@ -649,6 +696,11 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1305237782265906644, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Text
+      value: Circle
+      objectReference: {fileID: 0}
     - target: {fileID: 1855850437848270091, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_fontSize
@@ -664,6 +716,96 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266005383486766593, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: KeyboardInteractionRebindButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472686159143867833, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2949989989256504488, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: ResetKeyboardMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357423247258237389, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357423247258237389, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357423247258237389, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.6901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719213912409821045, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: GamepadMovementRebindButton
+      objectReference: {fileID: 0}
     - target: {fileID: 3879669516867689742, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_fontSize
@@ -678,6 +820,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5604828651067261499, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: ResetGamepadMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6243516221463767526, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: KeyboardMovementRebindButton
       objectReference: {fileID: 0}
     - target: {fileID: 6387291871193047136, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
@@ -784,6 +966,31 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6787181907950097016, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787181907950097016, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787181907950097016, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.6901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000673326204121935, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: ResetKeyboardInteraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057956862444385133, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: activeButton
+      value: 
+      objectReference: {fileID: 2504149403412627347}
     - target: {fileID: 7120445709690429153, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_fontSize
@@ -802,17 +1009,97 @@ PrefabInstance:
     - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
-      value: 0.2901961
+      value: 0.5176471
       objectReference: {fileID: 0}
     - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.g
-      value: 0.36078432
+      value: 0.6313726
       objectReference: {fileID: 0}
     - target: {fileID: 7440207893868211754, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
-      value: 0.4
+      value: 0.6901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 8058462249376552372, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Name
+      value: GamepadInteractionRebindButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.6901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819740048353494825, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.8509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086182760599998328, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.8509804
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
@@ -832,6 +1119,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3189b95980ac3224aa3460cdb24138db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2504149403412627347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1954767439410178539, guid: 7189eaea369d4a741a0cc843f990dc37,
+    type: 3}
+  m_PrefabInstance: {fileID: 4170399485393983096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5815877353575684269
