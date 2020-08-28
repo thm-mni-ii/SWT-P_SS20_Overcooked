@@ -17,7 +17,9 @@ namespace Underconnected
         [SerializeField] Sprite emptyStar;
         [SerializeField] Sprite filledStar;
         [SerializeField] TextMeshProUGUI recipesDeliveredText;
+        [SerializeField] TextMeshProUGUI recipesDeliveredCounterText;
         [SerializeField] TextMeshProUGUI recipesFailedDeliveredText;
+        [SerializeField] TextMeshProUGUI recipesFailedDeliveredCounterText;
         [SerializeField] TextMeshProUGUI pointsText;
         [SerializeField] TextMeshProUGUI highscoreText;
 
@@ -35,19 +37,38 @@ namespace Underconnected
         /// <summary>
         /// Sets the points of right delivered recipes and display them on this screen.
         /// </summary>
-        /// <param name="deliveredPoints">The amount of delivered recipes.</param>
+        /// <param name="deliveredPoints">The amount of points gained by delivering recipes.</param>
         public void SetDeliveredPoints(int deliveredPoints)
         {
             recipesDeliveredText.SetText(deliveredPoints.ToString());
         }
 
         /// <summary>
-        /// Sets the points of wrong delivered recipes and display them on this screen.
+        /// Sets the amount of right delivered recipes and display them on this screen.
+        /// </summary>
+        /// <param name="deliveredCounter">The amount of delivered recipes.</param>
+
+        public void SetDeliveredCounter(int deliveredCounter)
+        {
+            recipesDeliveredCounterText.SetText(deliveredCounter.ToString());
+        }
+
+        /// <summary>
+        /// Sets the points of not delivered recipes and display them on this screen.
         /// </summary>
         /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
         public void SetDeliveredFailedPoints(int deliveredFailedPoints)
         {
             recipesFailedDeliveredText.SetText(deliveredFailedPoints.ToString());
+        }
+
+        /// <summary>
+        /// Sets the amount of not delivered recipes and display them on this screen.
+        /// </summary>
+        /// <param name="deliveredFailedPoints">The amount of failed recipes.</param>
+        public void SetDeliveredFailedCounter(int deliveredFailedCounter)
+        {
+            recipesFailedDeliveredCounterText.SetText(deliveredFailedCounter.ToString());
         }
 
         /// <summary>
