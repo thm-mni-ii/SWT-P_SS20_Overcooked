@@ -37,7 +37,7 @@ namespace Underconnected
         /// <summary>
         /// The output slot of this equipment.
         /// </summary>
-        private MatterObject outputObject;
+        private List<MatterObject> outputObjects;
 
 
         private void Awake()
@@ -45,7 +45,7 @@ namespace Underconnected
             this.insertedObjects = new List<MatterObject>();
             this.insertedMatter = new List<Matter>();
             this.recipeInProgress = null;
-            this.outputObject = null;
+            this.outputObjects = new List<MatterObject>();
         }
 
 
@@ -64,7 +64,7 @@ namespace Underconnected
 
             if (heldObject != null)
             {
-                if (this.outputObject == null)
+                if (this.outputObjects.Count == 0)
                 {
                     MatterObject matterObject = heldObject.GetComponent<MatterObject>();
 
@@ -77,7 +77,7 @@ namespace Underconnected
             }
             else if (interactor.HeldObject == null)
             {
-                MatterObject toTake = this.outputObject != null ? this.TakeOutputObject() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedObject() : null;
+                MatterObject toTake = this.outputObjects.Count != 0 ? this.TakeOutputObject() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedObject() : null;
 
                 if (toTake != null)
                     interactor.SetHeldObject(toTake.GetComponent<PickableObject>());
@@ -147,13 +147,13 @@ namespace Underconnected
         /// <returns>The output matter object or `null` if none.</returns>
         private MatterObject TakeOutputObject()
         {
-            if (this.outputObject != null)
+            if (this.outputObjects.Count != 0)
             {
-                MatterObject toTake = this.outputObject;
+                MatterObject toTake = this.outputObjects[this.outputObjects.Count-1];
                 toTake.EnablePhysics();
                 toTake.transform.SetParent(this.transform, false);
 
-                this.outputObject = null;
+                this.outputObjects.RemoveAt(this.outputObjects.Count - 1);
                 return toTake;
             }
 
@@ -205,18 +205,18 @@ namespace Underconnected
         [Server]
         private void AddToOutput(Matter[] matter)
         {
-            if (matter != null)
+            if (matter.Length>0)
             {
                 for(int i = 0; i < matter.Length; i++)
                 {
                     GameObject resultMatter = GameObject.Instantiate(matter[i].GetPrefab());
 
-                    this.outputObject = resultMatter.GetComponent<MatterObject>();
-                    this.outputObject.DisablePhysics();
+                    this.outputObjects.Add(resultMatter.GetComponent<MatterObject>());
+                    this.outputObjects[i].DisablePhysics();
 
-                    resultMatter.transform.SetParent(this.outputContainer.transform, false);
-                    resultMatter.transform.localPosition = Vector3.zero;
-                    resultMatter.transform.localRotation = Quaternion.identity;
+                    this.outputObjects[i].transform.SetParent(this.outputContainer.transform, false);
+                    this.outputObjects[i].transform.localPosition = Vector3.zero;
+                    this.outputObjects[i].transform.localRotation = Quaternion.identity;
 
                     NetworkServer.Spawn(resultMatter);
                     this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
@@ -311,7 +311,7 @@ namespace Underconnected
         [ClientRpc]
         private void RpcAddOutput(NetworkIdentity outputObject)
         {
-            if (this.isClientOnly && outputObject != null)
+            if (this.isClientOnly && outputObjects.Count != 0)
             {
                 MatterObject matterObject = outputObject.GetComponent<MatterObject>();
                 matterObject.DisablePhysics();
@@ -320,7 +320,7 @@ namespace Underconnected
                 outputObject.transform.localPosition = Vector3.zero;
                 outputObject.transform.localRotation = Quaternion.identity;
 
-                this.outputObject = matterObject;
+                this.outputObjects.Add(matterObject);
             }
         }
     }
