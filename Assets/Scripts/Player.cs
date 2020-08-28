@@ -55,7 +55,6 @@ namespace Underconnected
             if (GameManager.CurrentLevel != null)
             {
                 this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
-                Debug.Log($"Player start, name visible: {this.isNameVisible}");
                 GameManager.CurrentLevel.RegisterPlayer(this);
             }
             else
@@ -108,12 +107,7 @@ namespace Underconnected
             this.isNameVisible = true;
 
             if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
-            {
                 this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
-                Debug.Log("Player name now visible");
-            }
-            else
-                Debug.Log($"isNameVisible is {this.isNameVisible}");
         }
         /// <summary>
         /// Hides this player's name.
@@ -123,12 +117,7 @@ namespace Underconnected
             this.isNameVisible = false;
 
             if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
-            {
                 this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
-                Debug.Log("Player name now invisible");
-            }
-            else
-                Debug.Log($"isNameVisible is {this.isNameVisible}");
         }
 
 
