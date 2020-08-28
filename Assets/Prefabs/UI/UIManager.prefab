@@ -680,6 +680,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 618589069, guid: 7189eaea369d4a741a0cc843f990dc37, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 144580111138286545, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Name
@@ -743,7 +747,7 @@ PrefabInstance:
     - target: {fileID: 1305237782265906644, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Text
-      value: A
+      value: Y
       objectReference: {fileID: 0}
     - target: {fileID: 1855850437848270091, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
@@ -830,6 +834,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResetKeyboardMovement
       objectReference: {fileID: 0}
+    - target: {fileID: 3129199699217643910, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Text
+      value: R/D/F/G
+      objectReference: {fileID: 0}
     - target: {fileID: 3357423247258237389, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
@@ -869,6 +878,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ResetGamepadMovement
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644425651696705301, guid: 7189eaea369d4a741a0cc843f990dc37,
+        type: 3}
+      propertyPath: m_Text
+      value: D-Pad
       objectReference: {fileID: 0}
     - target: {fileID: 5978424800814464524, guid: 7189eaea369d4a741a0cc843f990dc37,
         type: 3}

@@ -47,11 +47,11 @@ namespace Underconnected
             LevelUI.gameObject.SetActive(false);
         }
         /// <summary>
-        /// Shows up the control settings screen, when the ESC is pressed.
+        /// Shows up the control settings screen, when the escape/start is pressed.
         /// </summary>
         public void OnAbort(InputValue value) 
         {
-            if(PlayerControlsUI.gameObject.activeSelf)
+            if (PlayerControlsUI.gameObject.activeSelf)
             {
                 PlayerControlsUI.gameObject.SetActive(false);
             }

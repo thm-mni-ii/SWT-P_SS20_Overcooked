@@ -7,18 +7,27 @@ using UnityEngine.InputSystem;
 
 namespace Underconnected {
     /// <summary>
-    /// Represents the "Control Settings Screen" screen that is shown after ...
+    /// Represents the "Control Settings Screen" screen that is shown after press escape/start.
     /// </summary>
     public class PlayerControlsUI : MonoBehaviour {
-        [SerializeField] Button activeButton;
         /// <summary>
-        /// Represents the "Control Settings Screen" screen that is shown after ...
+        /// A reference to the selected Button when this screen appears.
         /// </summary>
-        private void OnEnable() {
+        [SerializeField] Button activeButton;
+
+        /// <summary>
+        /// Selects the KeyboardMovementRebindButton to navigate this screen with the keyboard/gamepad.
+        /// </summary>
+        private void OnEnable() 
+        {
             activeButton.Select();
         }
 
-        public void Close(){
+        /// <summary>
+        /// Hides this screen.
+        /// </summary>
+        public void Close()
+        {
             this.gameObject.SetActive(false);
         }
     }

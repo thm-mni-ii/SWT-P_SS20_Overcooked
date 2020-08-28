@@ -46,12 +46,12 @@ namespace Underconnected
         {
             this.playerColor = Random.ColorHSV();
         }
+
         /// <summary>
         /// Movement Method of Player with new Input System
         /// </summary>
-        private void OnMovement(InputValue value){
-            
-            Debug.Log("OnMovement wird aufgerufen!");
+        private void OnMovement(InputValue value)
+        {
             Vector2 tmpInput = value.Get<Vector2>();
             movementInput.x = tmpInput.x;
             movementInput.z = tmpInput.y;
@@ -64,27 +64,7 @@ namespace Underconnected
         {
             //this.rigidBody.isKinematic = !this.hasAuthority;
         }
-
-        /// <summary>
-        /// Listens for player input and stores it to move the player inside of <see cref="FixedUpdate"/>.
-        /// Called every frame.
-        /// </summary>
-        /*
-        private void Update()
-        {
-            if (this.isLocalPlayer)
-            {
-                this.movementInput.x = Input.GetAxisRaw("Horizontal");
-                this.movementInput.y = 0;
-                this.movementInput.z = Input.GetAxisRaw("Vertical");
-
-                if (this.movementInput.sqrMagnitude > Mathf.Epsilon)
-                    this.targetYaw = Vector3.SignedAngle(this.movementInput, Vector3.forward, Vector3.down);
-            }
-            
-
-        }
-        */
+        
         /// <summary>
         /// Moves the player with the input values previously recorded inside of <see cref="Update"/>.
         /// The player needs to be moved here because Unity's physics system expects rigidbodies to move inside of FixedUpdate instead of regular Update.

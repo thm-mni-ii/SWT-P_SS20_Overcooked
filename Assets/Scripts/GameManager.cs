@@ -23,38 +23,13 @@ namespace Underconnected
         /// The currently played level. `null` if there is none.
         /// </summary>
         public static Level CurrentLevel => Instance.currentLevel;
-
-        /// <summary>
-        /// The OG game manager.
-        /// </summary>
-        public KeyCode forward { get; set;}
-        /// <summary>
-        /// The OG game manager.
-        /// </summary>
-        public KeyCode right { get; set;}
-        /// <summary>
-        /// The OG game manager.
-        /// </summary>
-        public KeyCode left { get; set;}
-        /// <summary>
-        /// The OG game manager.
-        /// </summary>
-        public KeyCode backward { get; set;}
-        /// <summary>
-        /// The OG game manager.
-        /// </summary>
-        public KeyCode action { get; set;}
-
-
+        
         [Header("References")]
         [SerializeField] UIManager uiManager;
+        [SerializeField] LevelFinishedUI levelFinishedUI;
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
-
-        //[Tooltip("A reference to the level finished UI.")]
-        [Header("Settings")]
-        [SerializeField] LevelFinishedUI levelFinishedUI;
 
         /// <summary>
         /// Holds the currently played level.
@@ -86,12 +61,6 @@ namespace Underconnected
             }
             else
                 GameObject.Destroy(this.gameObject);
-
-            forward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("forwardKey", "W"));
-            left = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "A"));
-            right = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "D"));
-            backward = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("backwardKey", "S"));
-            action = (KeyCode) System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("actionKey", "E"));
         }
 
         /// <summary>

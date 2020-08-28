@@ -42,7 +42,7 @@ public class @TestMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c9a895f9-befa-4e1e-a81e-839ef6101ee8"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

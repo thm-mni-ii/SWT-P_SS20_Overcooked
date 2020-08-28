@@ -8,7 +8,7 @@ namespace Underconnected
 
 {
     /// <summary>
-    /// Will check if local player presses the 'E' key and if so calls Interact.
+    /// Will check if local player presses the interaction key and if so calls Interact.
     /// </summary>
     public class Player : NetworkBehaviour
     {
@@ -27,24 +27,9 @@ namespace Underconnected
         #region Unity Callbacks
 
         /// <summary>
-        /// Will check if local player presses the 'E' key and if so calls <see cref="Interactor.Interact"/>.
-        /// </summary>
-        /*private void Update()
-        {
-            if (this.isLocalPlayer)
-            {
-                if (this.isLocalPlayer)
-                {
-                    if (Input.GetKeyDown(KeyCode.E))
-                        this.interactor.Interact();
-                }
-            }
-        }*/
-        /// <summary>
-        /// 
+        /// Will check if local player presses the interaction key and if so calls <see cref="Interactor.Interact"/>.
         /// </summary>
          private void OnInteraction(){
-            Debug.Log("OnInteraction wird aufgerufen");
             this.interactor.Interact();
         }
      
