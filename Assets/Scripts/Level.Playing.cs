@@ -183,7 +183,7 @@ namespace Underconnected
             /// Called when a demand is removed from the demand queue.
             /// Removes the demand from the demand queue UI.
             /// </summary>
-            /// <param name="demand"></param>
+            /// <param name="demand">The demand that was removed.</param>
             private void DemandQueue_OnDemandRemoved(Demand demand) => GameManager.UI.LevelUI.DemandQueue.RemoveDemand(demand);
             /// <summary>
             /// Called when a demand's time limit is reached.
@@ -192,8 +192,9 @@ namespace Underconnected
             /// <param name="demand">The expired demand.</param>
             private void DemandQueue_OnDemandExpired_Server(Demand demand)
             {
+                this.level.IncrementDeliveredFailedCounter();
                 this.level.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
-                this.level.IncrementDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+                this.level.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
             }
         }
     }

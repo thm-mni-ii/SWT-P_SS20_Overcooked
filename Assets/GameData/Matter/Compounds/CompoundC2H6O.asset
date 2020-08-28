@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4fccc8ac1bcc042a074074f83bf8cc, type: 3}
   m_Name: CompoundC2H6O
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 100b40a92cfd73f48a6f6ac7fb6e28c1, type: 3}
+  icon: {fileID: 21300000, guid: 611a189b79292bf49a4042ca677d0096, type: 3}
   name: Ethanol
   description: Good ol' ethanol.
   scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: ef0661911121d074b8ea146a07d54357, type: 3}
   components:
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
   formula: C2H6O

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87c5171be1c7d24f99373ec7ea366d0, type: 3}
   m_Name: MoleculeH2
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e135dbed5611f2b4eb03663649c0f59d, type: 3}
+  icon: {fileID: 21300000, guid: 2fe978f71d03ab74ea9a6b89e7deb9c3, type: 3}
   name: Dihydrogen
   description: 
   scoreReward: 50
