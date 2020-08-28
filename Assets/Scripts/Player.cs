@@ -47,11 +47,6 @@ namespace Underconnected
             Debug.Log("OnInteraction wird aufgerufen");
             this.interactor.Interact();
         }
-
-        /*private void OnInteract(InputValue value){
-            Debug.Log("Wird ausgeführt");
-            //this.interactor.Interact();
-        }*/
      
         #endregion
     }
