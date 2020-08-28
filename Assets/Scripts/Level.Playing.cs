@@ -17,6 +17,14 @@ namespace Underconnected
             /// The coroutine that adds demands to the demands list.
             /// </summary>
             private Coroutine demandCoroutine;
+            /// <summary>
+            /// The wait object for <see cref="demandCoroutine"/>.
+            /// </summary>
+            private WaitForSeconds demandWait;
+            /// <summary>
+            /// The amount of seconds the demand coroutine waits between each iteration.
+            /// </summary>
+            private float demandWaitAmount;
 
             /// <summary>
             /// Tells whether this phase has been initialized on the server.
@@ -32,7 +40,12 @@ namespace Underconnected
             /// Creates a new LevelPlayingPhase.
             /// </summary>
             /// <param name="level">The level this phase belongs to.</param>
-            public LevelPlayingPhase(Level level) => this.level = level;
+            public LevelPlayingPhase(Level level)
+            {
+                this.level = level;
+                this.demandWaitAmount = 0.1F;
+                this.demandWait = new WaitForSeconds(this.demandWaitAmount);
+            }
 
 
             public override void OnStateEnter(State<LevelPhase> previousState)
@@ -127,13 +140,30 @@ namespace Underconnected
             /// </summary>
             private IEnumerator Do_DemandCoroutine()
             {
+                float nextDemandTimeout = Random.Range(this.level.demandSpawnTimeMinMax.x, this.level.demandSpawnTimeMinMax.y);
+                this.AddRandomDemand();
+
                 while (true)
                 {
-                    if (this.level.demandsPool.Length > 0)
-                        this.level.DemandQueue.AddDemand(this.level.demandsPool[Random.Range(0, this.level.demandsPool.Length)], this.level.timePerDemand);
+                    yield return this.demandWait;
+                    nextDemandTimeout -= this.demandWaitAmount;
 
-                    yield return new WaitForSeconds(Random.Range(this.level.demandSpawnTimeMinMax.x, this.level.demandSpawnTimeMinMax.y));
+                    if (nextDemandTimeout <= 0.0F || this.level.demandQueue.CurrentDemands.Count <= 0)
+                    {
+                        this.AddRandomDemand();
+                        nextDemandTimeout = Random.Range(this.level.demandSpawnTimeMinMax.x, this.level.demandSpawnTimeMinMax.y);
+                    }
                 }
+            }
+
+
+            /// <summary>
+            /// Adds a random demand to the demand queue.
+            /// </summary>
+            private void AddRandomDemand()
+            {
+                if (this.level.demandsPool.Length > 0)
+                    this.level.DemandQueue.AddDemand(this.level.demandsPool[Random.Range(0, this.level.demandsPool.Length)], this.level.timePerDemand);
             }
 
 
