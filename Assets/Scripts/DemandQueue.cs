@@ -12,6 +12,12 @@ namespace Underconnected
     public class DemandQueue : NetworkBehaviour
     {
         /// <summary>
+        /// Returns all the demands that are currently inside this demand queue.
+        /// </summary>
+        public SortedDictionary<int, Demand>.ValueCollection CurrentDemands => this.currentDemands.Values;
+
+
+        /// <summary>
         /// Fired when a demand is added to this queue.
         /// Parameters: The demand that has been added.
         /// </summary>
@@ -68,6 +74,52 @@ namespace Underconnected
             var enumerator = this.currentDemands.GetEnumerator();
             while (enumerator.MoveNext())
                 enumerator.Current.Value.Update(Time.deltaTime);
+        }
+
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
+        {
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
+            {
+                writer.WriteInt32(this.currentDemands.Count);
+
+                var enumerator = this.currentDemands.GetEnumerator();
+                while (enumerator.MoveNext())
+                {
+                    writer.WriteInt32(enumerator.Current.Value.ID);
+                    writer.WriteString(enumerator.Current.Value.Matter.GetID());
+                    writer.WriteSingle(enumerator.Current.Value.TimeLimit);
+
+                    if (enumerator.Current.Value.HasTimeLimit)
+                        writer.WriteSingle(enumerator.Current.Value.TimeLeft);
+                }
+
+                dataWritten = true;
+            }
+
+            return dataWritten;
+        }
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            base.OnDeserialize(reader, initialState);
+
+            if (initialState)
+            {
+                int amountOfDemands = reader.ReadInt32();
+                Demand demand;
+
+                for (int i = 0; i < amountOfDemands; i++)
+                {
+                    demand = new Demand(reader.ReadInt32(), Matter.GetByID(reader.ReadString()), reader.ReadSingle());
+
+                    if (demand.HasTimeLimit)
+                        demand.SetTimeLeft(reader.ReadSingle());
+
+                    this.AcceptDemand(demand);
+                }
+            }
         }
 
 

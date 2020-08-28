@@ -19,6 +19,10 @@ namespace Underconnected
         /// Tells whether the requested level for this player client has finished loading.
         /// </summary>
         public bool HasFinishedLoading { get; private set; }
+        /// <summary>
+        /// Holds the player information for this connection.
+        /// </summary>
+        public PlayerInfo PlayerInfo { get; private set; }
 
 
         /// <summary>
@@ -38,9 +42,34 @@ namespace Underconnected
         private void Awake()
         {
             this.HasFinishedLoading = true;
+            this.PlayerInfo = PlayerInfo.Random();
         }
         private void Start() => GameManager.NetworkManager.RegisterClient(this);
         private void OnDestroy() => GameManager.NetworkManager.UnregisterClient(this);
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
+        {
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
+            {
+                writer.WriteString(this.PlayerInfo.Name);
+                writer.WriteColor(this.PlayerInfo.Color);
+                dataWritten = true;
+            }
+
+            return dataWritten;
+        }
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            base.OnDeserialize(reader, initialState);
+
+            if (initialState)
+                this.SetPlayerInfo(new PlayerInfo(reader.ReadString(), reader.ReadColor()));
+        }
+
+
+        public void SetPlayerInfo(PlayerInfo playerInfo) => this.PlayerInfo = playerInfo;
 
 
         #region Server Side & Commands

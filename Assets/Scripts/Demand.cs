@@ -96,5 +96,11 @@ namespace Underconnected
                 this.OnDelivered?.Invoke(this);
             }
         }
+
+        /// <summary>
+        /// Sets the time left until this demand expires.
+        /// </summary>
+        /// <param name="timeLeft">The time left in seconds.</param>
+        public void SetTimeLeft(float timeLeft) => this.TimeLeft = Mathf.Min(Mathf.Max(timeLeft, 0.0F), this.TimeLimit);
     }
 }

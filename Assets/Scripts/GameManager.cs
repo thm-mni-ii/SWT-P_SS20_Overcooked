@@ -42,6 +42,11 @@ namespace Underconnected
         /// </summary>
         public static Camera Camera => Instance.camera;
 
+        /// <summary>
+        /// Information about our own player.
+        /// </summary>
+        public static PlayerInfo PlayerInfo => Instance.playerInfo;
+
 
         /// <summary>
         /// An event that is called when the game manager has finished loading a level.
@@ -71,6 +76,11 @@ namespace Underconnected
         /// </summary>
         private Scene currentLevelScene;
 
+        /// <summary>
+        /// Holds the information about our own player.
+        /// </summary>
+        private PlayerInfo playerInfo;
+
 
         private void Awake()
         {
@@ -80,6 +90,7 @@ namespace Underconnected
                 GameManager.Instance = this;
                 this.currentLevel = null;
                 SceneManager.sceneLoaded += this.SceneManager_SceneLoaded;
+                this.playerInfo = PlayerInfo.Random();
 
                 this.uiManager.HideAllUI();
                 this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary

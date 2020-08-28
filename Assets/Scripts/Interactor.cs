@@ -138,7 +138,7 @@ namespace Underconnected
             if (interactable != null && this.LookedAtObject != null && this.LookedAtObject.GetGameObject().Equals(interactable.gameObject))
                 this.RpcConfirmInteract(interactable);
             else
-                Debug.LogWarning($"Client interaction check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{this.LookedAtObject.GetGameObject()}\"");
+                Debug.LogWarning($"Client interaction check failed. Claimed: \"{interactable?.gameObject}\", Actual: \"{this.LookedAtObject?.GetGameObject()}\"");
         }
         /// <summary>
         /// Tells a client that this interactor has interacted with the given <paramref name="interactable"/>.

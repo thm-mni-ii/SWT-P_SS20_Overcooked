@@ -12,7 +12,6 @@ namespace Underconnected
     public class PlayerControls : NetworkBehaviour
     {
         [SerializeField] Rigidbody rigidBody;
-        [SerializeField] MeshRenderer playerModelRenderer;
         [SerializeField] Player player;
         [SerializeField] Interactor interactor;
         [SerializeField] float moveSpeed = 100.0F;
@@ -39,26 +38,15 @@ namespace Underconnected
         /// </summary>
         private float targetYaw;
 
-        /// <summary>
-        /// This player's color.
-        /// </summary>
-        [SyncVar(hook = nameof(UpdatePlayerColor))]
-        private Color playerColor;
-
 
         private void Awake()
         {
             this.movementInput = Vector3.zero;
-            this.EnableControls();
         }
 
         private void Start()
         {
             this.targetYaw = this.transform.rotation.eulerAngles.y;
-        }
-        public override void OnStartServer()
-        {
-            this.playerColor = Random.ColorHSV();
         }
         public override void OnStartClient()
         {
@@ -111,17 +99,5 @@ namespace Underconnected
         /// Disables the player controls.
         /// </summary>
         public void DisableControls() => this.ControlsEnabled = false;
-
-
-        /// <summary>
-        /// Called when the value of <see cref="playerColor"/> changes on the server.
-        /// Updates the player color on clients to synchronize it with the server.
-        /// </summary>
-        /// <param name="oldColor">The previous player color.</param>
-        /// <param name="newColor">The new player color.</param>
-        private void UpdatePlayerColor(Color oldColor, Color newColor)
-        {
-            this.playerModelRenderer.material.color = newColor;
-        }
     }
 }

@@ -60,7 +60,6 @@ namespace Underconnected
         {
             this.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
             this.LevelFinishedUI.gameObject.SetActive(true);
-            this.LevelUI.gameObject.SetActive(false);
         }
     }
 }

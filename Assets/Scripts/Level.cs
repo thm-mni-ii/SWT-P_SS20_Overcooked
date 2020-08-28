@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
 
 namespace Underconnected
@@ -9,7 +10,7 @@ namespace Underconnected
     /// <summary>
     /// Represents a game level.
     /// </summary>
-    public class Level : NetworkBehaviour
+    public partial class Level : NetworkBehaviour
     {
         [Header("Settings")]
         [SerializeField] float timePerDemand = 30.0F;
@@ -69,19 +70,16 @@ namespace Underconnected
         /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
         /// </summary>
         [SyncVar(hook = nameof(DeliveredScore_OnChange))] int deliveredScore;
-
         /// <summary>
         /// The current amount of correctly delivered recipes.
         /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
         /// </summary>
         [SyncVar(hook = nameof(DeliveredCounter_OnChange))] int deliveredCounter;
-
         /// <summary>
         /// The current score that the players lose by not delivering recipes.
         /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
         /// </summary>
         [SyncVar(hook = nameof(DeliveredFailedScore_OnChange))] int deliveredFailedScore;
-
         /// <summary>
         /// The current amount of not delivered recipes.
         /// Synchronized with the clients through <see cref="SyncVarAttribute"/> and thus can only be changed on the server.
@@ -89,23 +87,24 @@ namespace Underconnected
         [SyncVar(hook = nameof(DeliveredFailedCounter_OnChange))] int deliveredFailedCounter;
 
         /// <summary>
-        /// The coroutine that adds demands to the demands list.
+        /// Holds the phase this level is currently in.
         /// </summary>
-        private Coroutine demandCoroutine;
+        private StateMachine<LevelPhase> levelPhase;
 
         /// <summary>
         /// Holds a list of all players inside of this level.
         /// </summary>
         private List<Player> allPlayers;
 
+
         /// <summary>
-        /// Tells whether this level has been set up to run on the server.
+        /// Called when a player is registered on this level.
         /// </summary>
-        private bool isRunningOnServer;
+        public event UnityAction<Player> OnPlayerRegistered;
         /// <summary>
-        /// Tells whether this level has been set up to run on the client.
+        /// Called when a player is unregistered from this level.
         /// </summary>
-        private bool isRunningOnClient;
+        public event UnityAction<Player> OnPlayerUnregistered;
 
 
         private void Awake()
@@ -116,90 +115,48 @@ namespace Underconnected
             this.deliveredFailedCounter = 0;
             this.deliveredFailedScore = 0;
 
-            this.demandCoroutine = null;
-
             this.allPlayers = new List<Player>();
 
-            this.isRunningOnServer = false;
-            this.isRunningOnClient = false;
+            this.levelPhase = new StateMachine<LevelPhase>();
+            this.levelPhase.RegisterState(new LevelInitPhase());
+            this.levelPhase.RegisterState(new LevelPreparingPhase(this));
+            this.levelPhase.RegisterState(new LevelPlayingPhase(this));
+            this.levelPhase.RegisterState(new LevelFinishedPhase(this));
+            this.levelPhase.SetState(LevelPhase.Init);
         }
 
-        public override void OnStartServer()
+        private void Update() => this.levelPhase.Update(Time.deltaTime);
+        private void FixedUpdate() => this.levelPhase.FixedUpdate(Time.fixedDeltaTime);
+        private void LateUpdate() => this.levelPhase.LateUpdate(Time.deltaTime);
+
+        /// <summary>
+        /// Starts this level by putting it into its starting phase.
+        /// </summary>
+        public virtual void StartLevel() => this.ChangePhase(LevelPhase.Preparing);
+        /// <summary>
+        /// Stops and shuts down this level.
+        /// </summary>
+        public void Unload() => this.levelPhase.Shutdown();
+
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
         {
-            if (!this.isRunningOnServer)
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
             {
-                // Setup UI and coroutines
-                if (this.HasTimer)
-                    this.Timer.StartTimer();
-
-                if (this.HasDemandQueue)
-                {
-                    this.SubscribeDemandQueueUI();
-                    this.DemandQueue.OnDemandExpired += this.DemandQueue_OnDemandExpired_Server;
-                    this.demandCoroutine = this.StartCoroutine(this.Do_DemandCoroutine());
-                }
-
-                // Setup events to create/destroy a player for each joining/leaving client automatically
-                GameManager.NetworkManager.OnClientJoin += this.AddPlayer;
-                GameManager.NetworkManager.OnClientLeave += this.RemovePlayer;
-
-                // Add a player for each client to this level
-                this.AddAllPlayers();
-
-                this.isRunningOnServer = true;
+                writer.WriteByte((byte)this.levelPhase.CurrentState);
+                dataWritten = true;
             }
+
+            return dataWritten;
         }
-        public override void OnStartClient()
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
         {
-            if (!this.isRunningOnClient)
-            {
-                if (this.HasTimer)
-                    this.Timer.OnTimerFinished += this.Timer_OnTimerFinished_Client;
+            base.OnDeserialize(reader, initialState);
 
-                if (this.HasDemandQueue && !this.isServer /* only subscribe if we are not running a server as the server also subscribes to these events (see OnStartServer)*/)
-                    this.SubscribeDemandQueueUI();
-
-                this.isRunningOnClient = true;
-            }
-        }
-
-        public void Unload()
-        {
-            if (this.isRunningOnServer)
-            {
-                // Stop level timer and coroutines
-                if (this.HasTimer)
-                    this.Timer.StopTimer();
-
-                if (this.HasDemandQueue)
-                {
-                    this.StopCoroutine(this.demandCoroutine);
-                    this.DemandQueue.OnDemandExpired -= this.DemandQueue_OnDemandExpired_Server;
-                }
-
-                // Unsubscribe from events
-                GameManager.NetworkManager.OnClientJoin -= this.AddPlayer;
-                GameManager.NetworkManager.OnClientLeave -= this.RemovePlayer;
-
-                // Remove all players from this level
-                this.RemoveAllPlayers();
-
-                this.isRunningOnServer = false;
-            }
-
-            if (this.isRunningOnClient)
-            {
-                if (this.HasTimer)
-                    this.Timer.OnTimerFinished -= this.Timer_OnTimerFinished_Client;
-
-                this.isRunningOnClient = false;
-            }
-
-            if (this.HasDemandQueue)
-            {
-                this.UnsubscribeDemandQueueUI();
-                GameManager.UI.LevelUI.DemandQueue.Clear();
-            }
+            if (initialState)
+                this.levelPhase.SetState((LevelPhase)reader.ReadByte());
         }
 
 
@@ -262,6 +219,7 @@ namespace Underconnected
                     this.OwnPlayer = player;
 
                 this.allPlayers.Add(player);
+                this.OnPlayerRegistered?.Invoke(player);
             }
         }
         /// <summary>
@@ -280,6 +238,7 @@ namespace Underconnected
                     this.OwnPlayer = null;
 
                 this.allPlayers.Remove(player);
+                this.OnPlayerUnregistered?.Invoke(player);
             }
         }
 
@@ -306,24 +265,6 @@ namespace Underconnected
         /// </summary>
         /// <param name="scoreDelta">The amount by which to increase the player score.</param>
         public void IncrementDeliveredScore(int scoreDelta) => this.SetDeliveredScore(this.deliveredScore + scoreDelta);
-
-        /// <summary>
-        /// Increments the recipes delievered amount by one.
-        /// Only has effect when called on the server.
-        public void IncrementDeliveredCounter() => this.SetDeliveredCounter(this.deliveredCounter + 1);
-
-        /// <summary>
-        /// Reduces the recipes delievered score by the given amount.
-        /// Only has effect when called on the server.
-        /// </summary>
-        /// <param name="scoreDelta">The amount by which to decrease the player score.</param>
-        public void IncrementFailedDeliveredScore(int scoreDelta) => this.SetDeliveredFailedScore(this.deliveredFailedScore + scoreDelta);
-
-        /// <summary>
-        /// Increments the recipes failed amount by one.
-        /// Only has effect when called on the server.
-        public void IncrementFailedDeliveredCounter() => this.SetDeliveredFailedCounter(this.deliveredFailedCounter + 1);
-
         /// <summary>
         /// Sets the recipes delievered score to the given amount.
         /// Only has effect when called on the server.
@@ -332,9 +273,13 @@ namespace Underconnected
         public void SetDeliveredScore(int newScore)
         {
             if (this.isServer)
-                this.deliveredScore = newScore;
+                this.deliveredScore = Mathf.Max(0, newScore);
         }
 
+        /// <summary>
+        /// Increments the recipes delievered amount by one.
+        /// Only has effect when called on the server.
+        public void IncrementDeliveredCounter() => this.SetDeliveredCounter(this.deliveredCounter + 1);
         /// <summary>
         /// Sets the recipes delievered score to the given amount.
         /// Only has effect when called on the server.
@@ -343,9 +288,15 @@ namespace Underconnected
         public void SetDeliveredCounter(int newAmount)
         {
             if (this.isServer)
-                this.deliveredCounter = newAmount;
+                this.deliveredCounter = Mathf.Max(0, newAmount);
         }
 
+        /// <summary>
+        /// Reduces the recipes delievered score by the given amount.
+        /// Only has effect when called on the server.
+        /// </summary>
+        /// <param name="scoreDelta">The amount by which to decrease the player score.</param>
+        public void IncrementFailedDeliveredScore(int scoreDelta) => this.SetDeliveredFailedScore(this.deliveredFailedScore + scoreDelta);
         /// <summary>
         /// Sets the recipes delievered score to the given amount.
         /// Only has effect when called on the server.
@@ -358,6 +309,10 @@ namespace Underconnected
         }
 
         /// <summary>
+        /// Increments the recipes failed amount by one.
+        /// Only has effect when called on the server.
+        public void IncrementDeliveredFailedCounter() => this.SetDeliveredFailedCounter(this.deliveredFailedCounter + 1);
+        /// <summary>
         /// Sets the recipes delievered score to the given amount.
         /// Only has effect when called on the server.
         /// </summary>
@@ -366,40 +321,6 @@ namespace Underconnected
         {
             if (this.isServer)
                 this.deliveredFailedCounter = newAmount;
-        }
-
-
-        /// <summary>
-        /// The coroutine used to add demands to the demand queue.
-        /// </summary>
-        private IEnumerator Do_DemandCoroutine()
-        {
-            while (true)
-            {
-                // add random demand from demand pool
-                yield return new WaitForSeconds(Random.Range(this.demandSpawnTimeMinMax.x, this.demandSpawnTimeMinMax.y));
-
-                if (this.demandsPool.Length > 0)
-                    this.DemandQueue.AddDemand(this.demandsPool[Random.Range(0, this.demandsPool.Length)], this.timePerDemand);
-            }
-        }
-
-
-        /// <summary>
-        /// Subscribes to the demand queue events to start updating the demand queue UI.
-        /// </summary>
-        private void SubscribeDemandQueueUI()
-        {
-            this.demandQueue.OnDemandAdded += this.DemandQueue_OnDemandAdded;
-            this.demandQueue.OnDemandRemoved += this.DemandQueue_OnDemandRemoved;
-        }
-        /// <summary>
-        /// Unsubscribes from the demand queue events to stop updating the demand queue UI.
-        /// </summary>
-        private void UnsubscribeDemandQueueUI()
-        {
-            this.demandQueue.OnDemandAdded -= this.DemandQueue_OnDemandAdded;
-            this.demandQueue.OnDemandRemoved -= this.DemandQueue_OnDemandRemoved;
         }
 
 
@@ -474,6 +395,29 @@ namespace Underconnected
                 NetworkServer.Destroy(player.gameObject);
             }
         }
+        /// <summary>
+        /// Transitions to the given level phase and synchronizes it with the clients.
+        /// Can only be called on the server.
+        /// </summary>
+        /// <param name="levelPhase">The level phase to transition to.</param>
+        [Server]
+        private void ChangePhase(LevelPhase levelPhase)
+        {
+            this.levelPhase.SetState(levelPhase);
+            this.RpcSetPhase((byte)levelPhase);
+        }
+
+
+        /// <summary>
+        /// Tells the client to transition to the given level phase.
+        /// </summary>
+        /// <param name="phaseNum">The phase number as defined in <see cref="LevelPhase"/>.</param>
+        [ClientRpc]
+        private void RpcSetPhase(byte phaseNum)
+        {
+            if (this.isClientOnly)
+                this.levelPhase.SetState((LevelPhase)phaseNum);
+        }
 
 
         /// <summary>
@@ -489,7 +433,6 @@ namespace Underconnected
             GameManager.UI.LevelFinishedUI.SetScore(newValue);
             GameManager.UI.LevelFinishedUI.SetStars(newValue); //doesnt work with FailedDeliveredPoints
         }
-
         /// <summary>
         /// Called when the value of <see cref="DeliveredScore"/> has changed on the server side.
         /// Updates the score on a client to synchronize it with the server. 
@@ -501,7 +444,6 @@ namespace Underconnected
         {
             GameManager.UI.LevelFinishedUI.SetDeliveredPoints(newValue);
         }
-
         /// <summary>
         /// Called when the value of <see cref="DeliveredCounter"/> has changed on the server side.
         /// Updates the amount on a client to synchronize it with the server. 
@@ -509,12 +451,10 @@ namespace Underconnected
         /// </summary>
         /// <param name="oldValue">The previous recipes delivered score.</param>
         /// <param name="newValue">The new recipes delivered  score.</param>
-
         private void DeliveredCounter_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelFinishedUI.SetDeliveredCounter(newValue);
         }
-
         /// <summary>
         /// Called when the value of <see cref="DeliveredFailedScore"/> has changed on the server side.
         /// Updates the score on a client to synchronize it with the server. 
@@ -526,7 +466,6 @@ namespace Underconnected
         {
             GameManager.UI.LevelFinishedUI.SetDeliveredFailedPoints(newValue);
         }
-
         /// <summary>
         /// Called when the value of <see cref="DeliveredFailedCounter"/> has changed on the server side.
         /// Updates the amount on a client to synchronize it with the server. 
@@ -534,49 +473,9 @@ namespace Underconnected
         /// </summary>
         /// <param name="oldValue">The previous recipes delivered score.</param>
         /// <param name="newValue">The new recipes delivered  score.</param>
-
         private void DeliveredFailedCounter_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelFinishedUI.SetDeliveredFailedCounter(newValue);
-        }
-
-        /// <summary>
-        /// Called when the level timer is finished.
-        /// Shows the level finished screen and blocks player controls for the own player.
-        /// Will only be called on the client as this event is only subscribed on the client side.
-        /// </summary>
-        private void Timer_OnTimerFinished_Client()
-        {
-            this.OwnPlayer?.Controls.DisableControls();
-            GameManager.UI.ShowLevelFinishedScreen();
-        }
-
-        /// <summary>
-        /// Called when a new demand is added to the demand queue.
-        /// Adds the demand to the demand queue UI.
-        /// </summary>
-        /// <param name="demand">The new demand that has been added.</param>
-        private void DemandQueue_OnDemandAdded(Demand demand) => GameManager.UI.LevelUI.DemandQueue.AddDemand(demand);
-        /// <summary>
-        /// Called when a demand is removed from the demand queue.
-        /// Removes the demand from the demand queue UI.
-        /// </summary>
-        /// <param name="demand"></param>
-        private void DemandQueue_OnDemandRemoved(Demand demand) => GameManager.UI.LevelUI.DemandQueue.RemoveDemand(demand);
-        /// <summary>
-        /// Called when a demand's time limit is reached.
-        /// Applies a score penalty.
-        /// </summary>
-        /// <param name="demand">The expired demand.</param>
-        private void DemandQueue_OnDemandExpired_Server(Demand demand)
-        {
-            this.IncrementFailedDeliveredCounter();
-            if (this.playerScore > 0)
-            {
-                this.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
-                this.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
-                
-            }
         }
     }
 }

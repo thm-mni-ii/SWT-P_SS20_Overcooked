@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 namespace Underconnected
 {
@@ -10,8 +11,12 @@ namespace Underconnected
     /// </summary>
     public class Player : NetworkBehaviour
     {
+        [SerializeField] MeshRenderer playerModelRenderer;
+        [SerializeField] TextMeshProUGUI playerNameText;
         [SerializeField] Interactor interactor;
         [SerializeField] PlayerControls controls;
+        [SerializeField] Animator playerInfoCanvasAnimator;
+        [SerializeField] string playerNameAnimationBool = "IsShown";
 
 
         /// <summary>
@@ -37,6 +42,9 @@ namespace Underconnected
         public bool IsOwnPlayer => this.hasAuthority;
 
 
+        private bool isNameVisible;
+
+
         #region Unity Callbacks
 
         /// <summary>
@@ -46,6 +54,7 @@ namespace Underconnected
         {
             if (GameManager.CurrentLevel != null)
             {
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
                 GameManager.CurrentLevel.RegisterPlayer(this);
             }
             else
@@ -85,8 +94,30 @@ namespace Underconnected
             if (initialState)
             {
                 NetworkIdentity clientIdentity = reader.ReadNetworkIdentity();
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
+                this.SetClient(clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null);
             }
+        }
+
+
+        /// <summary>
+        /// Shows this player's name.
+        /// </summary>
+        public void ShowName()
+        {
+            this.isNameVisible = true;
+
+            if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
+        }
+        /// <summary>
+        /// Hides this player's name.
+        /// </summary>
+        public void HideName()
+        {
+            this.isNameVisible = false;
+
+            if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
         }
 
 
@@ -98,6 +129,12 @@ namespace Underconnected
         public void SetClient(PlayerConnection client)
         {
             this.Client = client;
+
+            if (client != null)
+            {
+                this.playerNameText.text = client.PlayerInfo.Name;
+                this.playerModelRenderer.material.color = client.PlayerInfo.Color;
+            }
 
             if (this.isServer)
                 this.RpcSetClient(client != null ? client.GetComponent<NetworkIdentity>() : null);
@@ -113,7 +150,7 @@ namespace Underconnected
         private void RpcSetClient(NetworkIdentity clientIdentity)
         {
             if (this.isClientOnly)
-                this.Client = clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null;
+                this.SetClient(clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null);
         }
     }
 }
