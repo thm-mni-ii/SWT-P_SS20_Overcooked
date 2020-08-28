@@ -42,7 +42,6 @@ namespace Underconnected
         private void Awake()
         {
             this.movementInput = Vector3.zero;
-            this.EnableControls();
         }
 
         private void Start()

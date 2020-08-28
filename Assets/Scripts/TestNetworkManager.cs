@@ -250,7 +250,7 @@ namespace Underconnected
         /// </summary>
         /// <param name="levelNum">The level number that has been loaded.</param>
         /// <param name="level">The level object that has been loaded.</param>
-        private void GameManager_OnLevelLoaded_Server(int levelNum, Level level) { }
+        private void GameManager_OnLevelLoaded_Server(int levelNum, Level level) => level.StartLevel();
         /// <summary>
         /// Called when a level has been loaded on the client.
         /// If the client is already connected to the server, it just notifies the server that the level has been loaded.
