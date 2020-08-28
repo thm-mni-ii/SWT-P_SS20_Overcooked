@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  secondsToFinish: 10
+  secondsToFinish: 5
   resultObject: {fileID: 0}
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 4692045464979522353}
