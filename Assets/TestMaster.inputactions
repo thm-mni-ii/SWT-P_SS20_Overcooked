@@ -1,0 +1,33 @@
+{
+    "name": "TestMaster",
+    "maps": [
+        {
+            "name": "AbortUI",
+            "id": "e9bdcf8b-a11d-4a5a-9ef7-c78137ddb16d",
+            "actions": [
+                {
+                    "name": "Abort",
+                    "type": "Button",
+                    "id": "91df5648-245f-43c5-be1d-d66d6065735f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4e729dde-1bb0-41f7-acb5-d8b9d11b5bf6",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Abort",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

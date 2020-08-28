@@ -33,14 +33,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""Abort"",
-                    ""type"": ""Button"",
-                    ""id"": ""79a81af7-8396-4a7e-ab6d-7dd6f8dda5c8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -131,17 +123,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe1473ba-a592-454f-b82e-83c8974f49a0"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Abort"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -180,7 +161,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Interaction = m_Gameplay.FindAction("Interaction", throwIfNotFound: true);
-        m_Gameplay_Abort = m_Gameplay.FindAction("Abort", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -232,14 +212,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Interaction;
-    private readonly InputAction m_Gameplay_Abort;
     public struct GameplayActions
     {
         private @InputMaster m_Wrapper;
         public GameplayActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Interaction => m_Wrapper.m_Gameplay_Interaction;
-        public InputAction @Abort => m_Wrapper.m_Gameplay_Abort;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,9 +233,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interaction.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteraction;
-                @Abort.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAbort;
-                @Abort.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAbort;
-                @Abort.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAbort;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -268,9 +243,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
-                @Abort.started += instance.OnAbort;
-                @Abort.performed += instance.OnAbort;
-                @Abort.canceled += instance.OnAbort;
             }
         }
     }
@@ -297,6 +269,5 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
-        void OnAbort(InputAction.CallbackContext context);
     }
 }

@@ -52,15 +52,15 @@ namespace Underconnected
         /*public void ShowControlSettings() {
                     if (Input.GetKeyDown(KeyCode.Escape)) PlayerControlsUI.gameObject.SetActive(true);
         }*/
-
-        
-
-        public void OnAbort(InputValue value) {
+public void OnAbort(InputValue value) {
+            Debug.Log("OnAbort wird aufgerufen");
             if(PlayerControlsUI.gameObject.activeSelf){
                 PlayerControlsUI.gameObject.SetActive(false);
             }else{
                 PlayerControlsUI.gameObject.SetActive(true);
             }
         }
+        
+
     }
 }

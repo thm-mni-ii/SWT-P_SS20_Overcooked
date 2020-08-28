@@ -488,6 +488,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6162885419970098383, guid: 2a304940b56ad0e4e9bbdedc38523115,
+        type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 20f9b9a0a128edf4aa357af9800c6d37,
+        type: 3}
+    - target: {fileID: 6162885419970098383, guid: 2a304940b56ad0e4e9bbdedc38523115,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: AbortUI
+      objectReference: {fileID: 0}
     - target: {fileID: 6346374945003955477, guid: 2a304940b56ad0e4e9bbdedc38523115,
         type: 3}
       propertyPath: activeButton
