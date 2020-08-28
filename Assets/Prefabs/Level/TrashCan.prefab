@@ -246,9 +246,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837909045972130657}
+  - component: {fileID: 426791031792367763}
   - component: {fileID: 6342713235316122733}
   - component: {fileID: 1837909045972130656}
-  - component: {fileID: 426791031792367763}
+  - component: {fileID: -7474257960576329939}
   m_Layer: 8
   m_Name: TrashCan
   m_TagString: Untagged
@@ -271,6 +272,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &426791031792367763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837909045972130670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!65 &6342713235316122733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -298,11 +315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  elementDisplayRenderer: {fileID: 0}
+  matterDisplayRenderer: {fileID: 0}
+  highlighting: {fileID: -7474257960576329939}
   containedMatter: {fileID: 0}
   canTakeBackItems: 1
-  elementDisplayTextureField: _Back
---- !u!114 &426791031792367763
+  matterDisplayTextureField: _Back
+--- !u!114 &-7474257960576329939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,13 +329,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1837909045972130670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &1837909046403804890
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 namespace Underconnected
@@ -14,22 +15,55 @@ namespace Underconnected
         [Header("References")]
         [SerializeField] Image iconUI;
         [SerializeField] TextMeshProUGUI quantityText;
+        [SerializeField] Slider timeLeftSlider;
+        [SerializeField] Image timeLeftSliderFill;
         [SerializeField] GameObject requiredMatterContainer;
         [SerializeField] GameObject demandedMatterUIPrefab;
 
+        [Header("Settings")]
+        [SerializeField] Color timeLeftLow;
+        [SerializeField] Color timeLeftHigh;
+
+
 
         /// <summary>
-        /// The matter to display.
+        /// The demand to display.
         /// </summary>
-        private Matter matter;
+        public Demand Demand { get; private set; }
 
 
         private void Awake()
         {
-            this.SetMatter(null);
+            this.SetDemand(this.Demand);
+        }
+        private void Update()
+        {
+            if (this.Demand != null && this.Demand.HasTimeLimit)
+            {
+                this.timeLeftSlider.value = Mathf.Clamp01(this.Demand.TimeLeft / this.Demand.TimeLimit);
+                this.timeLeftSliderFill.color = Color.Lerp(this.timeLeftLow, this.timeLeftHigh, this.timeLeftSlider.value);
+            }
         }
 
 
+        /// <summary>
+        /// Sets the demand to display on this UI element.
+        /// </summary>
+        /// <param name="demand">The demand to display.</param>
+        public void SetDemand(Demand demand)
+        {
+            this.Demand = demand;
+            this.SetMatter(demand != null ? demand.Matter : null, true);
+
+            if (demand != null && demand.HasTimeLimit)
+            {
+                this.timeLeftSliderFill.color = this.timeLeftHigh;
+                this.timeLeftSlider.value = 1.0F;
+                this.timeLeftSlider.enabled = true;
+            }
+            else
+                this.timeLeftSlider.enabled = false;
+        }
         /// <summary>
         /// Sets the matter to display on this UI element.
         /// </summary>
@@ -38,7 +72,6 @@ namespace Underconnected
         public void SetMatter(Matter matter, bool showRequiredComponents = true)
         {
             int quantity = matter is MatterMolecule ? ((MatterMolecule)matter).ElementalAmount : 1;
-            this.matter = matter;
 
             if (matter != null)
             {
@@ -58,6 +91,7 @@ namespace Underconnected
 
                 if (showRequiredComponents && matter is MatterCompound)
                 {
+                    this.ClearRequiredComponents();
                     this.requiredMatterContainer.SetActive(true);
 
                     foreach (Matter component in ((MatterCompound)matter).Components)
@@ -75,12 +109,20 @@ namespace Underconnected
                 this.iconUI.enabled = false;
         }
 
+
         /// <summary>
         /// Destroys this UI element.
         /// </summary>
-        public void Remove()
+        public void Remove() => GameObject.Destroy(this.gameObject);
+
+
+        /// <summary>
+        /// Removes all UI elements for required components.
+        /// </summary>
+        private void ClearRequiredComponents()
         {
-            GameObject.Destroy(this.gameObject);
+            for (int i = this.requiredMatterContainer.transform.childCount - 1; i >= 0; i--)
+                GameObject.Destroy(this.requiredMatterContainer.transform.GetChild(i).gameObject);
         }
     }
 }

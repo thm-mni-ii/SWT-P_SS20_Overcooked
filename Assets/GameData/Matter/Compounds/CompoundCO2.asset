@@ -15,6 +15,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 46c7f90acac60904bb6e4e93ab39e91f, type: 3}
   name: Carbon Dioxide
   description: Ja
+  scoreReward: 50
   prefab: {fileID: 5137224915557663102, guid: 2bb6133ce327b4d44884e242463b6387, type: 3}
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}

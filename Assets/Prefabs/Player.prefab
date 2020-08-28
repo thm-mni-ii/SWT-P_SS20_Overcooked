@@ -295,6 +295,8 @@ MonoBehaviour:
   syncInterval: 0.1
   rigidBody: {fileID: 2127368311968531779}
   playerModelRenderer: {fileID: 482893924135192172}
+  player: {fileID: 5674135250990863131}
+  interactor: {fileID: 8694444420510392368}
   moveSpeed: 70
   rotationSpeed: 1000
 --- !u!114 &8694444420510392368

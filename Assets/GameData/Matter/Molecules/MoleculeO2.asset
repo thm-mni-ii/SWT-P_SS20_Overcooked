@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87c5171be1c7d24f99373ec7ea366d0, type: 3}
   m_Name: MoleculeO2
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c45931ccaa9f9ca41a9600d6f6ef0662, type: 3}
+  icon: {fileID: 21300000, guid: 812b3b72f05183b409c51d5601d3ffe6, type: 3}
   name: Dioxide
   description: 0xrayn
+  scoreReward: 50
   prefab: {fileID: 2873589174651004775, guid: effc34d17bea1b748bdda20084471d26, type: 3}
   element: {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
   elementalAmount: 2
