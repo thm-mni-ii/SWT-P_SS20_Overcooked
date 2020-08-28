@@ -612,6 +612,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -766,6 +771,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -1959,6 +1969,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2220,6 +2235,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -2639,6 +2659,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2833,6 +2858,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2912,6 +2942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}

@@ -565,6 +565,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,7 +630,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &253077312 stripped
 Transform:
@@ -649,6 +661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -710,7 +727,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &277505120 stripped
 Transform:
@@ -734,6 +758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -795,7 +824,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1 &293571446
 GameObject:
@@ -876,6 +912,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -936,7 +977,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &342904325
 PrefabInstance:
@@ -954,6 +1002,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -1015,7 +1068,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &409462071
 PrefabInstance:
@@ -1033,6 +1093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -1094,7 +1159,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &442191200
 PrefabInstance:
@@ -1112,6 +1184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -1173,7 +1250,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &458757185
 PrefabInstance:
@@ -1550,6 +1634,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1610,7 +1699,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &728894063
 PrefabInstance:
@@ -1709,6 +1805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1769,7 +1870,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &760456667
 PrefabInstance:
@@ -1880,6 +1988,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1940,7 +2053,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1 &840473960
 GameObject:
@@ -2215,6 +2335,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2275,7 +2400,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1157553019 stripped
 Transform:
@@ -2311,6 +2443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -2372,7 +2509,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1255887075 stripped
 Transform:
@@ -2703,6 +2847,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2763,7 +2912,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1587420962 stripped
 Transform:
@@ -2787,6 +2943,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -2848,7 +3009,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1669604876 stripped
 Transform:
@@ -2872,6 +3040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -2933,7 +3106,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1675883395 stripped
 Transform:
@@ -2963,6 +3143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -3024,7 +3209,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!4 &1740893956 stripped
 Transform:
@@ -3048,6 +3240,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -3109,7 +3306,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &1782198675
 PrefabInstance:
@@ -3127,6 +3331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -3188,7 +3397,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &1828826050
 PrefabInstance:
@@ -3282,6 +3498,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3342,7 +3563,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1 &1918881540
 GameObject:
@@ -3524,6 +3752,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3584,7 +3817,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1 &1991346538
 GameObject:
@@ -3825,6 +4065,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drawers1x1FlatTable (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3885,7 +4130,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &2140501048
 PrefabInstance:
@@ -3903,6 +4155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Drawers1x1FlatTable (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103308554213498887, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3128640702753886740, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
         type: 3}
@@ -3964,7 +4221,14 @@ PrefabInstance:
       propertyPath: canBeInteractedWith
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5146540916148598577, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
+    - {fileID: -4166289160006921000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 090bbde4ddad6da468f4c07dfe5bfdd9, type: 3}
 --- !u!1001 &5804353388963270701
 PrefabInstance:
