@@ -491,13 +491,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2083109638}
     m_Modifications:
-    - target: {fileID: 121393549961948885, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_text
-      value: 'LAB
-
-        COMPLETED'
-      objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -613,20 +606,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3665182924025863236, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8752107873892963473, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_Name
       value: LevelFinishedUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8752107873892963473, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32cd8f536377c8740859a06ae27e9f3e, type: 3}

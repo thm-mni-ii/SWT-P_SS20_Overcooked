@@ -31,7 +31,7 @@ namespace Underconnected
         /// <param name="numOfLevel">The number of the finished level.</param>
         public void SetNumOfLevel(int numOfLevel)
         {
-            levelText.SetText("Level " + numOfLevel.ToString() + System.Environment.NewLine + "Chempleted");
+            levelText.SetText("LAB " + numOfLevel.ToString() + System.Environment.NewLine + "COMPLETED");
         }
 
         /// <summary>
