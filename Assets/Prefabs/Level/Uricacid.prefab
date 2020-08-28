@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 8198835769458044712}
   - component: {fileID: 5903637250742498075}
   - component: {fileID: 6841287079668667772}
+  - component: {fileID: 8436300171519899000}
   m_Layer: 8
   m_Name: Uricacid
   m_TagString: Untagged
@@ -273,6 +274,7 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 1049514052348973630}
   progressBar: {fileID: 1049514052693189804}
+  highlighting: {fileID: 8436300171519899000}
   inputContainer: {fileID: 5499348793014076250}
   outputContainer: {fileID: 957700091386983624}
   fireLight: {fileID: 2813394409817355645}
@@ -293,6 +295,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.7404122, z: 1.4280686}
   m_Center: {x: -0, y: 0.8592088, z: -0.2923844}
+--- !u!114 &8436300171519899000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310813259668026015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &4763508148722570016
 GameObject:
   m_ObjectHideFlags: 0

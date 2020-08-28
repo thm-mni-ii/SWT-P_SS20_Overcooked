@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 2103659432041102936}
   - component: {fileID: 2103659432041102940}
   - component: {fileID: 2103659432041102941}
+  - component: {fileID: 6666291757894410151}
   m_Layer: 8
   m_Name: AceticAcidEquip
   m_TagString: Untagged
@@ -230,6 +231,7 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0.68, z: 0}
   objectInfoCanvas: {fileID: 2384034151830493077}
   progressBar: {fileID: 2384034152308924679}
+  highlighting: {fileID: 6666291757894410151}
   inputContainer: {fileID: 8864635976296845720}
   outputContainer: {fileID: 8864635976296845720}
   fireLight: {fileID: 8864635976296848997}
@@ -253,6 +255,19 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &6666291757894410151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510813599345777470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &9024698867764925439
 GameObject:
   m_ObjectHideFlags: 0

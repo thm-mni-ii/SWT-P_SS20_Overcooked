@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 7585084083480260565}
   - component: {fileID: 723018833624438312}
   - component: {fileID: 8655015157286580595}
+  - component: {fileID: -4003998247206813533}
   m_Layer: 8
   m_Name: BunsenBurner
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 4692045464979522353}
   progressBar: {fileID: 4692045464652101027}
+  highlighting: {fileID: -4003998247206813533}
   inputContainer: {fileID: 3565021576769041815}
   outputContainer: {fileID: 8784323689539261018}
   fireLight: {fileID: 156810408095616313}
@@ -130,6 +132,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7346287, y: 1.1457455, z: 0.98511267}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &-4003998247206813533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724276517388463542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
 --- !u!1 &3565021576769041815
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,15 +854,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8273e072ccac6d3409a3319201b143c2, type: 3}
---- !u!198 &156810408095613638 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2217655088505808218, guid: 8273e072ccac6d3409a3319201b143c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 2083948031822423964}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &156810408095613639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2217655088505808219, guid: 8273e072ccac6d3409a3319201b143c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2083948031822423964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &156810408095613638 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2217655088505808218, guid: 8273e072ccac6d3409a3319201b143c2,
     type: 3}
   m_PrefabInstance: {fileID: 2083948031822423964}
   m_PrefabAsset: {fileID: 0}
@@ -987,6 +1002,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9023251060405802512}
   m_PrefabAsset: {fileID: 0}
+--- !u!223 &4692045464979522353 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4333722287350076705, guid: a379a82c9328b14498ab58e23d92de5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 9023251060405802512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4692045464652101027 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4333722287677481907, guid: a379a82c9328b14498ab58e23d92de5d,
@@ -999,9 +1020,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!223 &4692045464979522353 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 4333722287350076705, guid: a379a82c9328b14498ab58e23d92de5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 9023251060405802512}
-  m_PrefabAsset: {fileID: 0}
