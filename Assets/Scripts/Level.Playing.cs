@@ -43,7 +43,13 @@ namespace Underconnected
 
                 // Check whether the level has a timer and subscribe UI events
                 if (this.level.HasDemandQueue)
+                {
+                    // Add all demands that are already inside the queue to the demands list
+                    foreach (Demand demand in this.level.demandQueue.CurrentDemands)
+                        GameManager.UI.LevelUI.DemandQueue.AddDemand(demand);
+
                     this.SubscribeDemandQueueUI();
+                }
 
                 // If our player has been registered before: enable their controls
                 this.level.OwnPlayer?.Controls.EnableControls();
