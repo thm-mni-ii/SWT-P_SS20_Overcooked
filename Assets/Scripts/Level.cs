@@ -570,10 +570,13 @@ namespace Underconnected
         /// <param name="demand">The expired demand.</param>
         private void DemandQueue_OnDemandExpired_Server(Demand demand)
         {
-            this.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
-            this.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
             this.IncrementFailedDeliveredCounter();
-
+            if (this.playerScore > 0)
+            {
+                this.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
+                this.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+                
+            }
         }
     }
 }
