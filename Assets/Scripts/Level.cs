@@ -114,7 +114,7 @@ namespace Underconnected
         /// <summary>
         /// Starts this level by putting it into its starting phase.
         /// </summary>
-        public virtual void StartLevel() => this.levelPhase.SetState(LevelPhase.Preparing);
+        public virtual void StartLevel() => this.ChangePhase(LevelPhase.Preparing);
         /// <summary>
         /// Stops and shuts down this level.
         /// </summary>
