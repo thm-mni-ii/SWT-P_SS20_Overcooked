@@ -91,6 +91,8 @@ namespace Underconnected
             {
                 if (player.IsOwnPlayer)
                     player.Controls.DisableControls();
+
+                player.ShowName();
             }
         }
     }

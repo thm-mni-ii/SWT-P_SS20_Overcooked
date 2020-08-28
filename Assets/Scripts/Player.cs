@@ -15,6 +15,8 @@ namespace Underconnected
         [SerializeField] TextMeshProUGUI playerNameText;
         [SerializeField] Interactor interactor;
         [SerializeField] PlayerControls controls;
+        [SerializeField] Animator playerInfoCanvasAnimator;
+        [SerializeField] string playerNameAnimationBool = "IsShown";
 
 
         /// <summary>
@@ -40,6 +42,9 @@ namespace Underconnected
         public bool IsOwnPlayer => this.hasAuthority;
 
 
+        private bool isNameVisible;
+
+
         #region Unity Callbacks
 
         /// <summary>
@@ -49,6 +54,8 @@ namespace Underconnected
         {
             if (GameManager.CurrentLevel != null)
             {
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
+                Debug.Log($"Player start, name visible: {this.isNameVisible}");
                 GameManager.CurrentLevel.RegisterPlayer(this);
             }
             else
@@ -90,6 +97,38 @@ namespace Underconnected
                 NetworkIdentity clientIdentity = reader.ReadNetworkIdentity();
                 this.SetClient(clientIdentity != null ? clientIdentity.GetComponent<PlayerConnection>() : null);
             }
+        }
+
+
+        /// <summary>
+        /// Shows this player's name.
+        /// </summary>
+        public void ShowName()
+        {
+            this.isNameVisible = true;
+
+            if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
+            {
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
+                Debug.Log("Player name now visible");
+            }
+            else
+                Debug.Log($"isNameVisible is {this.isNameVisible}");
+        }
+        /// <summary>
+        /// Hides this player's name.
+        /// </summary>
+        public void HideName()
+        {
+            this.isNameVisible = false;
+
+            if (this.playerInfoCanvasAnimator.isActiveAndEnabled)
+            {
+                this.playerInfoCanvasAnimator.SetBool(this.playerNameAnimationBool, this.isNameVisible);
+                Debug.Log("Player name now invisible");
+            }
+            else
+                Debug.Log($"isNameVisible is {this.isNameVisible}");
         }
 
 

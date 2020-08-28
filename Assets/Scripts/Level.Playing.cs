@@ -77,6 +77,10 @@ namespace Underconnected
 
                     this.isRunningOnServer = true;
                 }
+
+                // Hide all player names
+                foreach (Player p in this.level.AllPlayers)
+                    p.HideName();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
             {
