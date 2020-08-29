@@ -46,6 +46,10 @@ namespace Underconnected
         /// Holds a reference to the object information canvas.
         /// </summary>
         protected Canvas ObjectInfoCanvas => this.objectInfoCanvas;
+        /// <summary>
+        /// Holds a reference to the progress bar.
+        /// </summary>
+        protected Slider ProgressBar => this.progressBar;
 
         /// <summary>
         /// Holds the interactor that is currently looking at this interactable.
@@ -60,7 +64,7 @@ namespace Underconnected
             this.CurrentInteractor = null;
             this.SecondsPassed = 0.0F;
 
-            this.objectInfoCanvas.gameObject.SetActive(false);
+            this.progressBar.gameObject.SetActive(false);
 
             this.watchingInteractor = null;
         }
@@ -118,7 +122,7 @@ namespace Underconnected
                 this.SecondsPassed = 0.0F;
                 this.progressBar.value = 0.0F;
 
-                this.objectInfoCanvas.gameObject.SetActive(true);
+                this.progressBar.gameObject.SetActive(true);
                 this.IsActivated = true;
 
                 if (this.secondsToFinish <= Mathf.Epsilon)

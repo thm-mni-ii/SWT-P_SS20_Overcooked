@@ -1167,6 +1167,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 019e7463578cdfd4584b83a34df6908a,
         type: 2}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2846866026949719891, guid: f28d248b5897f164f8e880003f6c6ce2,
         type: 3}
       propertyPath: m_Name
@@ -1645,6 +1665,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Uricacid
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187944263583936611, guid: 135972ca380201d4da2b8898a0b93b3d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187944263583936611, guid: 135972ca380201d4da2b8898a0b93b3d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187944263583936611, guid: 135972ca380201d4da2b8898a0b93b3d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187944263583936611, guid: 135972ca380201d4da2b8898a0b93b3d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8198835769458044712, guid: 135972ca380201d4da2b8898a0b93b3d,
         type: 3}
@@ -2180,6 +2220,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 993275301}
     m_Modifications:
+    - target: {fileID: 268121943115380168, guid: 824e7cc2bc9451f49b26bc1210c8ffb8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268121943115380168, guid: 824e7cc2bc9451f49b26bc1210c8ffb8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268121943115380168, guid: 824e7cc2bc9451f49b26bc1210c8ffb8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268121943115380168, guid: 824e7cc2bc9451f49b26bc1210c8ffb8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1510813599345777470, guid: 824e7cc2bc9451f49b26bc1210c8ffb8,
         type: 3}
       propertyPath: m_Name
@@ -3023,6 +3083,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ElectrolysisEquip
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811121808431932842, guid: c7eadae0433a0584a9fe9e4272b38a6a,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811121808431932842, guid: c7eadae0433a0584a9fe9e4272b38a6a,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811121808431932842, guid: c7eadae0433a0584a9fe9e4272b38a6a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811121808431932842, guid: c7eadae0433a0584a9fe9e4272b38a6a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7eadae0433a0584a9fe9e4272b38a6a, type: 3}

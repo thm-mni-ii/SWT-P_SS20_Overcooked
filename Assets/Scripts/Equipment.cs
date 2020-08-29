@@ -15,6 +15,7 @@ namespace Underconnected
         [SerializeField] GameObject outputContainer;
         [SerializeField] Light fireLight;
         [SerializeField] ParticleSystem fireParticles;
+        [SerializeField] ContentsUI contentsUI;
 
         [Header("Settings")]
         [SerializeField] bool allowForeignMattersInRecipes;
@@ -98,7 +99,7 @@ namespace Underconnected
 
                 this.IsActivated = false;
                 this.IsFinished = true;
-                this.ObjectInfoCanvas.gameObject.SetActive(false);
+                this.ProgressBar.gameObject.SetActive(false);
 
                 if (this.isServer)
                     this.CompleteRecipe(this.recipeInProgress);
@@ -119,6 +120,8 @@ namespace Underconnected
                 matterObject.transform.SetParent(this.inputContainer.transform, false);
                 matterObject.transform.localPosition = Vector3.zero;
                 matterObject.transform.localRotation = Quaternion.identity;
+
+                this.contentsUI?.AddMatter(matterObject.Matter);
                 this.insertedObjects.Add(matterObject);
                 this.insertedMatter.Add(matterObject.Matter);
 
@@ -149,10 +152,11 @@ namespace Underconnected
         {
             if (this.outputObjects.Count != 0)
             {
-                MatterObject toTake = this.outputObjects[this.outputObjects.Count-1];
+                MatterObject toTake = this.outputObjects[this.outputObjects.Count - 1];
                 toTake.EnablePhysics();
                 toTake.transform.SetParent(this.transform, false);
 
+                this.contentsUI?.RemoveMatter(toTake.Matter);
                 this.outputObjects.RemoveAt(this.outputObjects.Count - 1);
                 return toTake;
             }
@@ -172,6 +176,7 @@ namespace Underconnected
                 toTake.EnablePhysics();
                 toTake.transform.SetParent(this.transform, false);
 
+                this.contentsUI?.RemoveMatter(toTake.Matter);
                 this.insertedMatter.RemoveAt(index);
                 this.insertedObjects.RemoveAt(index);
 
@@ -205,14 +210,15 @@ namespace Underconnected
         [Server]
         private void AddToOutput(Matter[] matter)
         {
-            if (matter.Length>0)
+            if (matter.Length > 0)
             {
-                for(int i = 0; i < matter.Length; i++)
+                for (int i = 0; i < matter.Length; i++)
                 {
                     GameObject resultMatter = GameObject.Instantiate(matter[i].GetPrefab());
 
                     this.outputObjects.Add(resultMatter.GetComponent<MatterObject>());
                     this.outputObjects[i].DisablePhysics();
+                    this.contentsUI?.AddMatter(matter[i]);
 
                     this.outputObjects[i].transform.SetParent(this.outputContainer.transform, false);
                     this.outputObjects[i].transform.localPosition = Vector3.zero;
@@ -221,7 +227,6 @@ namespace Underconnected
                     NetworkServer.Spawn(resultMatter);
                     this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
                 }
-                
             }
         }
         /// <summary>
@@ -243,6 +248,7 @@ namespace Underconnected
                 {
                     NetworkServer.Destroy(this.insertedObjects[insertedSlotIndex].gameObject);
 
+                    this.contentsUI?.RemoveMatter(toRemove);
                     this.insertedMatter.RemoveAt(insertedSlotIndex);
                     this.insertedObjects.RemoveAt(insertedSlotIndex);
                     removeIndices.Add(insertedSlotIndex);
@@ -275,6 +281,9 @@ namespace Underconnected
                 {
                     foreach (int index in indices)
                     {
+                        Matter target = this.insertedMatter[index];
+
+                        this.contentsUI?.RemoveMatter(target);
                         this.insertedMatter.RemoveAt(index);
                         this.insertedObjects.RemoveAt(index);
                     }
@@ -284,6 +293,7 @@ namespace Underconnected
                     Debug.LogError("Cannot remove given indices from input list. Clearing entire list instead.", this);
                     Debug.LogException(ex, this);
 
+                    this.contentsUI?.Clear();
                     this.insertedObjects.Clear();
                     this.insertedMatter.Clear();
                 }
@@ -299,6 +309,7 @@ namespace Underconnected
         {
             if (this.isClientOnly)
             {
+                this.contentsUI?.Clear();
                 this.insertedObjects.Clear();
                 this.insertedMatter.Clear();
             }
@@ -320,6 +331,7 @@ namespace Underconnected
                 outputObject.transform.localPosition = Vector3.zero;
                 outputObject.transform.localRotation = Quaternion.identity;
 
+                this.contentsUI?.AddMatter(matterObject.Matter);
                 this.outputObjects.Add(matterObject);
             }
         }
