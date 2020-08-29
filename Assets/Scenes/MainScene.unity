@@ -345,7 +345,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 28.5
+  field of view: 19
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -370,13 +370,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006195448}
-  m_LocalRotation: {x: 0.41530636, y: -0, z: -0, w: 0.9096817}
-  m_LocalPosition: {x: 0, y: 15.93, z: -21.03}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 16, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 49.077003, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!1 &2083109637
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,13 +491,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2083109638}
     m_Modifications:
-    - target: {fileID: 121393549961948885, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_text
-      value: 'LAB
-
-        COMPLETED'
-      objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -613,20 +606,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3665182924025863236, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8752107873892963473, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_Name
       value: LevelFinishedUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8752107873892963473, guid: 32cd8f536377c8740859a06ae27e9f3e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32cd8f536377c8740859a06ae27e9f3e, type: 3}

@@ -310,7 +310,8 @@ GameObject:
   - component: {fileID: 8698817287112452421}
   - component: {fileID: 853779676}
   - component: {fileID: 853779675}
-  - component: {fileID: -6105685868394061933}
+  - component: {fileID: 8381565830882111697}
+  - component: {fileID: -3767914202776448225}
   m_Layer: 8
   m_Name: distillationModern
   m_TagString: Untagged
@@ -373,7 +374,7 @@ MonoBehaviour:
   resultSpawnOffset: {x: 0, y: 0, z: 0}
   objectInfoCanvas: {fileID: 4333722288737559273}
   progressBar: {fileID: 4333722288544371835}
-  highlighting: {fileID: -6105685868394061933}
+  highlighting: {fileID: -3767914202776448225}
   inputContainer: {fileID: 1341058849}
   outputContainer: {fileID: 399333216}
   fireLight: {fileID: 2217655089101224303}
@@ -381,7 +382,20 @@ MonoBehaviour:
   allowForeignMattersInRecipes: 0
   allRecipes:
   - {fileID: 11400000, guid: e562eecc31531fe4bb70baf3e0795328, type: 2}
---- !u!114 &-6105685868394061933
+--- !u!65 &8381565830882111697
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5684442006031145814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7987788, y: 2.8560913, z: 1.0614239}
+  m_Center: {x: -0.3993895, y: 1.4561137, z: -0.040418684}
+--- !u!114 &-3767914202776448225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 8632365603161309298}
   - component: {fileID: 8632365603161309296}
   - component: {fileID: 122257757236250085}
-  - component: {fileID: 7223036563972852211}
   m_Layer: 8
   m_Name: MatterObject
   m_TagString: Pickup
@@ -34,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 8632365603161309307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -167,7 +166,7 @@ MonoBehaviour:
   canBeDropped: 1
   nonKinematicRBs:
   - {fileID: 8632365603161309308}
-  highlighting: {fileID: 7223036563972852211}
+  highlighting: {fileID: 0}
 --- !u!114 &122257757236250085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,18 +185,3 @@ MonoBehaviour:
   - {fileID: 8632365603161309309}
   pickableObject: {fileID: 8632365603161309296}
   matter: {fileID: 0}
---- !u!114 &7223036563972852211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8632365603161309307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allRenderers:
-  - {fileID: 8632365603161309310}
-  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
