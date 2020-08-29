@@ -727,6 +727,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8965098516938292597}
     m_Modifications:
+    - target: {fileID: 546835132545228037, guid: a6dd05e148ac7b24fbfb633890dd71b1,
+        type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 546835132545228038, guid: a6dd05e148ac7b24fbfb633890dd71b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -836,6 +841,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ContentsUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4139449061701725747, guid: a6dd05e148ac7b24fbfb633890dd71b1,
+        type: 3}
+      propertyPath: maxRowsCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6dd05e148ac7b24fbfb633890dd71b1, type: 3}

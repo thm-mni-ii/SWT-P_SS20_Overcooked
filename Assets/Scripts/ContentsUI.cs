@@ -14,20 +14,20 @@ namespace Underconnected
         [SerializeField] MatterIcon matterIconPrefab;
         [SerializeField] GridLayoutGroup gridLayoutGroup;
 
+        [Header("Settings")]
+        [SerializeField] int maxRowsCount = 1;
+
 
         /// <summary>
         /// Holds the matter that is currently displayed.
         /// </summary>
-        private Dictionary<Matter, MatterIcon> displayedMatter;
+        private Dictionary<Matter, MatterIcon> displayedMatter = new Dictionary<Matter, MatterIcon>();
 
 
         private void Awake()
         {
-            if (this.displayedMatter == null)
-                this.displayedMatter = new Dictionary<Matter, MatterIcon>();
-
             if (this.gridLayoutGroup != null)
-                this.gridLayoutGroup.cellSize = Vector2.one * ((RectTransform)this.transform).rect.height;
+                this.gridLayoutGroup.cellSize = Vector2.one * (((RectTransform)this.transform).rect.height / Mathf.Max(this.maxRowsCount, 1));
         }
 
 
@@ -58,7 +58,6 @@ namespace Underconnected
                 matterIcon.SetDisplay(matter, newQuantity);
             }
         }
-
         /// <summary>
         /// Removes the given matter from this UI.
         /// </summary>
@@ -78,6 +77,19 @@ namespace Underconnected
                 else
                     matterIcon.SetDisplay(matterIcon.DisplayedMatter, matterIcon.DisplayedQuantity - quantity);
             }
+        }
+
+        /// <summary>
+        /// Removes all displayed matters from this UI.
+        /// </summary>
+        public void Clear()
+        {
+            var enumerator = this.displayedMatter.GetEnumerator();
+
+            while (enumerator.MoveNext())
+                GameObject.Destroy(enumerator.Current.Value.gameObject);
+
+            this.displayedMatter.Clear();
         }
     }
 }

@@ -76,3 +76,4 @@ MonoBehaviour:
   matterIconPrefab: {fileID: 2723414597181443155, guid: 335a7b9d70ddb2f428b583db976a9a53,
     type: 3}
   gridLayoutGroup: {fileID: 546835132545228037}
+  maxRowsCount: 2
