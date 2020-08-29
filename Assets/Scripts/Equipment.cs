@@ -311,7 +311,7 @@ namespace Underconnected
         [ClientRpc]
         private void RpcAddOutput(NetworkIdentity outputObject)
         {
-            if (this.isClientOnly && outputObjects.Count != 0)
+            if (this.isClientOnly && outputObject != null)
             {
                 MatterObject matterObject = outputObject.GetComponent<MatterObject>();
                 matterObject.DisablePhysics();
