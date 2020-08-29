@@ -80,7 +80,7 @@ MonoBehaviour:
   runInBackground: 1
   startOnHeadless: 1
   showDebugMessages: 0
-  serverTickRate: 10
+  serverTickRate: 40
   offlineScene: 
   onlineScene: 
   transport: {fileID: 4268389510805711341}
