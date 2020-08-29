@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Underconnected
 {
@@ -11,6 +12,7 @@ namespace Underconnected
     {
         [Header("References")]
         [SerializeField] MatterIcon matterIconPrefab;
+        [SerializeField] GridLayoutGroup gridLayoutGroup;
 
 
         /// <summary>
@@ -23,6 +25,9 @@ namespace Underconnected
         {
             if (this.displayedMatter == null)
                 this.displayedMatter = new Dictionary<Matter, MatterIcon>();
+
+            if (this.gridLayoutGroup != null)
+                this.gridLayoutGroup.cellSize = Vector2.one * ((RectTransform)this.transform).rect.height;
         }
 
 

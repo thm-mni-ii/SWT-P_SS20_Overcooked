@@ -13,6 +13,7 @@ namespace Underconnected
         [SerializeField] float interactReach = 0.5F;
         [SerializeField] LayerMask interactLayers;
         [SerializeField] Transform interactOrigin;
+        [SerializeField] ContentsUI holdingContentsUI;
 
 
         /// <summary>
@@ -86,12 +87,22 @@ namespace Underconnected
             if (this.HeldObject != heldObject)
             {
                 if (this.HeldObject != null)
+                {
+                    if (this.holdingContentsUI != null && this.HeldObject.GetComponent<MatterObject>() != null)
+                        this.holdingContentsUI.RemoveMatter(this.HeldObject.GetComponent<MatterObject>().Matter);
+
                     this.HeldObject.Drop(this);
+                }
 
                 this.HeldObject = heldObject;
 
                 if (this.HeldObject != null)
+                {
+                    if (this.holdingContentsUI != null && this.HeldObject.GetComponent<MatterObject>() != null)
+                        this.holdingContentsUI.AddMatter(this.HeldObject.GetComponent<MatterObject>().Matter);
+
                     this.HeldObject.Pickup(this);
+                }
             }
         }
 
