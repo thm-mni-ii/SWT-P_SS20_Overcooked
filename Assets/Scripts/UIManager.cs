@@ -56,10 +56,6 @@ namespace Underconnected
         /// <summary>
         /// Shows the level finished screen.
         /// </summary>
-        public void ShowLevelFinishedScreen()
-        {
-            this.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
-            this.LevelFinishedUI.gameObject.SetActive(true);
-        }
+        public void ShowLevelFinishedScreen() => this.LevelFinishedUI.gameObject.SetActive(true);
     }
 }
