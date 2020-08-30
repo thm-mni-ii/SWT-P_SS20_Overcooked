@@ -561,11 +561,6 @@ PrefabInstance:
       propertyPath: mirrorHUD
       value: 
       objectReference: {fileID: 4268389511968292781}
-    - target: {fileID: 5112068891454636496, guid: 585ce050ee231b845ab42aa02e70bfb2,
-        type: 3}
-      propertyPath: useMirrorHUD
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585ce050ee231b845ab42aa02e70bfb2, type: 3}
 --- !u!114 &1324537561877426101 stripped
