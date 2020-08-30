@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4268389510805711331}
   - component: {fileID: 4268389510805711340}
   - component: {fileID: 4268389510805711341}
-  - component: {fileID: 4268389510805711342}
+  - component: {fileID: 641182169812277280}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -138,7 +138,7 @@ MonoBehaviour:
   serverMaxReceivesPerTick: 10000
   clientMaxMessageSize: 16384
   clientMaxReceivesPerTick: 1000
---- !u!114 &4268389510805711342
+--- !u!114 &641182169812277280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
