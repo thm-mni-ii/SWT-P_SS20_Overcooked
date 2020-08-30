@@ -6,4 +6,4 @@ You can find more about the game by heading over to our [wiki](https://github.co
 
 We used the [Unity-Engine](https://unity.com/) to create this game, this was a requirement and not an active choice on our part.
 
-The code documentation can be found [here]. It was created using [Doxygen](https://www.doxygen.nl/).
+The code documentation can be found [here](https://thm-mni-ii.github.io/SWT-P_SS20_Overcooked/). It was created using [Doxygen](https://www.doxygen.nl/).
