@@ -17,7 +17,7 @@ namespace Underconnected
         [SerializeField] LevelUI levelUI;
         [Tooltip("A reference to the level finished UI.")]
         [SerializeField] LevelFinishedUI levelFinishedUI;
-
+        [Tooltip("A reference to the Tutorial UI.")]
         [SerializeField] TutorialUI tutorialUI;
 
 
@@ -56,13 +56,19 @@ namespace Underconnected
         /// </summary>
         public void HideLevelUI() => this.levelUI.gameObject.SetActive(false);
 
-        /// <summary>
-        /// Shows the level finished screen.
-        /// </summary>
+        
 
 
         public TutorialUI TutorialUI => this.tutorialUI;
 
+        public void showTutorialUI()
+        {
+            this.tutorialUI.LoadTutorialUI();
+        }
+
+        /// <summary>
+        /// Shows the level finished screen.
+        /// </summary>
         public void ShowLevelFinishedScreen()
 
         {
