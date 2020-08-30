@@ -138,9 +138,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lass uns nun Wasser herstellen! Daf\xFCr ben\xF6tigst du 2 Wasserstoffatome
-    (H) und ein Sauerstoffatom (O). Hole die Elemente aus den Boxen und bringe sie
-    zum Ger\xE4t auf dem Tisch und lege sie mit E in das Ger\xE4t."
+  m_text: Let's create some water. You need two hydrogen atoms (H) and a single oxygen
+    (O). get the elements and place them in the Multitool by pressing E.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1803,7 +1802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xDCber deinem Punktestand steht die aktuell im Level verbleibende Zeit."
+  m_text: Right above your points is the remaining time for the level.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2089,8 +2088,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Auf der linken Seite siehst du Boxen aus denen du Elemente entnehmen kannst.\nGehe
-    zu einer der Boxen und dr\xFCcke E um mit ihr zu interagieren."
+  m_text: 'On your left are matter supply boxes.
+
+    Walk up to them and use E to
+    interact.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2878,9 +2879,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nachdem du die Verbindung hergestellt hast musst du sie noch abgeben,
-    um Punkte daf\xFCr zu erhalten. Gehe daf\xFCr zum Abgabetisch und lasse mit E
-    das Molek\xFCl fallen."
+  m_text: After creating the connection you need to get some points for that. Take
+    it out of the tool by pressing E and bring it over to this table to hand it in.
+    Press E again to drop it there.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3036,8 +3037,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Elemente oder Verbindungen, die du nicht mehr brauchst kommen in den M\xFCll.
-    Stelle dich daf\xFCr an den M\xFClleimer und dr\xFCcke wieder E um zu interagieren."
+  m_text: Atoms or connections you do not need any longer or picked up by accident
+    can be placed in the trash. Walk over there and use E to interact.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4004,8 +4005,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Wilkommen zu Underconnected!\nIn diesem Tutorial lernst du die grundlegende
-    Steuerung und das Erstellen einfacher Verbindungen. \nViel Spa\xDF damit."
+  m_text: 'Welcome to Underconnected!
+
+    This tutorial teaches you how to move
+    and create connections.
+
+    Have a great time.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4940,9 +4945,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Im grauen Balken oben findest du immer das aktuell geforderte Molek\xFCl.
-    Dieses gilt es dann herzustellen. Doch sei schnell! Wird ein Molek\xFCl nicht
-    rechtzeitig abgeliefert bekommst du Punktabzug!"
+  m_text: In the top part of your screen you can see the currently demanded molecule.
+    This is the one you need to complete next. But hurry! If you are not able to
+    complete the demand you lose some points.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5470,7 +5475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Deinen aktuellen Punktestand findest du hier direkt \xFCber diesem Textfenster."
+  m_text: Speaking of points. Your current points are found right above this textbox.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5626,16 +5631,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nutze die Tasten W,A,S,D um dich zu bewegen.
+  m_text: 'Use W,A,S,D on your keyboard to move around..
 
-    W - hoch
+    W - up
 
-    A - links
+    A - left
 
-    S
-    - runter
+    D
+    - right
 
-    D - rechts'
+    S - down'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
