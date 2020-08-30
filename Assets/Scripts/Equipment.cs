@@ -40,6 +40,15 @@ namespace Underconnected
         /// </summary>
         private List<MatterObject> outputObjects;
 
+        /// <summary>
+        /// Holds the pending input objects.
+        /// </summary>
+        private List<uint> pendingInputs;
+        /// <summary>
+        /// Holds the pending output objects.
+        /// </summary>
+        private List<uint> pendingOutputs;
+
 
         private void Awake()
         {
@@ -47,6 +56,64 @@ namespace Underconnected
             this.insertedMatter = new List<Matter>();
             this.recipeInProgress = null;
             this.outputObjects = new List<MatterObject>();
+
+            this.pendingInputs = new List<uint>();
+            this.pendingOutputs = new List<uint>();
+        }
+        public override void OnStartClient()
+        {
+            foreach (uint pending in this.pendingInputs)
+                this.InsertMatterObject(NetworkIdentity.spawned[pending].GetComponent<MatterObject>());
+            this.pendingInputs.Clear();
+
+            foreach (uint pending in this.pendingOutputs)
+                this.InsertMatterObject(NetworkIdentity.spawned[pending].GetComponent<MatterObject>());
+            this.pendingOutputs.Clear();
+        }
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
+        {
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
+            {
+                writer.WriteInt32(this.insertedObjects.Count);
+                writer.WriteInt32(this.outputObjects.Count);
+
+                // We serialize NetIDs here because the actual MatterObjects are not yet spawned on the client so it won't find them while deserializing
+                // We need to send NetIDs and then look up their MatterObjects inside of OnStartClient (see above)
+
+                // Serialize inputs
+                foreach (MatterObject mObj in this.insertedObjects)
+                    writer.WriteUInt32(mObj.GetComponent<NetworkIdentity>().netId);
+
+                // Serialize outputs
+                foreach (MatterObject mObj in this.outputObjects)
+                    writer.WriteUInt32(mObj.GetComponent<NetworkIdentity>().netId);
+
+                dataWritten = true;
+            }
+
+            return dataWritten;
+        }
+
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            int inputCount = reader.ReadInt32();
+            int outputCount = reader.ReadInt32();
+
+            uint readId;
+            for (int i = 0; i < inputCount; i++)
+            {
+                readId = reader.ReadUInt32();
+                this.pendingInputs.Add(readId);
+            }
+
+            for (int i = 0; i < outputCount; i++)
+            {
+                readId = reader.ReadUInt32();
+                this.pendingOutputs.Add(readId);
+            }
         }
 
 
@@ -145,6 +212,24 @@ namespace Underconnected
             }
         }
         /// <summary>
+        /// Adds an output object to this equipment.
+        /// Synchronizes it with the clients if run on the server.
+        /// </summary>
+        /// <param name="matterObject">The object to add to the output.</param>
+        private void AddOutputObject(MatterObject matterObject)
+        {
+            this.outputObjects.Add(matterObject);
+            this.contentsUI?.AddMatter(matterObject.Matter);
+
+            matterObject.DisablePhysics();
+            matterObject.transform.SetParent(this.outputContainer.transform, false);
+            matterObject.transform.localPosition = Vector3.zero;
+            matterObject.transform.localRotation = Quaternion.identity;
+
+            if (this.isServer)
+                this.RpcAddOutput(matterObject.GetComponent<NetworkIdentity>());
+        }
+        /// <summary>
         /// Ejects the matter object inside the output slot and returns it.
         /// </summary>
         /// <returns>The output matter object or `null` if none.</returns>
@@ -215,17 +300,9 @@ namespace Underconnected
                 for (int i = 0; i < matter.Length; i++)
                 {
                     GameObject resultMatter = GameObject.Instantiate(matter[i].GetPrefab());
-
-                    this.outputObjects.Add(resultMatter.GetComponent<MatterObject>());
-                    this.outputObjects[i].DisablePhysics();
-                    this.contentsUI?.AddMatter(matter[i]);
-
-                    this.outputObjects[i].transform.SetParent(this.outputContainer.transform, false);
-                    this.outputObjects[i].transform.localPosition = Vector3.zero;
-                    this.outputObjects[i].transform.localRotation = Quaternion.identity;
-
                     NetworkServer.Spawn(resultMatter);
-                    this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
+
+                    this.AddOutputObject(resultMatter.GetComponent<MatterObject>());
                 }
             }
         }
@@ -265,7 +342,11 @@ namespace Underconnected
         [ClientRpc]
         private void RpcCompleteRecipe()
         {
-            this.recipeInProgress = null;
+            if (this.isClientOnly)
+            {
+                this.recipeInProgress = null;
+                this.OnTimerFinish();
+            }
         }
         /// <summary>
         /// Tells all clients to remove elements from the input at the given indices.
@@ -323,17 +404,7 @@ namespace Underconnected
         private void RpcAddOutput(NetworkIdentity outputObject)
         {
             if (this.isClientOnly && outputObject != null)
-            {
-                MatterObject matterObject = outputObject.GetComponent<MatterObject>();
-                matterObject.DisablePhysics();
-
-                outputObject.transform.SetParent(this.outputContainer.transform, false);
-                outputObject.transform.localPosition = Vector3.zero;
-                outputObject.transform.localRotation = Quaternion.identity;
-
-                this.contentsUI?.AddMatter(matterObject.Matter);
-                this.outputObjects.Add(matterObject);
-            }
+                this.AddOutputObject(outputObject.GetComponent<MatterObject>());
         }
     }
 }
