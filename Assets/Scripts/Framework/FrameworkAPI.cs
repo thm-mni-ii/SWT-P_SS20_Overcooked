@@ -31,6 +31,16 @@ namespace GameFramework
         [SerializeField] private float disconnectWaitTime;
 
         /// <summary>
+        /// Tells whether we should use the mirror HUD.
+        /// `true` for testing purposes, `false` for production.
+        /// </summary>
+        [SerializeField] private bool useMirrorHUD;
+        /// <summary>
+        /// The reference to Mirror's network HUD.
+        /// </summary>
+        [SerializeField] private NetworkManagerHUD mirrorHUD;
+
+        /// <summary>
         /// Stores the time until disconnect.
         /// </summary>
         private float disconnectTimer;
@@ -63,10 +73,7 @@ namespace GameFramework
 
 
         /// <summary>
-        /// The server loads the player info of the local player, if:
-        /// - the player is the host -> start server as host
-        /// - the player is the client -> join server as client
-        /// NOTE: This is not important for development.
+        /// Loads the player data.
         /// </summary>
         public void Load()
         {
@@ -78,16 +85,29 @@ namespace GameFramework
             //LoadPlayerInfo();             // <- FOR RELEASE
         }
 
+        /// <summary>
+        /// The server loads the player info of the local player, if:
+        /// - the player is the host -> start server as host
+        /// - the player is the client -> join server as client
+        /// NOTE: This is not important for development.
+        /// </summary>
         void Start()
         {
-            if (isHost)
+            if (!this.useMirrorHUD)
             {
-                GameManager.NetworkManager.StartHost();
+                this.mirrorHUD.enabled = false;
+
+                if (isHost)
+                {
+                    GameManager.NetworkManager.StartHost();
+                }
+                else
+                {
+                    disconnectTimer = disconnectWaitTime;
+                }
             }
             else
-            {
-                disconnectTimer = disconnectWaitTime;
-            }
+                this.mirrorHUD.enabled = true;
         }
 
         /// <summary>
@@ -97,17 +117,20 @@ namespace GameFramework
         /// </summary>
         private void Update()
         {
-            // Try connecting if not host
-            if (!isHost && !NetworkClient.isConnected)
+            if (!this.useMirrorHUD)
             {
-                disconnectTimer -= Time.deltaTime;
-
-                if (disconnectTimer <= 0f)
+                // Try connecting if not host
+                if (!isHost && !NetworkClient.isConnected)
                 {
-                    Application.Quit();
-                }
+                    disconnectTimer -= Time.deltaTime;
 
-                GameManager.NetworkManager.StartClient();
+                    if (disconnectTimer <= 0f)
+                    {
+                        Application.Quit();
+                    }
+
+                    GameManager.NetworkManager.StartClient();
+                }
             }
 
             // Try quitting

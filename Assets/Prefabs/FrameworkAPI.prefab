@@ -43,4 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbac9774b3e147b4799b352f109268bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disconnectWaitTime: 0
+  disconnectWaitTime: 20
+  useMirrorHUD: 0
+  mirrorHUD: {fileID: 0}
