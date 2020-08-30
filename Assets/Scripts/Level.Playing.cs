@@ -231,8 +231,8 @@ namespace Underconnected
                 }
                 else if(this.level.playerScore > 0 && this.level.playerScore< demand.Matter.GetScoreFailPenalty())
                 {
-                    this.level.IncrementPlayerScore(-this.level.playerScore);
                     this.level.IncrementFailedDeliveredScore(-this.level.playerScore);
+                    this.level.IncrementPlayerScore(-this.level.playerScore);
                 }
                 
             }
