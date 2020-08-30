@@ -315,11 +315,10 @@ namespace Underconnected
         private void RemoveFromInput(Matter[] matters)
         {
             List<int> removeIndices = new List<int>(matters.Length);
+
             foreach (Matter toRemove in matters)
             {
                 int insertedSlotIndex = this.insertedMatter.IndexOf(toRemove);
-                while (insertedSlotIndex >= 0 && removeIndices.Contains(insertedSlotIndex) && insertedSlotIndex + 1 < this.insertedMatter.Count)
-                    insertedSlotIndex = this.insertedMatter.IndexOf(toRemove, insertedSlotIndex + 1);
 
                 if (insertedSlotIndex >= 0 && insertedSlotIndex < this.insertedMatter.Count)
                 {
