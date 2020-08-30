@@ -17,6 +17,8 @@ namespace Underconnected
         [SerializeField] LevelUI levelUI;
         [Tooltip("A reference to the level finished UI.")]
         [SerializeField] LevelFinishedUI levelFinishedUI;
+        [Tooltip("A reference to the party player UI.")]
+        [SerializeField] PlayerParty playerParty;
 
 
         /// <summary>
@@ -31,6 +33,10 @@ namespace Underconnected
         /// A reference to the level finished UI.
         /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
+        /// <summary>
+        /// A reference to the player party UI.
+        /// </summary>
+        public PlayerParty PlayerParty => this.playerParty;
 
 
 
@@ -60,6 +66,7 @@ namespace Underconnected
         {
             this.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
             this.LevelFinishedUI.gameObject.SetActive(true);
+            this.playerParty.gameObject.SetActive(true);
         }
     }
 }
