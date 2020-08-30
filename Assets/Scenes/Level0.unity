@@ -410,10 +410,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 131857961}
     m_Modifications:
+    - target: {fileID: 1227648956620233849, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5539673847107387527, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: sceneId
       value: 1944263651
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804353389066788904, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505396, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
@@ -429,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
@@ -911,14 +921,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  scorePerDelivery: 50
-  levelDurationSeconds: 180
+  timePerDemand: 30
+  bonusScore: 10
+  bonusScoreThreshold: 0.15
+  demandSpawnTimeMinMax: {x: 10, y: 30}
   demandsPool: []
   spawnPoints:
   - {fileID: 576548503}
   - {fileID: 1562858133}
   - {fileID: 1088264439}
   - {fileID: 1993753609}
+  timer: {fileID: 0}
+  demandQueue: {fileID: 0}
 --- !u!114 &890738741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,10 +1491,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 131857961}
     m_Modifications:
+    - target: {fileID: 1227648956620233849, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5539673847107387527, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: sceneId
       value: 3494814969
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804353389066788904, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505396, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
@@ -1496,7 +1520,7 @@ PrefabInstance:
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
@@ -1569,10 +1593,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 131857961}
     m_Modifications:
+    - target: {fileID: 1227648956620233849, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5539673847107387527, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: sceneId
       value: 2567367183
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804353389066788904, guid: 527fa62e42399e94d88adc0135274ec9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505396, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
@@ -1588,7 +1622,7 @@ PrefabInstance:
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804353390669505397, guid: 527fa62e42399e94d88adc0135274ec9,
         type: 3}
