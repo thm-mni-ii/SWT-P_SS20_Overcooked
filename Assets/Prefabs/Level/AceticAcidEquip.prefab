@@ -232,8 +232,8 @@ MonoBehaviour:
   objectInfoCanvas: {fileID: 2384034151830493077}
   progressBar: {fileID: 2384034152308924679}
   highlighting: {fileID: 6666291757894410151}
-  inputContainer: {fileID: 8864635976296845720}
-  outputContainer: {fileID: 8864635976296845720}
+  inputContainer: {fileID: 9024698869187659391}
+  outputContainer: {fileID: 9024698867764925439}
   fireLight: {fileID: 8864635976296848997}
   fireParticles: {fileID: 8864635976296845722}
   contentsUI: {fileID: 4421538840244700925}
@@ -608,12 +608,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8273e072ccac6d3409a3319201b143c2, type: 3}
---- !u!1 &8864635976296845720 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2217655088505808216, guid: 8273e072ccac6d3409a3319201b143c2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7332760666386445504}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8864635976296845723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2217655088505808219, guid: 8273e072ccac6d3409a3319201b143c2,
