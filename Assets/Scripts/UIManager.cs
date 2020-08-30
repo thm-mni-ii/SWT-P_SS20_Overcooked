@@ -47,6 +47,7 @@ namespace Underconnected
         {
             this.HideLevelUI();
             this.LevelFinishedUI.gameObject.SetActive(false);
+            //this.PlayerParty.gameObject.SetActive(false);
         }
 
 
@@ -68,6 +69,19 @@ namespace Underconnected
             this.LevelFinishedUI.gameObject.SetActive(true);
         }
 
-        //this.playerParty.gameObject.SetActive(true);
+        /// <summary>
+        /// Shows the player party UI.
+        /// </summary>
+        public void ShowPlayerPartyUI() {
+            Debug.Log("ShowPlayerPartyUI");
+            this.PlayerParty.gameObject.SetActive(true);
+        }
+        /// <summary>
+        /// Hides the player party UI.
+        /// </summary>
+        public void HidePlayerPartyUI() {
+            Debug.Log("HidePlayerPartyUI");
+            this.PlayerParty.gameObject.SetActive(false);
+        }
     }
 }

@@ -34,9 +34,10 @@ namespace Underconnected
             {
                 this.isRunningOnServer = NetworkServer.active;
 
-                // Disable our own player's controls and show the finished screen
+                // Disable our own player's controls and show the finished screen and the player party UI
                 this.level.OwnPlayer?.Controls.DisableControls();
                 GameManager.UI.ShowLevelFinishedScreen();
+                GameManager.UI.ShowPlayerPartyUI();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
             {
