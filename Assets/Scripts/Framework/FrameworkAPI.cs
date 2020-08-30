@@ -16,7 +16,7 @@ namespace GameFramework
     /// This class represents a game server.
     /// The server starts automatically and loads the player prefab into the online scene.
     /// </summary>
-    public class FrameworkAPI : NetworkManager
+    public class FrameworkAPI : MonoBehaviour
     {
         /// <summary>
         /// Location of the file that holds playerInfo of
@@ -56,37 +56,26 @@ namespace GameFramework
         private bool readyToQuit;
 
         public JSONNode PlayerInfos => playerInfos;
-
         public JSONNode GameInfos => gameInfos;
 
-        public static FrameworkAPI Instance => (FrameworkAPI)singleton;
+        public bool IsHost => this.isHost;
+        public string PlayerName => this.playerInfos != null ? this.playerInfos["name"].ToString() : null;
+
 
         /// <summary>
-        /// Start is called before the first frame update.
         /// The server loads the player info of the local player, if:
         /// - the player is the host -> start server as host
         /// - the player is the client -> join server as client
         /// NOTE: This is not important for development.
         /// </summary>
-        void Start()
+        public void Load()
         {
-            base.Start();
-
             readyToQuit = false;
             isHost = false;
 
-            //LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
+            LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
 
-            LoadPlayerInfo();             // <- FOR RELEASE
-
-            if (isHost)
-            {
-                StartHost();
-            }
-            else
-            {
-                disconnectTimer = disconnectWaitTime;
-            }
+            //LoadPlayerInfo();             // <- FOR RELEASE
         }
 
         /// <summary>
@@ -96,19 +85,6 @@ namespace GameFramework
         /// </summary>
         private void Update()
         {
-            // Try connecting if not host
-            if (!isHost && !NetworkClient.isConnected)
-            {
-                disconnectTimer -= Time.deltaTime;
-
-                if (disconnectTimer <= 0f)
-                {
-                    Application.Quit();
-                }
-
-                StartClient();
-            }
-
             // Try quitting
             if (readyToQuit)
             {
