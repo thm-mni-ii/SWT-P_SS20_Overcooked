@@ -12,6 +12,13 @@ namespace Underconnected
         /// </summary>
         public class LevelInitPhase : State<LevelPhase>
         {
+            public override void OnStateEnter(State<LevelPhase> previousState)
+            {
+                // Make sure that the demand queue is empty and that the score display is at 0 when initializing a new level
+                GameManager.UI.LevelUI.DemandQueue.Clear();
+                GameManager.UI.LevelUI.ScoreDisplay.SetScore(0);
+            }
+
             public override LevelPhase GetState() => LevelPhase.Init;
         }
     }

@@ -223,9 +223,20 @@ namespace Underconnected
             private void DemandQueue_OnDemandExpired_Server(Demand demand)
             {
                 this.level.IncrementDeliveredFailedCounter();
-                this.level.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
-                this.level.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+                if (this.level.playerScore > demand.Matter.GetScoreFailPenalty())
+                {
+                    this.level.IncrementPlayerScore(-demand.Matter.GetScoreFailPenalty());
+                    this.level.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
+
+                }
+                else if(this.level.playerScore > 0 && this.level.playerScore< demand.Matter.GetScoreFailPenalty())
+                {
+                    this.level.IncrementFailedDeliveredScore(-this.level.playerScore);
+                    this.level.IncrementPlayerScore(-this.level.playerScore);
+                }
+                
             }
+                
         }
     }
 }
