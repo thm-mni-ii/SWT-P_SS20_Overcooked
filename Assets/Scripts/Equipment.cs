@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,4 +1,5 @@
-﻿namespace Underconnected
+﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
+namespace Underconnected
 {
     /// <summary>
     /// Contains phases for game levels.
