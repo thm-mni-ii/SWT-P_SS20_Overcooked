@@ -1,5 +1,4 @@
-﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -65,6 +64,8 @@ namespace Underconnected
 
                     this.isRunningOnServer = true;
                 }
+                
+                GameManager.UI.ShowPlayerPartyUI();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
             {
@@ -78,6 +79,8 @@ namespace Underconnected
 
                     this.isRunningOnServer = false;
                 }
+                
+                GameManager.UI.HidePlayerPartyUI();
             }
 
             public override LevelPhase GetState() => LevelPhase.Preparing;
