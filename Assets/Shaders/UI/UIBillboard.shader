@@ -23,11 +23,12 @@ Shader "UIBillboard"
 	{
 		LOD 0
 
-		Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True" }
+		Tags { "Queue"="Overlay" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True" }
 		
 		
 
-		Cull Off
+
+		Cull Back
 		Lighting Off
 		ZWrite Off
 		ZTest Always
@@ -86,7 +87,7 @@ Shader "UIBillboard"
 				UNITY_SETUP_INSTANCE_ID( IN );
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 				UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
-
+				OUT.worldPosition = IN.vertex;
 				//Calculate new billboard vertex position and normal;
 				float3 upCamVec = normalize ( UNITY_MATRIX_V._m10_m11_m12 );
 				float3 forwardCamVec = -normalize ( UNITY_MATRIX_V._m20_m21_m22 );
@@ -101,7 +102,7 @@ Shader "UIBillboard"
 				//Need to nullify rotation inserted by generated surface shader;
 				IN.vertex = mul( unity_WorldToObject, IN.vertex );
 				
-				OUT.worldPosition = IN.vertex;
+				OUT.worldPosition.xyz += 0;
 				OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
 
 				OUT.texcoord = IN.texcoord;
@@ -113,7 +114,7 @@ Shader "UIBillboard"
 			fixed4 frag(v2f IN  ) : SV_Target
 			{
 				
-				half4 color = ( tex2D( _MainTex, float4(IN.texcoord.xy,0,0).xy ) * IN.color );
+				half4 color = ( tex2D( _MainTex, IN.texcoord.xy ) * IN.color );
 				
 				#ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
@@ -133,15 +134,15 @@ Shader "UIBillboard"
 	
 }
 /*ASEBEGIN
-Version=18200
-586;382;1162;637;1345.487;306.762;1.3;True;False
+Version=18301
+416;244;1162;619;1255.17;434.3372;1;True;False
 Node;AmplifyShaderEditor.TemplateShaderPropertyNode;2;-1032.973,-136.1429;Inherit;False;0;0;_MainTex;Shader;0;5;SAMPLER2D;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;16;-1047.788,44.23798;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;3;-839.9737,-138.1429;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.VertexColorNode;17;-708.4874,113.1382;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;4;-496.9736,-69.14289;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.BillboardNode;8;-295.7653,74.91031;Inherit;False;Spherical;True;0;1;FLOAT3;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-42,0;Float;False;True;-1;2;ASEMaterialInspector;0;4;UIBillboard;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;True;2;5;False;-1;10;False;-1;0;1;False;-1;0;False;-1;False;False;False;False;False;False;False;False;True;0;False;-1;True;True;True;True;True;0;True;-9;False;False;False;True;False;0;True;-5;255;True;-8;255;True;-7;0;True;-4;0;True;-6;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;7;False;-11;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;0;;0;0;Standard;0;0;1;True;False;;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;-42,0;Float;False;True;-1;2;ASEMaterialInspector;0;4;UIBillboard;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;True;2;5;False;-1;10;False;-1;0;1;False;-1;0;False;-1;False;False;False;False;False;False;False;False;True;0;False;-1;True;True;True;True;True;0;True;-9;False;False;False;True;False;0;True;-5;255;True;-8;255;True;-7;0;True;-4;0;True;-6;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;True;2;False;-1;True;7;False;-11;False;True;5;Queue=Overlay=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;0;;0;0;Standard;0;0;1;True;False;;0
 WireConnection;3;0;2;0
 WireConnection;3;1;16;0
 WireConnection;4;0;3;0
@@ -149,4 +150,4 @@ WireConnection;4;1;17;0
 WireConnection;1;0;4;0
 WireConnection;1;1;8;0
 ASEEND*/
-//CHKSM=1BB01C012DDDE8C69F8A4DC14059DF804181783D
+//CHKSM=660F0E42678DCF4C07BF9220A6B39BC0ABB5B1ED

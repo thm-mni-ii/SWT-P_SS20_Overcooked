@@ -18,6 +18,7 @@ namespace Underconnected
         [Header("References")]
         [SerializeField] Canvas objectInfoCanvas = null;
         [SerializeField] Slider progressBar = null;
+        [SerializeField] ObjectHighlighting highlighting = null;
 
 
         /// <summary>
@@ -45,6 +46,15 @@ namespace Underconnected
         /// Holds a reference to the object information canvas.
         /// </summary>
         protected Canvas ObjectInfoCanvas => this.objectInfoCanvas;
+        /// <summary>
+        /// Holds a reference to the progress bar.
+        /// </summary>
+        protected Slider ProgressBar => this.progressBar;
+
+        /// <summary>
+        /// Holds the interactor that is currently looking at this interactable.
+        /// </summary>
+        private Interactor watchingInteractor;
 
 
         private void Awake()
@@ -54,7 +64,9 @@ namespace Underconnected
             this.CurrentInteractor = null;
             this.SecondsPassed = 0.0F;
 
-            this.objectInfoCanvas.gameObject.SetActive(false);
+            this.progressBar.gameObject.SetActive(false);
+
+            this.watchingInteractor = null;
         }
 
         protected virtual void Update()
@@ -76,6 +88,15 @@ namespace Underconnected
             if (!this.IsActivated && !this.IsFinished)
                 this.OnTimerStart(interactor);
         }
+        public void SetWatcher(Interactor watcher)
+        {
+            this.watchingInteractor = watcher;
+            if (watcher != null)
+                this.highlighting.ShowHighlighting();
+            else
+                this.highlighting.HideHighlighting();
+        }
+        public GameObject GetGameObject() => this.gameObject;
 
 
         /// <summary>
@@ -101,7 +122,7 @@ namespace Underconnected
                 this.SecondsPassed = 0.0F;
                 this.progressBar.value = 0.0F;
 
-                this.objectInfoCanvas.gameObject.SetActive(true);
+                this.progressBar.gameObject.SetActive(true);
                 this.IsActivated = true;
 
                 if (this.secondsToFinish <= Mathf.Epsilon)

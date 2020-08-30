@@ -15,6 +15,7 @@ namespace Underconnected
         [SerializeField] GameObject outputContainer;
         [SerializeField] Light fireLight;
         [SerializeField] ParticleSystem fireParticles;
+        [SerializeField] ContentsUI contentsUI;
 
         [Header("Settings")]
         [SerializeField] bool allowForeignMattersInRecipes;
@@ -37,7 +38,16 @@ namespace Underconnected
         /// <summary>
         /// The output slot of this equipment.
         /// </summary>
-        private MatterObject outputObject;
+        private List<MatterObject> outputObjects;
+
+        /// <summary>
+        /// Holds the pending input objects.
+        /// </summary>
+        private List<uint> pendingInputs;
+        /// <summary>
+        /// Holds the pending output objects.
+        /// </summary>
+        private List<uint> pendingOutputs;
 
 
         private void Awake()
@@ -45,7 +55,65 @@ namespace Underconnected
             this.insertedObjects = new List<MatterObject>();
             this.insertedMatter = new List<Matter>();
             this.recipeInProgress = null;
-            this.outputObject = null;
+            this.outputObjects = new List<MatterObject>();
+
+            this.pendingInputs = new List<uint>();
+            this.pendingOutputs = new List<uint>();
+        }
+        public override void OnStartClient()
+        {
+            foreach (uint pending in this.pendingInputs)
+                this.InsertMatterObject(NetworkIdentity.spawned[pending].GetComponent<MatterObject>());
+            this.pendingInputs.Clear();
+
+            foreach (uint pending in this.pendingOutputs)
+                this.InsertMatterObject(NetworkIdentity.spawned[pending].GetComponent<MatterObject>());
+            this.pendingOutputs.Clear();
+        }
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
+        {
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
+            {
+                writer.WriteInt32(this.insertedObjects.Count);
+                writer.WriteInt32(this.outputObjects.Count);
+
+                // We serialize NetIDs here because the actual MatterObjects are not yet spawned on the client so it won't find them while deserializing
+                // We need to send NetIDs and then look up their MatterObjects inside of OnStartClient (see above)
+
+                // Serialize inputs
+                foreach (MatterObject mObj in this.insertedObjects)
+                    writer.WriteUInt32(mObj.GetComponent<NetworkIdentity>().netId);
+
+                // Serialize outputs
+                foreach (MatterObject mObj in this.outputObjects)
+                    writer.WriteUInt32(mObj.GetComponent<NetworkIdentity>().netId);
+
+                dataWritten = true;
+            }
+
+            return dataWritten;
+        }
+
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            int inputCount = reader.ReadInt32();
+            int outputCount = reader.ReadInt32();
+
+            uint readId;
+            for (int i = 0; i < inputCount; i++)
+            {
+                readId = reader.ReadUInt32();
+                this.pendingInputs.Add(readId);
+            }
+
+            for (int i = 0; i < outputCount; i++)
+            {
+                readId = reader.ReadUInt32();
+                this.pendingOutputs.Add(readId);
+            }
         }
 
 
@@ -64,7 +132,7 @@ namespace Underconnected
 
             if (heldObject != null)
             {
-                if (this.outputObject == null)
+                if (this.outputObjects.Count == 0)
                 {
                     MatterObject matterObject = heldObject.GetComponent<MatterObject>();
 
@@ -77,7 +145,7 @@ namespace Underconnected
             }
             else if (interactor.HeldObject == null)
             {
-                MatterObject toTake = this.outputObject != null ? this.TakeOutputObject() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedObject() : null;
+                MatterObject toTake = this.outputObjects.Count != 0 ? this.TakeOutputObject() : this.insertedObjects.Count > 0 ? this.TakeLastInsertedObject() : null;
 
                 if (toTake != null)
                     interactor.SetHeldObject(toTake.GetComponent<PickableObject>());
@@ -98,7 +166,7 @@ namespace Underconnected
 
                 this.IsActivated = false;
                 this.IsFinished = true;
-                this.ObjectInfoCanvas.gameObject.SetActive(false);
+                this.ProgressBar.gameObject.SetActive(false);
 
                 if (this.isServer)
                     this.CompleteRecipe(this.recipeInProgress);
@@ -119,6 +187,8 @@ namespace Underconnected
                 matterObject.transform.SetParent(this.inputContainer.transform, false);
                 matterObject.transform.localPosition = Vector3.zero;
                 matterObject.transform.localRotation = Quaternion.identity;
+
+                this.contentsUI?.AddMatter(matterObject.Matter);
                 this.insertedObjects.Add(matterObject);
                 this.insertedMatter.Add(matterObject.Matter);
 
@@ -142,18 +212,37 @@ namespace Underconnected
             }
         }
         /// <summary>
+        /// Adds an output object to this equipment.
+        /// Synchronizes it with the clients if run on the server.
+        /// </summary>
+        /// <param name="matterObject">The object to add to the output.</param>
+        private void AddOutputObject(MatterObject matterObject)
+        {
+            this.outputObjects.Add(matterObject);
+            this.contentsUI?.AddMatter(matterObject.Matter);
+
+            matterObject.DisablePhysics();
+            matterObject.transform.SetParent(this.outputContainer.transform, false);
+            matterObject.transform.localPosition = Vector3.zero;
+            matterObject.transform.localRotation = Quaternion.identity;
+
+            if (this.isServer)
+                this.RpcAddOutput(matterObject.GetComponent<NetworkIdentity>());
+        }
+        /// <summary>
         /// Ejects the matter object inside the output slot and returns it.
         /// </summary>
         /// <returns>The output matter object or `null` if none.</returns>
         private MatterObject TakeOutputObject()
         {
-            if (this.outputObject != null)
+            if (this.outputObjects.Count != 0)
             {
-                MatterObject toTake = this.outputObject;
+                MatterObject toTake = this.outputObjects[this.outputObjects.Count - 1];
                 toTake.EnablePhysics();
                 toTake.transform.SetParent(this.transform, false);
 
-                this.outputObject = null;
+                this.contentsUI?.RemoveMatter(toTake.Matter);
+                this.outputObjects.RemoveAt(this.outputObjects.Count - 1);
                 return toTake;
             }
 
@@ -172,6 +261,7 @@ namespace Underconnected
                 toTake.EnablePhysics();
                 toTake.transform.SetParent(this.transform, false);
 
+                this.contentsUI?.RemoveMatter(toTake.Matter);
                 this.insertedMatter.RemoveAt(index);
                 this.insertedObjects.RemoveAt(index);
 
@@ -192,7 +282,7 @@ namespace Underconnected
         private void CompleteRecipe(Recipe recipe)
         {
             this.RemoveFromInput(recipe.Inputs);
-            this.AddToOutput(recipe.Output);
+            this.AddToOutput(recipe.Outputs);
 
             this.recipeInProgress = null;
             this.RpcCompleteRecipe();
@@ -203,21 +293,17 @@ namespace Underconnected
         /// </summary>
         /// <param name="matter">The matter to add.</param>
         [Server]
-        private void AddToOutput(Matter matter)
+        private void AddToOutput(Matter[] matter)
         {
-            if (matter != null)
+            if (matter.Length > 0)
             {
-                GameObject resultMatter = GameObject.Instantiate(matter.GetPrefab());
+                for (int i = 0; i < matter.Length; i++)
+                {
+                    GameObject resultMatter = GameObject.Instantiate(matter[i].GetPrefab());
+                    NetworkServer.Spawn(resultMatter);
 
-                this.outputObject = resultMatter.GetComponent<MatterObject>();
-                this.outputObject.DisablePhysics();
-
-                resultMatter.transform.SetParent(this.outputContainer.transform, false);
-                resultMatter.transform.localPosition = Vector3.zero;
-                resultMatter.transform.localRotation = Quaternion.identity;
-
-                NetworkServer.Spawn(resultMatter);
-                this.RpcAddOutput(resultMatter.GetComponent<NetworkIdentity>());
+                    this.AddOutputObject(resultMatter.GetComponent<MatterObject>());
+                }
             }
         }
         /// <summary>
@@ -239,6 +325,7 @@ namespace Underconnected
                 {
                     NetworkServer.Destroy(this.insertedObjects[insertedSlotIndex].gameObject);
 
+                    this.contentsUI?.RemoveMatter(toRemove);
                     this.insertedMatter.RemoveAt(insertedSlotIndex);
                     this.insertedObjects.RemoveAt(insertedSlotIndex);
                     removeIndices.Add(insertedSlotIndex);
@@ -255,7 +342,11 @@ namespace Underconnected
         [ClientRpc]
         private void RpcCompleteRecipe()
         {
-            this.recipeInProgress = null;
+            if (this.isClientOnly)
+            {
+                this.recipeInProgress = null;
+                this.OnTimerFinish();
+            }
         }
         /// <summary>
         /// Tells all clients to remove elements from the input at the given indices.
@@ -271,6 +362,9 @@ namespace Underconnected
                 {
                     foreach (int index in indices)
                     {
+                        Matter target = this.insertedMatter[index];
+
+                        this.contentsUI?.RemoveMatter(target);
                         this.insertedMatter.RemoveAt(index);
                         this.insertedObjects.RemoveAt(index);
                     }
@@ -280,6 +374,7 @@ namespace Underconnected
                     Debug.LogError("Cannot remove given indices from input list. Clearing entire list instead.", this);
                     Debug.LogException(ex, this);
 
+                    this.contentsUI?.Clear();
                     this.insertedObjects.Clear();
                     this.insertedMatter.Clear();
                 }
@@ -295,6 +390,7 @@ namespace Underconnected
         {
             if (this.isClientOnly)
             {
+                this.contentsUI?.Clear();
                 this.insertedObjects.Clear();
                 this.insertedMatter.Clear();
             }
@@ -308,16 +404,7 @@ namespace Underconnected
         private void RpcAddOutput(NetworkIdentity outputObject)
         {
             if (this.isClientOnly && outputObject != null)
-            {
-                MatterObject matterObject = outputObject.GetComponent<MatterObject>();
-                matterObject.DisablePhysics();
-
-                outputObject.transform.SetParent(this.outputContainer.transform, false);
-                outputObject.transform.localPosition = Vector3.zero;
-                outputObject.transform.localRotation = Quaternion.identity;
-
-                this.outputObject = matterObject;
-            }
+                this.AddOutputObject(outputObject.GetComponent<MatterObject>());
         }
     }
 }

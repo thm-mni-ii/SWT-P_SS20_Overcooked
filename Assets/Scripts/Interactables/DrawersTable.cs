@@ -12,6 +12,8 @@ namespace Underconnected
         [Header("References")]
         [Tooltip("The drawer animator.")]
         [SerializeField] Animator drawerAnimator;
+        [Tooltip("The object highlighting effect.")]
+        [SerializeField] ObjectHighlighting highlighting;
 
         [Header("Settings")]
         [Tooltip("Whether the drawer should be opened at level start.")]
@@ -35,6 +37,11 @@ namespace Underconnected
         /// </summary>
         public bool IsDrawerOpened => this.isDrawerOpened;
 
+        /// <summary>
+        /// Holds the interactor that is currently looking at this interactable.
+        /// </summary>
+        private Interactor watchingInteractor;
+
 
         /// <summary>
         /// Play the correct animation on level start based on whether the drawer should be opened or not.
@@ -47,6 +54,8 @@ namespace Underconnected
                 this.drawerAnimator.Play(this.drawerOpenedState);
             else
                 this.drawerAnimator.Play(this.drawerClosedState);
+
+            this.watchingInteractor = null;
         }
 
 
@@ -88,5 +97,14 @@ namespace Underconnected
         /// </summary>
         /// <param name="interactor">The initiator of this interaction.</param>
         public void Interact(Interactor interactor) => this.ToggleDrawer();
+        public void SetWatcher(Interactor watcher)
+        {
+            this.watchingInteractor = watcher;
+            if (watcher != null)
+                this.highlighting.ShowHighlighting();
+            else
+                this.highlighting.HideHighlighting();
+        }
+        public GameObject GetGameObject() => this.gameObject;
     }
 }

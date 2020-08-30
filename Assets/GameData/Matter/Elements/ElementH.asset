@@ -15,5 +15,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e135dbed5611f2b4eb03663649c0f59d, type: 3}
   name: Hydrogen
   description: Hydrogen undso
+  scoreReward: 50
   prefab: {fileID: 8496902568302352896, guid: 58006da545cb5c84390fbd5a85b11697, type: 3}
   elementSymbol: H

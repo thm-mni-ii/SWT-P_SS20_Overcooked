@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7232195095005542986}
   - component: {fileID: 7232195095005542987}
   - component: {fileID: 7232195095005542985}
+  - component: {fileID: -560918051561779531}
   m_Layer: 8
   m_Name: ObjectPickable
   m_TagString: Pickup
@@ -165,3 +166,17 @@ MonoBehaviour:
   canBeDropped: 1
   nonKinematicRBs:
   - {fileID: 7232195095005542981}
+  highlighting: {fileID: -560918051561779531}
+--- !u!114 &-560918051561779531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7232195095005542978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34476a227953d354b9fc9893f357918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: b6dd28cd648f49146b4f622c1888da92, type: 2}
