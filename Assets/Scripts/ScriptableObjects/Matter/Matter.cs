@@ -41,7 +41,8 @@ namespace Underconnected
         public static void RegisterSpawnablePrefabs()
         {
             foreach (Matter m in matters.Values)
-                ClientScene.RegisterPrefab(m.GetPrefab());
+                if (!ClientScene.prefabs.ContainsKey(m.GetPrefab().GetComponent<NetworkIdentity>().assetId))
+                    ClientScene.RegisterPrefab(m.GetPrefab());
         }
 
 
@@ -57,7 +58,10 @@ namespace Underconnected
                 if (matter.GetPrefab() != null)
                 {
                     if (matter.GetPrefab().GetComponent<MatterObject>().Matter == matter)
+                    {
                         matters.Add(matter.GetID(), matter);
+                        ClientScene.RegisterPrefab(matter.GetPrefab());
+                    }
                     else
                         Debug.LogWarning($"Matter {matter.GetFullName()}'s prefab does not have its 'Matter' property set correctly. The matter cannot be registered!");
                 }
