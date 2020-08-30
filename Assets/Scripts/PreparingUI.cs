@@ -24,6 +24,13 @@ namespace Underconnected
         [SerializeField] string hiddenAnimation = "hidden";
 
 
+        private void Awake()
+        {
+            if (this.animator.isActiveAndEnabled)
+                this.animator.Play(this.hiddenAnimation);
+        }
+
+
         /// <summary>
         /// Shows the "READY?" message.
         /// </summary>
