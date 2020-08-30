@@ -105,12 +105,6 @@ namespace Underconnected
         }
         private void Start()
         {
-            // Start the server and client if necessary
-            if (this.frameworkAPI.IsHost)
-                this.networkManager.StartHost();
-            else
-                this.networkManager.StartClient();
-
             // SceneManager does not fire its SceneLoaded event for the currently active scene.
             // Meaning if we start from inside the Unity Editor and the opened level scene is the active one,
             // it won't be registered by SceneManager_SceneLoaded.

@@ -8,7 +8,7 @@ using Mirror.Websocket;
 using SimpleJSON;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Underconnected;
 
 namespace GameFramework
 {
@@ -78,6 +78,18 @@ namespace GameFramework
             //LoadPlayerInfo();             // <- FOR RELEASE
         }
 
+        void Start()
+        {
+            if (isHost)
+            {
+                GameManager.NetworkManager.StartHost();
+            }
+            else
+            {
+                disconnectTimer = disconnectWaitTime;
+            }
+        }
+
         /// <summary>
         /// Update is called once per frame.
         /// Checks if the local player is a client and not connected.
@@ -85,6 +97,19 @@ namespace GameFramework
         /// </summary>
         private void Update()
         {
+            // Try connecting if not host
+            if (!isHost && !NetworkClient.isConnected)
+            {
+                disconnectTimer -= Time.deltaTime;
+
+                if (disconnectTimer <= 0f)
+                {
+                    Application.Quit();
+                }
+
+                GameManager.NetworkManager.StartClient();
+            }
+
             // Try quitting
             if (readyToQuit)
             {
