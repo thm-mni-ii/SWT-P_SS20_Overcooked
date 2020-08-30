@@ -18,6 +18,9 @@ namespace Underconnected
         [Tooltip("A reference to the level finished UI.")]
         [SerializeField] LevelFinishedUI levelFinishedUI;
 
+        [SerializeField] TutorialUI tutorialUI;
+
+
 
         /// <summary>
         /// A reference to the UI canvas.
@@ -35,6 +38,8 @@ namespace Underconnected
         /// <summary>
         /// Shows up the level finished screen, when the timer is finished.
         /// </summary>
+
+        public TutorialUI TutorialUI => this.tutorialUI;
         public void ShowLevelFinishedScreen() 
         {
             LevelFinishedUI.gameObject.SetActive(true);
