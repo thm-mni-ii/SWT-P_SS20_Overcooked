@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -229,14 +230,14 @@ namespace Underconnected
                     this.level.IncrementFailedDeliveredScore(-demand.Matter.GetScoreFailPenalty());
 
                 }
-                else if(this.level.playerScore > 0 && this.level.playerScore< demand.Matter.GetScoreFailPenalty())
+                else if (this.level.playerScore > 0 && this.level.playerScore < demand.Matter.GetScoreFailPenalty())
                 {
                     this.level.IncrementFailedDeliveredScore(-this.level.playerScore);
                     this.level.IncrementPlayerScore(-this.level.playerScore);
                 }
-                
+
             }
-                
+
         }
     }
 }

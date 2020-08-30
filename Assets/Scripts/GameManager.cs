@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -63,7 +64,7 @@ namespace Underconnected
         [SerializeField] UIManager uiManager;
         [SerializeField] FrameworkAPI frameworkAPI;
         [SerializeField] TestNetworkManager networkManager;
-        
+
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
@@ -96,7 +97,7 @@ namespace Underconnected
 
                 this.uiManager.HideAllUI();
                 this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary
-               
+
 
                 // Load player data
                 this.frameworkAPI.Load();

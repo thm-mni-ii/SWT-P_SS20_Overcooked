@@ -1,4 +1,6 @@
-﻿using System;
+﻿/* Created by: SWT-P_SS20_Framework */
+/* Edited by: SWT-P_SS20_Overcooked (Team Drai Studios) */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
