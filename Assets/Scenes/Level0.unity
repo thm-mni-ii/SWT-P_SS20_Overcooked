@@ -800,6 +800,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4ee99540874699a4db2c48c1670b5dce,
         type: 2}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2200356306941543895, guid: f28d248b5897f164f8e880003f6c6ce2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2846866026949719891, guid: f28d248b5897f164f8e880003f6c6ce2,
         type: 3}
       propertyPath: m_Name
@@ -1017,7 +1037,7 @@ MonoBehaviour:
   bonusScore: 10
   bonusScoreThreshold: 0.15
   demandSpawnTimeMinMax: {x: 10, y: 30}
-demandsPool:
+  demandsPool:
   - {fileID: 11400000, guid: a7143530cfade0545ae9994ea7034726, type: 2}
   spawnPoints:
   - {fileID: 576548503}
