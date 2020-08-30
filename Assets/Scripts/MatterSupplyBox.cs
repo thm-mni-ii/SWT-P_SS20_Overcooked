@@ -17,7 +17,8 @@ namespace Underconnected
         [Header("Settings")]
         [SerializeField] Matter containedMatter;
         [SerializeField] bool canTakeBackItems = true;
-        [SerializeField] string matterDisplayTextureField = "_Back";
+        [SerializeField] string matterDisplayTextureField = "_Top";
+        [SerializeField] int matterDisplayMaterialIndex = 0;
 
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Underconnected
         private void Awake()
         {
             if (this.matterDisplayRenderer != null)
-                this.matterDisplayMaterial = this.matterDisplayRenderer.material;
+                this.matterDisplayMaterial = this.matterDisplayRenderer.materials[this.matterDisplayMaterialIndex];
             this.SetContainedMatter(this.containedMatter);
 
             this.watchingInteractor = null;
