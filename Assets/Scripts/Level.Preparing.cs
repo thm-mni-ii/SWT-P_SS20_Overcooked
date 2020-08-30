@@ -10,7 +10,7 @@ namespace Underconnected
         /// <summary>
         /// The preparing phase which shows a timer running down until the main phase (<see cref="LevelPhase.Playing"/>).
         /// </summary>
-        public class LevelPreparingPhase : State<LevelPhase>
+        public class LevelPreparingPhase : LevelPhaseState
         {
             /// <summary>
             /// Holds the time in seconds left until the main phase.
@@ -43,14 +43,34 @@ namespace Underconnected
                 if (this.preparingTimer > 0.0F)
                 {
                     this.preparingTimer = Mathf.Max(this.preparingTimer - deltaTime, 0.0F);
+
+                    if (this.preparingTimer <= 3.0F)
+                        GameManager.UI.LevelUI.PreparingUI.ShowCountdownNumber(Mathf.CeilToInt(this.preparingTimer));
+
                     if (this.isRunningOnServer && this.preparingTimer <= 0.0F)
                         this.level.ChangePhase(LevelPhase.Playing);
                 }
             }
 
 
+            public override bool OnSerialize(NetworkWriter writer, bool initialState)
+            {
+                if (initialState)
+                    writer.WriteSingle(this.preparingTimer);
+
+                return initialState;
+            }
+            public override void OnDeserialize(NetworkReader reader, bool initialState)
+            {
+                if (initialState)
+                    this.preparingTimer = reader.ReadSingle();
+            }
+
+
             public override void OnStateEnter(State<LevelPhase> previousState)
             {
+                GameManager.UI.LevelUI.PreparingUI.ShowReady();
+
                 this.level.OnPlayerRegistered += this.Level_OnPlayerRegistered;
 
                 if (!this.isRunningOnServer && NetworkServer.active)
@@ -69,6 +89,8 @@ namespace Underconnected
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
             {
+                GameManager.UI.LevelUI.PreparingUI.ShowGo();
+
                 this.level.OnPlayerRegistered -= this.Level_OnPlayerRegistered;
 
                 if (this.isRunningOnServer)

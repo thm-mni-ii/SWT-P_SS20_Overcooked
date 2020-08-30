@@ -13,6 +13,7 @@ namespace Underconnected
         [SerializeField] LevelTimerUI levelTimer = null;
         [SerializeField] DemandQueueUI demandQueue = null;
         [SerializeField] ScoreDisplay scoreDisplay = null;
+        [SerializeField] PreparingUI preparingUI = null;
 
 
         /// <summary>
@@ -24,8 +25,12 @@ namespace Underconnected
         /// </summary>
         public DemandQueueUI DemandQueue => this.demandQueue;
         /// <summary>
-        /// A display for score
+        /// A display for player score.
         /// </summary>
         public ScoreDisplay ScoreDisplay => this.scoreDisplay;
+        /// <summary>
+        /// The preparing UI.
+        /// </summary>
+        public PreparingUI PreparingUI => this.preparingUI;
     }
 }

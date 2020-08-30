@@ -152,6 +152,8 @@ namespace Underconnected
                 dataWritten = true;
             }
 
+            dataWritten |= ((LevelPhaseState)this.levelPhase.CurrentStateObject).OnSerialize(writer, initialState);
+
             return dataWritten;
         }
         public override void OnDeserialize(NetworkReader reader, bool initialState)
@@ -160,6 +162,8 @@ namespace Underconnected
 
             if (initialState)
                 this.levelPhase.SetState((LevelPhase)reader.ReadByte());
+
+            ((LevelPhaseState)this.levelPhase.CurrentStateObject).OnDeserialize(reader, initialState);
         }
 
 
@@ -479,6 +483,28 @@ namespace Underconnected
         private void DeliveredFailedCounter_OnChange(int oldValue, int newValue)
         {
             GameManager.UI.LevelFinishedUI.SetDeliveredFailedCounter(newValue);
+        }
+
+
+        /// <summary>
+        /// Represents a level phase state.
+        /// Offers more functionality to level phases.
+        /// </summary>
+        public abstract class LevelPhaseState : State<LevelPhase>
+        {
+            /// <summary>
+            /// Serializes this level phase.
+            /// </summary>
+            /// <param name="writer">The writer to serialize this phase into.</param>
+            /// <param name="initialState">Tells whether this is the inital state.</param>
+            /// <returns>Whether data was written to <paramref name="writer"/> by calling this method.</returns>
+            public virtual bool OnSerialize(NetworkWriter writer, bool initialState) => false;
+            /// <summary>
+            /// Deserializes this level phase.
+            /// </summary>
+            /// <param name="reader">The reader to deserialize this phase from.</param>
+            /// <param name="initialState">Tells whether this is the initial state.</param>
+            public virtual void OnDeserialize(NetworkReader reader, bool initialState) { }
         }
     }
 }
