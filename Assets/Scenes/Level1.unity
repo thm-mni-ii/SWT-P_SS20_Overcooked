@@ -2762,7 +2762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  levelDurationSeconds: 180
+  levelDurationSeconds: 60
   syncAfterSeconds: 30
 --- !u!4 &1342468623 stripped
 Transform:
