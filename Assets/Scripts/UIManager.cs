@@ -1,5 +1,4 @@
-﻿/* Created by: SWT-P_SS20_Overcooked (Team Drai Studios) */
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +17,10 @@ namespace Underconnected
         [SerializeField] LevelUI levelUI;
         [Tooltip("A reference to the level finished UI.")]
         [SerializeField] LevelFinishedUI levelFinishedUI;
+        [Tooltip("A reference to the party player UI.")]
+        [SerializeField] PlayerParty playerParty;
         [Tooltip("A reference to the Tutorial UI.")]
         [SerializeField] TutorialUI tutorialUI;
-
 
 
         /// <summary>
@@ -35,11 +35,12 @@ namespace Underconnected
         /// A reference to the level finished UI.
         /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
-
         /// <summary>
-        /// A reference to the tutorial UI.
+        /// A reference to the player party UI.
         /// </summary>
-        public TutorialUI TutorialUI => this.tutorialUI;
+        public PlayerParty PlayerParty => this.playerParty;
+
+
 
         /// <summary>
         /// Hides all UI elements, screens and menus.
@@ -48,6 +49,7 @@ namespace Underconnected
         {
             this.HideLevelUI();
             this.LevelFinishedUI.gameObject.SetActive(false);
+            //this.PlayerParty.gameObject.SetActive(false);
         }
 
 
@@ -60,8 +62,27 @@ namespace Underconnected
         /// </summary>
         public void HideLevelUI() => this.levelUI.gameObject.SetActive(false);
 
+        /// <summary>
+        /// Shows the level finished screen.
+        /// </summary>
+        public void ShowLevelFinishedScreen()
+        {
+            this.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
+            this.LevelFinishedUI.gameObject.SetActive(true);
+        }
 
-
+        /// <summary>
+        /// Shows the player party UI.
+        /// </summary>
+        public void ShowPlayerPartyUI() {
+            this.PlayerParty.gameObject.SetActive(true);
+        }
+        /// <summary>
+        /// Hides the player party UI.
+        /// </summary>
+        public void HidePlayerPartyUI() {
+            this.PlayerParty.gameObject.SetActive(false);
+        }
         /// <summary>
         /// Shows the tutorial UI.
         /// </summary>
@@ -70,12 +91,6 @@ namespace Underconnected
         {
             this.tutorialUI.LoadTutorialUI();
         }
-
-        /// <summary>
-        /// Shows the level finished screen.
-        /// </summary>
-
-        public void ShowLevelFinishedScreen() => this.LevelFinishedUI.gameObject.SetActive(true);
-
     }
+
 }
