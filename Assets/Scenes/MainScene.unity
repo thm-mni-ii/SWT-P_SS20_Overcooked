@@ -301,39 +301,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2083109638}
     m_Modifications:
-    - target: {fileID: 2216993424529872053, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: Let's create some water. You need two hydrogen atoms (H) and a single
-        oxygen (O). get the elements and place them in the Multitool by pressing
-        E.
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993425151390886, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: Right above your points is the remaining time for the level.
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993425200875493, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: 'On your left are matter supply boxes.
-
-        Walk up to them and
-        use E to interact.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993425573007151, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: After creating the connection you need to get some points for that.
-        Take it out of the tool by pressing E and bring it over to this table to
-        hand it in. Press E again to drop it there.
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993425631210055, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: Atoms or connections you do not need any longer or picked up by accident
-        can be placed in the trash. Walk over there and use E to interact.
-      objectReference: {fileID: 0}
     - target: {fileID: 2216993425665714712, guid: 8dee6654144a6014b8737fbf8522fda7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -443,42 +410,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TutorialUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993425997627787, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: 'Welcome to Underconnected!
-
-        This tutorial teaches you how to
-        move and create connections.
-
-        Have a great time.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993426384975878, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: In the top part of your screen you can see the currently demanded molecule.
-        This is the one you need to complete next. But hurry! If you are not able
-        to complete the demand you lose some points.
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993426595873112, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: Speaking of points. Your current points are found right above this textbox.
-      objectReference: {fileID: 0}
-    - target: {fileID: 2216993426602001805, guid: 8dee6654144a6014b8737fbf8522fda7,
-        type: 3}
-      propertyPath: m_text
-      value: 'Use W,A,S,D on your keyboard to move around..
-
-        W - up
-
-        A
-        - left
-
-        D - right
-
-        S - down'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dee6654144a6014b8737fbf8522fda7, type: 3}
