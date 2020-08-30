@@ -24,8 +24,13 @@ namespace Underconnected
         [SerializeField] string hiddenAnimation = "hidden";
 
 
+        private int shownNumber;
+
+
         private void Awake()
         {
+            this.shownNumber = -1;
+
             if (this.animator.isActiveAndEnabled)
                 this.animator.Play(this.hiddenAnimation);
         }
@@ -38,6 +43,7 @@ namespace Underconnected
         {
             this.animator.Play(this.readyAnimation);
             this.label.text = this.readyText;
+            this.shownNumber = -1;
         }
         /// <summary>
         /// Shows the given number.
@@ -45,8 +51,12 @@ namespace Underconnected
         /// <param name="number">The number to show.</param>
         public void ShowCountdownNumber(int number)
         {
-            this.animator.Play(this.numberPopAnimation);
-            this.label.text = number.ToString();
+            if (number != this.shownNumber)
+            {
+                this.animator.Play(this.numberPopAnimation);
+                this.label.text = number.ToString();
+                this.shownNumber = number;
+            }
         }
         /// <summary>
         /// Shows the "GO!" message.
@@ -55,6 +65,7 @@ namespace Underconnected
         {
             this.animator.Play(this.goAnimation);
             this.label.text = this.goText;
+            this.shownNumber = -1;
         }
 
         /// <summary>
@@ -64,6 +75,7 @@ namespace Underconnected
         {
             this.animator.Play(this.hiddenAnimation);
             this.label.text = string.Empty;
+            this.shownNumber = -1;
         }
     }
 }
