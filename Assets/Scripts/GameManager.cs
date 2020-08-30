@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using GameFramework;
 using Mirror;
 
 namespace Underconnected
@@ -60,6 +61,7 @@ namespace Underconnected
         [Header("References")]
         [SerializeField] new Camera camera;
         [SerializeField] UIManager uiManager;
+        [SerializeField] FrameworkAPI frameworkAPI;
         [SerializeField] TestNetworkManager networkManager;
 
         [Header("Settings")]
@@ -90,19 +92,25 @@ namespace Underconnected
                 GameManager.Instance = this;
                 this.currentLevel = null;
                 SceneManager.sceneLoaded += this.SceneManager_SceneLoaded;
-                this.playerInfo = PlayerInfo.Random();
 
                 this.uiManager.HideAllUI();
                 this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary
 
-                // TODO: Load player data
-                // TODO: Check startup parameters & connect to given server or show main menu
+                // Load player data
+                this.frameworkAPI.Load();
+                this.playerInfo = new PlayerInfo(this.frameworkAPI.PlayerName, Random.ColorHSV());
             }
             else
                 GameObject.Destroy(this.gameObject);
         }
         private void Start()
         {
+            // Start the server and client if necessary
+            if (this.frameworkAPI.IsHost)
+                this.networkManager.StartHost();
+            else
+                this.networkManager.StartClient();
+
             // SceneManager does not fire its SceneLoaded event for the currently active scene.
             // Meaning if we start from inside the Unity Editor and the opened level scene is the active one,
             // it won't be registered by SceneManager_SceneLoaded.
@@ -146,6 +154,21 @@ namespace Underconnected
                 this.currentLevel = null;
                 SceneManager.UnloadSceneAsync(this.currentLevelScene);
             }
+        }
+
+
+        /// <summary>
+        /// Disconnects and quits the game by calling the game framework's <see cref="FrameworkAPI.HandleGameResults(int, string)"/>.
+        /// NOTE: The game won't quit immediately because the framework waits until all clients have disconnected (if we are running a server).
+        /// </summary>
+        public void ExitGame()
+        {
+            if (NetworkClient.active)
+                this.networkManager.StopClient();
+            if (NetworkServer.active)
+                this.networkManager.StopServer();
+
+            this.frameworkAPI.HandleGameResults(1, this.playerInfo.Name);
         }
 
 

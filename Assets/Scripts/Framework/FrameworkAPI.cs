@@ -59,7 +59,7 @@ namespace GameFramework
         public JSONNode GameInfos => gameInfos;
 
         public bool IsHost => this.isHost;
-        public string PlayerName => this.playerInfos != null ? this.playerInfos["name"].ToString() : null;
+        public string PlayerName => this.playerInfos != null ? this.playerInfos["name"].Value : null;
 
 
         /// <summary>
@@ -148,9 +148,8 @@ namespace GameFramework
         private void LoadPlayerInfoMockup()
         {
             isHost = true;
-            JSONNode tmp = new JSONObject();
-            tmp.Add("name", "Mustermann");
-            playerInfos.Add(tmp);
+            playerInfos = new JSONObject();
+            playerInfos.Add("name", "Mustermann");
         }
 
         /// <summary>
