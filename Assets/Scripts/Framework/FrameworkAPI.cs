@@ -80,9 +80,9 @@ namespace GameFramework
             readyToQuit = false;
             isHost = false;
 
-            LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
+            //LoadPlayerInfoMockup();     // <- FOR DEVELOPMENT
 
-            //LoadPlayerInfo();             // <- FOR RELEASE
+            LoadPlayerInfo();             // <- FOR RELEASE
         }
 
         /// <summary>
@@ -174,17 +174,25 @@ namespace GameFramework
                     throw new ArgumentException("Illegal OS !");
             }
 
-            StreamReader file = new StreamReader(filePath);
-            JSONNode jsonFile = JSON.Parse(file.ReadLine());
+            if (File.Exists(filePath))
+            {
+                StreamReader file = new StreamReader(filePath);
+                JSONNode jsonFile = JSON.Parse(file.ReadLine());
 
-            // Load data
-            isHost = jsonFile["playerInfo"]["isHost"].AsBool;
-            playerInfos = jsonFile["playerInfo"];
-            gameInfos = jsonFile["gameInfo"];
+                // Load data
+                isHost = jsonFile["playerInfo"]["isHost"].AsBool;
+                playerInfos = jsonFile["playerInfo"];
+                gameInfos = jsonFile["gameInfo"];
 
-            // Close file
-            file.Close();
-            File.Delete(FILE_NAME);
+                // Close file
+                file.Close();
+                File.Delete(FILE_NAME);
+            }
+            else
+            {
+                this.useMirrorHUD = true;
+                this.LoadPlayerInfoMockup();
+            }
         }
 
         /// <summary>
@@ -197,7 +205,7 @@ namespace GameFramework
         {
             isHost = true;
             playerInfos = new JSONObject();
-            playerInfos.Add("name", "Mustermann");
+            playerInfos.Add("name", Utils.GetRandomPlayerName(UnityEngine.Random.Range(4, 8)));
         }
 
         /// <summary>
