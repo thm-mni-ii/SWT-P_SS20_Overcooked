@@ -336,7 +336,7 @@ MonoBehaviour:
   timePerDemand: 50
   bonusScore: 20
   bonusScoreThreshold: 0.15
-  demandSpawnTimeMinMax: {x: 20, y: 40}
+  demandSpawnTimeMinMax: {x: 25, y: 50}
   demandsPool:
   - {fileID: 11400000, guid: 7ae9c523b40530c4ab804a53a14a73cf, type: 2}
   - {fileID: 11400000, guid: 4bb81de973dcd524e92e38fdde8f4b32, type: 2}

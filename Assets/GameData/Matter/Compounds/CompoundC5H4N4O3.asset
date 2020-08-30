@@ -21,8 +21,8 @@ MonoBehaviour:
     blood concentrations of uric acid can lead to gout and are associated with other
     medical conditions, including diabetes and the formation of ammonium acid urate
     kidney stones.
-  scoreReward: 80
-  scoreFailPenalty: 32
+  scoreReward: 100
+  scoreFailPenalty: 40
   prefab: {fileID: 5137224915557663102, guid: d17440ae36638b94d8d89d656445136c, type: 3}
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
