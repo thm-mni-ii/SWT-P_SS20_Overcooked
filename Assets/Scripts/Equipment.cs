@@ -57,8 +57,10 @@ namespace Underconnected
             this.recipeInProgress = null;
             this.outputObjects = new List<MatterObject>();
 
-            this.pendingInputs = new List<uint>();
-            this.pendingOutputs = new List<uint>();
+            if (this.pendingInputs == null)
+                this.pendingInputs = new List<uint>();
+            if (this.pendingOutputs == null)
+                this.pendingOutputs = new List<uint>();
         }
         public override void OnStartClient()
         {
@@ -103,21 +105,19 @@ namespace Underconnected
 
             if (initialState)
             {
+                if (this.pendingInputs == null)
+                    this.pendingInputs = new List<uint>();
+                if (this.pendingOutputs == null)
+                    this.pendingOutputs = new List<uint>();
+
                 int inputCount = reader.ReadInt32();
                 int outputCount = reader.ReadInt32();
 
-                uint readId;
                 for (int i = 0; i < inputCount; i++)
-                {
-                    readId = reader.ReadUInt32();
-                    this.pendingInputs.Add(readId);
-                }
+                    this.pendingInputs.Add(reader.ReadUInt32());
 
                 for (int i = 0; i < outputCount; i++)
-                {
-                    readId = reader.ReadUInt32();
-                    this.pendingOutputs.Add(readId);
-                }
+                    this.pendingOutputs.Add(reader.ReadUInt32());
             }
         }
 
