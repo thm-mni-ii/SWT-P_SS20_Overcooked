@@ -54,6 +54,20 @@ namespace Underconnected
             }
 
 
+            public override bool OnSerialize(NetworkWriter writer, bool initialState)
+            {
+                if (initialState)
+                    writer.WriteSingle(this.preparingTimer);
+
+                return initialState;
+            }
+            public override void OnDeserialize(NetworkReader reader, bool initialState)
+            {
+                if (initialState)
+                    this.preparingTimer = reader.ReadSingle();
+            }
+
+
             public override void OnStateEnter(State<LevelPhase> previousState)
             {
                 GameManager.UI.LevelUI.PreparingUI.ShowReady();
