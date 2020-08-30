@@ -15,7 +15,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2fe978f71d03ab74ea9a6b89e7deb9c3, type: 3}
   name: Dihydrogen
   description: 
-  scoreReward: 50
+  scoreReward: 25
+  scoreFailPenalty: 10
   prefab: {fileID: 2873589174651004775, guid: b507003908a09104e8e534fffc8441f9, type: 3}
   element: {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
   elementalAmount: 2

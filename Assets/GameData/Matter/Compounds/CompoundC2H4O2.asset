@@ -24,7 +24,8 @@ MonoBehaviour:
     a precursor to polyvinyl acetate and cellulose acetate. It is classified as a
     weak acid since it only partially dissociates in solution, but concentrated acetic
     acid is corrosive and can attack the skin."
-  scoreReward: 50
+  scoreReward: 60
+  scoreFailPenalty: 24
   prefab: {fileID: 2873589174651004775, guid: 9f06c5e4ee9660e48ba69f712cc2099d, type: 3}
   components:
   - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}

@@ -715,10 +715,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  timePerDemand: 30
-  bonusScore: 10
+  timePerDemand: 50
+  bonusScore: 20
   bonusScoreThreshold: 0.15
-  demandSpawnTimeMinMax: {x: 10, y: 30}
+  demandSpawnTimeMinMax: {x: 25, y: 50}
   demandsPool:
   - {fileID: 11400000, guid: 7ae9c523b40530c4ab804a53a14a73cf, type: 2}
   - {fileID: 11400000, guid: 4bb81de973dcd524e92e38fdde8f4b32, type: 2}
