@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using TMPro;
 
 namespace Underconnected
 {
@@ -14,7 +13,6 @@ namespace Underconnected
     {
         [Header("References")]
         [SerializeField] Image iconUI;
-        [SerializeField] TextMeshProUGUI quantityText;
         [SerializeField] Slider timeLeftSlider;
         [SerializeField] Image timeLeftSliderFill;
         [SerializeField] GameObject requiredMatterContainer;
@@ -71,23 +69,10 @@ namespace Underconnected
         /// <param name="showRequiredComponents">Whether to display the required components for the given <paramref name="matter"/>.</param>
         public void SetMatter(Matter matter, bool showRequiredComponents = true)
         {
-            int quantity = matter is MatterMolecule ? ((MatterMolecule)matter).ElementalAmount : 1;
-
             if (matter != null)
             {
                 this.iconUI.sprite = matter.GetIcon();
                 this.iconUI.enabled = true;
-
-                if (quantity > 1)
-                {
-                    this.quantityText.text = quantity.ToString();
-                    this.quantityText.enabled = true;
-                }
-                else
-                {
-                    this.quantityText.text = string.Empty;
-                    this.quantityText.enabled = false;
-                }
 
                 if (showRequiredComponents && matter is MatterCompound)
                 {
