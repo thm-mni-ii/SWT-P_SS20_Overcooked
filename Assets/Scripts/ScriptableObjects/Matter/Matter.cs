@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 namespace Underconnected
 {
@@ -35,6 +36,16 @@ namespace Underconnected
         }
 
         /// <summary>
+        /// Registers the prefabs of all registered matters to Mirror's spawn system.
+        /// </summary>
+        public static void RegisterSpawnablePrefabs()
+        {
+            foreach (Matter m in matters.Values)
+                ClientScene.RegisterPrefab(m.GetPrefab());
+        }
+
+
+        /// <summary>
         /// Registers a matter and adds it to the <see cref="matters"/> dictionary.
         /// It only adds it if no matter with the same ID had been added before.
         /// </summary>
@@ -42,7 +53,17 @@ namespace Underconnected
         private static void RegisterMatter(Matter matter)
         {
             if (!matters.ContainsKey(matter.GetID()))
-                matters.Add(matter.GetID(), matter);
+            {
+                if (matter.GetPrefab() != null)
+                {
+                    if (matter.GetPrefab().GetComponent<MatterObject>().Matter == matter)
+                        matters.Add(matter.GetID(), matter);
+                    else
+                        Debug.LogWarning($"Matter {matter.GetFullName()}'s prefab does not have its 'Matter' property set correctly. The matter cannot be registered!");
+                }
+                else
+                    Debug.LogWarning($"Matter {matter.GetFullName()} does not have a prefab assigned to it and thus cannot be registered!");
+            }
         }
 
 

@@ -76,6 +76,9 @@ namespace Underconnected
 
         public override void OnStartServer()
         {
+            // Register the spawnable prefabs on server
+            Matter.RegisterSpawnablePrefabs();
+
             // Register message handlers
             NetworkServer.RegisterHandler<ConnectionRequestMessage>(this.OnConnectionRequestMessage, false);
 
@@ -99,6 +102,10 @@ namespace Underconnected
 
         public override void OnStartClient()
         {
+            // Register the spawnable prefabs on client (if not registered already because we are running a server)
+            if (!NetworkServer.active)
+                Matter.RegisterSpawnablePrefabs();
+
             // Register message handlers
             NetworkClient.RegisterHandler<ServerStateMessage>(this.OnServerStateMessage, false);
 
