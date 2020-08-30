@@ -99,20 +99,25 @@ namespace Underconnected
 
         public override void OnDeserialize(NetworkReader reader, bool initialState)
         {
-            int inputCount = reader.ReadInt32();
-            int outputCount = reader.ReadInt32();
+            base.OnDeserialize(reader, initialState);
 
-            uint readId;
-            for (int i = 0; i < inputCount; i++)
+            if (initialState)
             {
-                readId = reader.ReadUInt32();
-                this.pendingInputs.Add(readId);
-            }
+                int inputCount = reader.ReadInt32();
+                int outputCount = reader.ReadInt32();
 
-            for (int i = 0; i < outputCount; i++)
-            {
-                readId = reader.ReadUInt32();
-                this.pendingOutputs.Add(readId);
+                uint readId;
+                for (int i = 0; i < inputCount; i++)
+                {
+                    readId = reader.ReadUInt32();
+                    this.pendingInputs.Add(readId);
+                }
+
+                for (int i = 0; i < outputCount; i++)
+                {
+                    readId = reader.ReadUInt32();
+                    this.pendingOutputs.Add(readId);
+                }
             }
         }
 
