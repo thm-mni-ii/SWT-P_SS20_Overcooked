@@ -35,7 +35,10 @@ namespace Underconnected
         /// </summary>
         public LevelFinishedUI LevelFinishedUI => this.levelFinishedUI;
 
-
+        /// <summary>
+        /// A reference to the tutorial UI.
+        /// </summary>
+        public TutorialUI TutorialUI => this.tutorialUI;
 
         /// <summary>
         /// Hides all UI elements, screens and menus.
@@ -56,10 +59,11 @@ namespace Underconnected
         /// </summary>
         public void HideLevelUI() => this.levelUI.gameObject.SetActive(false);
 
-        
 
 
-        public TutorialUI TutorialUI => this.tutorialUI;
+        /// <summary>
+        /// Shows the tutorial UI.
+        /// </summary>
 
         public void showTutorialUI()
         {
