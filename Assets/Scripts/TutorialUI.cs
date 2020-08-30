@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Underconnected
 {
-    public class Tutorial : MonoBehaviour
+    public class TutorialUI : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()
