@@ -61,6 +61,7 @@ namespace Underconnected
         [SerializeField] new Camera camera;
         [SerializeField] UIManager uiManager;
         [SerializeField] TestNetworkManager networkManager;
+        
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
@@ -94,6 +95,7 @@ namespace Underconnected
 
                 this.uiManager.HideAllUI();
                 this.uiManager.ShowLevelUI(); // TODO: Show level UI only if necessary
+               
 
                 // TODO: Load player data
                 // TODO: Check startup parameters & connect to given server or show main menu
@@ -174,6 +176,10 @@ namespace Underconnected
                         SceneManager.SetActiveScene(levelScene);
 
                         Debug.Log($"Current level is now: {this.currentLevel.gameObject.scene.name}");
+                        if (this.currentLevel.isTutorial)
+                        {
+                            this.uiManager.showTutorialUI();
+                        }
                         return true;
                     }
                 }

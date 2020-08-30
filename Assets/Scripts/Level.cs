@@ -25,6 +25,8 @@ namespace Underconnected
         [SerializeField] LevelTimer timer;
         [SerializeField] DemandQueue demandQueue;
 
+        [SerializeField] public bool isTutorial = false;
+
 
         /// <summary>
         /// Holds the score the players currently have.
