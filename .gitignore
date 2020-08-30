@@ -21,6 +21,7 @@
 /[Aa]ssets/Ludiq*
 /[Aa]ssets/Plugins*
 *MaintainerSettings.asset
+*MaintainerPersonalSettings.asset
 /[Aa]ssets/Project\ Planner*
 Project\ Planner/
 /[Aa]ssets/uCodeEditor*
