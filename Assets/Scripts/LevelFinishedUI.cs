@@ -96,6 +96,10 @@ namespace Underconnected
         /// <param name="score">The amount of stars.</param>
         public void SetStars(int score)
         {
+            for(int i = 0; i < stars.Length; i++)
+            {
+                stars[i].sprite = emptyStar;
+            }
             if (score >= 100) //placeholder points
             {
                 stars[0].sprite = filledStar;
