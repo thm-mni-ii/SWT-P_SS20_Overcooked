@@ -37,11 +37,24 @@ namespace Underconnected
         /// </summary>
         private RaycastHit[] hitResultsPool;
 
+        /// <summary>
+        /// The object id that was transmitted when this interactor was deserialized.
+        /// </summary>
+        private uint pendingHeldObjectID;
+
 
         private void Awake()
         {
             this.LookedAtObject = null;
             this.hitResultsPool = new RaycastHit[2];
+        }
+        private void Start()
+        {
+            if (this.pendingHeldObjectID > 0)
+            {
+                this.SetHeldObject(NetworkIdentity.spawned[this.pendingHeldObjectID].GetComponent<PickableObject>());
+                this.pendingHeldObjectID = 0;
+            }
         }
         private void Update()
         {
@@ -61,6 +74,34 @@ namespace Underconnected
             {
                 this.LookedAtObject.SetWatcher(null);
                 this.LookedAtObject = null;
+            }
+        }
+
+        public override bool OnSerialize(NetworkWriter writer, bool initialState)
+        {
+            bool dataWritten = base.OnSerialize(writer, initialState);
+
+            if (initialState)
+            {
+                NetworkIdentity identity = this.IsHoldingObject ? this.HeldObject.GetComponent<NetworkIdentity>() : null;
+
+                writer.WriteBoolean(identity != null);
+                if (identity != null)
+                    writer.WriteUInt32(identity.netId);
+
+                dataWritten = true;
+            }
+
+            return dataWritten;
+        }
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            base.OnDeserialize(reader, initialState);
+
+            if (initialState)
+            {
+                if (reader.ReadBoolean())
+                    this.pendingHeldObjectID = reader.ReadUInt32();
             }
         }
 
