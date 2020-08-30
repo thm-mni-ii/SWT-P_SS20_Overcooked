@@ -12,7 +12,7 @@ namespace Underconnected
         /// The level finished phase.
         /// Indicates that a level has finished and should show its finished screen.
         /// </summary>
-        public class LevelFinishedPhase : State<LevelPhase>
+        public class LevelFinishedPhase : LevelPhaseState
         {
             /// <summary>
             /// Tells whether this phase has been initialized on the server.

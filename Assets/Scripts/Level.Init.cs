@@ -11,7 +11,7 @@ namespace Underconnected
         /// Level init phase.
         /// Indicates that the level is loading and has not been started yet (by calling <see cref="StartLevel"/>).
         /// </summary>
-        public class LevelInitPhase : State<LevelPhase>
+        public class LevelInitPhase : LevelPhaseState
         {
             public override void OnStateEnter(State<LevelPhase> previousState)
             {

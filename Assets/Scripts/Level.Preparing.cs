@@ -11,7 +11,7 @@ namespace Underconnected
         /// <summary>
         /// The preparing phase which shows a timer running down until the main phase (<see cref="LevelPhase.Playing"/>).
         /// </summary>
-        public class LevelPreparingPhase : State<LevelPhase>
+        public class LevelPreparingPhase : LevelPhaseState
         {
             /// <summary>
             /// Holds the time in seconds left until the main phase.

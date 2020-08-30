@@ -12,7 +12,7 @@ namespace Underconnected
         /// The playing phase.
         /// Indicates that a level is currently being played.
         /// </summary>
-        public class LevelPlayingPhase : State<LevelPhase>
+        public class LevelPlayingPhase : LevelPhaseState
         {
             /// <summary>
             /// The coroutine that adds demands to the demands list.
