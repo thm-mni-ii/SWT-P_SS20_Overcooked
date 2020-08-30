@@ -547,6 +547,7 @@ MonoBehaviour:
   timeLeftSlider: {fileID: 2987976127478135218}
   timeLeftSliderFill: {fileID: 5851777056116418472}
   requiredMatterContainer: {fileID: 1793402820}
-  demandedMatterUIPrefab: {fileID: 3559500836891273518}
+  matterIconPrefab: {fileID: 8413160057435853870, guid: 335a7b9d70ddb2f428b583db976a9a53,
+    type: 3}
   timeLeftLow: {r: 0.73, g: 0.06844188, b: 0, a: 0.9019608}
   timeLeftHigh: {r: 0, g: 0.8, b: 0, a: 0}

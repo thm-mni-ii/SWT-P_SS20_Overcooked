@@ -18,7 +18,7 @@ namespace Underconnected
         [SerializeField] Slider timeLeftSlider;
         [SerializeField] Image timeLeftSliderFill;
         [SerializeField] GameObject requiredMatterContainer;
-        [SerializeField] GameObject demandedMatterUIPrefab;
+        [SerializeField] GameObject matterIconPrefab;
 
         [Header("Settings")]
         [SerializeField] Color timeLeftLow;
@@ -94,12 +94,21 @@ namespace Underconnected
                     this.ClearRequiredComponents();
                     this.requiredMatterContainer.SetActive(true);
 
+                    Dictionary<Matter, int> requiredMatters = new Dictionary<Matter, int>();
                     foreach (Matter component in ((MatterCompound)matter).Components)
                     {
-                        GameObject uiElement = GameObject.Instantiate(this.demandedMatterUIPrefab, Vector3.zero, Quaternion.identity, this.requiredMatterContainer.transform);
-                        DemandedMatterUI demandedMatterUI = uiElement.GetComponent<DemandedMatterUI>();
+                        if (!requiredMatters.ContainsKey(component))
+                            requiredMatters.Add(component, 1);
+                        else
+                            requiredMatters[component]++;
+                    }
 
-                        demandedMatterUI?.SetMatter(component, false);
+                    var enumerator = requiredMatters.GetEnumerator();
+                    while (enumerator.MoveNext())
+                    {
+                        GameObject uiElement = GameObject.Instantiate(this.matterIconPrefab, Vector3.zero, Quaternion.identity, this.requiredMatterContainer.transform);
+                        MatterIcon matterIcon = uiElement.GetComponent<MatterIcon>();
+                        matterIcon?.SetDisplay(enumerator.Current.Key, enumerator.Current.Value);
                     }
                 }
                 else
