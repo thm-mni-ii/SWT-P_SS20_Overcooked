@@ -93,25 +93,13 @@ namespace Underconnected
         /// <summary>
         /// Sets the amount of reached stars to display.
         /// </summary>
-        /// <param name="score">The amount of stars.</param>
-        public void SetStars(int score)
+        /// <param name="amount">The amount of stars.</param>
+        public void SetStars(int amount)
         {
-            for(int i = 0; i < stars.Length; i++)
-            {
-                stars[i].sprite = emptyStar;
-            }
-            if (score >= 100) //placeholder points
-            {
-                stars[0].sprite = filledStar;
-                if (score >= 200)
-                {
-                    stars[1].sprite = filledStar;
-                    if (score >= 300)
-                    {
-                        stars[2].sprite = filledStar;
-                    }
-                }
-            }
+
+            for (int i = 0; i < this.stars.Length; i++)
+                this.stars[i].sprite = i < amount ? this.filledStar : this.emptyStar;
+
         }
 
         /// <summary>

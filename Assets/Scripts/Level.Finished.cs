@@ -44,7 +44,7 @@ namespace Underconnected
                 GameManager.UI.LevelFinishedUI.SetDeliveredFailedCounter(this.level.deliveredFailedCounter);
                 GameManager.UI.LevelFinishedUI.SetDeliveredFailedPoints(this.level.deliveredFailedScore);
                 GameManager.UI.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
-                GameManager.UI.LevelFinishedUI.SetStars(this.level.playerScore);
+                GameManager.UI.LevelFinishedUI.SetStars(Mathf.FloorToInt(this.level.playerScore / 100));
                 GameManager.UI.ShowLevelFinishedScreen();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
