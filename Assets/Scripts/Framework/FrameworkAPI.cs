@@ -16,7 +16,7 @@ namespace GameFramework
     /// This class represents a game server.
     /// The server starts automatically and loads the player prefab into the online scene.
     /// </summary>
-    public class GameServer : NetworkManager
+    public class FrameworkAPI : NetworkManager
     {
         /// <summary>
         /// Location of the file that holds playerInfo of
@@ -59,7 +59,7 @@ namespace GameFramework
 
         public JSONNode GameInfos => gameInfos;
 
-        public static GameServer Instance => (GameServer)singleton;
+        public static FrameworkAPI Instance => (FrameworkAPI)singleton;
 
         /// <summary>
         /// Start is called before the first frame update.
