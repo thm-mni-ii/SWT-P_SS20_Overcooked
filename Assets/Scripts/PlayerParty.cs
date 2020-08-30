@@ -18,27 +18,35 @@ namespace Underconnected
         [SerializeField] Image playerThreeColor;
         [SerializeField] TextMeshProUGUI playerFourName;
         [SerializeField] Image playerFourColor;
-
-        int numOfPlayers;
-        bool playerOneExists = false;
-        bool playerTwoExists = false;
-        bool playerThreeExists = false;
-        bool playerFourExists = false;
-
-        // Start is called before the first frame update
+        
         void Start() {
-            setPlayerInfos();
+            GameManager.NetworkManager.OnClientJoin += NetworkManager_OnClientJoin;
+            GameManager.NetworkManager.OnClientLeave += NetworkManager_OnClientLeave;
         }
 
-        // Update is called once per frame
-        void Update() {
+        private void NetworkManager_OnClientJoin(PlayerConnection player) {
+            switch (GameManager.NetworkManager.AllClients.Count) {
+                case 1:
+                    playerOneName.SetText(player.PlayerInfo.Name);
+                    playerOneColor.GetComponent<Image>().color = player.PlayerInfo.Color;
+                    break;
+                case 2:
+                    playerTwoName.SetText(player.PlayerInfo.Name);
+                    playerTwoColor.GetComponent<Image>().color = player.PlayerInfo.Color;
+                    break;
+                case 3:
+                    playerThreeName.SetText(player.PlayerInfo.Name);
+                    playerThreeColor.GetComponent<Image>().color = player.PlayerInfo.Color;
+                    break;
+                case 4:
+                    playerFourName.SetText(player.PlayerInfo.Name);
+                    playerFourColor.GetComponent<Image>().color = player.PlayerInfo.Color;
+                    break;
+            }
         }
 
-        public void setPlayerInfos() {
-
-            playerThreeName.SetText("xXx--SniperZZZkiler370-xXx");
-            playerThreeColor.GetComponent<Image>().color = new Color(1f, 110f, 0f);
-
+        private void NetworkManager_OnClientLeave(PlayerConnection player) {
+            
         }
     }
 }
