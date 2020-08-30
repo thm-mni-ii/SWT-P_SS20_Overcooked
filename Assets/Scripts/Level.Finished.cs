@@ -36,6 +36,15 @@ namespace Underconnected
 
                 // Disable our own player's controls and show the finished screen
                 this.level.OwnPlayer?.Controls.DisableControls();
+
+                // Make sure that the level finished screen displays the correct values and then show it
+                GameManager.UI.LevelFinishedUI.SetScore(this.level.playerScore);
+                GameManager.UI.LevelFinishedUI.SetDeliveredCounter(this.level.deliveredCounter);
+                GameManager.UI.LevelFinishedUI.SetDeliveredPoints(this.level.deliveredScore);
+                GameManager.UI.LevelFinishedUI.SetDeliveredFailedCounter(this.level.deliveredFailedCounter);
+                GameManager.UI.LevelFinishedUI.SetDeliveredFailedPoints(this.level.deliveredFailedScore);
+                GameManager.UI.LevelFinishedUI.SetNumOfLevel(GameManager.CurrentLevelNum);
+                GameManager.UI.LevelFinishedUI.SetStars(Mathf.FloorToInt(this.level.playerScore / 100));
                 GameManager.UI.ShowLevelFinishedScreen();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)

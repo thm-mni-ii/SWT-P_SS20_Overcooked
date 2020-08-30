@@ -559,32 +559,32 @@ PrefabInstance:
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1238.9497
+      value: 893.0503
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -199.40894
+      value: 880.59106
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1410767753897323210, guid: 32cd8f536377c8740859a06ae27e9f3e,
         type: 3}
@@ -729,11 +729,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891202723520425891, guid: dc096327aa22c9b4f9295303a9a6bf91,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc096327aa22c9b4f9295303a9a6bf91, type: 3}
