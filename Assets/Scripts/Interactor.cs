@@ -48,7 +48,7 @@ namespace Underconnected
             this.LookedAtObject = null;
             this.hitResultsPool = new RaycastHit[2];
         }
-        private void Start()
+        public override void OnStartClient()
         {
             if (this.pendingHeldObjectID > 0)
             {
