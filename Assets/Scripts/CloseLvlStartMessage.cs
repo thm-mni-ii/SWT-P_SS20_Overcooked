@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloseLvlStartMessage : MonoBehaviour
+namespace Underconnected
 {
-    [SerializeField] GameObject startMessage;
-
-    public void CloseStartMessage()
+    /// <summary>
+    /// Closes the tutorial UI at the beginning of each level
+    /// </summary>
+    public class CloseLvlStartMessage : MonoBehaviour
     {
-        startMessage.SetActive(false);
-    }
+        [SerializeField] GameObject startMessage;
 
+        public void CloseStartMessage()
+        {
+            startMessage.SetActive(false);
+        }
+
+    }
 }
+
