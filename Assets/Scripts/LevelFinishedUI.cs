@@ -104,21 +104,30 @@ namespace Underconnected
         }
 
         /// <summary>
-        /// Hides this screen.
+        /// Orders the GameManager to exit the game.
         /// </summary>
         public void Exit()
         {
-            this.gameObject.SetActive(false);
+            GameManager.Instance.ExitGame();
         }
         /// <summary>
         /// Hides this screen and load the next level.
         /// </summary>
         public void NextLevel()
         {
-            this.gameObject.SetActive(false);
-
-            if (NetworkServer.active)
+            if (GameManager.IsLastLevel) 
+            {
+                Exit();
+            }
+            else if (NetworkServer.active)
                 GameManager.NetworkManager.RequestChangeToNextLevel();
+        }
+
+        /// <summary>
+        /// Hides this screen.
+        /// </summary>
+        public void HideScreen() {
+            this.gameObject.SetActive(false);
         }
     }
 }

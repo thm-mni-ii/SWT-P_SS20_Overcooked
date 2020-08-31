@@ -32,6 +32,10 @@ namespace Underconnected
         /// </summary>
         public static int CurrentLevelNum => (CurrentLevel != null) ? Instance.currentLevelScene.buildIndex - Instance.levelBuildIndexStart + 1 : 0;
         /// <summary>
+        /// Tells whether the current level is the last level.
+        /// </summary>
+        public static bool IsLastLevel => CurrentLevel != null && CurrentLevelNum >= Instance.lastLevelNum;
+        /// <summary>
         /// The global network manager.
         /// </summary>
         public static TestNetworkManager NetworkManager => Instance.networkManager;
@@ -68,6 +72,7 @@ namespace Underconnected
 
         [Header("Settings")]
         [SerializeField] int levelBuildIndexStart = 1;
+        [SerializeField] int lastLevelNum;
         [SerializeField] Player playerPrefab = null; // TODO: move elsewhere (e.g. a constants/globals class?)
 
 

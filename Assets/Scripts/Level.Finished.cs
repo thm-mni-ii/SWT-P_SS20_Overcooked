@@ -60,7 +60,7 @@ namespace Underconnected
                 }
 
                 // Hide the finished screen if it is still open
-                GameManager.UI.LevelFinishedUI.Exit();
+                GameManager.UI.LevelFinishedUI.HideScreen();
             }
 
 
