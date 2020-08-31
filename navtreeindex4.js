@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"class_mirror_1_1_sync_list.html#a1abb36b2de02eca2541f2ceaa6bdff85":[1,0,1,70,36],
-"class_mirror_1_1_sync_list.html#a1b9ba0529691de38bf5443f249248986":[1,0,1,70,3],
 "class_mirror_1_1_sync_list.html#a1d7e39872ea7fb7de3a58f00a3cd7160":[1,0,1,70,8],
 "class_mirror_1_1_sync_list.html#a2e1b80efc7b7ee11894590bf166545b9":[1,0,1,70,26],
 "class_mirror_1_1_sync_list.html#a3a8a0b05590f1d7d8f58d83a5186d3d1":[1,0,1,70,33],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "class_mirror_1_1_websocket_1_1_websocket_transport.html#adf86fda1ed7e5524c753c229e39f09d1":[1,0,1,2,2,21],
 "class_mirror_1_1_websocket_1_1_websocket_transport.html#af9085f6e48ef2d51425d47efa7e37e35":[1,0,1,2,2,12],
 "class_mirror_1_1_websocket_1_1_websocket_transport.html#afe783af2ecfcd7faca1583a969f78d49":[1,0,1,2,2,7],
-"class_ninja_1_1_web_sockets_1_1_buffer_pool.html":[1,0,2,0,2]
+"class_ninja_1_1_web_sockets_1_1_buffer_pool.html":[1,0,2,0,2],
+"class_ninja_1_1_web_sockets_1_1_buffer_pool.html#a149c865037418c7e09738ae71317d653":[1,0,2,0,2,3],
+"class_ninja_1_1_web_sockets_1_1_buffer_pool.html#a69143428202d3f89181593a3ab5c850d":[1,0,2,0,2,5]
 };

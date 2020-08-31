@@ -149,7 +149,6 @@ var hierarchy =
     [ "Mirror.NetworkDiagnostics.MessageInfo", "struct_mirror_1_1_network_diagnostics_1_1_message_info.html", null ],
     [ "Mirror.MessagePacker", "class_mirror_1_1_message_packer.html", null ],
     [ "MonoBehaviour", null, [
-      [ "CloseLvlStartMessage", "class_close_lvl_start_message.html", null ],
       [ "GameFramework.FrameworkAPI", "class_game_framework_1_1_framework_a_p_i.html", null ],
       [ "Mirror.Logging.NetworkHeadlessLogger", "class_mirror_1_1_logging_1_1_network_headless_logger.html", null ],
       [ "Mirror.Logging.NetworkLogSettings", "class_mirror_1_1_logging_1_1_network_log_settings.html", null ],
@@ -180,6 +179,7 @@ var hierarchy =
         [ "Mirror.TelepathyTransport", "class_mirror_1_1_telepathy_transport.html", null ],
         [ "Mirror.Websocket.WebsocketTransport", "class_mirror_1_1_websocket_1_1_websocket_transport.html", null ]
       ] ],
+      [ "Underconnected.CloseLvlStartMessage", "class_underconnected_1_1_close_lvl_start_message.html", null ],
       [ "Underconnected.ContentsUI", "class_underconnected_1_1_contents_u_i.html", null ],
       [ "Underconnected.DemandedMatterUI", "class_underconnected_1_1_demanded_matter_u_i.html", null ],
       [ "Underconnected.DemandQueueUI", "class_underconnected_1_1_demand_queue_u_i.html", null ],
@@ -192,7 +192,8 @@ var hierarchy =
       [ "Underconnected.MatterObject", "class_underconnected_1_1_matter_object.html", null ],
       [ "Underconnected.ObjectHighlighting", "class_underconnected_1_1_object_highlighting.html", null ],
       [ "Underconnected.OutputArea", "class_underconnected_1_1_output_area.html", null ],
-      [ "Underconnected.RemoveObjectSingleplayer", "class_underconnected_1_1_remove_object_singleplayer.html", null ],
+      [ "Underconnected.PlayerParty", "class_underconnected_1_1_player_party.html", null ],
+      [ "Underconnected.PreparingUI", "class_underconnected_1_1_preparing_u_i.html", null ],
       [ "Underconnected.ResetZone", "class_underconnected_1_1_reset_zone.html", null ],
       [ "Underconnected.ScoreDisplay", "class_underconnected_1_1_score_display.html", null ],
       [ "Underconnected.TutorialUI", "class_underconnected_1_1_tutorial_u_i.html", null ],
@@ -235,10 +236,12 @@ var hierarchy =
     [ "Mirror.Websocket.Server.SslConfiguration", "class_mirror_1_1_websocket_1_1_server_1_1_ssl_configuration.html", null ],
     [ "Underconnected.State< T >", "class_underconnected_1_1_state.html", null ],
     [ "Underconnected.State< LevelPhase >", "class_underconnected_1_1_state.html", [
-      [ "Underconnected.Level.LevelFinishedPhase", "class_underconnected_1_1_level_1_1_level_finished_phase.html", null ],
-      [ "Underconnected.Level.LevelInitPhase", "class_underconnected_1_1_level_1_1_level_init_phase.html", null ],
-      [ "Underconnected.Level.LevelPlayingPhase", "class_underconnected_1_1_level_1_1_level_playing_phase.html", null ],
-      [ "Underconnected.Level.LevelPreparingPhase", "class_underconnected_1_1_level_1_1_level_preparing_phase.html", null ]
+      [ "Underconnected.Level.LevelPhaseState", "class_underconnected_1_1_level_1_1_level_phase_state.html", [
+        [ "Underconnected.Level.LevelFinishedPhase", "class_underconnected_1_1_level_1_1_level_finished_phase.html", null ],
+        [ "Underconnected.Level.LevelInitPhase", "class_underconnected_1_1_level_1_1_level_init_phase.html", null ],
+        [ "Underconnected.Level.LevelPlayingPhase", "class_underconnected_1_1_level_1_1_level_playing_phase.html", null ],
+        [ "Underconnected.Level.LevelPreparingPhase", "class_underconnected_1_1_level_1_1_level_preparing_phase.html", null ]
+      ] ]
     ] ],
     [ "Underconnected.StateMachine< TEnum >", "class_underconnected_1_1_state_machine.html", null ],
     [ "Underconnected.StateMachine< LevelPhase >", "class_underconnected_1_1_state_machine.html", null ],

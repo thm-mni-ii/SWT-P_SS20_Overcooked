@@ -2,6 +2,7 @@ var class_underconnected_1_1_level =
 [
     [ "LevelFinishedPhase", "class_underconnected_1_1_level_1_1_level_finished_phase.html", "class_underconnected_1_1_level_1_1_level_finished_phase" ],
     [ "LevelInitPhase", "class_underconnected_1_1_level_1_1_level_init_phase.html", "class_underconnected_1_1_level_1_1_level_init_phase" ],
+    [ "LevelPhaseState", "class_underconnected_1_1_level_1_1_level_phase_state.html", "class_underconnected_1_1_level_1_1_level_phase_state" ],
     [ "LevelPlayingPhase", "class_underconnected_1_1_level_1_1_level_playing_phase.html", "class_underconnected_1_1_level_1_1_level_playing_phase" ],
     [ "LevelPreparingPhase", "class_underconnected_1_1_level_1_1_level_preparing_phase.html", "class_underconnected_1_1_level_1_1_level_preparing_phase" ],
     [ "AddAllPlayers", "class_underconnected_1_1_level.html#a3a2d6cf227eeef8f75b94ce103b2195c", null ],

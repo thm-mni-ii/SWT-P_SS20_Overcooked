@@ -5,6 +5,5 @@ var annotated_dup =
     [ "Ninja", "namespace_ninja.html", "namespace_ninja" ],
     [ "SimpleJSON", "namespace_simple_j_s_o_n.html", "namespace_simple_j_s_o_n" ],
     [ "Telepathy", "namespace_telepathy.html", "namespace_telepathy" ],
-    [ "Underconnected", "namespace_underconnected.html", "namespace_underconnected" ],
-    [ "CloseLvlStartMessage", "class_close_lvl_start_message.html", "class_close_lvl_start_message" ]
+    [ "Underconnected", "namespace_underconnected.html", "namespace_underconnected" ]
 ];

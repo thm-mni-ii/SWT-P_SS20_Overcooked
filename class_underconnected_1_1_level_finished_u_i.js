@@ -1,6 +1,7 @@
 var class_underconnected_1_1_level_finished_u_i =
 [
     [ "Exit", "class_underconnected_1_1_level_finished_u_i.html#acdba2b5bea7d139773f91d5ad009f516", null ],
+    [ "HideScreen", "class_underconnected_1_1_level_finished_u_i.html#af8f9e85305207b50bb6e450bb7f88b73", null ],
     [ "NextLevel", "class_underconnected_1_1_level_finished_u_i.html#aef36985353ac7bfeb0e36df3238bf194", null ],
     [ "SetDeliveredCounter", "class_underconnected_1_1_level_finished_u_i.html#a0f0faa71dacabed75fe21720863d6ccc", null ],
     [ "SetDeliveredFailedCounter", "class_underconnected_1_1_level_finished_u_i.html#a11797490aff2f66e85708add3756bc65", null ],

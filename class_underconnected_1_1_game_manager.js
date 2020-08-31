@@ -15,6 +15,8 @@ var class_underconnected_1_1_game_manager =
     [ "CurrentLevelNum", "class_underconnected_1_1_game_manager.html#a79572ee01b994a17c9b55614930c2bb9", null ],
     [ "currentLevelScene", "class_underconnected_1_1_game_manager.html#ad7cea4295f1ab3d5f44413180b879f83", null ],
     [ "frameworkAPI", "class_underconnected_1_1_game_manager.html#ae54d6d92b3087e21c5cfb263145d5644", null ],
+    [ "IsLastLevel", "class_underconnected_1_1_game_manager.html#aed66f3ce21e2ec5395e3f7a960934b09", null ],
+    [ "lastLevelNum", "class_underconnected_1_1_game_manager.html#a6dcf363b38dbcd0f8274da4d424006f8", null ],
     [ "levelBuildIndexStart", "class_underconnected_1_1_game_manager.html#a7a03f4867aaa082420969a3369ecc464", null ],
     [ "NetworkManager", "class_underconnected_1_1_game_manager.html#ab06a2f9ab809eafe55e50ee3494b8437", null ],
     [ "networkManager", "class_underconnected_1_1_game_manager.html#a5e884727556943caedc29608bfbb2940", null ],
