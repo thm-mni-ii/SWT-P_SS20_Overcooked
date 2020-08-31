@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4fccc8ac1bcc042a074074f83bf8cc, type: 3}
+  m_Name: CompoundC2H4O2
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 0b88da702d3e4ca429e6c46118336e1d, type: 3}
+  name: Acetic acid
+  description: "Acetic acid /\u0259\u02C8si\u02D0t\u026Ak/, systematically named
+    ethanoic acid /\u02CC\u025B\u03B8\u0259\u02C8no\u028A\u026Ak/, is a colourless
+    liquid organic compound with the chemical formula CH3COOH (also written as CH3CO2H,
+    C2H4O2, or HC2H3O2). When undiluted, it is sometimes called glacial acetic acid.
+    Vinegar is no less than 4% acetic acid by volume, making acetic acid the main
+    component of vinegar apart from water. Acetic acid has a distinctive sour taste
+    and pungent smell. In addition to household vinegar, it is mainly produced as
+    a precursor to polyvinyl acetate and cellulose acetate. It is classified as a
+    weak acid since it only partially dissociates in solution, but concentrated acetic
+    acid is corrosive and can attack the skin."
+  scoreReward: 60
+  scoreFailPenalty: 24
+  prefab: {fileID: 2873589174651004775, guid: 9f06c5e4ee9660e48ba69f712cc2099d, type: 3}
+  components:
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: ff8cdbd06bc96d740992daf5917e1329, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 075543f587a67fc4e80cbd08c92d64bb, type: 2}
+  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
+  - {fileID: 11400000, guid: 19a9182a87b14084cb16f3d598cd89cd, type: 2}
+  formula: C2H4O2
