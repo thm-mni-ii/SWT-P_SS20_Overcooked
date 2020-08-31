@@ -43,8 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21698d9a3fc5c514bac2392ae74603cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   uiManager: {fileID: 0}
+  frameworkAPI: {fileID: 0}
   networkManager: {fileID: 0}
   levelBuildIndexStart: 1
+  lastLevelNum: 3
   playerPrefab: {fileID: 5674135250990863131, guid: 14c523ffd8720af42b085703c72b7bc4,
     type: 3}
