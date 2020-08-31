@@ -44,7 +44,7 @@ namespace Underconnected
                 {
                     this.preparingTimer = Mathf.Max(this.preparingTimer - deltaTime, 0.0F);
 
-                    if (this.preparingTimer <= 3.0F)
+                    if (this.preparingTimer <= 3.0F && Mathf.CeilToInt(this.preparingTimer) > 0)
                         GameManager.UI.LevelUI.PreparingUI.ShowCountdownNumber(Mathf.CeilToInt(this.preparingTimer));
 
                     if (this.isRunningOnServer && this.preparingTimer <= 0.0F)
@@ -84,7 +84,7 @@ namespace Underconnected
 
                     this.isRunningOnServer = true;
                 }
-                
+
                 GameManager.UI.ShowPlayerPartyUI();
             }
             public override void OnStateLeave(State<LevelPhase> nextState)
@@ -101,7 +101,7 @@ namespace Underconnected
 
                     this.isRunningOnServer = false;
                 }
-                
+
                 GameManager.UI.HidePlayerPartyUI();
             }
 
